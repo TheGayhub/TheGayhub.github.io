@@ -1628,5 +1628,34 @@ a {
   margin: 4px 8px;
 }
 
-      <embed src="http://www.blogclock.cn/swf/S100098d768d228-4.swf" Width="150px" Height="210px" type="application/x-shockwave-flash" quality="high" wmode="transparent"></embed>
+      /* 设置博客正文一二三级标题格式 */
+/* 一级标题 */
+#cnblogs_post_body h1 {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: black;
+    margin: 10px 0;
+}
+/* 二级标题 */
+#cnblogs_post_body h2 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: whitesmoke;
+    background-color: royalblue;
+    margin: 10px 0;
+}
+/* 三级标题 */
+#cnblogs_post_body h3 {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: whitesmoke;
+    background-color: dimgrey;
+}
+/*  正文 */
+#cnblogs_post_body p {
+    font-size: 12pt;
+}
     
