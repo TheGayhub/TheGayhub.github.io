@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POJ 2796 Feel Good(单调栈) | Gridea</title>
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1556970780704">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://TheGayhub.github.io">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1556970780704" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              POJ 2796 Feel Good(单调栈)
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-05-04 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <p><a href="http://poj.org/problem?id=2796">POJ 2796</a>
+题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值这段这段连续子序列的和，我们要使得求得的这个值最大，比如样例 &gt; 6 3 1 6 4 5 2，我们选择&gt; 6 4 5这段连续的子序列，值为&gt; 4(6+4+5)=60
+首先对于每个数<code>a[i]</code>，我们想让他最大可能的往左右扩展，知道这个数往左和往右最大的扩展的坐标<code>l,r</code>,利用前缀和我们就求得了这个值<code>a[i]*(s[r]-s[l-1])</code>，所以这题在于我们怎么去求一个数往左右扩展的最大位置.
+我们先以往右扩展为例，用<code>R[i]</code>表示<code>**i**</code>往右扩展的最大位置。我们建立一个单调栈，这个单调栈是单调递减的，即栈顶到栈底递减，用数组表示即是从左到右递增。我们扫描这个序列。</p>
+<ul>
+<li>如果当前这个数比栈顶大或者等于，我们直接入栈。</li>
+<li>如果当前这个数比栈顶小，我们就从栈中弹出数，直到这个数比栈顶大，那怎么记录往右扩展的最大位置呢，我们在把数从栈中弹出的过程中，弹出的数一定比当前要入栈的数大，因此他一定不是最小的数，对后面没有作用，因此弹出的数最大扩展位置就是当前这个数的位置i再减去1,即<code>i-1</code>。
+我们用<code>pos</code>数组记录一下栈中数所在的位置，同时<code>a[n+1]</code>设为<code>-1</code>，保证最后栈中元素都可以被弹出。
+向左扩展也是一样道理。</li>
+</ul>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long ll;
+const int N = 1e5 + 10;
+int a[N], n, L[N], R[N], s[N], tot, pos[N];
+ll sum[N];
+pair&lt;int, int&gt; ans;
+int main()
+{
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++){
+        scanf(&quot;%d&quot;, &amp;a[i]);
+        sum[i] = sum[i - 1] + 1LL*a[i];
+        L[i] = R[i] = i;
+    }
+    a[n + 1] = -1;
+    for (int i = 1; i &lt;= n+1; i++)
+    {
+        if (a[i] &gt;= s[tot])
+            s[++tot] = a[i],pos[tot]=i;
+        else{
+            while (tot&amp;&amp;a[i] &lt; s[tot]){
+                R[pos[tot]] = i - 1;
+                tot--;
+            }
+            s[++tot] = a[i],pos[tot]=i;
+        }
+    }
+    a[0] = -1,tot=0;
+    for (int i = n; i &gt;= 0; i--){
+        if (a[i] &gt;= s[tot]){
+            s[++tot] = a[i],pos[tot]=i;
+        }
+        else{
+            while (tot&amp;&amp; a[i] &lt; s[tot]){
+                L[pos[tot]] = i+1;
+                tot--;
+            }
+            s[++tot] = a[i], pos[tot] = i;
+        }
+    }
+    ll max_val= -1;
+    for (int i = 1; i &lt;= n; i++){
+        if (a[i]*(sum[R[i]] - sum[L[i] - 1]) &gt; max_val)
+        {
+            max_val = a[i] * (sum[R[i]] - sum[L[i] - 1]);
+            ans.first = L[i];
+            ans.second = R[i];
+        }
+    }
+    cout &lt;&lt; max_val &lt;&lt; endl;
+    cout &lt;&lt; ans.first &lt;&lt; &quot; &quot; &lt;&lt; ans.second &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://TheGayhub.github.io/post/hello-gridea">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '10f790001ada82f18531',
+    clientSecret: '28d160d9de074bd1b5839bac5c19dd191cf2c634',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
