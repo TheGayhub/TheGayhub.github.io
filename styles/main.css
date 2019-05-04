@@ -1628,34 +1628,159 @@ a {
   margin: 4px 8px;
 }
 
-      /* 设置博客正文一二三级标题格式 */
-/* 一级标题 */
-#cnblogs_post_body h1 {
+      // Custom styles.
+//首页文章阴影样式
+.post {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 25px;
+    -webkit-box-shadow: 0 0 14px rgba(202, 203, 203, .5);
+    -moz-box-shadow: 0 0 14px rgba(202, 203, 204, .5);
+}
+//热评文章
+.ds-top-threads li a {
+    padding-left: 5px;
+    transition: border-width 0.2s linear 0s, color 0.2s linear 0s;
+    border-bottom: none;
+}
+.ds-top-threads li a:hover {
+    border-left: 8px solid #4d768c;
+}
+//首页头部样式
+.header {
+    background: url("/images/header-bk.jpg");
+    height: 20vh;
+}
+.site-meta {
+    float: none;
+}
+.menu {
+    float: none;
+}
+.logo-line-before,
+.logo-line-after {
+    display: none;
+}
+.menu .menu-item a {
+    font-size: 14px;
+    color: rgb(15, 46, 65);
+    border-radius: 4px;
+}
+.site-meta {
+    margin-left: 0px;
+    text-align: center;
+}
+.site-meta .site-title {
     font-size: 28px;
-    font-weight: bold;
-    line-height: 1.5;
-    color: black;
-    margin: 10px 0;
+    font-family: 'Comic Sans MS', sans-serif;
+    color: #fff;
 }
-/* 二级标题 */
-#cnblogs_post_body h2 {
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 1.5;
-    color: whitesmoke;
-    background-color: royalblue;
-    margin: 10px 0;
+//首页尾部样式
+.footer {
+    background: none;
+    font-size: 16px;
 }
-/* 三级标题 */
-#cnblogs_post_body h3 {
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.5;
-    color: whitesmoke;
-    background-color: dimgrey;
+.footer-inner {
+    font-family: 'Comic Sans MS', sans-serif;
+    text-align: center;
+    color: #4c618f;
 }
-/*  正文 */
-#cnblogs_post_body p {
-    font-size: 12pt;
+//侧边栏信息样式修改
+.site-author-name {
+    margin: 48px 0 0;
+    color: #090909;
+    font-family: 'Comic Sans MS', sans-serif;
+}
+.links-of-blogroll {
+    font-size: 14px;
+    margin-bottom: 42px;
+}
+.links-of-author {
+    margin-top: 30px;
+    margin-bottom: 58px;
+}
+.sidebar-inner {
+    color: #649ab6;
+    height: 638px;
+}
+.site-overview{
+    height: 638px;
+}
+
+.sidebar a {
+    color: #649ab6;
+    border-bottom-color: #649ab6;
+    border-bottom: none;
+}
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 1040;
+  box-shadow: inset 0 2px 6px #000;
+  background: url("/images/bk.jpg");
+  -webkit-transform: translateZ(0);
+  background-size: 320px 659px;
+  background-position-y: 1vh;
+  background-repeat: no-repeat;
+  box-shadow: inset 2px 2px 40px #bdb2b2;
+}
+.sidebar a:hover {
+    color: #0c0b0b;
+}
+.site-state-item {
+    display: inline-block;
+    padding: 8px 28px;
+    border-left: 1px solid #649ab6;
+}
+.sidebar-nav .sidebar-nav-active {
+    color: #649ab6;
+    border-bottom-color: #649ab6;
+}
+.sidebar-nav li:hover {
+    color: #0c0b0b;
+}
+
+//侧栏按钮样式
+.sidebar-toggle {
+    background: #649ab6;
+}
+.back-to-top {
+    background: #649ab6;
+}
+//文章目录样式
+.post-toc .nav .active>a {
+    color: #4f7e96;
+}
+.post-toc ol a:hover {
+    color: #7784ba;
+}
+.sidebar-nav .sidebar-nav-active:hover {
+    color: #37596c;
+}
+a {
+    border-bottom: none;
+}
+//首页阅读全文样式
+.post-button {
+    margin-top: 30px;
+    text-align: center;
+}
+.post-button .btn {
+    color: #fff;
+    font-size: 15px;
+    background: #686868;
+    border-radius: 16px;
+    line-height: 2;
+    margin: 0 4px 8px 4px;
+    padding: 0 20px;
+}
+.post-button a{
+  border-bottom: 1px solid #666;
+}
+.post-button a:hover {
+    color: #7784ba;
 }
     
