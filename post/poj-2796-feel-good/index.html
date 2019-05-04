@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" >
 
-<title>POJ 2796 Feel Good(单调栈) | Gridea</title>
+<title>POJ 2796 Feel Good | Gridea</title>
 <meta name="description" content="博学笃行，之于A题">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1556972794249">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1556973126636">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
 
@@ -35,7 +35,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://TheGayhub.github.io">
-        <img src="https://TheGayhub.github.io/images/avatar.png?v=1556972794249" class="site-logo">
+        <img src="https://TheGayhub.github.io/images/avatar.png?v=1556973126636" class="site-logo">
         <h1 class="site-title">Gridea</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -97,17 +97,19 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">POJ 2796 Feel Good(单调栈)</h2>
+            <h2 class="post-title">POJ 2796 Feel Good</h2>
             <div class="post-date">2019-05-04</div>
             
-              <div class="feature-container" style="background-image: url('https://TheGayhub.github.io/post-images/poj-2796-feel-gooddan-diao-zhan.jpg')">
+              <div class="feature-container" style="background-image: url('https://TheGayhub.github.io/post-images/poj-2796-feel-good.jpg')">
               </div>
             
             <div class="post-content">
-              <p><a href="http://poj.org/problem?id=2796">POJ 2796</a>
-题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值这段这段连续子序列的和，我们要使得求得的这个值最大，比如样例 &gt; 6 3 1 6 4 5 2，我们选择&gt; 6 4 5这段连续的子序列，值为&gt; 4(6+4+5)=60
+              <h1 id="单调栈">单调栈</h1>
+<!-- more -->
+<p><a href="http://poj.org/problem?id=2796">POJ 2796</a></p>
+<p>题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值这段这段连续子序列的和，我们要使得求得的这个值最大，比如样例 <code>6 3 1 6 4 5 2</code>，我们选择<code>6 4 5</code>这段连续的子序列，值为&gt;<code>4*(6+4+5)=60</code>
 首先对于每个数<code>a[i]</code>，我们想让他最大可能的往左右扩展，知道这个数往左和往右最大的扩展的坐标<code>l,r</code>,利用前缀和我们就求得了这个值<code>a[i]*(s[r]-s[l-1])</code>，所以这题在于我们怎么去求一个数往左右扩展的最大位置.
-我们先以往右扩展为例，用<code>R[i]</code>表示<code>**i**</code>往右扩展的最大位置。我们建立一个单调栈，这个单调栈是单调递减的，即栈顶到栈底递减，用数组表示即是从左到右递增。我们扫描这个序列。</p>
+我们先以往右扩展为例，用 <strong><code>R[i]</code></strong>  表示 <strong><code>i</code></strong> 往右扩展的最大位置。我们建立一个单调栈，这个单调栈是单调递减的，即栈顶到栈底递减，用数组表示即是从左到右递增。我们扫描这个序列。</p>
 <ul>
 <li>如果当前这个数比栈顶大或者等于，我们直接入栈。</li>
 <li>如果当前这个数比栈顶小，我们就从栈中弹出数，直到这个数比栈顶大，那怎么记录往右扩展的最大位置呢，我们在把数从栈中弹出的过程中，弹出的数一定比当前要入栈的数大，因此他一定不是最小的数，对后面没有作用，因此弹出的数最大扩展位置就是当前这个数的位置i再减去1,即<code>i-1</code>。
