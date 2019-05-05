@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>快速幂模板 | Guapi</title>
+<title>字符串最小表示法 | Guapi</title>
 <link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557065623883">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
@@ -76,7 +76,7 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              快速幂模板
+              字符串最小表示法
             </h2>
             <div class="post-info">
               <time class="post-time">
@@ -89,52 +89,66 @@
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://ncdn.camarts.cn/5b697723.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://ncdn.camarts.cn/5630c79f.jpg')">
               </div>
             
             <div class="post-content">
-              <h1 id="快速乘快速幂">快速乘+快速幂</h1>
-<h1 id="计算-ab-p">计算 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.849108em;"></span><span class="strut bottom" style="height:0.849108em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathit">b</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> % p</h1>
+              <h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
 <!-- more -->
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-int t;
-ll a, b, p;
-ll fast_mul(ll a, ll b, ll p)
+<blockquote>
+<p>第一种</p>
+</blockquote>
+<pre><code>int get_minstring(char s[])
 {
-    ll res = 0;
-    while (b)
+    int n =strlen(s);
+    int i = 0, j = 1, k;
+    while (i &lt; n&amp;&amp;j &lt; n)
     {
-        if (b &amp; 1) res = (res + a) % p;
-        a = a * 2 % p;
-        b &gt;&gt;= 1;
+        for (k = 0; k &lt; n&amp;&amp;s[(j + k) % n] == s[(i + k) % n]; k++);
+        if (k == n)  break;
+        if (s[(i + k)%n]&gt;s[(j + k)%n])
+        {
+            i = i + k + 1;
+            if (i == j) i++;
+        }
+        else
+        {
+            j = j + k + 1;
+            if (i == j) j++;
+        }
     }
-    return res;
+    return min(i, j);
 }
-ll fast_pow(ll a, ll b, ll p)
-{
-    ll res = 1;
-    while (b)
-    {
-        if (b &amp; 1) res = fast_mul(res, a, p);
-        a = fast_mul(a, a, p);
-        b &gt;&gt;= 1;
-    }
-    return res;
-}
-int main()
-{
-    cin &gt;&gt; t;
-    while (t--)
-    {
-        scanf(&quot;%lld%lld%lld&quot;, &amp;a, &amp;b, &amp;p);
-        printf(&quot;%lld\n&quot;, fast_pow(a, b, p));
-    }
 
-    return 0;
+</code></pre>
+<blockquote>
+<p>第二种</p>
+</blockquote>
+<pre><code>int get_minstring(char s[])
+{
+    int n = strlen(s + 1);
+    for (int i = 1; i &lt;= n; i++)
+        s[n + i] = s[i];
+    int i = 1, j = 2,k;
+    while (i &lt;= n&amp;&amp;j &lt;= n)
+    {
+        for ( k = 0; k &lt; n&amp;&amp;s[j + k] == s[i + k]; k++);
+        if (k == n)  break;
+        if (s[i + k]&gt;s[j + k])
+        {
+            i = i + k + 1;
+            if (i == j) i++;
+        }
+        else
+        {
+            j = j + k + 1;
+            if (i == j) j++;
+        }
+    }
+    return min(i, j);
 }
 </code></pre>
+<p>这两个其实差不多</p>
 
             </div>
           </article>
@@ -143,9 +157,9 @@ int main()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://TheGayhub.github.io/post/JNU-LinkList">
+            <a href="https://TheGayhub.github.io/post/fast_pow">
               <h3 class="post-title">
-                数据结构上机实验报告——链表
+                快速幂模板
               </h3>
             </a>
           </div>  
