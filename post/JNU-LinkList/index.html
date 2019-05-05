@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>数据结构上机实验报告——链表 | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557031691856">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557032271007">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557031691856" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557032271007" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -93,59 +93,36 @@
               <h1 id="链表">链表</h1>
 <h2 id="数据结构课上机实验报告">数据结构课上机实验报告</h2>
 <!-- more -->
+<blockquote>
 <p>编写一个程序Linklist.cpp，实现链表的各种基本运算和整体建表算法（假设链表的元素类型ElemType为int），并在此基础上设计一个主程序，完成如下功能：</p>
-<ul>
-<li>
+</blockquote>
 <ol>
-<li>构建基于动态分配内存的链表L，并初始化链表。</li>
-</ol>
+<li>
+<pre><code>构建基于动态分配内存的链表L，并初始化链表。
+</code></pre>
 </li>
 <li>
-<ol start="2">
-<li>依次将1Mints.txt文件中的数据输入到链表中。</li>
-</ol>
+<pre><code>依次将`1Mints.txt`文件中的数据输入到链表中。
+</code></pre>
 </li>
-<li>
-<ol start="3">
 <li>输出链表L长度。</li>
-</ol>
-</li>
-<li>
-<ol start="4">
 <li>判断链表L是否为空。</li>
-</ol>
+<li>分别输出顺序表L的第<code>30、300、3000、30000、300000</code>个元素值，记录相应时间。</li>
+<li>输出值为<code>-12345</code>的元素的位置。</li>
+<li>
+<pre><code>依次在第`4、40、400、4000、40000、400000`个元素位置上插入整数`-10086`，记录相应的时间。
+</code></pre>
 </li>
 <li>
-<ol start="5">
-<li>分别输出顺序表L的第30、300、3000、30000、300000个元素值，记录相应时间。</li>
-</ol>
+<pre><code>依次删除在第`4、40、400、4000、40000、400000`个元素位置上的元素，记录相应的时间。
+</code></pre>
 </li>
 <li>
-<ol start="6">
-<li>输出值为-12345的元素的位置。</li>
-</ol>
+<pre><code>输出链表L的前`10`个元素。
+</code></pre>
 </li>
-<li>
-<ol start="7">
-<li>依次在第4、40、400、4000、40000、400000个元素位置上插入整数-10086，记录相应的时间。</li>
-</ol>
-</li>
-<li>
-<ol start="8">
-<li>依次删除在第4、40、400、4000、40000、400000个元素位置上的元素，记录相应的时间。</li>
-</ol>
-</li>
-<li>
-<ol start="9">
-<li>输出链表L的前10个元素。</li>
-</ol>
-</li>
-<li>
-<ol start="10">
 <li>释放链表L。</li>
 </ol>
-</li>
-</ul>
 <pre><code>// LinkList.cpp : 定义控制台应用程序的入口点。
 //
 
