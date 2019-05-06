@@ -1,0 +1,225 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Codeforces Gym 101147 J-Whistle&#39;s New Car | Guapi</title>
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143477169">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://TheGayhub.github.io">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143477169" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/TheGayhub/" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Codeforces Gym 101147 J-Whistle&#39;s New Car
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-05-06 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <h1 id="dfs">DFS</h1>
+<!-- more -->
+<blockquote>
+<p>题目链接<a href="https://codeforces.com/gym/101147/problem/J"> Whistle's New Car</a>
+题目的意思是给定 <code>n</code> 个城市编号 <code>1-n</code> ,每个城市都有一个权值 <code>$X_i$</code> ,两个城市间的距离 <code>$C_i_j$</code> 这些城市的结构是一颗以 <code>1</code> 为根节点的树，输出每个城市<code>i</code>的<code>attractiveness</code>   ，每个节点 <code>attractiveness</code> 是满足以下条件的城市的个数</p>
+</blockquote>
+<ol>
+<li><code>j</code> 是 <code>i</code> 的子树。</li>
+<li>在城市<code>j</code>加满 <code>$X_j$</code> 的油后不再加油能到达 i 城市。</li>
+</ol>
+<p>主要思路：从根节点<code>1</code>出发DFS整棵树，我们用<code>s[i]</code>表示根节点到第<code>i</code>个节点的路径长度之和,(第 <strong><code>i</code></strong> 个节点貌似不恰当，可以理解为第 <strong><code>i</code></strong> 层).<code>num</code> 数组保存了我们 <code>dfs</code> 过程中之前所经过的城市(后面有用)。对于当前城市<code>i</code>它只能往上走，我们需要判断它能往上走到哪里,我们可以发现,对于在<code>i</code>之前的城市<code>j</code>如果满足  <strong><code>s[j]+x[i]&gt;=s[i]</code></strong> ，那么我们就可以从城市<code>i</code>走到城市<code>j</code>，因此我们需要找到最小的<code>j</code>，满足 <strong><code>s[j]&gt;=s[i]-x[i]</code></strong>  ,对于这个我们可以二分查找<code>s</code>数组，找到满足条件的最小的<code>j</code>,<code>j</code>城市满足条件，<code>j</code>到<code>i</code>路上所有的城市节点都满足条件(不包括i)，因此我们把<code>j,j+1....i-1</code>这些城市答案都加<code>1</code>，对于闭区间<code>[j-i-1]</code> 的值加上<code>1</code>，可以类似于差分来处理，<code>cnt[i-1]++</code>,<code>cnt[j-1]--</code>.这里让<code>cnt[j-1]--</code>，是为消除城市节点<code>j</code>之前的城市的影响，因为我们每次统计答案是<code>cnt[u] += cnt[v]</code> (<code>v</code>是<code>u</code>的孩子),对<code>[j-i-1]</code>之间的城市我们这样操作后它们的答案都会加<code>1</code>，但<code>j</code>之前的城市我们不能让它答案加<code>1</code>，因此我们<code>cnt[j-1]--</code>来消除这个影响。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;string&gt;
+#include&lt;cstring&gt;
+#include&lt;vector&gt;
+using namespace std;
+#define lowbit(x) (x&amp;(-x))
+typedef long long ll;
+const int N = 5e5 + 10;
+int n;
+ll a[N],s[N];
+typedef pair&lt;int, ll&gt; P;
+vector&lt;P&gt; p[N];
+int cnt[N],num[N];
+int ret;
+void dfs(int u, int pre)
+{
+	for (auto E : p[u])
+	{
+		int v = E.first;
+		ll w = E.second;
+		if (v == pre) continue;
+		s[ret] = s[ret - 1] + w;
+		num[ret] = v;
+		int pos = lower_bound(s, s + ret + 1, s[ret] - a[v])-s;
+		if (pos &lt; ret){
+			cnt[u]++;
+			if (pos) cnt[num[pos - 1]]--;
+		}
+		ret++;
+		dfs(v, u);
+		ret--;
+		cnt[u] += cnt[v];
+	}
+}
+int main()
+{
+	freopen(&quot;car.in&quot;, &quot;r&quot;, stdin);
+	int T;
+	scanf(&quot;%d&quot;, &amp;T);
+	while (T--)
+	{
+		ret = 1;
+		memset(cnt, 0, sizeof(cnt));
+		scanf(&quot;%d&quot;, &amp;n);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%lld&quot;, &amp;a[i]);
+			p[i].clear();
+		}
+		for (int i = 1; i &lt; n; i++)
+		{
+			int u,v;
+			ll w;
+			scanf(&quot;%d%d%lld&quot;, &amp;u, &amp;v, &amp;w);
+			p[u].push_back(P(v, w));
+			p[v].push_back(P(u, w));
+		}
+		ret = 1;
+		num[0] = 1;
+		s[0] = 0;
+		dfs(1, -1);
+		for (int i = 1; i &lt;= n; i++)
+			printf(&quot;%d%c&quot;, cnt[i], i == n ? '\n' : ' ');
+	}
+	fclose(stdin);
+	return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://TheGayhub.github.io/post/codeforce-gym-101086-d-secure-but-true">
+              <h3 class="post-title">
+                Codeforce Gym 101086 D - Secure but True
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '10f790001ada82f18531',
+    clientSecret: '28d160d9de074bd1b5839bac5c19dd191cf2c634',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
