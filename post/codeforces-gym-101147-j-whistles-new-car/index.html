@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Codeforces Gym 101147 J-Whistle&#39;s New Car | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143778382">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143968276">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143778382" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143968276" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -103,7 +103,7 @@
 <li><code>j</code> 是 <code>i</code> 的子树。</li>
 <li>在城市<code>j</code>加满 <code>$X_j$</code> 的油后不再加油能到达 i 城市。</li>
 </ol>
-<p>主要思路：从根节点<code>1</code>出发DFS整棵树，我们用<code>s[i]</code>表示根节点到第<code>i</code>个节点的路径长度之和,(第 <strong><code>i</code></strong> 个节点貌似不恰当，可以理解为第 <strong><code>i</code></strong> 层).<code>num</code> 数组保存了我们 <code>dfs</code> 过程中之前所经过的城市(后面有用)。对于当前城市<code>i</code>它只能往上走，我们需要判断它能往上走到哪里,我们可以发现,对于在<code>i</code>之前的城市<code>j</code>如果满足  <strong><code>s[j]+x[i]&gt;=s[i]</code></strong> ，那么我们就可以从城市<code>i</code>走到城市<code>j</code>，因此我们需要找到最小的<code>j</code>，满足 <strong><code>s[j]&gt;=s[i]-x[i]</code></strong>  ,对于这个我们可以二分查找<code>s</code>数组，找到满足条件的最小的<code>j</code>,<code>j</code>城市满足条件，<code>j</code>到<code>i</code>路上所有的城市节点都满足条件(不包括i)，因此我们把<code>j,j+1....i-1</code>这些城市答案都加<code>1</code>，对于闭区间<code>[j-i-1]</code> 的值加上<code>1</code>，可以类似于差分来处理，<code>cnt[i-1]++</code>,<code>cnt[j-1]--</code>.这里让<code>cnt[j-1]--</code>，是为消除城市节点<code>j</code>之前的城市的影响，因为我们每次统计答案是<code>cnt[u] += cnt[v]</code> (<code>v</code>是<code>u</code>的孩子),对<code>[j-i-1]</code>之间的城市我们这样操作后它们的答案都会加<code>1</code>，但<code>j</code>之前的城市我们不能让它答案加<code>1</code>，因此我们<code>cnt[j-1]--</code>来消除这个影响。</p>
+<p>主要思路：从根节点<code>1</code>出发DFS整棵树，我们用<code>s[i]</code>表示根节点到第<code>i</code>个节点的路径长度之和,(第 <strong><code>i</code></strong> 个节点貌似不恰当，可以理解为第 <strong><code>i</code></strong> 层).<code>num</code> 数组保存了我们 <code>dfs</code> 过程中之前所经过的城市(后面有用)。对于当前城市<code>i</code>它只能往上走，我们需要判断它能往上走到哪里,我们可以发现,对于在<code>i</code>之前的城市<code>j</code>如果满足  <strong><code>s[j]+x[i]&gt;=s[i]</code></strong> ，那么我们就可以从城市<code>i</code>走到城市<code>j</code>，因此我们需要找到最小的<code>j</code>，满足 <strong><code>s[j]&gt;=s[i]-x[i]</code></strong>  ,对于这个我们可以二分查找<code>s</code>数组，找到满足条件的最小的<code>j</code>,<code>j</code>城市满足条件，<code>j</code>到<code>i</code>路上所有的城市节点都满足条件(不包括i)，因此我们把<code>j,j+1....i-1</code>这些城市答案都加<code>1</code>，对于闭区间<code>[j~i-1]</code> 的值加上<code>1</code>，可以类似于差分来处理，<code>cnt[i-1]++</code>,<code>cnt[j-1]--</code>.这里让<code>cnt[j-1]--</code>，是为消除城市节点<code>j</code>之前的城市的影响，因为我们每次统计答案是<code>cnt[u] += cnt[v]</code> (<code>v</code>是<code>u</code>的孩子),对<code>[j~i-1]</code>之间的城市我们这样操作后它们的答案都会加<code>1</code>，但<code>j</code>之前的城市我们不能让它答案加<code>1</code>，因此我们<code>cnt[j-1]--</code>来消除这个影响。</p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;algorithm&gt;

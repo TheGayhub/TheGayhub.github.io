@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Codeforce Gym 101086 D - Secure but True | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143778382">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143968276">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143778382" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143968276" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -103,7 +103,7 @@
 </blockquote>
 <p>首先这11个字符可以组成无数个字符串，而k的范围又是1e9,所以不可能直接做。首先由11个字符先按照长度再按照字典序排可以想到10进制数，<strong><code>0-9 10-19 20-29</code></strong>  ,这 <strong><code>10</code></strong> 个数不正是先按照长度，再按照字典序来排的吗。于是这题也就和 <strong><code>11</code></strong> 进制相关，于是我和我队友想到了如下思路，将k转化为11进制，再将字符串s转化为11进制，<code>A-Y</code> 分别代表 <code>1-11</code>，然后相加，得到的结果再按照对应字符输出。
 我们按照这个思路写了一下，然后交上去WA了，后来我们发现将k转化为11进制后会出现0，对于0我们无法处理，因为我们是把 <code>A-Y</code> 分别代表 <code>1-11</code> 来处理的，出现0我们就无法处理，于是我们就改了好长时间代码，还是没能正常处理0. 我们把Y当成0处理也不行，最后这题没能A掉。
-比赛过后，我请教了一位大佬，就是用11进制做，A-Y仍分别代表1-11。然后模拟两个11进制相加。所以我们用短除法把k转为11进制这个方法错了。要用其他方法把k转化为11进制,并且不出现1，既每一位最低是1。</p>
+比赛过后，我请教了一位大佬，就是用11进制做，A-Y仍分别代表1-11。然后模拟两个11进制相加。所以我们用短除法把k转为11进制这个方法错了。要用其他方法把k转化为11进制,并且不出现0，既每一位最低是1。</p>
 <pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 const int N = 2e5 + 100;

@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>POJ 2796 Feel Good | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143778382">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557143968276">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143778382" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557143968276" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -96,7 +96,7 @@
               <h1 id="单调栈">单调栈</h1>
 <!-- more -->
 <p><a href="http://poj.org/problem?id=2796">POJ 2796</a></p>
-<p>题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值这段这段连续子序列的和，我们要使得求得的这个值最大，比如样例 <code>6 3 1 6 4 5 2</code>，我们选择<code>6 4 5</code>这段连续的子序列，值为&gt;<code>4*(6+4+5)=60</code>
+<p>题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值乘于这段连续子序列的和，我们要使得求得的这个值最大，比如样例 <code>6 3 1 6 4 5 2</code>，我们选择<code>6 4 5</code>这段连续的子序列，值为<code>4*(6+4+5)=60</code>
 首先对于每个数<code>a[i]</code>，我们想让他最大可能的往左右扩展，知道这个数往左和往右最大的扩展的坐标<code>l,r</code>,利用前缀和我们就求得了这个值<code>a[i]*(s[r]-s[l-1])</code>，所以这题在于我们怎么去求一个数往左右扩展的最大位置.
 我们先以往右扩展为例，用 <strong><code>R[i]</code></strong>  表示 <strong><code>i</code></strong> 往右扩展的最大位置。我们建立一个单调栈，这个单调栈是单调递减的，即栈顶到栈底递减，用数组表示即是从左到右递增。我们扫描这个序列。</p>
 <ul>
