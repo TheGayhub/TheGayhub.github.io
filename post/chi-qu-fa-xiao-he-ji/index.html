@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>字符串最小表示法 | Guapi</title>
+<title>尺取法小合集 | Guapi</title>
 <link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557479148955">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
@@ -76,79 +76,153 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              字符串最小表示法
+              尺取法小合集
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2019-05-02 ·
+                · 2019-05-10 ·
               </time>
               
-                <a href="https://TheGayhub.github.io/tag/8AwwtVN5L" class="post-tags">
-                  # 常用模板
+                <a href="https://TheGayhub.github.io/tag/Ml1rPTXNB" class="post-tags">
+                  # 尺取法
                 </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://ncdn.camarts.cn/5630c79f.jpg')">
-              </div>
-            
             <div class="post-content">
-              <h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
+              <h1 id="尺取法">尺取法</h1>
 <!-- more -->
 <blockquote>
-<p>第一种</p>
+<p><a href="http://poj.org/problem?id=3061">POJ 3061 Subsequence</a></p>
 </blockquote>
-<pre><code>int get_minstring(char s[])
-{
-    int n =strlen(s);
-    int i = 0, j = 1, k;
-    while (i &lt; n&amp;&amp;j &lt; n)
-    {
-        for (k = 0; k &lt; n&amp;&amp;s[(j + k) % n] == s[(i + k) % n]; k++);
-        if (k == n)  break;
-        if (s[(i + k)%n]&gt;s[(j + k)%n])
-        {
-            i = i + k + 1;
-            if (i == j) i++;
-        }
-        else
-        {
-            j = j + k + 1;
-            if (i == j) j++;
-        }
-    }
-    return min(i, j);
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N = 1e5 + 10;
+int n, s,a[N];
+int main(){
+	int t;
+	cin &gt;&gt; t;
+	while (t--)
+	{
+		scanf(&quot;%d%d&quot;, &amp;n,&amp;s);
+		for (int i = 1; i &lt;= n; i++)
+			scanf(&quot;%d&quot;, &amp;a[i]);
+		int st = 1, en = 1;
+		int tot = 0;
+		int ans = n+10;
+		while (1)
+		{
+			while (en &lt;= n&amp;&amp;tot &lt; s)
+				tot += a[en++];
+			if (tot &lt; s)
+				break;
+			ans = min(ans, en - st);
+			tot -= a[st++];
+		}
+		if (ans == n + 10) printf(&quot;0\n&quot;);
+		else 
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}
+</code></pre>
+<blockquote>
+<p><a href="http://poj.org/problem?id=3320">POJ 3320 Jessica's Reading Problem</a></p>
+</blockquote>
+<p>求最小的页数覆盖所有知识点</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;set&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N = 1e6 + 10;
+int n,a[N];
+set&lt;int&gt; s;
+map&lt;int, int&gt; cnt;
+int main(){
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++)
+		scanf(&quot;%d&quot;, &amp;a[i]),s.insert(a[i]);
+	int sum = s.size();
+	int st = 1, en = 1, tot = 0;
+	int ans = n;
+	while (1)
+	{
+		while (en &lt;= n&amp;&amp;tot &lt; sum){
+			if (cnt[a[en]] == 0){
+				tot++;
+			}
+			cnt[a[en++]]++;
+		}
+		if (tot &lt; sum) break;
+		ans = min(ans, en - st);
+		--cnt[a[st]];
+		if (cnt[a[st++]] == 0) tot--;
+	}
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
 }
 
 </code></pre>
 <blockquote>
-<p>第二种</p>
+<p><a href="http://poj.org/problem?id=2566">POJ 2566 Bound Found</a></p>
 </blockquote>
-<pre><code>int get_minstring(char s[])
+<p>给定一个数组和一个值t，求一个子区间使得其和的绝对值与t的差值最小，如果存在多个，任意解都可行。</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;set&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N = 1e5 + 10;
+const int INF = 1e9 + 10;
+int n,k,t,a[N];
+typedef pair&lt;int, int&gt; P;
+P s[N];
+int main()
 {
-    int n = strlen(s + 1);
-    for (int i = 1; i &lt;= n; i++)
-        s[n + i] = s[i];
-    int i = 1, j = 2,k;
-    while (i &lt;= n&amp;&amp;j &lt;= n)
-    {
-        for ( k = 0; k &lt; n&amp;&amp;s[j + k] == s[i + k]; k++);
-        if (k == n)  break;
-        if (s[i + k]&gt;s[j + k])
-        {
-            i = i + k + 1;
-            if (i == j) i++;
-        }
-        else
-        {
-            j = j + k + 1;
-            if (i == j) j++;
-        }
-    }
-    return min(i, j);
+	while (scanf(&quot;%d%d&quot;, &amp;n, &amp;k) &amp;&amp; (n || k))
+	{
+		s[0] = P(0, 0);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%d&quot;, &amp;a[i]);
+			s[i] = P(a[i] + s[i - 1].first, i);
+		}
+		sort(s, s + n + 1);//保证0在负数后面，即开始就出现正数，负数的话会一直更新en++
+		while (k--)
+		{
+			scanf(&quot;%d&quot;, &amp;t);
+			int st = 0, en = 1, minv = INF,l=1,r=n,ans=s[1].first;
+			while (en &lt;= n)
+			{
+				int sum = s[en].first - s[st].first;
+				if (abs(sum - t) &lt; minv){
+					minv = abs(sum - t);
+					l = s[st].second, r = s[en].second;
+					ans = sum;
+				}
+				if (sum == t)
+					break;
+				else if (sum &lt; t){
+					en++;
+				}
+				else{
+					st++;
+				}
+				if (st == en) en++;
+			}
+			if (l&gt;r) swap(l, r);
+			printf(&quot;%d %d %d\n&quot;, ans, l+1, r);
+		}
+		
+	}
+	return 0;
 }
 </code></pre>
-<p>这两个其实差不多</p>
 
             </div>
           </article>
@@ -157,9 +231,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://TheGayhub.github.io/post/fast_pow">
+            <a href="https://TheGayhub.github.io/post/codeforce-1163-b-cat-party">
               <h3 class="post-title">
-                快速幂模板
+                Codeforce 1163 B Cat Party
               </h3>
             </a>
           </div>  
