@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>尺取法小合集 | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557479148955">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557479695463">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557479148955" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557479695463" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -92,10 +92,19 @@
             <div class="post-content">
               <h1 id="尺取法">尺取法</h1>
 <!-- more -->
+<h3 id="尺取法顾名思义像尺子一样取一段借用挑战书上面的话说尺取法通常是对数组保存一对下标即所选取的区间的左右端点然后根据实际情况不断地推进区间左右端点以得出答案-之所以需要掌握这个技巧是因为尺取法比直接暴力枚举区间效率高很多尤其是数据量大的">尺取法：顾名思义，像尺子一样取一段，借用挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的</h3>
+<h3 id="时候所以尺取法是一种高效的枚举区间的方法一般用于求取有一定限制的区间个数或最短的区间等等-当然任何技巧都存在其不足的地方有些情况下尺取法不可行无法得出正确答案">时候，所以尺取法是一种高效的枚举区间的方法，一般用于求取有一定限制的区间个数或最短的区间等等。当然任何技巧都存在其不足的地方，有些情况下尺取法不可行，无法得出正确答案。</h3>
+<h3 id="使用尺取法时应清楚以下四点">使用尺取法时应清楚以下四点：</h3>
+<h3 id="1-什么情况下能使用尺取法-2-何时推进区间的端点-3-如何推进区间的端点-3-何时结束区间的枚举">1、  什么情况下能使用尺取法?  2、何时推进区间的端点？ 3、如何推进区间的端点？ 3、何时结束区间的枚举？</h3>
+<h3 id="尺取法通常适用于选取区间有一定规律或者说所选取的区间有一定的变化趋势的情况通俗地说在对所选取区间进行判断之后我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间如果已经判断了目前所选取的区间但却无法确定所要求解的区间如何进一步得到根据其端点得到那么尺取法便是不可行的-首先明确题目所需要求解的量之后区间左右端点一般从最整个数组的起点开始之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案">尺取法通常适用于选取区间有一定规律，或者说所选取的区间有一定的变化趋势的情况，通俗地说，在对所选取区间进行判断之后，我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间，如果已经判断了目前所选取的区间，但却无法确定所要求解的区间如何进一步得到根据其端点得到，那么尺取法便是不可行的。首先，明确题目所需要求解的量之后，区间左右端点一般从最整个数组的起点开始，之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案。</h3>
+<h3 id="总结尺取法的模型便是这样根据区间的特征交替推进左右端点求解问题其高效的原因在于避免了大量的无效枚举其区间枚举都是根据区间特征有方向的枚举如果胡乱使用尺取法的话会使得枚举量减少因而很大可能会错误所以关键的一步是进行问题的分析">总结：尺取法的模型便是这样：根据区间的特征交替推进左右端点求解问题，其高效的原因在于避免了大量的无效枚举，其区间枚举都是根据区间特征有方向的枚举，如果胡乱使用尺取法的话会使得枚举量减少，因而很大可能会错误，所以关键的一步是进行问题的分析</h3>
+<p><a href="https://blog.csdn.net/lxt_lucia/article/details/81091597">来自</a></p>
+<!-- more -->
 <blockquote>
 <p><a href="http://poj.org/problem?id=3061">POJ 3061 Subsequence</a></p>
 </blockquote>
-<pre><code>#include &lt;iostream&gt;
+<pre><code>
+#include &lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 using namespace std;
@@ -129,10 +138,11 @@ int main(){
 }
 </code></pre>
 <blockquote>
-<p><a href="http://poj.org/problem?id=3320">POJ 3320 Jessica's Reading Problem</a></p>
+<p><a href="http://poj.org/problem?id=3320">POJ 3320 Jessica's Reading Problem</a>
+求最小的页数覆盖所有知识点</p>
 </blockquote>
-<p>求最小的页数覆盖所有知识点</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code>
+#include &lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 #include&lt;set&gt;
@@ -168,10 +178,11 @@ int main(){
 
 </code></pre>
 <blockquote>
-<p><a href="http://poj.org/problem?id=2566">POJ 2566 Bound Found</a></p>
+<p><a href="http://poj.org/problem?id=2566">POJ 2566 Bound Found</a>
+给定一个数组和一个值t，求一个子区间使得其和的绝对值与t的差值最小，如果存在多个，任意解都可行。</p>
 </blockquote>
-<p>给定一个数组和一个值t，求一个子区间使得其和的绝对值与t的差值最小，如果存在多个，任意解都可行。</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code>
+#include &lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 #include&lt;set&gt;
@@ -222,6 +233,103 @@ int main()
 	}
 	return 0;
 }
+</code></pre>
+<blockquote>
+<p><a href="http://poj.org/problem?id=2739">poj2739</a>
+<a href="http://poj.org/problem?id=2100">poj2100</a>
+找到某一个区间使得区间内的数的和/平方和等于某一给定值k</p>
+</blockquote>
+<pre><code>
+//poj2739
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include&lt;iostream&gt;
+#define INF 0x3f3f3f3f
+#define LL long long
+#define N 10100
+using namespace std;
+int prime[N], tot;
+bool vis[N];
+int n;
+void get_prime(int n)
+{
+	memset(vis, true, sizeof(vis));
+	for (int i = 2; i &lt;= n; i++)
+	{
+		if (vis[i]){
+			prime[++tot] = i;
+			for (int j = i + i; j &lt;= n; j += i){
+				vis[j] = false;
+			}
+		}
+	}
+}
+int main()
+{
+	get_prime(10090);
+	while (scanf(&quot;%d&quot;, &amp;n) &amp;&amp; n)
+	{
+		int st = 1, en = 1,sum=0,ans=0;
+		while (1)
+		{
+			while (sum &lt; n&amp;&amp;prime[en] &lt;= n) sum += prime[en++];
+			if (sum == n) ans++;
+			if (sum&lt;n) break;
+			sum -= prime[st++];
+		}
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}
+
+</code></pre>
+<pre><code>
+//poj2100
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#define INF 0x3f3f3f3f
+typedef long long ll;
+#define N 10100
+using namespace std;
+typedef pair&lt;ll, ll&gt; P;
+vector&lt;P&gt; ans;
+ll n;
+int main()
+{
+	while (cin &gt;&gt; n)
+	{
+		ans.clear();
+		ll st = 1, en = 1;
+		ll sum = 0;
+		while (1)
+		{
+			while (sum &lt; n&amp;&amp;en*en &lt;= n)
+				sum += en*en,en++;
+			if (sum == n){
+				ans.push_back(P(st, en));
+			}
+			if (sum &lt; n)
+				break;
+			sum -= st*st;
+			st++;
+		}
+		printf(&quot;%d\n&quot;, ans.size());
+		for (int i = 0; i &lt; ans.size(); i++)
+		{
+			P t = ans[i];
+			printf(&quot;%lld&quot;, t.second - t.first);
+			for (ll j = t.first; j &lt; t.second; j++)
+				printf(&quot; %lld&quot;, j);
+			printf(&quot;\n&quot;);
+		}
+	}
+	return 0;
+}
+
 </code></pre>
 
             </div>
