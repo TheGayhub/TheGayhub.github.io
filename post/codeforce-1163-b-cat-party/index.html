@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Codeforce 1163 B Cat Party | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557469631493">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1557469901877">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557469631493" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1557469901877" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -110,7 +110,7 @@
 </ul>
 <p>可以发现，我们每次判断<code>x</code>是否合法几乎只与颜色个数为1的和颜色个数最多的那些颜色有关。所以我们就可用数组来保存这些颜色的信息，然后<code>O(1)</code>判断，总复杂度为<code>O(n)</code>.
 具体看代码实现.</p>
-<pre><code>#include&lt;iostream&gt;
+<pre><code class="language-c++">#include&lt;iostream&gt;
 #include&lt;algorithm&gt;
 #include&lt;cstring&gt;
 #include&lt;cstdio&gt;
@@ -122,31 +122,30 @@ using namespace std;
 typedef long long ll;
 const int N = 1e5 + 10;
 int n, x,ans, mx, cnt[N], f[N];
-//**f[i] 颜色为i的个数 **
-//**cnt[i]表示个数为i的颜色的种类**
+//f[i] 颜色为i的个数
+//cnt[i]表示个数为i的颜色的种类
 int main()
 {
 	scanf(&quot;%d&quot;, &amp;n);
 	for (int i = 1; i &lt;= n; i++)
 	{
 		scanf(&quot;%d&quot;, &amp;x);
-		cnt[f[x]]--;//**x要加1，所以原来种类的要减去1**
+		cnt[f[x]]--;//x要加1，所以原来种类的要减去1
 		f[x]++;
 		cnt[f[x]]++;
-		mx = max(mx, f[x]);//**保存出现最多的颜色的个数**
-		//**每种颜色的个数都是1**
+		mx = max(mx, f[x]);//保存出现最多的颜色的个数
+		//每种颜色的个数都是1
 		if (cnt[1] == i) ans = i;
-		//	**只有一种颜色，i个**
+		//只有一种颜色，i个
 		else if (cnt[i] == 1) ans = i;
-		//**只有一种颜色个数是一，其他若干种颜色个数相同**
+		//只有一种颜色个数是一，其他若干种颜色个数相同
 		else if (cnt[1] == 1 &amp;&amp; cnt[mx] * mx == i - 1) ans = i;
-		//**个数最多的颜色的个数为mx,它的种类必须为1，并且比其他种类的颜色多1个，且其他种类的颜色的个数必须相同**
+		//个数最多的颜色的个数为mx,它的种类必须为1，并且比其他种类的颜色多1个，且其他种类的颜色的个数必须相同
 		else if (cnt[mx - 1] * (mx - 1) == i - mx&amp;&amp;cnt[mx] == 1) ans = i;
 	}
 	printf(&quot;%d\n&quot;, ans);
 	return 0;
 }
-
 </code></pre>
 
             </div>
