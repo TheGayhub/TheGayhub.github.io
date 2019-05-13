@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://TheGayhub.github.io</id>
+    <title>Guapi</title>
+    <updated>2019-05-13T08:43:00.742Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://TheGayhub.github.io"/>
+    <link rel="self" href="https://TheGayhub.github.io/atom.xml"/>
+    <subtitle>惟世之繁华如故,斟酌岁月如初</subtitle>
+    <logo>https://TheGayhub.github.io/images/avatar.png</logo>
+    <icon>https://TheGayhub.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[尺取法小合集]]></title>
+        <id>https://TheGayhub.github.io/post/chi-qu-fa-xiao-he-ji</id>
+        <link href="https://TheGayhub.github.io/post/chi-qu-fa-xiao-he-ji">
+        </link>
+        <updated>2019-05-10T08:34:30.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="尺取法">尺取法</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="尺取法">尺取法</h1>
+<!-- more -->
+<h3 id="尺取法顾名思义像尺子一样取一段借用挑战书上面的话说尺取法通常是对数组保存一对下标即所选取的区间的左右端点然后根据实际情况不断地推进区间左右端点以得出答案-之所以需要掌握这个技巧是因为尺取法比直接暴力枚举区间效率高很多尤其是数据量大的">尺取法：顾名思义，像尺子一样取一段，借用挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的</h3>
+<h3 id="时候所以尺取法是一种高效的枚举区间的方法一般用于求取有一定限制的区间个数或最短的区间等等-当然任何技巧都存在其不足的地方有些情况下尺取法不可行无法得出正确答案">时候，所以尺取法是一种高效的枚举区间的方法，一般用于求取有一定限制的区间个数或最短的区间等等。当然任何技巧都存在其不足的地方，有些情况下尺取法不可行，无法得出正确答案。</h3>
+<h3 id="使用尺取法时应清楚以下四点">使用尺取法时应清楚以下四点：</h3>
+<h3 id="1-什么情况下能使用尺取法-2-何时推进区间的端点-3-如何推进区间的端点-3-何时结束区间的枚举">1、  什么情况下能使用尺取法?  2、何时推进区间的端点？ 3、如何推进区间的端点？ 3、何时结束区间的枚举？</h3>
+<h3 id="尺取法通常适用于选取区间有一定规律或者说所选取的区间有一定的变化趋势的情况通俗地说在对所选取区间进行判断之后我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间如果已经判断了目前所选取的区间但却无法确定所要求解的区间如何进一步得到根据其端点得到那么尺取法便是不可行的-首先明确题目所需要求解的量之后区间左右端点一般从最整个数组的起点开始之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案">尺取法通常适用于选取区间有一定规律，或者说所选取的区间有一定的变化趋势的情况，通俗地说，在对所选取区间进行判断之后，我们可以明确如何进一步有方向地推进区间端点以求解满足条件的区间，如果已经判断了目前所选取的区间，但却无法确定所要求解的区间如何进一步得到根据其端点得到，那么尺取法便是不可行的。首先，明确题目所需要求解的量之后，区间左右端点一般从最整个数组的起点开始，之后判断区间是否符合条件在根据实际情况变化区间的端点求解答案。</h3>
+<h3 id="总结尺取法的模型便是这样根据区间的特征交替推进左右端点求解问题其高效的原因在于避免了大量的无效枚举其区间枚举都是根据区间特征有方向的枚举如果胡乱使用尺取法的话会使得枚举量减少因而很大可能会错误所以关键的一步是进行问题的分析">总结：尺取法的模型便是这样：根据区间的特征交替推进左右端点求解问题，其高效的原因在于避免了大量的无效枚举，其区间枚举都是根据区间特征有方向的枚举，如果胡乱使用尺取法的话会使得枚举量减少，因而很大可能会错误，所以关键的一步是进行问题的分析</h3>
+<p><a href="https://blog.csdn.net/lxt_lucia/article/details/81091597">来自</a></p>
+<!-- more -->
+<blockquote>
+<p><a href="http://poj.org/problem?id=3061">POJ 3061 Subsequence</a></p>
+</blockquote>
+<pre><code>
+#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N = 1e5 + 10;
+int n, s,a[N];
+int main(){
+	int t;
+	cin &gt;&gt; t;
+	while (t--)
+	{
+		scanf(&quot;%d%d&quot;, &amp;n,&amp;s);
+		for (int i = 1; i &lt;= n; i++)
+			scanf(&quot;%d&quot;, &amp;a[i]);
+		int st = 1, en = 1;
+		int tot = 0;
+		int ans = n+10;
+		while (1)
+		{
+			while (en &lt;= n&amp;&amp;tot &lt; s)
+				tot += a[en++];
+			if (tot &lt; s)
+				break;
+			ans = min(ans, en - st);
+			tot -= a[st++];
+		}
+		if (ans == n + 10) printf(&quot;0\n&quot;);
+		else 
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}
+</code></pre>
+<blockquote>
+<p><a href="http://poj.org/problem?id=3320">POJ 3320 Jessica's Reading Problem</a>
+求最小的页数覆盖所有知识点</p>
+</blockquote>
+<pre><code>
+#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;set&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N = 1e6 + 10;
+int n,a[N];
+set&lt;int&gt; s;
+map&lt;int, int&gt; cnt;
+int main(){
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++)
+		scanf(&quot;%d&quot;, &amp;a[i]),s.insert(a[i]);
+	int sum = s.size();
+	int st = 1, en = 1, tot = 0;
+	int ans = n;
+	while (1)
+	{
+		while (en &lt;= n&amp;&amp;tot &lt; sum){
+			if (cnt[a[en]] == 0){
+				tot++;
+			}
+			cnt[a[en++]]++;
+		}
+		if (tot &lt; sum) break;
+		ans = min(ans, en - st);
+		--cnt[a[st]];
+		if (cnt[a[st++]] == 0) tot--;
+	}
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
+}
+
+</code></pre>
+<blockquote>
+<p><a href="http://poj.org/problem?id=2566">POJ 2566 Bound Found</a>
+给定一个数组和一个值t，求一个子区间使得其和的绝对值与t的差值最小，如果存在多个，任意解都可行。</p>
+</blockquote>
+<pre><code>
+#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;set&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N = 1e5 + 10;
+const int INF = 1e9 + 10;
+int n,k,t,a[N];
+typedef pair&lt;int, int&gt; P;
+P s[N];
+int main()
+{
+	while (scanf(&quot;%d%d&quot;, &amp;n, &amp;k) &amp;&amp; (n || k))
+	{
+		s[0] = P(0, 0);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%d&quot;, &amp;a[i]);
+			s[i] = P(a[i] + s[i - 1].first, i);
+		}
+		sort(s, s + n + 1);//保证0在负数后面，即开始就出现正数，负数的话会一直更新en++
+		while (k--)
+		{
+			scanf(&quot;%d&quot;, &amp;t);
+			int st = 0, en = 1, minv = INF,l=1,r=n,ans=s[1].first;
+			while (en &lt;= n)
+			{
+				int sum = s[en].first - s[st].first;
+				if (abs(sum - t) &lt; minv){
+					minv = abs(sum - t);
+					l = s[st].second, r = s[en].second;
+					ans = sum;
+				}
+				if (sum == t)
+					break;
+				else if (sum &lt; t){
+					en++;
+				}
+				else{
+					st++;
+				}
+				if (st == en) en++;
+			}
+			if (l&gt;r) swap(l, r);
+			printf(&quot;%d %d %d\n&quot;, ans, l+1, r);
+		}
+		
+	}
+	return 0;
+}
+</code></pre>
+<blockquote>
+<p><a href="http://poj.org/problem?id=2739">poj2739</a>
+<a href="http://poj.org/problem?id=2100">poj2100</a>
+找到某一个区间使得区间内的数的和/平方和等于某一给定值k</p>
+</blockquote>
+<pre><code>
+//poj2739
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include&lt;iostream&gt;
+#define INF 0x3f3f3f3f
+#define LL long long
+#define N 10100
+using namespace std;
+int prime[N], tot;
+bool vis[N];
+int n;
+void get_prime(int n)
+{
+	memset(vis, true, sizeof(vis));
+	for (int i = 2; i &lt;= n; i++)
+	{
+		if (vis[i]){
+			prime[++tot] = i;
+			for (int j = i + i; j &lt;= n; j += i){
+				vis[j] = false;
+			}
+		}
+	}
+}
+int main()
+{
+	get_prime(10090);
+	while (scanf(&quot;%d&quot;, &amp;n) &amp;&amp; n)
+	{
+		int st = 1, en = 1,sum=0,ans=0;
+		while (1)
+		{
+			while (sum &lt; n&amp;&amp;prime[en] &lt;= n) sum += prime[en++];
+			if (sum == n) ans++;
+			if (sum&lt;n) break;
+			sum -= prime[st++];
+		}
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}
+
+</code></pre>
+<pre><code>
+//poj2100
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#define INF 0x3f3f3f3f
+typedef long long ll;
+#define N 10100
+using namespace std;
+typedef pair&lt;ll, ll&gt; P;
+vector&lt;P&gt; ans;
+ll n;
+int main()
+{
+	while (cin &gt;&gt; n)
+	{
+		ans.clear();
+		ll st = 1, en = 1;
+		ll sum = 0;
+		while (1)
+		{
+			while (sum &lt; n&amp;&amp;en*en &lt;= n)
+				sum += en*en,en++;
+			if (sum == n){
+				ans.push_back(P(st, en));
+			}
+			if (sum &lt; n)
+				break;
+			sum -= st*st;
+			st++;
+		}
+		printf(&quot;%d\n&quot;, ans.size());
+		for (int i = 0; i &lt; ans.size(); i++)
+		{
+			P t = ans[i];
+			printf(&quot;%lld&quot;, t.second - t.first);
+			for (ll j = t.first; j &lt; t.second; j++)
+				printf(&quot; %lld&quot;, j);
+			printf(&quot;\n&quot;);
+		}
+	}
+	return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Codeforce 1163 B Cat Party]]></title>
+        <id>https://TheGayhub.github.io/post/codeforce-1163-b-cat-party</id>
+        <link href="https://TheGayhub.github.io/post/codeforce-1163-b-cat-party">
+        </link>
+        <updated>2019-05-10T05:55:28.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="好题">好题</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="好题">好题</h1>
+<!-- more -->
+<blockquote>
+<p>题目链接 <a href="https://codeforces.com/contest/1163/problem/B2">Cat Party</a></p>
+</blockquote>
+<blockquote>
+<p>题目大致意思 题目会给出n天，每天都会有一个颜色<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>u</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">u_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，找出最大的<code>x</code>使<strong>删除前x天中的某一天</strong>，使得剩下的x-1天出现过的颜色个数相同</p>
+</blockquote>
+<p>如果<code>x</code>满足以下四个条件之一，那么这个<code>x</code>就是合法的。</p>
+<ul>
+<li>前<code>x</code>天内只出现过一种颜色</li>
+<li>前<code>x</code>天内出现过x种颜色，每种颜色的个数为1</li>
+<li>前<code>x</code>天内只有一种颜色出现过一次，既个数为1，其他若干种颜色的个数相同。</li>
+<li>前<code>x</code>天内出现个数最多的颜色只有一种，其他种类的颜色个数相同，且这个最多个数的颜色比这些颜色个数多1</li>
+</ul>
+<p>可以发现，我们每次判断<code>x</code>是否合法几乎只与颜色个数为1的和颜色个数最多的那些颜色有关。所以我们就可用数组来保存这些颜色的信息，然后<code>O(1)</code>判断，总复杂度为<code>O(n)</code>.
+具体看代码实现.</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdio&gt;
+#include&lt;string&gt;
+#include&lt;vector&gt;
+#include&lt;cmath&gt;
+#include&lt;set&gt;
+using namespace std;
+typedef long long ll;
+const int N = 1e5 + 10;
+int n, x,ans, mx, cnt[N], f[N];
+//f[i] 颜色为i的个数
+//cnt[i]表示个数为i的颜色的种类
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++)
+	{
+		scanf(&quot;%d&quot;, &amp;x);
+		cnt[f[x]]--;//x要加1，所以原来种类的要减去1
+		f[x]++;
+		cnt[f[x]]++;
+		mx = max(mx, f[x]);//保存出现最多的颜色的个数
+		//每种颜色的个数都是1
+		if (cnt[1] == i) ans = i;
+		//只有一种颜色，i个
+		else if (cnt[i] == 1) ans = i;
+		//只有一种颜色个数是一，其他若干种颜色个数相同
+		else if (cnt[1] == 1 &amp;&amp; cnt[mx] * mx == i - 1) ans = i;
+		//个数最多的颜色的个数为mx,它的种类必须为1，并且比其他种类的颜色多1个，且其他种类的颜色的个数必须相同
+		else if (cnt[mx - 1] * (mx - 1) == i - mx&amp;&amp;cnt[mx] == 1) ans = i;
+	}
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Codeforces Gym 101147 J-Whistle's New Car]]></title>
+        <id>https://TheGayhub.github.io/post/codeforces-gym-101147-j-whistles-new-car</id>
+        <link href="https://TheGayhub.github.io/post/codeforces-gym-101147-j-whistles-new-car">
+        </link>
+        <updated>2019-05-06T10:46:57.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="dfs">DFS</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="dfs">DFS</h1>
+<!-- more -->
+<blockquote>
+<p>题目链接<a href="https://codeforces.com/gym/101147/problem/J"> Whistle's New Car</a></p>
+</blockquote>
+<p>题目的意思是给定 <code>n</code> 个城市编号 <code>1-n</code> ,每个城市都有一个权值  <span class="katex-external">  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">{X_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> </span>
+,两个城市间的距离  <span class="katex-external">  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">{C_ {ij}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></span> </span> 这些城市的结构是一颗以 <code>1</code> 为根节点的树，输出每个城市<code>i</code>的<code>attractiveness</code>   ，每个节点 <code>attractiveness</code> 是满足以下条件的城市的个数</p>
+<ol>
+<li><code>j</code> 是 <code>i</code> 的子树。</li>
+<li>在城市<code>j</code>加满<span class="katex-external">  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">{X_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> </span> 的油后不再加油能到达 i 城市。</li>
+</ol>
+<p>主要思路：从根节点<code>1</code>出发DFS整棵树，我们用<code>s[i]</code>表示根节点到第<code>i</code>个节点的路径长度之和,(第 <strong><code>i</code></strong> 个节点貌似不恰当，可以理解为第 <strong><code>i</code></strong> 层).<code>num</code> 数组保存了我们 <code>dfs</code> 过程中之前所经过的城市(后面有用)。对于当前城市<code>i</code>它只能往上走，我们需要判断它能往上走到哪里,我们可以发现,对于在<code>i</code>之前的城市<code>j</code>如果满足  <strong><code>s[j]+x[i]&gt;=s[i]</code></strong> ，那么我们就可以从城市<code>i</code>走到城市<code>j</code>，因此我们需要找到最小的<code>j</code>，满足 <strong><code>s[j]&gt;=s[i]-x[i]</code></strong>  ,对于这个我们可以二分查找<code>s</code>数组，找到满足条件的最小的<code>j</code>,<code>j</code>城市满足条件，<code>j</code>到<code>i</code>路上所有的城市节点都满足条件(不包括i)，因此我们把<code>j,j+1....i-1</code>这些城市答案都加<code>1</code>，对于闭区间<code>[j~i-1]</code> 的值加上<code>1</code>，可以类似于差分来处理，<code>cnt[i-1]++</code>,<code>cnt[j-1]--</code>.这里让<code>cnt[j-1]--</code>，是为消除城市节点<code>j</code>之前的城市的影响，因为我们每次统计答案是<code>cnt[u] += cnt[v]</code> (<code>v</code>是<code>u</code>的孩子),对<code>[j~i-1]</code>之间的城市我们这样操作后它们的答案都会加<code>1</code>，但<code>j</code>之前的城市我们不能让它答案加<code>1</code>，因此我们<code>cnt[j-1]--</code>来消除这个影响。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;string&gt;
+#include&lt;cstring&gt;
+#include&lt;vector&gt;
+using namespace std;
+#define lowbit(x) (x&amp;(-x))
+typedef long long ll;
+const int N = 5e5 + 10;
+int n;
+ll a[N],s[N];
+typedef pair&lt;int, ll&gt; P;
+vector&lt;P&gt; p[N];
+int cnt[N],num[N];
+int ret;
+void dfs(int u, int pre)
+{
+	for (auto E : p[u])
+	{
+		int v = E.first;
+		ll w = E.second;
+		if (v == pre) continue;
+		s[ret] = s[ret - 1] + w;
+		num[ret] = v; //路径上第ret城市为v
+		int pos = lower_bound(s, s + ret + 1, s[ret] - a[v])-s;
+		if (pos &lt; ret)//如果能到达父结点城市
+		{
+			cnt[u]++;
+			if (pos) cnt[num[pos - 1]]--;//这个一定要减，不然后面节点的数加到父节点的时候，父节点就多加了
+		}
+		ret++;
+		dfs(v, u);
+		ret--;
+		cnt[u] += cnt[v];
+	}
+}
+int main()
+{
+	freopen(&quot;car.in&quot;, &quot;r&quot;, stdin);
+	int T;
+	scanf(&quot;%d&quot;, &amp;T);
+	while (T--)
+	{
+		ret = 1;
+		memset(cnt, 0, sizeof(cnt));
+		scanf(&quot;%d&quot;, &amp;n);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%lld&quot;, &amp;a[i]);
+			p[i].clear();
+		}
+		for (int i = 1; i &lt; n; i++)
+		{
+			int u,v;
+			ll w;
+			scanf(&quot;%d%d%lld&quot;, &amp;u, &amp;v, &amp;w);
+			p[u].push_back(P(v, w));
+			p[v].push_back(P(u, w));
+		}
+		ret = 1;
+		num[0] = 1;
+		s[0] = 0;
+		dfs(1, -1);
+		for (int i = 1; i &lt;= n; i++)
+			printf(&quot;%d%c&quot;, cnt[i], i == n ? '\n' : ' ');
+	}
+	fclose(stdin);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Codeforce Gym 101086 D - Secure but True]]></title>
+        <id>https://TheGayhub.github.io/post/codeforce-gym-101086-d-secure-but-true</id>
+        <link href="https://TheGayhub.github.io/post/codeforce-gym-101086-d-secure-but-true">
+        </link>
+        <updated>2019-05-05T10:03:08.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="思维模拟">思维+模拟</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="思维模拟">思维+模拟</h1>
+<!-- more -->
+<blockquote>
+<p>题目链接 <a href="https://codeforces.com/gym/101086/problem/D">Secure but True </a></p>
+</blockquote>
+<blockquote>
+<p>题目的大致意思是给出11个字符 <code>{A, H, I, M, O, T, U, V, W, X, Y},</code> ，这些字符可以任意结合组成字符串，这些字符串排序首先按照它们的长度排序，长度相同按照字典序排序，然后题目给你T个询问，每个询问给一个整数 <strong><code>k</code></strong> ，一个字符串 <strong><code>s</code></strong>   ，然后询问字符串s后的第k的字符串是什么。</p>
+</blockquote>
+<p>首先这11个字符可以组成无数个字符串，而k的范围又是1e9,所以不可能直接做。首先由11个字符先按照长度再按照字典序排可以想到10进制数，<strong><code>0-9 10-19 20-29</code></strong>  ,这 <strong><code>10</code></strong> 个数不正是先按照长度，再按照字典序来排的吗。于是这题也就和 <strong><code>11</code></strong> 进制相关，于是我和我队友想到了如下思路，将k转化为11进制，再将字符串s转化为11进制，<code>A-Y</code> 分别代表 <code>1-11</code>，然后相加，得到的结果再按照对应字符输出。
+我们按照这个思路写了一下，然后交上去WA了，后来我们发现将k转化为11进制后会出现0，对于0我们无法处理，因为我们是把 <code>A-Y</code> 分别代表 <code>1-11</code> 来处理的，出现0我们就无法处理，于是我们就改了好长时间代码，还是没能正常处理0. 我们把Y当成0处理也不行，最后这题没能A掉。
+比赛过后，我请教了一位大佬，就是用11进制做，A-Y仍分别代表1-11。然后模拟两个11进制相加。所以我们用短除法把k转为11进制这个方法错了。要用其他方法把k转化为11进制,并且不出现0，既每一位最低是1。</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 2e5 + 100;
+string ss = &quot;AAHIMOTUVWXY&quot;;
+typedef long long ll;
+int to[128], k;
+char s[N];
+int a[N];
+int b[N];
+ll Pow[N];
+void dfs(int x, int val)
+{
+	if (x&lt;0) return;
+	for (int i = 1; i &lt;= 11; i++)
+	{
+		if (val &gt;= Pow[x]){
+			val -= Pow[x];
+		}
+		else{
+			b[x] = i;
+			dfs(x - 1, val);
+			break;
+		}
+	}
+}
+void Ac()
+{
+	memset(a, 0, sizeof(a));
+	memset(b, 0, sizeof(b));
+	scanf(&quot;%d%s&quot;, &amp;k, s);
+	int len1 = strlen(s);
+	for (int i = 0; i &lt; len1; i++)
+		a[i] = to[s[i]];
+	reverse(a, a + len1);
+	int len2 = 0;
+	//不能让0出现，这个处理保证了每一位最少是1 (与平时短除法转化不一样)
+	for (int i = 0; i &lt;= 12; i++)
+	{
+		if (k &lt; Pow[i]){
+			len2 = i;
+			break;
+		}
+		else{
+			//b[i]=1;
+			k -= Pow[i];
+		}
+	}
+	//这个dfs模拟转化11进制
+	dfs(len2 - 1, k);
+	//for (int i = 0; i &lt; len2; i++)
+		//cout &lt;&lt; b[i] &lt;&lt; ' ';
+	//cout &lt;&lt; endl;
+	len1 = max(len1, len2);
+	for (int i = 0; i &lt; len1; i++)
+	{
+		a[i] += b[i];
+		while (a[i]&gt;11) a[i] -= 11, b[i + 1]++;
+	}
+	if (b[len1])  a[len1] += b[len1],len1++;
+	for (int i = len1 - 1; i &gt;= 0; i--)
+		putchar(ss[a[i]]);
+	puts(&quot;&quot;);
+}
+
+int main(){
+	int T;
+	scanf(&quot;%d&quot;, &amp;T);
+	Pow[0] = 1;
+	for (int i = 1; i &lt;= 12; ++i)
+		Pow[i] = Pow[i - 1] * 11;
+	for (int i = 1; i &lt;= 11; i++)
+		to[ss[i]] = i;
+	while (T--)
+		Ac();
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[POJ 2796 Feel Good]]></title>
+        <id>https://TheGayhub.github.io/post/poj-2796-feel-good</id>
+        <link href="https://TheGayhub.github.io/post/poj-2796-feel-good">
+        </link>
+        <updated>2019-05-04T11:36:58.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="单调栈">单调栈</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="单调栈">单调栈</h1>
+<!-- more -->
+<p><a href="http://poj.org/problem?id=2796">POJ 2796</a></p>
+<p>题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值乘于这段连续子序列的和，我们要使得求得的这个值最大，比如样例 <code>6 3 1 6 4 5 2</code>，我们选择<code>6 4 5</code>这段连续的子序列，值为<code>4*(6+4+5)=60</code>
+首先对于每个数<code>a[i]</code>，我们想让他最大可能的往左右扩展，知道这个数往左和往右最大的扩展的坐标<code>l,r</code>,利用前缀和我们就求得了这个值<code>a[i]*(s[r]-s[l-1])</code>，所以这题在于我们怎么去求一个数往左右扩展的最大位置.
+我们先以往右扩展为例，用 <strong><code>R[i]</code></strong>  表示 <strong><code>i</code></strong> 往右扩展的最大位置。我们建立一个单调栈，这个单调栈是单调递减的，即栈顶到栈底递减，用数组表示即是从左到右递增。我们扫描这个序列。</p>
+<ul>
+<li>如果当前这个数比栈顶大或者等于，我们直接入栈。</li>
+<li>如果当前这个数比栈顶小，我们就从栈中弹出数，直到这个数比栈顶大，那怎么记录往右扩展的最大位置呢，我们在把数从栈中弹出的过程中，弹出的数一定比当前要入栈的数大，因此他一定不是最小的数，对后面没有作用，因此弹出的数最大扩展位置就是当前这个数的位置i再减去1,即<code>i-1</code>。
+我们用<code>pos</code>数组记录一下栈中数所在的位置，同时<code>a[n+1]</code>设为<code>-1</code>，保证最后栈中元素都可以被弹出。
+向左扩展也是一样道理。</li>
+</ul>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+typedef long long ll;
+const int N = 1e5 + 10;
+int a[N], n, L[N], R[N], s[N], tot, pos[N];
+ll sum[N];
+pair&lt;int, int&gt; ans;
+int main()
+{
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++){
+        scanf(&quot;%d&quot;, &amp;a[i]);
+        sum[i] = sum[i - 1] + 1LL*a[i];
+        L[i] = R[i] = i;
+    }
+    a[n + 1] = -1;
+    for (int i = 1; i &lt;= n+1; i++)
+    {
+        if (a[i] &gt;= s[tot])
+            s[++tot] = a[i],pos[tot]=i;
+        else{
+            while (tot&amp;&amp;a[i] &lt; s[tot]){
+                R[pos[tot]] = i - 1;
+                tot--;
+            }
+            s[++tot] = a[i],pos[tot]=i;
+        }
+    }
+    a[0] = -1,tot=0;
+    for (int i = n; i &gt;= 0; i--){
+        if (a[i] &gt;= s[tot]){
+            s[++tot] = a[i],pos[tot]=i;
+        }
+        else{
+            while (tot&amp;&amp; a[i] &lt; s[tot]){
+                L[pos[tot]] = i+1;
+                tot--;
+            }
+            s[++tot] = a[i], pos[tot] = i;
+        }
+    }
+    ll max_val= -1;
+    for (int i = 1; i &lt;= n; i++){
+        if (a[i]*(sum[R[i]] - sum[L[i] - 1]) &gt; max_val)
+        {
+            max_val = a[i] * (sum[R[i]] - sum[L[i] - 1]);
+            ans.first = L[i];
+            ans.second = R[i];
+        }
+    }
+    cout &lt;&lt; max_val &lt;&lt; endl;
+    cout &lt;&lt; ans.first &lt;&lt; &quot; &quot; &lt;&lt; ans.second &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[字符串最小表示法]]></title>
+        <id>https://TheGayhub.github.io/post/MinString</id>
+        <link href="https://TheGayhub.github.io/post/MinString">
+        </link>
+        <updated>2019-05-02T14:08:00.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
+<!-- more -->
+<blockquote>
+<p>第一种</p>
+</blockquote>
+<pre><code>int get_minstring(char s[])
+{
+    int n =strlen(s);
+    int i = 0, j = 1, k;
+    while (i &lt; n&amp;&amp;j &lt; n)
+    {
+        for (k = 0; k &lt; n&amp;&amp;s[(j + k) % n] == s[(i + k) % n]; k++);
+        if (k == n)  break;
+        if (s[(i + k)%n]&gt;s[(j + k)%n])
+        {
+            i = i + k + 1;
+            if (i == j) i++;
+        }
+        else
+        {
+            j = j + k + 1;
+            if (i == j) j++;
+        }
+    }
+    return min(i, j);
+}
+
+</code></pre>
+<blockquote>
+<p>第二种</p>
+</blockquote>
+<pre><code>int get_minstring(char s[])
+{
+    int n = strlen(s + 1);
+    for (int i = 1; i &lt;= n; i++)
+        s[n + i] = s[i];
+    int i = 1, j = 2,k;
+    while (i &lt;= n&amp;&amp;j &lt;= n)
+    {
+        for ( k = 0; k &lt; n&amp;&amp;s[j + k] == s[i + k]; k++);
+        if (k == n)  break;
+        if (s[i + k]&gt;s[j + k])
+        {
+            i = i + k + 1;
+            if (i == j) i++;
+        }
+        else
+        {
+            j = j + k + 1;
+            if (i == j) j++;
+        }
+    }
+    return min(i, j);
+}
+</code></pre>
+<p>这两个其实差不多</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[快速幂模板]]></title>
+        <id>https://TheGayhub.github.io/post/fast_pow</id>
+        <link href="https://TheGayhub.github.io/post/fast_pow">
+        </link>
+        <updated>2019-05-02T13:38:32.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="快速乘快速幂">快速乘+快速幂</h1>
+<h1 id="计算-ab-p">计算  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span></span></span></span> % p</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="快速乘快速幂">快速乘+快速幂</h1>
+<h1 id="计算-ab-p">计算  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span></span></span></span> % p</h1>
+<!-- more -->
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+int t;
+ll a, b, p;
+ll fast_mul(ll a, ll b, ll p)
+{
+    ll res = 0;
+    while (b)
+    {
+        if (b &amp; 1) res = (res + a) % p;
+        a = a * 2 % p;
+        b &gt;&gt;= 1;
+    }
+    return res;
+}
+ll fast_pow(ll a, ll b, ll p)
+{
+    ll res = 1;
+    while (b)
+    {
+        if (b &amp; 1) res = fast_mul(res, a, p);
+        a = fast_mul(a, a, p);
+        b &gt;&gt;= 1;
+    }
+    return res;
+}
+int main()
+{
+    cin &gt;&gt; t;
+    while (t--)
+    {
+        scanf(&quot;%lld%lld%lld&quot;, &amp;a, &amp;b, &amp;p);
+        printf(&quot;%lld\n&quot;, fast_pow(a, b, p));
+    }
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[数据结构上机实验报告——链表]]></title>
+        <id>https://TheGayhub.github.io/post/JNU-LinkList</id>
+        <link href="https://TheGayhub.github.io/post/JNU-LinkList">
+        </link>
+        <updated>2019-05-01T03:22:02.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="链表">链表</h1>
+<h2 id="数据结构课上机实验报告">数据结构课上机实验报告</h2>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="链表">链表</h1>
+<h2 id="数据结构课上机实验报告">数据结构课上机实验报告</h2>
+<!-- more -->
+<blockquote>
+<p>编写一个程序  <code>Linklist.cpp</code>  ，实现链表的各种基本运算和整体建表算法（假设链表的元素类型 <code>ElemType</code> 为 <code>int</code> ），并在此基础上设计一个主程序，完成如下功能：</p>
+</blockquote>
+<ul>
+<li>构建基于动态分配内存的链表L，并初始化链表。</li>
+<li>依次将  <code>1Mints.txt</code>  文件中的数据输入到链表中。</li>
+<li>输出链表L长度。</li>
+<li>判断链表L是否为空。</li>
+<li>分别输出顺序表L的第  <code>30、300、3000、30000、300000</code>  个元素值，记录相应时间。</li>
+<li>输出值为  <code>-12345</code>  的元素的位置。</li>
+<li>依次在第  <code>4、40、400、4000、40000、400000</code>  个元素位置上插入整数  <code>-10086</code>  ，记录相应的时间。</li>
+<li>依次删除在第  <code>4、40、400、4000、40000、400000</code>  个元素位置上的元素，记录相应的时间。</li>
+<li>输出链表L的前  <code>10</code>  个元素。</li>
+<li>释放链表L。</li>
+</ul>
+<pre><code>// LinkList.cpp : 定义控制台应用程序的入口点。
+//
+
+//#include &quot;stdafx.h&quot;
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;string&gt;
+#include&lt;cstdio&gt;
+#include&lt;fstream&gt;
+#include&lt;ctime&gt;
+#include &lt;windows.h&gt;
+using namespace std;
+typedef int ElemType;
+const int N = 5e6 + 5;
+ElemType a[N];
+LARGE_INTEGER nFreq;
+
+LARGE_INTEGER t1;
+
+LARGE_INTEGER t2;
+
+double dt;
+typedef struct node{
+	ElemType val;
+	struct node *next;
+	//node(int _val=0,node * _next=NULL):val(_val),next(_next){}
+}Node;
+void CreateHead(Node *&amp;head){
+	head = (Node *)malloc(sizeof(Node));
+	if (head == NULL) {
+		cout &lt;&lt; &quot;头节点内存分配失败&quot; &lt;&lt; endl;
+		exit(1);
+	}
+	head-&gt;val = 0;
+	head-&gt;next = NULL;
+}
+void InitLinkList(Node *&amp;head,int n){
+	Node *temp = head;
+	for (int i = 0; i &lt; n; i++)
+	{
+		Node * pnode = (Node *)malloc(sizeof(Node));
+		if (pnode == NULL){
+			cout &lt;&lt; &quot;节点内存分配失败&quot; &lt;&lt; endl;
+			exit(1);
+		}
+		pnode-&gt;val = a[i];
+		pnode-&gt;next = NULL;
+		temp-&gt;next = pnode;
+		temp = temp-&gt;next;
+	}
+	cout &lt;&lt; &quot;输入成功!&quot; &lt;&lt; endl&lt;&lt;endl;
+	head-&gt;val = n;
+}
+int ListLength(Node *L) {
+	return (L-&gt;val);
+}
+bool ListEmpty(Node *L) {
+	return (L-&gt;val == 0);
+}
+void DestroyList(Node *&amp;head){
+	Node *temp = head;
+	while (head != NULL)
+	{
+		head = head-&gt;next;
+		free(temp);
+		temp = head;
+	}
+}
+bool DispList(Node *head,int n) {
+	int length = ListLength(head);
+	if (length &lt; n) return false;
+	Node *cur = head;
+	for (int i = 0; i &lt; n; i++) {
+		cur = cur-&gt;next;
+		printf(&quot;%d &quot;, cur-&gt;val);
+	}
+	printf(&quot;\n\n&quot;);
+	return true;
+}
+bool GetElem(Node *head, int i, ElemType &amp;e) {
+	int length = ListLength(head);
+	if (length &lt;= 0) return false;
+	if (i&lt;1 || i&gt;length) return false;
+	Node *temp = head;
+	for (int j = 0; j &lt; i; j++)
+	{
+		temp = temp-&gt;next;
+	}
+	e = temp-&gt;val;
+	return true;
+}
+int LocateElem(Node *head, ElemType e) {
+	int i = 1;
+	int length = ListLength(head);
+	if (length &lt;= 0) return -1;
+	Node *temp = head-&gt;next;
+	while (i &lt;= length&amp;&amp;temp-&gt;val != e) {
+		i++;
+		temp = temp-&gt;next;
+	}
+if (i &gt; length) return -1;
+	else return i;
+}
+bool ListInsert(Node *&amp;head, int i, ElemType e) {
+	int length = ListLength(head);
+	if (i&lt;1 || i&gt;length + 1) return false;
+	Node *pre = head;
+	for (int j = 1; j &lt; i&amp;&amp;pre!=NULL; j++)
+	{
+		pre = pre-&gt;next;
+	}
+	if (pre == NULL){
+		return false;
+	}
+	else{
+		Node *cur = (Node *)malloc(sizeof(Node));
+		if (cur == NULL) return false;
+		cur-&gt;val = e;
+		cur-&gt;next = pre-&gt;next;
+		pre-&gt;next = cur;
+		head-&gt;val++;
+		return true;
+	}
+}
+bool ListDelete(Node *&amp;head, int i, ElemType &amp;e) {
+	int length = ListLength(head);
+	if (length == 0) return false;
+	if (i&lt;1 || i&gt;length) return false;
+	Node *cur = head, *pre = head;
+	for (int j = 1; j &lt;= i; j++)
+	{
+		if (cur == NULL || pre == NULL) return false;
+		pre = cur;
+		cur = cur-&gt;next;
+	}
+	if (cur == NULL || pre == NULL) return false;
+	else{
+		e = cur-&gt;val;
+		pre-&gt;next = cur-&gt;next;
+		free(cur);
+		head-&gt;val--;
+		return true;
+	}
+}
+void GetElemTime(Node *&amp;head)
+{
+	ElemType e;
+	for (int i = 30; i &lt;= 300000; i *= 10)
+	{
+		QueryPerformanceFrequency(&amp;nFreq);
+		QueryPerformanceCounter(&amp;t1);
+		GetElem(head, i, e);
+		QueryPerformanceCounter(&amp;t2);
+		dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+		cout &lt;&lt; &quot;链表第&quot; &lt;&lt; i &lt;&lt; &quot;个元素的值为：&quot; &lt;&lt; e &lt;&lt; &quot;        所花时间为：&quot; &lt;&lt; dt*1000000 &lt;&lt; &quot;μs&quot; &lt;&lt; endl;
+	}
+	cout &lt;&lt; endl;
+}
+void ListInsertTime(Node *&amp;head)
+{
+	ElemType e = -10086;
+	for (int i = 4; i &lt;= 400000; i *= 10)
+	{
+		QueryPerformanceFrequency(&amp;nFreq);
+		QueryPerformanceCounter(&amp;t1);
+		ListInsert(head, i, e);
+		QueryPerformanceCounter(&amp;t2);
+		dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+		cout &lt;&lt; &quot;链表第&quot; &lt;&lt; i &lt;&lt; &quot;个位置插入&quot; &lt;&lt; e &lt;&lt; &quot;         所花时间为：&quot; &lt;&lt; dt*1000000 &lt;&lt; &quot;μs&quot; &lt;&lt; endl;;
+	}
+	cout &lt;&lt; endl;
+}
+void ListDeleteTime(Node *&amp;head)
+{
+	ElemType e;
+	for (int i = 4; i &lt;= 400000; i *= 10)
+	{
+		QueryPerformanceFrequency(&amp;nFreq);
+		QueryPerformanceCounter(&amp;t1);
+		ListDelete(head, i, e);
+		QueryPerformanceCounter(&amp;t2);
+		dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+		cout &lt;&lt; &quot;链表删除第&quot; &lt;&lt; i &lt;&lt; &quot;个位置的元素&quot; &lt;&lt; e &lt;&lt; &quot;        所花时间为：&quot; &lt;&lt; dt*1000000 &lt;&lt; &quot;μs&quot; &lt;&lt; endl;;
+	}
+	cout &lt;&lt; endl;
+int main()
+{
+	cout &lt;&lt; &quot;链表的基本运算如下：&quot; &lt;&lt; endl &lt;&lt; endl;
+	cout &lt;&lt; &quot;(1)初始化链表&quot; &lt;&lt; endl &lt;&lt; endl;
+	Node *head;
+	CreateHead(head);
+	string filename = &quot;C:\\Users\\c1515\\Desktop\\Experiment_code\\1Mints.txt&quot;;
+	ifstream fn(filename.c_str());
+	if (!fn.is_open()){
+		cout &lt;&lt; &quot;Cannot open file:&quot; &lt;&lt; filename &lt;&lt; endl;
+		exit(1);
+	}
+	string s;
+	int cnt = 0;
+	while (!fn.eof())
+	{
+		getline(fn,s);
+		if (s.empty()) continue;
+		a[cnt++] = atoi(s.c_str());
+	}
+	fn.close();
+	cout &lt;&lt; &quot;(2)依次将1Mints.txt文件中的数据输入到链表中&quot; &lt;&lt; endl;
+	InitLinkList(head, cnt);
+	cout &lt;&lt; &quot;(3)链表L的长度：&quot; &lt;&lt; ListLength(head) &lt;&lt; endl &lt;&lt; endl;
+	cout &lt;&lt; &quot;(4)链表L为&quot; &lt;&lt; (ListEmpty(head) ? &quot;空&quot; : &quot;非空&quot;) &lt;&lt; endl &lt;&lt; endl;
+	cout &lt;&lt; &quot;(5)输出链表L的第30、300、3000、30000、300000个元素值&quot; &lt;&lt; endl;
+	GetElemTime(head);
+	cout &lt;&lt; &quot;(6)元素-12345的位置：&quot; &lt;&lt; LocateElem(head, -12345) &lt;&lt; endl &lt;&lt; endl;
+	cout &lt;&lt; &quot;(7)依次在第4、40、400、4000、40000、400000个元素位置上插入整数-10086&quot; &lt;&lt; endl;
+	ListInsertTime(head);
+	cout &lt;&lt; &quot;(8)依次删除在第4、40、400、4000、40000、400000个元素位置上的元素&quot; &lt;&lt; endl;
+	ListDeleteTime(head);
+	cout &lt;&lt; &quot;(9)输出前10个元素 &quot; &lt;&lt; endl;
+	DispList(head,10);
+	cout &lt;&lt; &quot;(10)释放链表&quot; &lt;&lt; endl;
+	DestroyList(head);
+	return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
+</feed>
