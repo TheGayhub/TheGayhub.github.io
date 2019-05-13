@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://TheGayhub.github.io</id>
     <title>Guapi</title>
-    <updated>2019-05-13T11:02:47.957Z</updated>
+    <updated>2019-05-13T11:46:00.345Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://TheGayhub.github.io"/>
     <link rel="self" href="https://TheGayhub.github.io/atom.xml"/>
@@ -10,6 +10,22 @@
     <logo>https://TheGayhub.github.io/images/avatar.png</logo>
     <icon>https://TheGayhub.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[2019江苏省程序设计竞赛(JSCPC)总结]]></title>
+        <id>https://TheGayhub.github.io/post/jscpc</id>
+        <link href="https://TheGayhub.github.io/post/jscpc">
+        </link>
+        <updated>2019-05-13T11:08:15.000Z</updated>
+        <content type="html"><![CDATA[<p>5.11号坐高铁到了南京，先去找宾馆，这时候发生了一件有趣的事情，我们按照地图到了我们前段时间在网上预订的宾馆，宾馆是在一个职院里的。刚进宾馆大厅，感觉宾馆挺大气，不错的，可是前台工作人员却找不到我们的预订信息，前台工作人员说我们可能订的是后楼，而这是前楼。这时我们俱乐部的一位学长就站出来说了句话：滚呐，我们怎么可能住这么高级的宾馆。我们当场笑死，这也太真实了。我们穿过职院，来到了后楼的宾馆，(当时路上飘得都是柳絮，跟下雪一样),这不就是我们学校的李园宿舍吗？这和前楼的宾馆完全不在一个等级上。也不管那么多了，走了很长时间都很累了，立马到宾馆休息了会，然后就去报道了。
+第二天5.12 早上出发去南邮吃早餐，然后去打比赛。
+比赛刚开始，我们先找一些题目比较短的开始读题，立马看到E题，和队友看了样例感觉是个签到题，立马莽了一发，发现最小值没有选区恰当，改了一下又交上去了，又WA了，回过头来原来是题目意思没看清，呜呜呜太气人了。我们看了一下榜单，发现L题过的人比较多，我们就去看了L题，是个签到题，我写了一发交上去过了。再看一下榜单，K题过的比较多，是个模拟题，我写了一发交上去过了，队友过来继续写E题，我去看了B题，B题拿到题后就有了思路(是错的思路。。。。),我等着队友写完了E题，我去写B题，然后WA了两发，队友过来看bug，队友认为是爆long long了，我认为不应该吧，但是禀着怀疑的心态，改成unsigned 后又WA了两发，后来看了半天代码才发现是算法出了问题。。。。改了一下交上去终于过了。过了4题发现我们的排名在60名左右(罚时太多了),我们学校的所有队伍都是4题。我们打算再开1题，我去看了C题，题意简短挺好理解的，可是我硬是卡了俩小时没有弄出来，再次期间另外一个队友再看几何题，题目意思读不懂。然后我们就这样到了比赛结束。我们仍然还是4题。排名60多。然后我们发现4题的队伍从将近30名到90名，好像有60多个队伍都是4题，第一次发现原来罚时是这么的重要。我们学长最终也没能绝杀，都是4题，我感觉很遗憾。我们的学长和去年取得了一样的成绩。我们学校除了女生队打的都不怎么好。
+这是我第一次组队出来打比赛，没有经验，也不知道如何稳。
+题目出的呢我感觉题目没有明显的层次感，4题的队伍60多支。这4题都不需要什么很好的算法和思维，而是在拼手速。
+是的，这次比赛我认识的我确实太菜了，在ACM这条道路上还有很远的路要走。当然我的评价也是以我这个菜鸡的角度出发的。
+省赛也结束了，这将近一个学期时间都花在了ACM上，高数拉下一大堆。接下来就是好好复习，迎接期末考的时候了，暑假再战！！！
+加油！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[尺取法小合集]]></title>
         <id>https://TheGayhub.github.io/post/chi-qu-fa-xiao-he-ji</id>
