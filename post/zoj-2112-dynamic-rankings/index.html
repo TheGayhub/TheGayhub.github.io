@@ -1,0 +1,462 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ZOJ 2112 Dynamic Rankings  | Guapi</title>
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1560148384016">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://TheGayhub.github.io">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1560148384016" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/TheGayhub/" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              ZOJ 2112 Dynamic Rankings 
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-06-10 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <h1 id="树状数组套主席树">树状数组套主席树</h1>
+<!-- more -->
+<p>之前学了主席树，解决了静态区间第k大，想着顺便学习一下如何求解动态区间第k大，奈何太菜，看了一晚上未能很好的理解，主要就是询问的时候卡住了我。第二天终于理解了。
+这里给出两种方法</p>
+<h4 id="方法1">* 方法1</h4>
+<p>前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询**(原来的值+树状数组的影响)**</p>
+<h4 id="方法2">* 方法2</h4>
+<p>类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
+<p>方法1的代码在洛谷和ZOJ都能过，方法2就只能过洛谷，ZOJ一直SF。</p>
+<blockquote>
+<p>方法1</p>
+</blockquote>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;string&gt;
+#include&lt;cmath&gt;
+#include&lt;string&gt;
+#include&lt;string.h&gt;
+#include&lt;vector&gt;
+#include&lt;map&gt;
+#include&lt;queue&gt;
+#include&lt;cstdlib&gt;
+using namespace std;
+#define lowbit(x) (x&amp;(-x))
+typedef long long ll;
+const int N = 6e4 + 10;
+const int M = 2500000;
+int a[N], b[N * 2], tot, n, m, q, numx, numy;
+struct query{
+	int op, l, r, v;
+}p[10005];
+struct tree{
+	int lc, rc, cnt;
+}T[N * 32];
+int root[N];
+int ux[50], uy[50];
+int S[N];
+void build(int &amp;rt, int l, int r)
+{
+	rt = ++tot;
+	T[rt].cnt = 0;
+	T[rt].lc = T[rt].rc = 0;
+	if (l == r) return;
+	int mid = (l + r) &gt;&gt; 1;
+	build(T[rt].lc, l, mid);
+	build(T[rt].rc, mid + 1, r);
+}
+void update(int &amp;cur, int pre, int l, int r, int pos, int val)
+{
+	cur = ++tot;
+	T[cur] = T[pre];
+	T[cur].cnt += val;
+	if (l == r) return;
+	int mid = (l + r) &gt;&gt; 1;
+	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos, val);
+	else update(T[cur].rc, T[pre].rc, mid + 1, r, pos, val);
+}
+void add(int pos, int val)
+{
+	int npos = lower_bound(b + 1, b + m + 1, a[pos]) - b;
+	for (; pos &lt;= n; pos += lowbit(pos))
+		update(S[pos], S[pos], 1, m, npos, val);
+}
+int query(int l, int r, int x, int y, int k)
+{
+	if (l == r) return l;
+	int mid = (l + r) &gt;&gt; 1;
+	int sum = 0;
+	for (int j = 0; j &lt; numx; j++) sum -= T[T[ux[j]].lc].cnt;
+	for (int j = 0; j &lt; numy; j++) sum += T[T[uy[j]].lc].cnt;
+	sum += T[T[y].lc].cnt - T[T[x].lc].cnt;
+	if (k&gt;sum)
+	{
+		for (int j = 0; j &lt; numx; j++)
+			ux[j] = T[ux[j]].rc;
+		for (int j = 0; j &lt; numy; j++)
+			uy[j] = T[uy[j]].rc;
+		return query(mid + 1, r, T[x].rc, T[y].rc, k - sum);
+	}
+	else
+	{
+		for (int j = 0; j &lt; numx; j++)
+			ux[j] = T[ux[j]].lc;
+		for (int j = 0; j &lt; numy; j++)
+			uy[j] = T[uy[j]].lc;
+		return query(l, mid, T[x].lc, T[y].lc, k );
+	}
+	
+	
+}
+int main()
+{
+	int t;
+	scanf(&quot;%d&quot;, &amp;t);
+	while (t--)
+	{
+		tot = 0;
+		m = 0;
+		scanf(&quot;%d%d&quot;, &amp;n, &amp;q);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%d&quot;, &amp;a[i]);
+			b[++m] = a[i];
+		}
+		for (int i = 1; i &lt;= q; i++)
+		{
+			char op[5];
+			scanf(&quot;%s&quot;, op);
+			if (op[0] == 'Q')
+			{
+				scanf(&quot;%d%d%d&quot;, &amp;p[i].l, &amp;p[i].r, &amp;p[i].v);
+				p[i].op = 1;
+			}
+			else
+			{
+				scanf(&quot;%d%d&quot;, &amp;p[i].l, &amp;p[i].r);
+				b[++m] = p[i].r;
+				p[i].op = 2;
+			}
+		}
+		sort(b + 1, b + m + 1);
+		m = unique(b + 1, b + m + 1) - b - 1;
+		build(root[0], 1, m);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			int pos = lower_bound(b + 1, b + m + 1, a[i]) - b;
+			update(root[i], root[i - 1], 1, m, pos, 1);
+		}
+		for (int i = 0; i &lt;= n; i++)
+			S[i] = root[0];
+		for (int i = 1; i &lt;= q; i++)
+		{
+			if (p[i].op == 1)
+			{
+				numx = 0, numy = 0;
+				for (int j = p[i].l - 1; j &gt; 0; j -= lowbit(j)) ux[numx++] = S[j];
+				for (int j = p[i].r; j &gt; 0; j -= lowbit(j)) uy[numy++] = S[j];
+				int ans = query(1, m, root[p[i].l - 1], root[p[i].r], p[i].v);
+				printf(&quot;%d\n&quot;, b[ans]);
+			}
+			else
+			{
+				add(p[i].l, -1);
+				a[p[i].l] = p[i].r;
+				add(p[i].l, 1);
+			}
+		}
+
+	}
+
+	return 0;
+}
+
+</code></pre>
+<blockquote>
+<p>方法2(顺便来个非递归查询和更新)</p>
+</blockquote>
+<pre><code>// luogu-judger-enable-o2
+// luogu-judger-enable-o2
+// luogu-judger-enable-o2
+// luogu-judger-enable-o2
+// luogu-judger-enable-o2
+#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;string&gt;
+#include&lt;cmath&gt;
+#include&lt;string&gt;
+#include&lt;string.h&gt;
+#include&lt;vector&gt;
+#include&lt;map&gt;
+#include&lt;queue&gt;
+#include&lt;cstdlib&gt;
+using namespace std;
+#define lowbit(x) (x&amp;(-x))
+typedef long long ll;
+const int N = 1e5+ 10;
+const int M = 2500000;
+int a[N], b[N*2], tot, n, m, q,numx,numy;
+struct query{
+    int op, l, r, v;
+}p[100005];
+struct tree{
+    int lc, rc, cnt;
+}T[N&lt;&lt;9];
+int root[N];
+int ux[50], uy[50];
+void build(int &amp;rt,int l,int r)
+{
+    rt = ++tot;
+    T[rt].cnt = 0;
+    T[rt].lc = T[rt].rc = 0;
+    if (l == r) return;
+    int mid = (l + r) &gt;&gt; 1;
+    build(T[rt].lc, l, mid);
+    build(T[rt].rc, mid + 1, r);
+}
+void update(int &amp;cur, int pre,int l, int r,int pos,int val)
+{
+    cur = ++tot;
+    T[cur] = T[pre];
+    T[cur].cnt += val;
+    int tmp = cur;
+    while (l &lt; r)
+    {
+        int mid = (l + r) &gt;&gt; 1;
+        if (pos &lt;= mid)
+        {
+            T[tmp].lc = ++tot;
+            T[tmp].rc = T[pre].rc;
+            pre = T[pre].lc;
+            tmp = T[tmp].lc;
+            r = mid;
+        }
+        else
+        {
+            T[tmp].rc = ++tot;
+            T[tmp].lc = T[pre].lc;
+            pre = T[pre].rc;
+            tmp = T[tmp].rc;
+            l = mid + 1;
+        }
+        T[tmp].cnt = T[pre].cnt + val;
+    }
+    return;
+}
+void add(int pos, int val)
+{
+    int npos = lower_bound(b + 1, b + m + 1, a[pos]) - b;
+    for (; pos &lt;= n; pos += lowbit(pos))
+        update(root[pos], root[pos], 1, m, npos, val);
+}
+int query(int l,int r,int k)
+{
+    while (l &lt; r)
+    {
+        int mid = (l + r) &gt;&gt; 1;
+        int sum = 0;
+        for (int j = 0; j &lt; numx; j++) sum -= T[T[ux[j]].lc].cnt;
+        for (int j = 0; j &lt; numy; j++) sum += T[T[uy[j]].lc].cnt;
+        if (k&gt;sum)
+        {
+            k -= sum;
+            for (int j = 0; j &lt; numx; j++)
+                ux[j] = T[ux[j]].rc;
+            for (int j = 0; j &lt; numy; j++)
+                uy[j] = T[uy[j]].rc;
+            l = mid + 1;
+        }
+        else
+        {
+            for (int j = 0; j &lt; numx; j++)
+                ux[j] = T[ux[j]].lc;
+            for (int j = 0; j &lt; numy; j++)
+                uy[j] = T[uy[j]].lc;
+            r = mid;
+        }
+    }
+
+    return l;
+}
+int main()
+{
+    tot = 0;
+    m = 0;
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;q);
+    for (int i = 1; i &lt;= n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+        b[++m] = a[i];
+    }
+    for (int i = 1; i &lt;= q; i++)
+    {
+        char op[5];
+        scanf(&quot;%s&quot;, op);
+        if (op[0] == 'Q')
+        {
+            scanf(&quot;%d%d%d&quot;, &amp;p[i].l, &amp;p[i].r, &amp;p[i].v);
+            p[i].op = 1;
+        }
+        else
+        {
+            scanf(&quot;%d%d&quot;, &amp;p[i].l, &amp;p[i].r);
+            b[++m] = p[i].r;
+            p[i].op = 2;
+        }
+    }
+    sort(b + 1, b + m + 1);
+    m = unique(b + 1, b + m + 1) - b - 1;
+    for (int i = 1; i &lt;= n; i++)
+        add(i, 1);
+    for (int i = 1; i &lt;= q; i++)
+    {
+        if (p[i].op == 1)
+        {
+            numx = 0, numy = 0;
+            for (int j = p[i].l-1; j &gt; 0; j -= lowbit(j)) ux[numx++] = root[j];
+            for (int j = p[i].r; j &gt; 0; j -= lowbit(j)) uy[numy++] = root[j];
+            int ans = query(1, m, p[i].v);
+            printf(&quot;%d\n&quot;, b[ans]);
+        }
+        else
+        {
+            add(p[i].l, -1);
+            a[p[i].l] = p[i].r;
+            add(p[i].l, 1);
+        }
+    }
+
+    return 0;
+}
+
+			
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://TheGayhub.github.io/post/chi-qu-fa-xiao-he-ji">
+              <h3 class="post-title">
+                尺取法小合集
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '10f790001ada82f18531',
+    clientSecret: '28d160d9de074bd1b5839bac5c19dd191cf2c634',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://TheGayhub.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
