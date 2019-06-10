@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ZOJ 2112 Dynamic Rankings  | Guapi</title>
-<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1560148528583">
+<link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1560148655100">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://TheGayhub.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://TheGayhub.github.io">
-  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1560148528583" alt="">
+  <img class="avatar" src="https://TheGayhub.github.io/images/avatar.png?v=1560148655100" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -95,10 +95,16 @@
 <!-- more -->
 <p>之前学了主席树，解决了静态区间第k大，想着顺便学习一下如何求解动态区间第k大，奈何太菜，看了一晚上未能很好的理解，主要就是询问的时候卡住了我。第二天终于理解了。
 这里给出两种方法</p>
-<h4 id="方法1">* 方法1</h4>
-<p>前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询**(原来的值+树状数组的影响)**</p>
-<h4 id="方法2">* 方法2</h4>
-<p>类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
+<ul>
+<li>
+<p>方法1
+前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询**(原来的值+树状数组的影响)**</p>
+</li>
+<li>
+<p>方法2
+类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
+</li>
+</ul>
 <p>方法1的代码在洛谷和ZOJ都能过，方法2就只能过洛谷，ZOJ一直SF。</p>
 <blockquote>
 <p>方法1</p>
