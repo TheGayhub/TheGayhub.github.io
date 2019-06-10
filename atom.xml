@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://TheGayhub.github.io</id>
     <title>Guapi</title>
-    <updated>2019-06-10T06:38:27.087Z</updated>
+    <updated>2019-06-10T06:40:10.218Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://TheGayhub.github.io"/>
     <link rel="self" href="https://TheGayhub.github.io/atom.xml"/>
@@ -23,15 +23,13 @@
 <p>之前学了主席树，解决了静态区间第k大，想着顺便学习一下如何求解动态区间第k大，奈何太菜，看了一晚上未能很好的理解，主要就是询问的时候卡住了我。第二天终于理解了。
 这里给出两种方法</p>
 <ul>
-<li>
-<p>方法1
-前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询**(原来的值+树状数组的影响)**</p>
-</li>
-<li>
-<p>方法2
-类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
-</li>
+<li>方法1</li>
 </ul>
+<p>前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询**(原来的值+树状数组的影响)**</p>
+<ul>
+<li>方法2</li>
+</ul>
+<p>类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
 <p>方法1的代码在洛谷和ZOJ都能过，方法2就只能过洛谷，ZOJ一直SF。</p>
 <blockquote>
 <p>方法1</p>
