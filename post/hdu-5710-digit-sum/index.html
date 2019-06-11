@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Guapi</title>
+<title>HDU 5710 Digit-Sum | Guapi</title>
 <link rel="shortcut icon" href="https://TheGayhub.github.io/favicon.ico?v=1560233322521">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -78,22 +78,87 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              HDU 5710 Digit-Sum
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2019-01-25 ·
+                · 2019-06-11 ·
               </time>
               
             </div>
             
             <div class="post-content">
-              <p>ACM菜鸡一枚，博客主要记录一些自己做的题目。</p>
+              <h1 id="构造">构造</h1>
+<!-- more -->
+<p><img src="https://TheGayhub.github.io/post-images/1560233194009.png" alt=""></p>
+<p>很容易发现，当 2 * n 每进1位的时候，与 2 * S(n)的差就会少去9，这也可以推出来，因为满10进1，每进1位就会少10，得到1，所以每进1位就会少9.所以当n的数位上出现[5-9]时，乘于2就会少9，假设n的所有位上一共有L个[5-9]的数
+我们可以得到 <code>S(2n)=2*S(n)-L*9</code>  再由 <code>a×S(n)=b×S(2n)</code> ,所以 <code>L/S(n)=(2*b-a)/(9*b)</code> 。(注意要上下同除gcd)
+所以我们可以让 <code>L=2*b-a,S(n)=9*b</code> ,那如何贪心构造出最小的n呢？
+我们先让n中的L位数全为5，即  xxx555(L个5)，S(n)-5 * L,然后剩下的S(n)再从末尾不断的加上去。
+当<code>L&lt;0||5 * L&gt;S(n)</code> 的时候就是无解。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int N = 2e5 + 10;
+int a, b;
+int gcd(int a, int b)
+{
+    if (b == 0) return a;
+    return gcd(b, a%b);
+}
+int ans[N];
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;, &amp;t);
+    while (t--)
+    {
+        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+        int d = gcd(a, b);
+        a /= d, b /= d;
+        int l = 2 * b - a, sn = 9 * b;
+        if (l&lt;0 || l * 5&gt;sn){
+            puts(&quot;0&quot;);
+            continue;
+        }
+        d = gcd(l, sn);
+        l /= d, sn /= d;
+        int tot = 0;
+        sn -= 5 * l;
+        for (int i = 0; i &lt; l; i++)
+        {
+            int tmp = min(4, sn);
+            ans[tot++] = 5 + tmp;
+            sn -= tmp;
+        }
+        while (sn)
+        {
+            int tmp = min(4, sn);
+            ans[tot++] = tmp;
+            sn -= tmp;
+        }
+        for (int i = tot - 1; i &gt;= 0; i--)
+            cout &lt;&lt; ans[i];
+        puts(&quot;&quot;);
+    }
+    return 0;
+}
+</code></pre>
 
             </div>
           </article>
         </div>
     
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://TheGayhub.github.io/post/zoj-2112-dynamic-rankings">
+              <h3 class="post-title">
+                ZOJ 2112 Dynamic Rankings 
+              </h3>
+            </a>
+          </div>  
         
 
         
