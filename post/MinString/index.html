@@ -177,6 +177,64 @@
 
 
 
+  <div class="post_content markdown"><p class="md_block">
+    <span class="md_line md_line_start md_line_end"><h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
+<!-- more -->
+<blockquote>
+<p>第一种</p>
+</blockquote>
+<pre><code>int get_minstring(char s[])
+{
+    int n =strlen(s);
+    int i = 0, j = 1, k;
+    while (i &lt; n&amp;&amp;j &lt; n)
+    {
+        for (k = 0; k &lt; n&amp;&amp;s[(j + k) % n] == s[(i + k) % n]; k++);
+        if (k == n)  break;
+        if (s[(i + k)%n]&gt;s[(j + k)%n])
+        {
+            i = i + k + 1;
+            if (i == j) i++;
+        }
+        else
+        {
+            j = j + k + 1;
+            if (i == j) j++;
+        }
+    }
+    return min(i, j);
+}
+
+</code></pre>
+<blockquote>
+<p>第二种</p>
+</blockquote>
+<pre><code>int get_minstring(char s[])
+{
+    int n = strlen(s + 1);
+    for (int i = 1; i &lt;= n; i++)
+        s[n + i] = s[i];
+    int i = 1, j = 2,k;
+    while (i &lt;= n&amp;&amp;j &lt;= n)
+    {
+        for ( k = 0; k &lt; n&amp;&amp;s[j + k] == s[i + k]; k++);
+        if (k == n)  break;
+        if (s[i + k]&gt;s[j + k])
+        {
+            i = i + k + 1;
+            if (i == j) i++;
+        }
+        else
+        {
+            j = j + k + 1;
+            if (i == j) j++;
+        }
+    }
+    return min(i, j);
+}
+</code></pre>
+<p>这两个其实差不多</p>
+</p>
 
 
 

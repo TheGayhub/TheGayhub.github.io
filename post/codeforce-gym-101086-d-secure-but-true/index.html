@@ -177,6 +177,96 @@
 
 
 
+  <div class="post_content markdown"><p class="md_block">
+    <span class="md_line md_line_start md_line_end"><h1 id="思维模拟">思维+模拟</h1>
+<!-- more -->
+<blockquote>
+<p>题目链接 <a href="https://codeforces.com/gym/101086/problem/D">Secure but True </a></p>
+</blockquote>
+<blockquote>
+<p>题目的大致意思是给出11个字符 <code>{A, H, I, M, O, T, U, V, W, X, Y},</code> ，这些字符可以任意结合组成字符串，这些字符串排序首先按照它们的长度排序，长度相同按照字典序排序，然后题目给你T个询问，每个询问给一个整数 <strong><code>k</code></strong> ，一个字符串 <strong><code>s</code></strong>   ，然后询问字符串s后的第k的字符串是什么。</p>
+</blockquote>
+<p>首先这11个字符可以组成无数个字符串，而k的范围又是1e9,所以不可能直接做。首先由11个字符先按照长度再按照字典序排可以想到10进制数，<strong><code>0-9 10-19 20-29</code></strong>  ,这 <strong><code>10</code></strong> 个数不正是先按照长度，再按照字典序来排的吗。于是这题也就和 <strong><code>11</code></strong> 进制相关，于是我和我队友想到了如下思路，将k转化为11进制，再将字符串s转化为11进制，<code>A-Y</code> 分别代表 <code>1-11</code>，然后相加，得到的结果再按照对应字符输出。
+我们按照这个思路写了一下，然后交上去WA了，后来我们发现将k转化为11进制后会出现0，对于0我们无法处理，因为我们是把 <code>A-Y</code> 分别代表 <code>1-11</code> 来处理的，出现0我们就无法处理，于是我们就改了好长时间代码，还是没能正常处理0. 我们把Y当成0处理也不行，最后这题没能A掉。
+比赛过后，我请教了一位大佬，就是用11进制做，A-Y仍分别代表1-11。然后模拟两个11进制相加。所以我们用短除法把k转为11进制这个方法错了。要用其他方法把k转化为11进制,并且不出现0，既每一位最低是1。</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 2e5 + 100;
+string ss = &quot;AAHIMOTUVWXY&quot;;
+typedef long long ll;
+int to[128], k;
+char s[N];
+int a[N];
+int b[N];
+ll Pow[N];
+void dfs(int x, int val)
+{
+	if (x&lt;0) return;
+	for (int i = 1; i &lt;= 11; i++)
+	{
+		if (val &gt;= Pow[x]){
+			val -= Pow[x];
+		}
+		else{
+			b[x] = i;
+			dfs(x - 1, val);
+			break;
+		}
+	}
+}
+void Ac()
+{
+	memset(a, 0, sizeof(a));
+	memset(b, 0, sizeof(b));
+	scanf(&quot;%d%s&quot;, &amp;k, s);
+	int len1 = strlen(s);
+	for (int i = 0; i &lt; len1; i++)
+		a[i] = to[s[i]];
+	reverse(a, a + len1);
+	int len2 = 0;
+	//不能让0出现，这个处理保证了每一位最少是1 (与平时短除法转化不一样)
+	for (int i = 0; i &lt;= 12; i++)
+	{
+		if (k &lt; Pow[i]){
+			len2 = i;
+			break;
+		}
+		else{
+			//b[i]=1;
+			k -= Pow[i];
+		}
+	}
+	//这个dfs模拟转化11进制
+	dfs(len2 - 1, k);
+	//for (int i = 0; i &lt; len2; i++)
+		//cout &lt;&lt; b[i] &lt;&lt; ' ';
+	//cout &lt;&lt; endl;
+	len1 = max(len1, len2);
+	for (int i = 0; i &lt; len1; i++)
+	{
+		a[i] += b[i];
+		while (a[i]&gt;11) a[i] -= 11, b[i + 1]++;
+	}
+	if (b[len1])  a[len1] += b[len1],len1++;
+	for (int i = len1 - 1; i &gt;= 0; i--)
+		putchar(ss[a[i]]);
+	puts(&quot;&quot;);
+}
+
+int main(){
+	int T;
+	scanf(&quot;%d&quot;, &amp;T);
+	Pow[0] = 1;
+	for (int i = 1; i &lt;= 12; ++i)
+		Pow[i] = Pow[i - 1] * 11;
+	for (int i = 1; i &lt;= 11; i++)
+		to[ss[i]] = i;
+	while (T--)
+		Ac();
+	return 0;
+}
+</code></pre>
+</p>
 
 
 
