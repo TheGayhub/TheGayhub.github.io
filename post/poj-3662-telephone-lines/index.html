@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>POJ 3662 Telephone Lines | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1560955501654">
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1560955594731">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1560955501654" alt="">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1560955594731" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -97,10 +97,10 @@
 <p>方法1 DP</p>
 </blockquote>
 <p><strong><code>用d[x][y]表示从1号节点到达x号节点,途中经过了y条免费电缆时,经过的路上最贵的电缆花费最小是多少.</code></strong>
-假设有一条边从x到v，权值为w，则我们可以：</p>
+假设有一条边从 <code>x</code> 到 <code>v</code> ，权值为 <code>w</code> ，则我们可以：</p>
 <ul>
-<li>用max(dp[x][y],z)更新dp[v][y],这个表示不在电缆x-v使用免费服务。</li>
-<li>用dp[x][y]更新dp[v][p+1],表示在电缆x-v上使用免费服务</li>
+<li>用 <code>max(dp[x][y],w)</code> 更新 <code>dp[v][y]</code> ,这个表示不在电缆 <code>x-v</code> 使用免费服务。</li>
+<li>用 <code>dp[x][y]</code> 更新 <code>dp[v][p+1]</code> ,表示在电缆 <code>x-v</code> 上使用免费服务</li>
 </ul>
 <p>由于这个dp有后效性，不能用dij，采用spfa不断迭代更新。</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;//缩短代码用了万能头，poj不允许这样
