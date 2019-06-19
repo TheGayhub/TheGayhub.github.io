@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://TheGayhub.github.io</id>
     <title>Guapi</title>
-    <updated>2019-06-12T08:54:33.040Z</updated>
+    <updated>2019-06-19T05:44:42.215Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://TheGayhub.github.io"/>
     <link rel="self" href="https://TheGayhub.github.io/atom.xml"/>
@@ -10,6 +10,88 @@
     <logo>https://TheGayhub.github.io/images/avatar.png</logo>
     <icon>https://TheGayhub.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[E. Minimal Segment Cover]]></title>
+        <id>https://TheGayhub.github.io/post/e-minimal-segment-cover</id>
+        <link href="https://TheGayhub.github.io/post/e-minimal-segment-cover">
+        </link>
+        <updated>2019-06-15T07:24:56.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://codeforces.com/contest/1175/problem/E">Minimal Segment Cover</a></p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+#define x first
+#define y second
+#define forn(i, n) for(int i = 0; i &lt; int(n); i++) 
+
+const int N = 500 * 1000 + 13;
+const int LOGN = 18;
+
+int n, m;
+pair&lt;int, int&gt; a[N], q[N];
+
+int nxt[N];
+int up[LOGN][N];
+
+int main(){
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	forn(i, n)
+		scanf(&quot;%d%d&quot;, &amp;a[i].x, &amp;a[i].y);
+	forn(i, m)
+		scanf(&quot;%d%d&quot;, &amp;q[i].x, &amp;q[i].y);
+	
+	sort(a, a + n);
+	
+	int lst = 0;
+	pair&lt;int, int&gt; mx(0, -1);
+	forn(i, N){
+		while (lst &lt; n &amp;&amp; a[lst].x == i){
+			mx = max(mx, make_pair(a[lst].y, lst));
+			++lst;
+		}
+		nxt[i] = (mx.x &lt;= i ? -1 : mx.y);
+	}
+	
+	forn(i, n)
+		up[0][i] = nxt[a[i].y];
+	for (int j = 1; j &lt; LOGN; ++j) forn(i, n){
+		if (up[j - 1][i] == -1)
+			up[j][i] = -1;
+		else
+			up[j][i] = up[j - 1][up[j - 1][i]];
+	}
+	
+	forn(i, m){
+		int x = nxt[q[i].x];
+		
+		if (x == -1){
+		puts(&quot;-1&quot;);
+		continue;
+		}
+		
+		int res = 0;
+		for (int j = LOGN - 1; j &gt;= 0; --j){
+			int y = up[j][x];
+			if (y == -1)
+				continue;
+			if (a[y].y &lt; q[i].y){
+				res += (1 &lt;&lt; j);
+				x = y;
+			}
+		}
+		
+		if (a[x].y &gt;= q[i].y)
+			printf(&quot;%d\n&quot;, res);
+		else if (up[0][x] == -1)
+			puts(&quot;-1&quot;);
+		else
+			printf(&quot;%d\n&quot;, res + 1);
+	}
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[HDU 5710 Digit-Sum]]></title>
         <id>https://TheGayhub.github.io/post/hdu-5710-digit-sum</id>
@@ -1064,10 +1146,10 @@ int main()
         </link>
         <updated>2019-05-02T13:38:32.000Z</updated>
         <summary type="html"><![CDATA[<h1 id="快速乘快速幂">快速乘+快速幂</h1>
-<h1 id="计算-ab-p">计算  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span></span></span></span> % p</h1>
+<h1 id="计算-ab-p">计算   $ a^b $   % p</h1>
 ]]></summary>
         <content type="html"><![CDATA[<h1 id="快速乘快速幂">快速乘+快速幂</h1>
-<h1 id="计算-ab-p">计算  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">a^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span></span></span></span> % p</h1>
+<h1 id="计算-ab-p">计算   $ a^b $   % p</h1>
 <!-- more -->
 <pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
@@ -1107,260 +1189,6 @@ int main()
 
     return 0;
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[数据结构上机实验报告——链表]]></title>
-        <id>https://TheGayhub.github.io/post/JNU-LinkList</id>
-        <link href="https://TheGayhub.github.io/post/JNU-LinkList">
-        </link>
-        <updated>2019-05-01T03:22:02.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="链表">链表</h1>
-<h2 id="数据结构课上机实验报告">数据结构课上机实验报告</h2>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="链表">链表</h1>
-<h2 id="数据结构课上机实验报告">数据结构课上机实验报告</h2>
-<!-- more -->
-<blockquote>
-<p>编写一个程序  <code>Linklist.cpp</code>  ，实现链表的各种基本运算和整体建表算法（假设链表的元素类型 <code>ElemType</code> 为 <code>int</code> ），并在此基础上设计一个主程序，完成如下功能：</p>
-</blockquote>
-<ul>
-<li>构建基于动态分配内存的链表L，并初始化链表。</li>
-<li>依次将  <code>1Mints.txt</code>  文件中的数据输入到链表中。</li>
-<li>输出链表L长度。</li>
-<li>判断链表L是否为空。</li>
-<li>分别输出顺序表L的第  <code>30、300、3000、30000、300000</code>  个元素值，记录相应时间。</li>
-<li>输出值为  <code>-12345</code>  的元素的位置。</li>
-<li>依次在第  <code>4、40、400、4000、40000、400000</code>  个元素位置上插入整数  <code>-10086</code>  ，记录相应的时间。</li>
-<li>依次删除在第  <code>4、40、400、4000、40000、400000</code>  个元素位置上的元素，记录相应的时间。</li>
-<li>输出链表L的前  <code>10</code>  个元素。</li>
-<li>释放链表L。</li>
-</ul>
-<pre><code>// LinkList.cpp : 定义控制台应用程序的入口点。
-//
-
-//#include &quot;stdafx.h&quot;
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;string&gt;
-#include&lt;cstdio&gt;
-#include&lt;fstream&gt;
-#include&lt;ctime&gt;
-#include &lt;windows.h&gt;
-using namespace std;
-typedef int ElemType;
-const int N = 5e6 + 5;
-ElemType a[N];
-LARGE_INTEGER nFreq;
-
-LARGE_INTEGER t1;
-
-LARGE_INTEGER t2;
-
-double dt;
-typedef struct node{
-	ElemType val;
-	struct node *next;
-	//node(int _val=0,node * _next=NULL):val(_val),next(_next){}
-}Node;
-void CreateHead(Node *&amp;head){
-	head = (Node *)malloc(sizeof(Node));
-	if (head == NULL) {
-		cout &lt;&lt; &quot;头节点内存分配失败&quot; &lt;&lt; endl;
-		exit(1);
-	}
-	head-&gt;val = 0;
-	head-&gt;next = NULL;
-}
-void InitLinkList(Node *&amp;head,int n){
-	Node *temp = head;
-	for (int i = 0; i &lt; n; i++)
-	{
-		Node * pnode = (Node *)malloc(sizeof(Node));
-		if (pnode == NULL){
-			cout &lt;&lt; &quot;节点内存分配失败&quot; &lt;&lt; endl;
-			exit(1);
-		}
-		pnode-&gt;val = a[i];
-		pnode-&gt;next = NULL;
-		temp-&gt;next = pnode;
-		temp = temp-&gt;next;
-	}
-	cout &lt;&lt; &quot;输入成功!&quot; &lt;&lt; endl&lt;&lt;endl;
-	head-&gt;val = n;
-}
-int ListLength(Node *L) {
-	return (L-&gt;val);
-}
-bool ListEmpty(Node *L) {
-	return (L-&gt;val == 0);
-}
-void DestroyList(Node *&amp;head){
-	Node *temp = head;
-	while (head != NULL)
-	{
-		head = head-&gt;next;
-		free(temp);
-		temp = head;
-	}
-}
-bool DispList(Node *head,int n) {
-	int length = ListLength(head);
-	if (length &lt; n) return false;
-	Node *cur = head;
-	for (int i = 0; i &lt; n; i++) {
-		cur = cur-&gt;next;
-		printf(&quot;%d &quot;, cur-&gt;val);
-	}
-	printf(&quot;\n\n&quot;);
-	return true;
-}
-bool GetElem(Node *head, int i, ElemType &amp;e) {
-	int length = ListLength(head);
-	if (length &lt;= 0) return false;
-	if (i&lt;1 || i&gt;length) return false;
-	Node *temp = head;
-	for (int j = 0; j &lt; i; j++)
-	{
-		temp = temp-&gt;next;
-	}
-	e = temp-&gt;val;
-	return true;
-}
-int LocateElem(Node *head, ElemType e) {
-	int i = 1;
-	int length = ListLength(head);
-	if (length &lt;= 0) return -1;
-	Node *temp = head-&gt;next;
-	while (i &lt;= length&amp;&amp;temp-&gt;val != e) {
-		i++;
-		temp = temp-&gt;next;
-	}
-if (i &gt; length) return -1;
-	else return i;
-}
-bool ListInsert(Node *&amp;head, int i, ElemType e) {
-	int length = ListLength(head);
-	if (i&lt;1 || i&gt;length + 1) return false;
-	Node *pre = head;
-	for (int j = 1; j &lt; i&amp;&amp;pre!=NULL; j++)
-	{
-		pre = pre-&gt;next;
-	}
-	if (pre == NULL){
-		return false;
-	}
-	else{
-		Node *cur = (Node *)malloc(sizeof(Node));
-		if (cur == NULL) return false;
-		cur-&gt;val = e;
-		cur-&gt;next = pre-&gt;next;
-		pre-&gt;next = cur;
-		head-&gt;val++;
-		return true;
-	}
-}
-bool ListDelete(Node *&amp;head, int i, ElemType &amp;e) {
-	int length = ListLength(head);
-	if (length == 0) return false;
-	if (i&lt;1 || i&gt;length) return false;
-	Node *cur = head, *pre = head;
-	for (int j = 1; j &lt;= i; j++)
-	{
-		if (cur == NULL || pre == NULL) return false;
-		pre = cur;
-		cur = cur-&gt;next;
-	}
-	if (cur == NULL || pre == NULL) return false;
-	else{
-		e = cur-&gt;val;
-		pre-&gt;next = cur-&gt;next;
-		free(cur);
-		head-&gt;val--;
-		return true;
-	}
-}
-void GetElemTime(Node *&amp;head)
-{
-	ElemType e;
-	for (int i = 30; i &lt;= 300000; i *= 10)
-	{
-		QueryPerformanceFrequency(&amp;nFreq);
-		QueryPerformanceCounter(&amp;t1);
-		GetElem(head, i, e);
-		QueryPerformanceCounter(&amp;t2);
-		dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
-		cout &lt;&lt; &quot;链表第&quot; &lt;&lt; i &lt;&lt; &quot;个元素的值为：&quot; &lt;&lt; e &lt;&lt; &quot;        所花时间为：&quot; &lt;&lt; dt*1000000 &lt;&lt; &quot;μs&quot; &lt;&lt; endl;
-	}
-	cout &lt;&lt; endl;
-}
-void ListInsertTime(Node *&amp;head)
-{
-	ElemType e = -10086;
-	for (int i = 4; i &lt;= 400000; i *= 10)
-	{
-		QueryPerformanceFrequency(&amp;nFreq);
-		QueryPerformanceCounter(&amp;t1);
-		ListInsert(head, i, e);
-		QueryPerformanceCounter(&amp;t2);
-		dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
-		cout &lt;&lt; &quot;链表第&quot; &lt;&lt; i &lt;&lt; &quot;个位置插入&quot; &lt;&lt; e &lt;&lt; &quot;         所花时间为：&quot; &lt;&lt; dt*1000000 &lt;&lt; &quot;μs&quot; &lt;&lt; endl;;
-	}
-	cout &lt;&lt; endl;
-}
-void ListDeleteTime(Node *&amp;head)
-{
-	ElemType e;
-	for (int i = 4; i &lt;= 400000; i *= 10)
-	{
-		QueryPerformanceFrequency(&amp;nFreq);
-		QueryPerformanceCounter(&amp;t1);
-		ListDelete(head, i, e);
-		QueryPerformanceCounter(&amp;t2);
-		dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
-		cout &lt;&lt; &quot;链表删除第&quot; &lt;&lt; i &lt;&lt; &quot;个位置的元素&quot; &lt;&lt; e &lt;&lt; &quot;        所花时间为：&quot; &lt;&lt; dt*1000000 &lt;&lt; &quot;μs&quot; &lt;&lt; endl;;
-	}
-	cout &lt;&lt; endl;
-int main()
-{
-	cout &lt;&lt; &quot;链表的基本运算如下：&quot; &lt;&lt; endl &lt;&lt; endl;
-	cout &lt;&lt; &quot;(1)初始化链表&quot; &lt;&lt; endl &lt;&lt; endl;
-	Node *head;
-	CreateHead(head);
-	string filename = &quot;C:\\Users\\c1515\\Desktop\\Experiment_code\\1Mints.txt&quot;;
-	ifstream fn(filename.c_str());
-	if (!fn.is_open()){
-		cout &lt;&lt; &quot;Cannot open file:&quot; &lt;&lt; filename &lt;&lt; endl;
-		exit(1);
-	}
-	string s;
-	int cnt = 0;
-	while (!fn.eof())
-	{
-		getline(fn,s);
-		if (s.empty()) continue;
-		a[cnt++] = atoi(s.c_str());
-	}
-	fn.close();
-	cout &lt;&lt; &quot;(2)依次将1Mints.txt文件中的数据输入到链表中&quot; &lt;&lt; endl;
-	InitLinkList(head, cnt);
-	cout &lt;&lt; &quot;(3)链表L的长度：&quot; &lt;&lt; ListLength(head) &lt;&lt; endl &lt;&lt; endl;
-	cout &lt;&lt; &quot;(4)链表L为&quot; &lt;&lt; (ListEmpty(head) ? &quot;空&quot; : &quot;非空&quot;) &lt;&lt; endl &lt;&lt; endl;
-	cout &lt;&lt; &quot;(5)输出链表L的第30、300、3000、30000、300000个元素值&quot; &lt;&lt; endl;
-	GetElemTime(head);
-	cout &lt;&lt; &quot;(6)元素-12345的位置：&quot; &lt;&lt; LocateElem(head, -12345) &lt;&lt; endl &lt;&lt; endl;
-	cout &lt;&lt; &quot;(7)依次在第4、40、400、4000、40000、400000个元素位置上插入整数-10086&quot; &lt;&lt; endl;
-	ListInsertTime(head);
-	cout &lt;&lt; &quot;(8)依次删除在第4、40、400、4000、40000、400000个元素位置上的元素&quot; &lt;&lt; endl;
-	ListDeleteTime(head);
-	cout &lt;&lt; &quot;(9)输出前10个元素 &quot; &lt;&lt; endl;
-	DispList(head,10);
-	cout &lt;&lt; &quot;(10)释放链表&quot; &lt;&lt; endl;
-	DestroyList(head);
-	return 0;
-}
-
 </code></pre>
 ]]></content>
     </entry>
