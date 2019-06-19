@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-19T11:16:59.339Z</updated>
+    <updated>2019-06-19T14:45:07.224Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -10,6 +10,198 @@
     <logo>https://www.akwing.cn/images/avatar.png</logo>
     <icon>https://www.akwing.cn/favicon.ico</icon>
     <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[POJ 3662 Telephone Lines]]></title>
+        <id>https://www.akwing.cn/post/poj-3662-telephone-lines</id>
+        <link href="https://www.akwing.cn/post/poj-3662-telephone-lines">
+        </link>
+        <updated>2019-06-19T12:35:40.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="dp二分-最短路">DP/二分 + 最短路</h2>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="dp二分-最短路">DP/二分 + 最短路</h2>
+<!-- more -->
+<blockquote>
+<p>方法1 DP</p>
+</blockquote>
+<p><strong><code>用d[x][y]表示从1号节点到达x号节点,途中经过了y条免费电缆时,经过的路上最贵的电缆花费最小是多少.</code></strong>
+假设有一条边从x到v，权值为w，则我们可以：</p>
+<ul>
+<li>用max(dp[x][y],z)更新dp[v][y],这个表示不在电缆x-v使用免费服务。</li>
+<li>用dp[x][y]更新dp[v][p+1],表示在电缆x-v上使用免费服务</li>
+</ul>
+<p>由于这个dp有后效性，不能用dij，采用spfa不断迭代更新。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;//缩短代码用了万能头，poj不允许这样
+using namespace std;
+const int N = 1e3 + 10;
+const int inf = 0x3f3f3f3f;
+int n, pp, k;
+struct E{
+	int to, next, w;
+}edge[20 * N];
+int tot;
+int head[N];
+bool vis[N][N];
+int dp[N][N];
+void addedge(int from, int to, int w)
+{
+	edge[++tot].to = to;
+	edge[tot].w = w;
+	edge[tot].next = head[from];
+	head[from] = tot;
+}
+typedef pair&lt;int, int&gt; P;
+queue&lt;P&gt; q;
+void spfa()
+{
+	memset(dp, inf, sizeof(dp));
+	dp[1][0] = 0;
+	vis[1][0] = true;
+	q.push(P(1, 0));
+	while (!q.empty())
+	{
+		P u = q.front();
+		q.pop();
+		int x = u.first, p = u.second;
+		vis[x][p] = false;
+		for (int i = head[x]; i != -1; i = edge[i].next)
+		{
+			int v = edge[i].to, w = edge[i].w;
+			if (dp[v][p]&gt;max(dp[x][p], w))
+			{
+				dp[v][p] = max(dp[x][p], w);
+				if (!vis[v][p])
+				{
+					vis[v][p] = true;
+					q.push(P(v, p));
+				}
+			}
+			if (p&lt;k&amp;&amp;dp[v][p + 1]&gt;dp[x][p])
+			{
+				dp[v][p + 1] = dp[x][p];
+				if (!vis[v][p + 1])
+				{
+					vis[v][p + 1] = true;
+					q.push(P(v, p + 1));
+				}
+			}
+		}
+	}
+
+}
+int main()
+{
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;pp, &amp;k);
+	memset(head, -1, sizeof(head));
+	while (pp--)
+	{
+		int u, v, w;
+		scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);
+		addedge(u, v, w);
+		addedge(v, u, w);
+	}
+	spfa();
+	int ans = inf;
+	for (int i = 0; i &lt;= k; i++)
+	{
+		ans = min(ans, dp[n][i]);
+	}
+	printf(&quot;%d\n&quot;, ans == inf ? -1 : ans);
+	return 0;
+}
+</code></pre>
+<blockquote>
+<p>方法2 二分</p>
+</blockquote>
+<p>显然答案具有单调性。二分答案，假设答案为mid，我们将边权大于等于mid的边的边权设为1，表示免费服务的边，即可以理解为使用了一次免费服务。小于mid的边权设为0，表示不免费，没有使用免费服务。然后我们跑一便最短路，看最短路径是否小于等于K，小于等于则mid是满足的，我们可以缩小mid,继续二分答案。</p>
+<pre><code>#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;ctime&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;sstream&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 1e3 + 10;
+const int inf = 0x3f3f3f3f;
+int n, pp, k;
+struct E{
+	int to, next, w;
+}edge[20 * N];
+int tot;
+int head[N];
+bool vis[N];
+int dis[N];
+void addedge(int from, int to, int w)
+{
+	edge[++tot].to = to;
+	edge[tot].w = w;
+	edge[tot].next = head[from];
+	head[from] = tot;
+}
+typedef pair&lt;int, int&gt; P;
+queue&lt;int&gt; q;
+int spfa(int mid)
+{
+	while (!q.empty()) q.pop();
+	memset(vis, false, sizeof(vis));
+	memset(dis, inf, sizeof(dis));
+	dis[1] = 0;
+	vis[1] = true;
+	q.push(1);
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		vis[u] = false;
+		for (int i = head[u]; i != -1; i = edge[i].next)
+		{
+			int v = edge[i].to;
+			int w = (edge[i].w &gt;= mid);
+			if (dis[v] &gt; dis[u]+ w)
+			{
+				dis[v] = dis[u] + w;
+				if (!vis[v])
+				{
+					vis[v]= true;
+					q.push(v);
+				}
+			}
+		}
+	}
+	return dis[n] &lt;= k;
+}
+int main()
+{
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;pp, &amp;k);
+	memset(head, -1, sizeof(head));
+	int l = 0;
+	while (pp--)
+	{
+		int u, v, w;
+		scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);
+		addedge(u, v, w);
+		addedge(v, u, w);
+	}
+	int r = 1e7;
+	while (l &lt; r)
+	{
+		int mid = (l+r+1) &gt;&gt; 1;
+		if (!spfa(mid)) l = mid;
+		else r = mid - 1;
+	}
+	printf(&quot;%d\n&quot;, l &gt;=1e7 ? -1 : l);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[E. Minimal Segment Cover]]></title>
         <id>https://www.akwing.cn/post/e-minimal-segment-cover</id>
@@ -1137,59 +1329,6 @@ int main()
 }
 </code></pre>
 <p>这两个其实差不多</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[快速幂模板]]></title>
-        <id>https://www.akwing.cn/post/fast_pow</id>
-        <link href="https://www.akwing.cn/post/fast_pow">
-        </link>
-        <updated>2019-05-02T13:38:32.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="快速乘快速幂">快速乘+快速幂</h1>
-<h1 id="计算-ab-p">计算   $ a^b $   % p</h1>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="快速乘快速幂">快速乘+快速幂</h1>
-<h1 id="计算-ab-p">计算   $ a^b $   % p</h1>
-<!-- more -->
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-int t;
-ll a, b, p;
-ll fast_mul(ll a, ll b, ll p)
-{
-    ll res = 0;
-    while (b)
-    {
-        if (b &amp; 1) res = (res + a) % p;
-        a = a * 2 % p;
-        b &gt;&gt;= 1;
-    }
-    return res;
-}
-ll fast_pow(ll a, ll b, ll p)
-{
-    ll res = 1;
-    while (b)
-    {
-        if (b &amp; 1) res = fast_mul(res, a, p);
-        a = fast_mul(a, a, p);
-        b &gt;&gt;= 1;
-    }
-    return res;
-}
-int main()
-{
-    cin &gt;&gt; t;
-    while (t--)
-    {
-        scanf(&quot;%lld%lld%lld&quot;, &amp;a, &amp;b, &amp;p);
-        printf(&quot;%lld\n&quot;, fast_pow(a, b, p));
-    }
-
-    return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
