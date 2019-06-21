@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>暑假集训——周赛1 | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561090394516">
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561091025107">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561090394516" alt="">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561091025107" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -299,6 +299,240 @@ int main()
 	return 0;
 }
 </code></pre>
+<blockquote>
+<p>**E - Extended Traffic <a href="https://vjudge.net/problem/LightOJ-1074">LightOJ - 1074</a> **</p>
+</blockquote>
+<p>spfa判负环，把负环上的点标记一下，不要想当然的认为有负环所有点都要被标记，负环只是所有点形成的图的一部分，还有就是不要忘了in[v]++,赛场上这个地方没写超时了，也没来得及发现</p>
+<pre><code>#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;ctime&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;sstream&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int M = 2e5 + 10;
+const int N = 2e2 + 10;
+const int inf = 0x3f3f3f3f;
+struct E{
+	int to, next, w;
+}edge[M];
+int head1[N], tot;
+int dis1[N], in[N];
+bool vis[N], vis1[N];
+int n, m, cas;
+int a[N];
+void addedge(int from, int to, int w)
+{
+	edge[++tot].to = to;
+	edge[tot].w = w;
+	edge[tot].next = head1[from];
+	head1[from] = tot;
+}
+void dfs(int u)
+{
+	vis1[u] = true;
+	for (int i = head1[u]; i != -1; i = edge[i].next)
+	{
+		if (!vis1[edge[i].to])
+			dfs(edge[i].to);
+	}
+}
+bool spfa1()
+{
+	int h = 0, t = 0;
+	queue&lt;int&gt; q;
+	memset(dis1, inf, sizeof(dis1));
+	memset(vis, false, sizeof(vis));
+	memset(vis1, false, sizeof(vis1));
+	memset(in, 0, sizeof(in));
+	dis1[1] = 0;
+	q.push(1);
+	in[1]++;
+	vis[1] = true;
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		vis[u] = false;
+		if (vis1[u]) continue;
+		for (int i = head1[u]; i != -1; i = edge[i].next)
+		{
+			int v = edge[i].to;
+			
+			int w = edge[i].w;
+			if (dis1[v]&gt; dis1[u] + w)
+			{
+				dis1[v] = dis1[u] + w;
+				if (!vis[v])
+				{
+					vis[v] = true;
+					q.push(v);
+					in[v]++;
+					if (in[v] &gt; n) vis1[v]=true;
+				}
+			}
+		}
+	}
+	return true;
+}
+
+int main()
+{
+	int t;
+	cin &gt;&gt; t;
+	while (t--)
+	{
+		tot = 0;
+		scanf(&quot;%d&quot;, &amp;n);
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%d&quot;, &amp;a[i]);
+			head1[i] = -1;
+		}
+		cin &gt;&gt; m;
+		while (m--)
+		{
+			int u, v;
+			scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+			int w = (a[v] - a[u])*(a[v] - a[u])*(a[v] - a[u]);
+			addedge(u, v, w);
+		}
+		bool f=spfa1();
+		printf(&quot;Case %d:\n&quot;, ++cas);
+		int q;
+		scanf(&quot;%d&quot;, &amp;q);
+		while (q--)
+		{
+			int vv;
+			scanf(&quot;%d&quot;, &amp;vv);
+			if (vis1[vv] || dis1[vv] == inf || dis1[vv] &lt; 3)
+			{
+				puts(&quot;?&quot;);
+			}
+			else
+			{
+				printf(&quot;%d\n&quot;, dis1[vv]);
+			}
+
+
+		}
+	}
+
+
+	return 0;
+}
+</code></pre>
+<hr>
+<blockquote>
+<p><strong>F - The Unique MST <a href="http://poj.org/problem?id=1679">POJ - 1679</a></strong></p>
+</blockquote>
+<p>这题判断最小生成树是否唯一，用kruskal 加边的时候如果两个顶点在一个集合中了，判断已加入的顶点集合中是否存在和当前边权值相同的边，有就是不唯一。可以把加入集合中的点建一颗树，然后搜索进行判断。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;string&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#include&lt;queue&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N = 1e3 + 10;
+const int inf = 0x3f3f3f3f;
+int n, m;
+int fa[N];
+int get(int x)
+{
+	if (x == fa[x])  return x;
+	return fa[x] = get(fa[x]);
+}
+struct E
+{
+	int u, v, w;
+	bool operator&lt;(const E &amp;other){
+		return w &lt; other.w;
+	}
+}edge[N*N];
+int tot;
+int a[N];
+typedef pair&lt;int, int&gt; P;
+vector&lt;P&gt; g[N];
+bool dfs(int v, int u,int pre, int c,bool f)
+{
+	for (int i = 0; i &lt; g[v].size(); i++)
+	{
+		if (g[v][i].first == pre) continue;
+		if (g[v][i].second == c)  f = true;
+		if (f&amp;&amp;g[v][i].first == u) return true;
+		if	(dfs(g[v][i].first, u, v, c, f)) return true;
+	}
+	return false;
+}
+int main()
+{
+	int t;
+	cin &gt;&gt; t;
+	while (t--)
+	{
+		cin &gt;&gt; n;
+		for (int i = 1; i &lt;= n; i++)
+			g[i].clear();
+		cin &gt;&gt; m;
+		tot = 0;
+		bool f = true;
+		while (m--)
+		{
+			int i, j, w;
+			cin &gt;&gt; i &gt;&gt; j &gt;&gt; w;
+			edge[tot].w = w;
+			edge[tot].u = i;
+			edge[tot].v = j;
+			tot++;
+		}
+		sort(edge, edge + tot);
+		for (int i = 1; i &lt;= n; i++)
+			fa[i] = i;
+		int ans = 0;
+		int k = 0;
+		for (int i = 0; i &lt; tot; i++)
+		{
+			if (k &gt;= n - 1) break;
+			int u = edge[i].u, v = edge[i].v;
+			if (get(u) != get(v))
+			{
+				g[u].push_back(P(v, edge[i].w));
+				g[v].push_back(P(u, edge[i].w));
+				fa[get(u)] = get(v);
+				ans += edge[i].w;
+			}
+			else
+			{
+				
+				if (dfs(u, v, -1, edge[i].w, false)) {
+					f = false;
+					break;
+				}
+				
+			}
+		}
+		if (f)
+			printf(&quot;%d\n&quot;, ans);
+		else
+			printf(&quot;Not Unique!\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<blockquote>
+<p>总结:比赛的时候一定要细心，有思路的时候要尝试去实现它！！！多刷题。</p>
+</blockquote>
 
             </div>
           </article>
