@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>暑假集训——周赛1 | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561091025107">
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561094435698">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561091025107" alt="">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561094435698" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -85,6 +85,18 @@
                 · 2019-06-21 ·
               </time>
               
+                <a href="https://www.akwing.cn/tag/LsciNYV-v" class="post-tags">
+                  # 图论—最短路
+                </a>
+              
+                <a href="https://www.akwing.cn/tag/BwZk5Zyfl" class="post-tags">
+                  # 图论—最小生成树
+                </a>
+              
+                <a href="https://www.akwing.cn/tag/w2Kxoedb6" class="post-tags">
+                  # 暑假集训
+                </a>
+              
             </div>
             
             <div class="post-content">
@@ -95,7 +107,7 @@
 </blockquote>
 <p>BFS+最小生成树</p>
 <p>比赛的时候想到了用 bfs求出每个点之间的最短距离，然后跑一遍MST。</p>
-<p>可是想想复杂度高达$$O(n^4)$$,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
+<p>可是想想复杂度高达<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>4</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^4)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
 <pre><code>    #include&lt;iostream&gt;
     #include&lt;cstdio&gt;
     #include&lt;algorithm&gt;
@@ -226,7 +238,8 @@
 </ul>
 <p>可以画一下，发现从一个点u到另一个点v就是邻接表 <code>C[u][v]</code> ,这样会使第V列多一个1，然后我们下次再从第V行出发在找下一个点，这样第V行也就多一个1，这样就满足了题目要求的关系。
 然后还有一种情况，那就是可以从点 1 出发到达其他点然后又回到点 1 形成一个环，同样也可以从点 n 出发回到点 n。这样也是符合条件的，答案为从 1 出发的最小权值环和从 n 出发的最小权值环之和。
-最后比较两种情况的最小值</p>
+最后比较两种情况的最小值
+求环，注意最开始不是将起点 s 入队，而是把与起点相连的点加入队列，将 <code>dis[s]</code> 设为 <code>inf</code> 这样可以求得从 s 出发回到 s 的最小环，具体参考代码。</p>
 <pre><code>#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 #include&lt;queue&gt;
@@ -253,7 +266,7 @@ void spfa(int st)
 		{
 			q.push(i);
 			vis[1] = true;
-			dis[i] = a[st][i];
+			dis[i] = c[st][i];
 		}
 	}
 	while (!q.empty())
@@ -263,9 +276,9 @@ void spfa(int st)
 		vis[u] = false;
 		for (int v = 1; v &lt;= n; v++)
 		{
-			if (dis[v] &gt; dis[u] + a[u][v])
+			if (dis[v] &gt; dis[u] + c[u][v])
 			{
-				dis[v] = dis[u] + a[u][v];
+				dis[v] = dis[u] +c[u][v];
 				if (!vis[v])
 				{
 					vis[v] = true;
@@ -286,7 +299,7 @@ int main()
 		for (int i = 1; i &lt;= n; i++)
 		{
 			for (int j = 1; j &lt;= n; j++)
-				scanf(&quot;%d&quot;, &amp;a[i][j]);
+				scanf(&quot;%d&quot;, &amp;c[i][j]);
 		}
 		spfa(1);
 		int c1 = dis[1], ans = dis[n];
@@ -299,6 +312,7 @@ int main()
 	return 0;
 }
 </code></pre>
+<hr>
 <blockquote>
 <p>**E - Extended Traffic <a href="https://vjudge.net/problem/LightOJ-1074">LightOJ - 1074</a> **</p>
 </blockquote>
