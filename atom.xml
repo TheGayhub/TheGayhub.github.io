@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-21T05:47:13.249Z</updated>
+    <updated>2019-06-21T08:24:24.568Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -10,6 +10,110 @@
     <logo>https://www.akwing.cn/images/avatar.png</logo>
     <icon>https://www.akwing.cn/favicon.ico</icon>
     <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[Codeforce 1181 D - Irrigation]]></title>
+        <id>https://www.akwing.cn/post/codeforce-1181-d-irrigation</id>
+        <link href="https://www.akwing.cn/post/codeforce-1181-d-irrigation">
+        </link>
+        <updated>2019-06-21T07:55:10.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="区间第k大">区间第K大</h2>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="区间第k大">区间第K大</h2>
+<!-- more -->
+<blockquote>
+<p><a href="https://codeforces.com/contest/1181/problem/D">D - Irrigation</a></p>
+</blockquote>
+<p>题目大致意思是Q个询问，每次询问一个K，输出表示第K年应该由那个城市举办奥运会。
+举办奥运会的次序是由举办次数决定的，举办次数少的优先举办，同等次数编号小的优先。并且前N年的举办情况已经知道。
+<img src="https://www.akwing.cn/post-images/1561104168882.png" alt=""></p>
+<blockquote>
+<p>我们可以先对前n年的城市举办的次数从小到大排序。其实我们可以发现举办的过程就是不断的去填平每一行，使得它们的差距不断减小。
+<code>S[n]</code> 数组，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示 i 前面每一列与第i列持平(填数是一行一行填的，目的是得到每一列相持平)，所需要的年数。可以发现k在某一区间内都是填固定的区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mtext> </mtext><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 ~ i-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>.   填至与第i列高度持平.然后转向区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mtext> </mtext><mi>i</mi></mrow><annotation encoding="application/x-tex">1 ~ i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">i</span></span></span></span>  继续这样填。
+有了S数组我们可以二分找到它正在填的区间，比如二分找到了位置pos,即它当前正在填区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mtext> </mtext><mi>p</mi><mi>o</mi><mi>s</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1~pos-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">p</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>,(注意我所说的区间是指按照前N年出现次数排序后的区间)。找到了所填区间，我们就可以对区间长度**<code>pos-1</code>** 取模，取模的得到的数X，正是它在填这个区间内的第X大数。然后转化为主席树求解(平衡时也可以，不过暂时不会)。</p>
+</blockquote>
+<pre><code>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;queue&gt;
+#include&lt;algorithm&gt;
+#include&lt;iostream&gt;
+using namespace std;
+const int N = 5e5 + 10;
+typedef long long ll;
+int n, m, q;
+struct node{
+	int val, pos;
+	bool operator&lt;(const node &amp;o)const{
+		return val &lt; o.val;
+	}
+}a[N];
+struct Tree{
+	int lc, rc, cnt;
+}T[N&lt;&lt;5];
+ll s[N];
+int ct[N];
+int tot,up;
+int root[N];
+void update(int &amp;cur, int pre, int l, int r, int pos)
+{
+	cur = ++tot;
+	T[cur] = T[pre];
+	T[cur].cnt++;
+	if (l == r) return;
+	int mid = (l + r) &gt;&gt; 1;
+	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos);
+	else update(T[cur].rc, T[pre].rc, mid + 1, r,pos);
+}
+int query(int x, int y, int l, int r, int k)
+{
+	if (l == r) return l;
+	int s = T[T[y].lc].cnt - T[T[x].lc].cnt;
+	int mid = (l + r) &gt;&gt; 1;
+	if (k &lt;= s)
+		return query(T[x].lc, T[y].lc, l, mid, k);
+	else 
+		return query(T[x].rc, T[y].rc, mid + 1, r, k-s);
+}
+int main()
+{
+	up = 5e5 + 5;
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;q);
+	for (int i = 1; i &lt;= n; i++)
+	{
+		int x;
+		scanf(&quot;%d&quot;, &amp;x);
+		ct[x]++;
+	}
+	for (int i = 1; i &lt;= m; i++)
+	{
+		a[i].val = ct[i];
+		a[i].pos = i;
+	}
+	sort(a + 1, a + m + 1);
+	for (int i = 2; i &lt;= m; i++)
+	{
+		s[i] = s[i - 1] + (i - 1LL)*(a[i].val - a[i - 1].val); //一定要转化为LL，不然爆int
+	}
+	for (int i = 1; i &lt;= m; i++)
+	{
+		update(root[i], root[i - 1], 1, up, a[i].pos);
+	}
+	while (q--)
+	{
+		ll k;
+		scanf(&quot;%lld&quot;, &amp;k);
+		k -= n;
+		int pos = lower_bound(s + 1, s + m + 1, k) - s;//先找到区间
+		k = (k - s[pos - 1] - 1) % (pos - 1) + 1; //先减去前pos-1个区间所需的年数，然后再取模得到区间第K大
+		int ans = query(root[0], root[pos - 1], 1, up, k);//
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[暑假集训——周赛1]]></title>
         <id>https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1</id>
@@ -25,7 +129,7 @@
 </blockquote>
 <p>BFS+最小生成树</p>
 <p>比赛的时候想到了用 bfs求出每个点之间的最短距离，然后跑一遍MST。</p>
-<p>可是想想复杂度高达<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>4</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^4)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
+<p>可是想想复杂度高达<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><msup><mi>m</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2m^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
 <pre><code>    #include&lt;iostream&gt;
     #include&lt;cstdio&gt;
     #include&lt;algorithm&gt;
@@ -1639,85 +1743,6 @@ int main(){
 	while (T--)
 		Ac();
 	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[POJ 2796 Feel Good]]></title>
-        <id>https://www.akwing.cn/post/poj-2796-feel-good</id>
-        <link href="https://www.akwing.cn/post/poj-2796-feel-good">
-        </link>
-        <updated>2019-05-04T11:36:58.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="单调栈">单调栈</h1>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="单调栈">单调栈</h1>
-<!-- more -->
-<p><a href="http://poj.org/problem?id=2796">POJ 2796</a></p>
-<p>题目的大致意思是，给你n个数，我们需要计算一个值，这个值是这个序列中的一段连续的子序列里的最小值乘于这段连续子序列的和，我们要使得求得的这个值最大，比如样例 <code>6 3 1 6 4 5 2</code>，我们选择<code>6 4 5</code>这段连续的子序列，值为<code>4*(6+4+5)=60</code>
-首先对于每个数<code>a[i]</code>，我们想让他最大可能的往左右扩展，知道这个数往左和往右最大的扩展的坐标<code>l,r</code>,利用前缀和我们就求得了这个值<code>a[i]*(s[r]-s[l-1])</code>，所以这题在于我们怎么去求一个数往左右扩展的最大位置.
-我们先以往右扩展为例，用 <strong><code>R[i]</code></strong>  表示 <strong><code>i</code></strong> 往右扩展的最大位置。我们建立一个单调栈，这个单调栈是单调递减的，即栈顶到栈底递减，用数组表示即是从左到右递增。我们扫描这个序列。</p>
-<ul>
-<li>如果当前这个数比栈顶大或者等于，我们直接入栈。</li>
-<li>如果当前这个数比栈顶小，我们就从栈中弹出数，直到这个数比栈顶大，那怎么记录往右扩展的最大位置呢，我们在把数从栈中弹出的过程中，弹出的数一定比当前要入栈的数大，因此他一定不是最小的数，对后面没有作用，因此弹出的数最大扩展位置就是当前这个数的位置i再减去1,即<code>i-1</code>。
-我们用<code>pos</code>数组记录一下栈中数所在的位置，同时<code>a[n+1]</code>设为<code>-1</code>，保证最后栈中元素都可以被弹出。
-向左扩展也是一样道理。</li>
-</ul>
-<pre><code>#include &lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-typedef long long ll;
-const int N = 1e5 + 10;
-int a[N], n, L[N], R[N], s[N], tot, pos[N];
-ll sum[N];
-pair&lt;int, int&gt; ans;
-int main()
-{
-    cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; i++){
-        scanf(&quot;%d&quot;, &amp;a[i]);
-        sum[i] = sum[i - 1] + 1LL*a[i];
-        L[i] = R[i] = i;
-    }
-    a[n + 1] = -1;
-    for (int i = 1; i &lt;= n+1; i++)
-    {
-        if (a[i] &gt;= s[tot])
-            s[++tot] = a[i],pos[tot]=i;
-        else{
-            while (tot&amp;&amp;a[i] &lt; s[tot]){
-                R[pos[tot]] = i - 1;
-                tot--;
-            }
-            s[++tot] = a[i],pos[tot]=i;
-        }
-    }
-    a[0] = -1,tot=0;
-    for (int i = n; i &gt;= 0; i--){
-        if (a[i] &gt;= s[tot]){
-            s[++tot] = a[i],pos[tot]=i;
-        }
-        else{
-            while (tot&amp;&amp; a[i] &lt; s[tot]){
-                L[pos[tot]] = i+1;
-                tot--;
-            }
-            s[++tot] = a[i], pos[tot] = i;
-        }
-    }
-    ll max_val= -1;
-    for (int i = 1; i &lt;= n; i++){
-        if (a[i]*(sum[R[i]] - sum[L[i] - 1]) &gt; max_val)
-        {
-            max_val = a[i] * (sum[R[i]] - sum[L[i] - 1]);
-            ans.first = L[i];
-            ans.second = R[i];
-        }
-    }
-    cout &lt;&lt; max_val &lt;&lt; endl;
-    cout &lt;&lt; ans.first &lt;&lt; &quot; &quot; &lt;&lt; ans.second &lt;&lt; endl;
-    return 0;
 }
 </code></pre>
 ]]></content>

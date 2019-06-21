@@ -1,0 +1,241 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Codeforce 1181 D - Irrigation | Guapi</title>
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561105461731">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.akwing.cn">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561105461731" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/TheGayhub/" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Codeforce 1181 D - Irrigation
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-06-21 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <h2 id="区间第k大">区间第K大</h2>
+<!-- more -->
+<blockquote>
+<p><a href="https://codeforces.com/contest/1181/problem/D">D - Irrigation</a></p>
+</blockquote>
+<p>题目大致意思是Q个询问，每次询问一个K，输出表示第K年应该由那个城市举办奥运会。
+举办奥运会的次序是由举办次数决定的，举办次数少的优先举办，同等次数编号小的优先。并且前N年的举办情况已经知道。
+<img src="https://www.akwing.cn/post-images/1561104168882.png" alt=""></p>
+<blockquote>
+<p>我们可以先对前n年的城市举办的次数从小到大排序。其实我们可以发现举办的过程就是不断的去填平每一行，使得它们的差距不断减小。
+<code>S[n]</code> 数组，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示 i 前面每一列与第i列持平(填数是一行一行填的，目的是得到每一列相持平)，所需要的年数。可以发现k在某一区间内都是填固定的区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mtext> </mtext><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 ~ i-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>.   填至与第i列高度持平.然后转向区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mtext> </mtext><mi>i</mi></mrow><annotation encoding="application/x-tex">1 ~ i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">i</span></span></span></span>  继续这样填。
+有了S数组我们可以二分找到它正在填的区间，比如二分找到了位置pos,即它当前正在填区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mtext> </mtext><mi>p</mi><mi>o</mi><mi>s</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1~pos-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">p</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>,(注意我所说的区间是指按照前N年出现次数排序后的区间)。找到了所填区间，我们就可以对区间长度**<code>pos-1</code>** 取模，取模的得到的数X，正是它在填这个区间内的第X大数。然后转化为主席树求解(平衡时也可以，不过暂时不会)。</p>
+</blockquote>
+<pre><code>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;queue&gt;
+#include&lt;algorithm&gt;
+#include&lt;iostream&gt;
+using namespace std;
+const int N = 5e5 + 10;
+typedef long long ll;
+int n, m, q;
+struct node{
+	int val, pos;
+	bool operator&lt;(const node &amp;o)const{
+		return val &lt; o.val;
+	}
+}a[N];
+struct Tree{
+	int lc, rc, cnt;
+}T[N&lt;&lt;5];
+ll s[N];
+int ct[N];
+int tot,up;
+int root[N];
+void update(int &amp;cur, int pre, int l, int r, int pos)
+{
+	cur = ++tot;
+	T[cur] = T[pre];
+	T[cur].cnt++;
+	if (l == r) return;
+	int mid = (l + r) &gt;&gt; 1;
+	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos);
+	else update(T[cur].rc, T[pre].rc, mid + 1, r,pos);
+}
+int query(int x, int y, int l, int r, int k)
+{
+	if (l == r) return l;
+	int s = T[T[y].lc].cnt - T[T[x].lc].cnt;
+	int mid = (l + r) &gt;&gt; 1;
+	if (k &lt;= s)
+		return query(T[x].lc, T[y].lc, l, mid, k);
+	else 
+		return query(T[x].rc, T[y].rc, mid + 1, r, k-s);
+}
+int main()
+{
+	up = 5e5 + 5;
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;q);
+	for (int i = 1; i &lt;= n; i++)
+	{
+		int x;
+		scanf(&quot;%d&quot;, &amp;x);
+		ct[x]++;
+	}
+	for (int i = 1; i &lt;= m; i++)
+	{
+		a[i].val = ct[i];
+		a[i].pos = i;
+	}
+	sort(a + 1, a + m + 1);
+	for (int i = 2; i &lt;= m; i++)
+	{
+		s[i] = s[i - 1] + (i - 1LL)*(a[i].val - a[i - 1].val); //一定要转化为LL，不然爆int
+	}
+	for (int i = 1; i &lt;= m; i++)
+	{
+		update(root[i], root[i - 1], 1, up, a[i].pos);
+	}
+	while (q--)
+	{
+		ll k;
+		scanf(&quot;%lld&quot;, &amp;k);
+		k -= n;
+		int pos = lower_bound(s + 1, s + m + 1, k) - s;//先找到区间
+		k = (k - s[pos - 1] - 1) % (pos - 1) + 1; //先减去前pos-1个区间所需的年数，然后再取模得到区间第K大
+		int ans = query(root[0], root[pos - 1], 1, up, k);//
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}
+
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1">
+              <h3 class="post-title">
+                暑假集训——周赛1
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '5ce5a551fd840268c860',
+    clientSecret: '5ead9040f7cc55641e21476762d5830732b68688',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  <a href="https://info.flagcounter.com/Za3A"><img src="https://s11.flagcounter.com/count2/Za3A/bg_E7FF6E/txt_000000/border_BBCC68/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a> | 
+  <a class="rss" href="https://www.akwing.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
