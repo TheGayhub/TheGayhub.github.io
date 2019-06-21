@@ -1,0 +1,276 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>暑假集训——周赛1 | Guapi</title>
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561089001042">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.akwing.cn">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561089001042" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/TheGayhub/" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              暑假集训——周赛1
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-06-21 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <h2 id="最短路最小生成树">最短路/最小生成树</h2>
+<!-- more -->
+<blockquote>
+<p><strong>C - Borg Maze <a href="http://poj.org/problem?id=3026">POJ - 3026</a></strong></p>
+</blockquote>
+<p>BFS+最小生成树</p>
+<p>比赛的时候想到了用 bfs求出每个点之间的最短距离，然后跑一遍MST。</p>
+<p>可是想想复杂度高达$$O(n^4)$$,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
+<pre><code>    #include&lt;iostream&gt;
+    #include&lt;cstdio&gt;
+    #include&lt;algorithm&gt;
+    #include&lt;string&gt;
+    #include&lt;cstring&gt;
+    #include&lt;cmath&gt;
+    #include&lt;queue&gt;
+    #include&lt;map&gt;
+    using namespace std;
+    const int N = 50 + 10;
+    const int inf = 0x3f3f3f3f;
+    int n, m;
+    int fa[N*N];
+    int a[N][N];
+    int get(int x)
+    {
+    	if (x == fa[x])  return x;
+    	return fa[x] = get(fa[x]);
+    }
+    struct E
+    {
+    	int u, v, w;
+    	bool operator&lt;(const E &amp;other){
+    		return w &lt; other.w;
+    	}
+    }edge[N*N*N*N];
+    int tot,cas;
+    int d[N][N];
+    const int dx[4] = { 0, 0, -1, 1 }, dy[4] = { 1, -1, 0, 0 };
+    typedef pair&lt;int, int &gt; P;
+    void bfs(int x,int y)
+    {
+    	memset(d, -1, sizeof(d));
+    	d[x][y] =0;
+    	queue&lt;P&gt; q;
+    	q.push(P(x, y));
+    	int cnt = 1;
+    	while (!q.empty())
+    	{
+    		P cur = q.front();
+    		q.pop();
+    		for (int i = 0; i &lt; 4; i++)
+    		{
+    			int nx = cur.first+ dx[i], ny = cur.second + dy[i];
+    			if (nx &gt;= 1 &amp;&amp; nx &lt;= n&amp;&amp;ny &gt;= 1 &amp;&amp; ny &lt;= m&amp;&amp;d[nx][ny] == -1&amp;&amp;a[nx][ny]&gt;=0)
+    			{
+    				d[nx][ny] = d[cur.first][cur.second] + 1;
+    				q.push(P(nx, ny));
+    				if (a[nx][ny]&gt;0)
+    				{
+    					edge[tot].u = a[x][y];
+    					edge[tot].v = a[nx][ny];
+    					edge[tot].w = d[nx][ny];
+    					tot++;
+    					cnt++;
+    					if (cnt &gt;= cas) return;
+    				}
+    			}
+    		}
+    	}
+    }
+    void kru()
+    {
+    	sort(edge, edge + tot);
+    	for (int i = 1; i &lt;= cas; i++)
+    		fa[i] = i;
+    	int ans = 0;
+    	int k = 0;
+    	for (int i = 0; i &lt; tot; i++)
+    	{
+    		int u = edge[i].u, v = edge[i].v;
+    		if (get(u) != get(v))
+    		{
+    			fa[get(u)] = get(v);
+    			ans += edge[i].w;
+    		}
+    	}
+    	cout &lt;&lt; ans &lt;&lt; endl;
+    
+    }
+    int main()
+    {
+    	int t;
+    	cin &gt;&gt; t;
+    	while (t--)
+    	{
+    		tot = 0;
+    		cas = 0;
+    		cin &gt;&gt; m &gt;&gt; n;
+    		char s[N];
+    		gets(s);
+    		for (int i = 1; i &lt;= n; i++)
+    		{
+    			for (int j = 1; j&lt;= m; j++)
+    			{
+    				char c = getchar();
+    				if (c == ' ') a[i][j] = 0;
+    				else if (c == '#') a[i][j] = -1;
+    				else a[i][j] = ++cas;
+    			}
+    			getchar();
+    		}
+    		for (int i = 1; i &lt;= n; i++)
+    		{
+    			for (int j = 1; j &lt;= m; j++)
+    			{
+    				if (a[i][j] &gt; 0)
+    					bfs(i, j);
+    			}
+    		}
+    		kru();
+    	}
+    	return 0;
+    }
+</code></pre>
+<p>[========]</p>
+<blockquote>
+<p>**D - 0 or 1   <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4370">HDU - 4370</a> **</p>
+</blockquote>
+<p>比赛的时候不会，赛后看题解也是挺懵的。
+这题把C矩阵看成邻接表，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>  表示 i到j之间的距离，把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 看成 i到j之间的关系，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 为1则表示i和j之间有一条路，并且权值为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.akwing.cn/post/poj-3662-telephone-lines">
+              <h3 class="post-title">
+                POJ 3662 Telephone Lines
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '5ce5a551fd840268c860',
+    clientSecret: '5ead9040f7cc55641e21476762d5830732b68688',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  <a href="https://info.flagcounter.com/Za3A"><img src="https://s11.flagcounter.com/count2/Za3A/bg_E7FF6E/txt_000000/border_BBCC68/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a> | 
+  <a class="rss" href="https://www.akwing.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

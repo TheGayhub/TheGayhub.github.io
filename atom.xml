@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-21T02:31:06.316Z</updated>
+    <updated>2019-06-21T03:50:02.531Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -10,6 +10,145 @@
     <logo>https://www.akwing.cn/images/avatar.png</logo>
     <icon>https://www.akwing.cn/favicon.ico</icon>
     <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[暑假集训——周赛1]]></title>
+        <id>https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1</id>
+        <link href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1">
+        </link>
+        <updated>2019-06-21T03:22:30.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="最短路最小生成树">最短路/最小生成树</h2>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="最短路最小生成树">最短路/最小生成树</h2>
+<!-- more -->
+<blockquote>
+<p><strong>C - Borg Maze <a href="http://poj.org/problem?id=3026">POJ - 3026</a></strong></p>
+</blockquote>
+<p>BFS+最小生成树</p>
+<p>比赛的时候想到了用 bfs求出每个点之间的最短距离，然后跑一遍MST。</p>
+<p>可是想想复杂度高达$$O(n^4)$$,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
+<pre><code>    #include&lt;iostream&gt;
+    #include&lt;cstdio&gt;
+    #include&lt;algorithm&gt;
+    #include&lt;string&gt;
+    #include&lt;cstring&gt;
+    #include&lt;cmath&gt;
+    #include&lt;queue&gt;
+    #include&lt;map&gt;
+    using namespace std;
+    const int N = 50 + 10;
+    const int inf = 0x3f3f3f3f;
+    int n, m;
+    int fa[N*N];
+    int a[N][N];
+    int get(int x)
+    {
+    	if (x == fa[x])  return x;
+    	return fa[x] = get(fa[x]);
+    }
+    struct E
+    {
+    	int u, v, w;
+    	bool operator&lt;(const E &amp;other){
+    		return w &lt; other.w;
+    	}
+    }edge[N*N*N*N];
+    int tot,cas;
+    int d[N][N];
+    const int dx[4] = { 0, 0, -1, 1 }, dy[4] = { 1, -1, 0, 0 };
+    typedef pair&lt;int, int &gt; P;
+    void bfs(int x,int y)
+    {
+    	memset(d, -1, sizeof(d));
+    	d[x][y] =0;
+    	queue&lt;P&gt; q;
+    	q.push(P(x, y));
+    	int cnt = 1;
+    	while (!q.empty())
+    	{
+    		P cur = q.front();
+    		q.pop();
+    		for (int i = 0; i &lt; 4; i++)
+    		{
+    			int nx = cur.first+ dx[i], ny = cur.second + dy[i];
+    			if (nx &gt;= 1 &amp;&amp; nx &lt;= n&amp;&amp;ny &gt;= 1 &amp;&amp; ny &lt;= m&amp;&amp;d[nx][ny] == -1&amp;&amp;a[nx][ny]&gt;=0)
+    			{
+    				d[nx][ny] = d[cur.first][cur.second] + 1;
+    				q.push(P(nx, ny));
+    				if (a[nx][ny]&gt;0)
+    				{
+    					edge[tot].u = a[x][y];
+    					edge[tot].v = a[nx][ny];
+    					edge[tot].w = d[nx][ny];
+    					tot++;
+    					cnt++;
+    					if (cnt &gt;= cas) return;
+    				}
+    			}
+    		}
+    	}
+    }
+    void kru()
+    {
+    	sort(edge, edge + tot);
+    	for (int i = 1; i &lt;= cas; i++)
+    		fa[i] = i;
+    	int ans = 0;
+    	int k = 0;
+    	for (int i = 0; i &lt; tot; i++)
+    	{
+    		int u = edge[i].u, v = edge[i].v;
+    		if (get(u) != get(v))
+    		{
+    			fa[get(u)] = get(v);
+    			ans += edge[i].w;
+    		}
+    	}
+    	cout &lt;&lt; ans &lt;&lt; endl;
+    
+    }
+    int main()
+    {
+    	int t;
+    	cin &gt;&gt; t;
+    	while (t--)
+    	{
+    		tot = 0;
+    		cas = 0;
+    		cin &gt;&gt; m &gt;&gt; n;
+    		char s[N];
+    		gets(s);
+    		for (int i = 1; i &lt;= n; i++)
+    		{
+    			for (int j = 1; j&lt;= m; j++)
+    			{
+    				char c = getchar();
+    				if (c == ' ') a[i][j] = 0;
+    				else if (c == '#') a[i][j] = -1;
+    				else a[i][j] = ++cas;
+    			}
+    			getchar();
+    		}
+    		for (int i = 1; i &lt;= n; i++)
+    		{
+    			for (int j = 1; j &lt;= m; j++)
+    			{
+    				if (a[i][j] &gt; 0)
+    					bfs(i, j);
+    			}
+    		}
+    		kru();
+    	}
+    	return 0;
+    }
+</code></pre>
+<p>[========]</p>
+<blockquote>
+<p>**D - 0 or 1   <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4370">HDU - 4370</a> **</p>
+</blockquote>
+<p>比赛的时候不会，赛后看题解也是挺懵的。
+这题把C矩阵看成邻接表，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>  表示 i到j之间的距离，把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 看成 i到j之间的关系，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 为1则表示i和j之间有一条路，并且权值为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[POJ 3662 Telephone Lines]]></title>
         <id>https://www.akwing.cn/post/poj-3662-telephone-lines</id>
@@ -1263,72 +1402,6 @@ int main()
     return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[字符串最小表示法]]></title>
-        <id>https://www.akwing.cn/post/MinString</id>
-        <link href="https://www.akwing.cn/post/MinString">
-        </link>
-        <updated>2019-05-02T14:08:00.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="字符串最小表示法模板">字符串最小表示法模板</h1>
-<!-- more -->
-<blockquote>
-<p>第一种</p>
-</blockquote>
-<pre><code>int get_minstring(char s[])
-{
-    int n =strlen(s);
-    int i = 0, j = 1, k;
-    while (i &lt; n&amp;&amp;j &lt; n)
-    {
-        for (k = 0; k &lt; n&amp;&amp;s[(j + k) % n] == s[(i + k) % n]; k++);
-        if (k == n)  break;
-        if (s[(i + k)%n]&gt;s[(j + k)%n])
-        {
-            i = i + k + 1;
-            if (i == j) i++;
-        }
-        else
-        {
-            j = j + k + 1;
-            if (i == j) j++;
-        }
-    }
-    return min(i, j);
-}
-
-</code></pre>
-<blockquote>
-<p>第二种</p>
-</blockquote>
-<pre><code>int get_minstring(char s[])
-{
-    int n = strlen(s + 1);
-    for (int i = 1; i &lt;= n; i++)
-        s[n + i] = s[i];
-    int i = 1, j = 2,k;
-    while (i &lt;= n&amp;&amp;j &lt;= n)
-    {
-        for ( k = 0; k &lt; n&amp;&amp;s[j + k] == s[i + k]; k++);
-        if (k == n)  break;
-        if (s[i + k]&gt;s[j + k])
-        {
-            i = i + k + 1;
-            if (i == j) i++;
-        }
-        else
-        {
-            j = j + k + 1;
-            if (i == j) j++;
-        }
-    }
-    return min(i, j);
-}
-</code></pre>
-<p>这两个其实差不多</p>
 ]]></content>
     </entry>
 </feed>
