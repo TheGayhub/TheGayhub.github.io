@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-23T01:04:52.205Z</updated>
+    <updated>2019-06-23T15:29:50.179Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -10,6 +10,106 @@
     <logo>https://www.akwing.cn/images/avatar.png</logo>
     <icon>https://www.akwing.cn/favicon.ico</icon>
     <rights>All rights reserved 2019, Guapi</rights>
+    <entry>
+        <title type="html"><![CDATA[BZOJ 2038 小Z的袜子 ]]></title>
+        <id>https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi</id>
+        <link href="https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi">
+        </link>
+        <updated>2019-06-23T14:51:29.000Z</updated>
+        <summary type="html"><![CDATA[<p>莫队</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>莫队</p>
+<!-- more -->
+<p>这题是个莫队模板题，今天学习了一下莫队，莫队用到了分块。莫队的巧妙之处就在于它的排序+转移。
+这题是个不带修莫队，先按照询问的左端点排序，左端点在同一区间再按照右端点排序，通常 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 转移对答案带来的影响可以预先推出来，然后实现了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>转移 ，比如这题的答案就是</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mspace linebreak="newline"></mspace><mi>d</mi><mi>f</mi><mi>r</mi><mi>a</mi><mi>c</mi><mrow><mo>(</mo><mo>∑</mo><mtext> </mtext><msubsup><mi>C</mi><mrow><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo></mrow><mn>2</mn></msubsup><mo>)</mo></mrow><mrow><mi>C</mi><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mn>2</mn><mrow><mi>r</mi><mo>−</mo><mi>l</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo fence="true">)</mo></mrow></mrow></mstyle></mrow><annotation encoding="application/x-tex"> \displaystyle
+\\dfrac{(\sum\ C_{cnt[x]}^2)}{ C{2 \choose r-l+1}} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="mspace newline"></span><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">c</span><span class="mord"><span class="mopen">(</span><span class="mop op-symbol large-op" style="position:relative;top:-0.000004999999999977245em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace"> </span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.428em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">t</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">]</span></span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4469999999999999em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord"><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></span></span></p>
+<p>化简一下就是</p>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;\(&#039; in math mode at position 29: …e
+\\dfrac{(\sum\̲(̲{cnt[x]})^2)-(r…'> \displaystyle
+\\dfrac{(\sum\({cnt[x]})^2)-(r-l+1)}{ (r-l+1)(r-l)} 
+</p>
+<p>如果增加数，转移的时候就是增加了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mn>1</mn><msup><mo>)</mo><mn>2</mn></msup><mo>−</mo><mo>(</mo><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo><msup><mo>)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(cnt[x]+1)^2 - (cnt[x])^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;algorithm&gt;
+#include&lt;iostream&gt;
+#include&lt;math.h&gt;
+#include&lt;cstring&gt;
+#define mem(a,b) memset(a,b,sizeof(a))
+#define ll long long 
+using namespace std; 
+const int N = 5e4+10;
+int a[N], cnt[N],b[N];
+int n, m,block;
+ll ans;
+ll gcd(ll a, ll b)
+{
+	if (!b) return a;
+	return gcd(b, a%b);
+}
+struct query{
+	int id, l, r;
+	int aa, bb;
+}q[N];
+bool cmp1(query o1, query o2)
+{
+	if (b[o1.l] != b[o2.l]) return o1.l &lt; o2.l;
+	return o1.r &lt; o2.r;
+}
+bool cmp2(query o1, query o2)
+{
+	return o1.id &lt; o2.id;
+}
+void update(int pos,int val)
+{
+	ans -= (cnt[a[pos]] * cnt[a[pos]]);
+	cnt[a[pos]] += val;
+	ans += (cnt[a[pos]] * cnt[a[pos]]);
+	
+}
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	block = sqrt(n);
+	for (int i = 1; i &lt;= n; i++)
+	{
+		scanf(&quot;%d&quot;, &amp;a[i]);
+		b[i] = (i - 1) / block + 1;
+	}
+	for (int i = 1; i &lt;= m; i++)
+	{
+		scanf(&quot;%d%d&quot;, &amp;q[i].l, &amp;q[i].r);
+		q[i].id = i;
+	}
+	sort(q + 1, q + m + 1,cmp1);
+	int l = 1, r = 0;
+	for (int i = 1; i &lt;= m; i++)
+	{
+		while (l &lt; q[i].l) update(l++, -1);
+		while (l&gt;q[i].l) update(--l, 1);
+		while (r &lt; q[i].r) update(++r, 1);
+		while (r&gt;q[i].r) update(r--, -1);
+		if (q[i].l == q[i].r){
+			q[i].aa = 0;
+			q[i].bb = 1;
+			continue;
+		}
+		ll aa = ans - (q[i].r - q[i].l + 1);
+		ll bb = (q[i].r - q[i].l + 1LL)*(q[i].r - q[i].l);
+		ll d = gcd(aa, bb);
+		q[i].aa = aa / d, q[i].bb = bb / d;
+	}
+	sort(q + 1, q + m + 1, cmp2);
+	for (int i = 1; i &lt;= m; i++)
+	{
+		printf(&quot;%d/%d\n&quot;, q[i].aa, q[i].bb);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Codeforce 1181 D - Irrigation]]></title>
         <id>https://www.akwing.cn/post/codeforce-1181-d-irrigation</id>
@@ -1644,104 +1744,6 @@ int main()
 			printf(&quot;%d%c&quot;, cnt[i], i == n ? '\n' : ' ');
 	}
 	fclose(stdin);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Codeforce Gym 101086 D - Secure but True]]></title>
-        <id>https://www.akwing.cn/post/codeforce-gym-101086-d-secure-but-true</id>
-        <link href="https://www.akwing.cn/post/codeforce-gym-101086-d-secure-but-true">
-        </link>
-        <updated>2019-05-05T10:03:08.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="思维模拟">思维+模拟</h1>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="思维模拟">思维+模拟</h1>
-<!-- more -->
-<blockquote>
-<p>题目链接 <a href="https://codeforces.com/gym/101086/problem/D">Secure but True </a></p>
-</blockquote>
-<blockquote>
-<p>题目的大致意思是给出11个字符 <code>{A, H, I, M, O, T, U, V, W, X, Y},</code> ，这些字符可以任意结合组成字符串，这些字符串排序首先按照它们的长度排序，长度相同按照字典序排序，然后题目给你T个询问，每个询问给一个整数 <strong><code>k</code></strong> ，一个字符串 <strong><code>s</code></strong>   ，然后询问字符串s后的第k的字符串是什么。</p>
-</blockquote>
-<p>首先这11个字符可以组成无数个字符串，而k的范围又是1e9,所以不可能直接做。首先由11个字符先按照长度再按照字典序排可以想到10进制数，<strong><code>0-9 10-19 20-29</code></strong>  ,这 <strong><code>10</code></strong> 个数不正是先按照长度，再按照字典序来排的吗。于是这题也就和 <strong><code>11</code></strong> 进制相关，于是我和我队友想到了如下思路，将k转化为11进制，再将字符串s转化为11进制，<code>A-Y</code> 分别代表 <code>1-11</code>，然后相加，得到的结果再按照对应字符输出。
-我们按照这个思路写了一下，然后交上去WA了，后来我们发现将k转化为11进制后会出现0，对于0我们无法处理，因为我们是把 <code>A-Y</code> 分别代表 <code>1-11</code> 来处理的，出现0我们就无法处理，于是我们就改了好长时间代码，还是没能正常处理0. 我们把Y当成0处理也不行，最后这题没能A掉。
-比赛过后，我请教了一位大佬，就是用11进制做，A-Y仍分别代表1-11。然后模拟两个11进制相加。所以我们用短除法把k转为11进制这个方法错了。要用其他方法把k转化为11进制,并且不出现0，既每一位最低是1。</p>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int N = 2e5 + 100;
-string ss = &quot;AAHIMOTUVWXY&quot;;
-typedef long long ll;
-int to[128], k;
-char s[N];
-int a[N];
-int b[N];
-ll Pow[N];
-void dfs(int x, int val)
-{
-	if (x&lt;0) return;
-	for (int i = 1; i &lt;= 11; i++)
-	{
-		if (val &gt;= Pow[x]){
-			val -= Pow[x];
-		}
-		else{
-			b[x] = i;
-			dfs(x - 1, val);
-			break;
-		}
-	}
-}
-void Ac()
-{
-	memset(a, 0, sizeof(a));
-	memset(b, 0, sizeof(b));
-	scanf(&quot;%d%s&quot;, &amp;k, s);
-	int len1 = strlen(s);
-	for (int i = 0; i &lt; len1; i++)
-		a[i] = to[s[i]];
-	reverse(a, a + len1);
-	int len2 = 0;
-	//不能让0出现，这个处理保证了每一位最少是1 (与平时短除法转化不一样)
-	for (int i = 0; i &lt;= 12; i++)
-	{
-		if (k &lt; Pow[i]){
-			len2 = i;
-			break;
-		}
-		else{
-			//b[i]=1;
-			k -= Pow[i];
-		}
-	}
-	//这个dfs模拟转化11进制
-	dfs(len2 - 1, k);
-	//for (int i = 0; i &lt; len2; i++)
-		//cout &lt;&lt; b[i] &lt;&lt; ' ';
-	//cout &lt;&lt; endl;
-	len1 = max(len1, len2);
-	for (int i = 0; i &lt; len1; i++)
-	{
-		a[i] += b[i];
-		while (a[i]&gt;11) a[i] -= 11, b[i + 1]++;
-	}
-	if (b[len1])  a[len1] += b[len1],len1++;
-	for (int i = len1 - 1; i &gt;= 0; i--)
-		putchar(ss[a[i]]);
-	puts(&quot;&quot;);
-}
-
-int main(){
-	int T;
-	scanf(&quot;%d&quot;, &amp;T);
-	Pow[0] = 1;
-	for (int i = 1; i &lt;= 12; ++i)
-		Pow[i] = Pow[i - 1] * 11;
-	for (int i = 1; i &lt;= 11; i++)
-		to[ss[i]] = i;
-	while (T--)
-		Ac();
 	return 0;
 }
 </code></pre>
