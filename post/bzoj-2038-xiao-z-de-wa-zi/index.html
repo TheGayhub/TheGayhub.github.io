@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>BZOJ 2038 小Z的袜子  | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561305746499">
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561348254662">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561305746499" alt="">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561348254662" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -99,7 +99,7 @@
               </div>
             
             <div class="post-content">
-              <p>莫队</p>
+              <h2 id="莫队">莫队</h2>
 <!-- more -->
 <p>这题是个莫队模板题，今天学习了一下莫队，莫队用到了分块。莫队的巧妙之处就在于它的排序+转移。
 这题是个不带修莫队，先按照询问的左端点排序，左端点在同一区间再按照右端点排序，通常 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 转移对答案带来的影响可以预先推出来，然后实现了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>转移 ，比如这题的答案就是</p>
