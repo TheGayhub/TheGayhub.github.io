@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-25T05:50:33.301Z</updated>
+    <updated>2019-06-25T13:35:34.512Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -25,6 +25,162 @@
 <p>洛谷P3674 <a href="https://www.luogu.org/problemnew/show/P3674">P3674 小清新人渣的本愿</a>
 1操作化简以后bitset统计答案左移x可以看成当前数+x , 2操作注意要另加一个bitset，这是因为可能有负数存不了，3操作直接枚举因子。</p>
 </blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HDU 5306 Gorgeous Sequence]]></title>
+        <id>https://www.akwing.cn/post/hdu-5306-gorgeous-sequence</id>
+        <link href="https://www.akwing.cn/post/hdu-5306-gorgeous-sequence">
+        </link>
+        <updated>2019-06-25T13:16:15.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="线段树">线段树</h1>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="线段树">线段树</h1>
+<!-- more -->
+<blockquote>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5306">HDU 5306 Gorgeous Sequence</a></p>
+</blockquote>
+<p>维护一个数组，支持以下几种操作</p>
+<ul>
+<li>给出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo separator="true">,</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">l,r,x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span></span></span></span>,对于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>∈</mo><mo>[</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">i\in[l,r]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69862em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span> 将<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>变为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mo>(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">min(a_i,x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>。</li>
+<li>给出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mo separator="true">,</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">l,r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>,对于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>∈</mo><mo>[</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">i\in[l,r]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69862em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span>,询问区间内<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的最大值。</li>
+<li>给出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mo separator="true">,</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">l,r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>,询问 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mi>l</mi></mrow><mi>r</mi></msubsup><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sum_{i=l}^r a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。</li>
+</ul>
+<p>我们可以用线段树来维护这个数组，线段树维护区间<strong>最大值</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">max</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span></span></span></span> ,<strong>严格次大值</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">sec</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span></span></span></span>，<strong>最大值的个数</strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span>,和<strong>区间和</strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span></span></span></span>.若使区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[l,r]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span>对<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>取<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span>，先递归定位到这个区间。然后：</p>
+<ul>
+<li>若<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">max&lt;x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>,直接返回</li>
+<li>若<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>c</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>m</mi><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">sec&lt;x&lt;max</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span></span></span></span>,我们将此时区间最大值改为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>,此时区间的和应该减去<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi><mo>∗</mo><mo>(</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo>−</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">cnt*(max-x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>,同时打上标记.</li>
+<li>否则递归到左右儿子继续处理</li>
+</ul>
+<p>整体时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O((n+m)log_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,不会证。
+对于标记我们不需要另开数组记录，当左右儿子的最值大于父亲节点的最值时，说明这个父亲节点一定被修改过，这时处理左右儿子即可。另外还要明确我们修改的区间一定是满足<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>c</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>m</mi><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">sec&lt;x&lt;max</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span></span></span></span>，因此对于区间和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span></span></span></span>的修改只和最大值有关。
+这题时间卡的也比较紧</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N = 1e6 + 10;
+typedef long long ll;
+struct tree{
+    ll sum, mx, se, cnt;
+}T[N&lt;&lt;2];
+ll add[N &lt;&lt; 2],a[N];
+int n, m;
+void pushup(int rt)
+{
+    int lc = rt &lt;&lt; 1, rc = rt &lt;&lt; 1 | 1;
+    if (T[lc].mx &gt; T[rc].mx)
+    {
+        T[rt].mx = T[lc].mx;
+        T[rt].cnt = T[lc].cnt;
+        T[rt].se = max(T[lc].se, T[rc].mx);
+    }
+    else if (T[lc].mx &lt; T[rc].mx)
+    {
+        T[rt].mx = T[rc].mx;
+        T[rt].cnt = T[rc].cnt;
+        T[rt].se = max(T[rc].se, T[lc].mx);
+    }
+    else
+    {
+        T[rt].mx = T[rc].mx;
+        T[rt].cnt = T[rc].cnt+T[lc].cnt;
+        T[rt].se = max(T[rc].se, T[lc].se);
+    }
+    T[rt].sum = T[lc].sum + T[rc].sum;
+}
+void pushdown(int rt)
+{
+    int lc = rt &lt;&lt; 1, rc = rt &lt;&lt; 1 | 1;
+    if (T[lc].mx &gt; T[rt].mx){
+        T[lc].sum -= T[lc].cnt*(T[lc].mx - T[rt].mx);
+        T[lc].mx = T[rt].mx;
+    }
+    if (T[rc].mx &gt; T[rt].mx)
+    {
+        T[rc].sum -= T[rc].cnt*(T[rc].mx - T[rt].mx);
+        T[rc].mx = T[rt].mx;
+    }
+}
+void build(int rt, int l, int r)
+{
+    if (l == r){
+        T[rt].sum = T[rt].mx = a[l];
+        T[rt].cnt = 1;
+        T[rt].se = 0;
+        return;
+    }
+    int mid = (l + r) &gt;&gt; 1;
+    build(rt &lt;&lt; 1, l, mid);
+    build(rt &lt;&lt; 1 | 1, mid + 1, r);
+    pushup(rt);
+}
+void change(int rt, int l, int r, int x, int y, int val)
+{
+    if (T[rt].mx &lt;= val) return;
+    if (x &lt;= l&amp;&amp;r &lt;= y&amp;&amp;val&gt;T[rt].se)
+    {
+        T[rt].sum -= (T[rt].mx - val)*T[rt].cnt;
+        T[rt].mx = val;
+        add[rt] = val;
+        return;
+    }
+     pushdown(rt);
+    int mid = (l + r) &gt;&gt; 1;
+    if (x &lt;= mid) change(rt &lt;&lt; 1, l, mid, x, y, val);
+    if (y &gt; mid)  change(rt &lt;&lt; 1 | 1, mid + 1, r, x, y, val);
+    pushup(rt);
+}
+ll qs(int rt, int l, int r, int x, int y)
+{
+    if (x &lt;= l&amp;&amp;r &lt;= y) return  T[rt].sum;
+     pushdown(rt);
+    int mid = (l + r) &gt;&gt; 1;
+    ll ans = 0;
+    if (x &lt;= mid) ans += qs(rt &lt;&lt; 1, l, mid, x, y);
+    if (y &gt; mid) ans += qs(rt &lt;&lt; 1 | 1, mid + 1, r, x, y);
+    return ans;
+}
+ll qmx(int rt, int l, int r, int x, int y)
+{
+    if (x &lt;= l&amp;&amp;r &lt;= y) return  T[rt].mx;
+    pushdown(rt);
+    int mid = (l + r) &gt;&gt; 1;
+    ll ans1 = 0,ans2=0;
+    if (x &lt;= mid) ans1 = qmx(rt &lt;&lt; 1, l, mid, x, y);
+    if (y &gt; mid) ans2 = qmx(rt &lt;&lt; 1 | 1, mid + 1, r, x, y);
+    return max(ans1, ans2);
+}
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;, &amp;t);
+    while (t--)
+    {
+        scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+        for (int i = 1; i &lt;= n; i++)
+            scanf(&quot;%lld&quot;, &amp;a[i]);
+        build(1, 1, n);
+        while (m--)
+        {
+            int op, x, y, val;
+            scanf(&quot;%d%d%d&quot;, &amp;op, &amp;x, &amp;y);
+            if (op == 0){
+                scanf(&quot;%d&quot;, &amp;val);
+                change(1, 1, n, x, y, val);
+            }
+            else if (op == 1){
+                printf(&quot;%lld\n&quot;, qmx(1, 1, n, x, y));
+            }
+            else if (op == 2){
+                printf(&quot;%lld\n&quot;, qs(1, 1, n, x, y));
+            }
+        }
+    }
+        return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -1425,335 +1581,6 @@ int main()
     }
     return 0;
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ZOJ 2112 Dynamic Rankings ]]></title>
-        <id>https://www.akwing.cn/post/zoj-2112-dynamic-rankings</id>
-        <link href="https://www.akwing.cn/post/zoj-2112-dynamic-rankings">
-        </link>
-        <updated>2019-06-10T06:08:02.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="树状数组套主席树">树状数组套主席树</h1>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="树状数组套主席树">树状数组套主席树</h1>
-<!-- more -->
-<p>之前学了主席树，解决了静态区间第k大，想着顺便学习一下如何求解动态区间第k大，奈何太菜，看了一晚上未能很好的理解，主要就是询问的时候卡住了我。第二天终于理解了。
-这里给出两种方法</p>
-<ul>
-<li>方法1</li>
-</ul>
-<p>前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询 <strong>(原来的值+树状数组的影响)</strong></p>
-<ul>
-<li>方法2</li>
-</ul>
-<p>类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
-<p>方法1的代码在洛谷和ZOJ都能过，方法2就只能过洛谷，ZOJ一直SF。</p>
-<blockquote>
-<p>方法1</p>
-</blockquote>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;string&gt;
-#include&lt;cmath&gt;
-#include&lt;string&gt;
-#include&lt;string.h&gt;
-#include&lt;vector&gt;
-#include&lt;map&gt;
-#include&lt;queue&gt;
-#include&lt;cstdlib&gt;
-using namespace std;
-#define lowbit(x) (x&amp;(-x))
-typedef long long ll;
-const int N = 6e4 + 10;
-const int M = 2500000;
-int a[N], b[N * 2], tot, n, m, q, numx, numy;
-struct query{
-	int op, l, r, v;
-}p[10005];
-struct tree{
-	int lc, rc, cnt;
-}T[N * 32];
-int root[N];
-int ux[50], uy[50];
-int S[N];
-void build(int &amp;rt, int l, int r)
-{
-	rt = ++tot;
-	T[rt].cnt = 0;
-	T[rt].lc = T[rt].rc = 0;
-	if (l == r) return;
-	int mid = (l + r) &gt;&gt; 1;
-	build(T[rt].lc, l, mid);
-	build(T[rt].rc, mid + 1, r);
-}
-void update(int &amp;cur, int pre, int l, int r, int pos, int val)
-{
-	cur = ++tot;
-	T[cur] = T[pre];
-	T[cur].cnt += val;
-	if (l == r) return;
-	int mid = (l + r) &gt;&gt; 1;
-	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos, val);
-	else update(T[cur].rc, T[pre].rc, mid + 1, r, pos, val);
-}
-void add(int pos, int val)
-{
-	int npos = lower_bound(b + 1, b + m + 1, a[pos]) - b;
-	for (; pos &lt;= n; pos += lowbit(pos))
-		update(S[pos], S[pos], 1, m, npos, val);
-}
-int query(int l, int r, int x, int y, int k)
-{
-	if (l == r) return l;
-	int mid = (l + r) &gt;&gt; 1;
-	int sum = 0;
-	for (int j = 0; j &lt; numx; j++) sum -= T[T[ux[j]].lc].cnt;
-	for (int j = 0; j &lt; numy; j++) sum += T[T[uy[j]].lc].cnt;
-	sum += T[T[y].lc].cnt - T[T[x].lc].cnt;
-	if (k&gt;sum)
-	{
-		for (int j = 0; j &lt; numx; j++)
-			ux[j] = T[ux[j]].rc;
-		for (int j = 0; j &lt; numy; j++)
-			uy[j] = T[uy[j]].rc;
-		return query(mid + 1, r, T[x].rc, T[y].rc, k - sum);
-	}
-	else
-	{
-		for (int j = 0; j &lt; numx; j++)
-			ux[j] = T[ux[j]].lc;
-		for (int j = 0; j &lt; numy; j++)
-			uy[j] = T[uy[j]].lc;
-		return query(l, mid, T[x].lc, T[y].lc, k );
-	}
-	
-	
-}
-int main()
-{
-	int t;
-	scanf(&quot;%d&quot;, &amp;t);
-	while (t--)
-	{
-		tot = 0;
-		m = 0;
-		scanf(&quot;%d%d&quot;, &amp;n, &amp;q);
-		for (int i = 1; i &lt;= n; i++)
-		{
-			scanf(&quot;%d&quot;, &amp;a[i]);
-			b[++m] = a[i];
-		}
-		for (int i = 1; i &lt;= q; i++)
-		{
-			char op[5];
-			scanf(&quot;%s&quot;, op);
-			if (op[0] == 'Q')
-			{
-				scanf(&quot;%d%d%d&quot;, &amp;p[i].l, &amp;p[i].r, &amp;p[i].v);
-				p[i].op = 1;
-			}
-			else
-			{
-				scanf(&quot;%d%d&quot;, &amp;p[i].l, &amp;p[i].r);
-				b[++m] = p[i].r;
-				p[i].op = 2;
-			}
-		}
-		sort(b + 1, b + m + 1);
-		m = unique(b + 1, b + m + 1) - b - 1;
-		build(root[0], 1, m);
-		for (int i = 1; i &lt;= n; i++)
-		{
-			int pos = lower_bound(b + 1, b + m + 1, a[i]) - b;
-			update(root[i], root[i - 1], 1, m, pos, 1);
-		}
-		for (int i = 0; i &lt;= n; i++)
-			S[i] = root[0];
-		for (int i = 1; i &lt;= q; i++)
-		{
-			if (p[i].op == 1)
-			{
-				numx = 0, numy = 0;
-				for (int j = p[i].l - 1; j &gt; 0; j -= lowbit(j)) ux[numx++] = S[j];
-				for (int j = p[i].r; j &gt; 0; j -= lowbit(j)) uy[numy++] = S[j];
-				int ans = query(1, m, root[p[i].l - 1], root[p[i].r], p[i].v);
-				printf(&quot;%d\n&quot;, b[ans]);
-			}
-			else
-			{
-				add(p[i].l, -1);
-				a[p[i].l] = p[i].r;
-				add(p[i].l, 1);
-			}
-		}
-
-	}
-
-	return 0;
-}
-
-</code></pre>
-<blockquote>
-<p>方法2(顺便来个非递归查询和更新)</p>
-</blockquote>
-<pre><code>// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;string&gt;
-#include&lt;cmath&gt;
-#include&lt;string&gt;
-#include&lt;string.h&gt;
-#include&lt;vector&gt;
-#include&lt;map&gt;
-#include&lt;queue&gt;
-#include&lt;cstdlib&gt;
-using namespace std;
-#define lowbit(x) (x&amp;(-x))
-typedef long long ll;
-const int N = 1e5+ 10;
-const int M = 2500000;
-int a[N], b[N*2], tot, n, m, q,numx,numy;
-struct query{
-    int op, l, r, v;
-}p[100005];
-struct tree{
-    int lc, rc, cnt;
-}T[N&lt;&lt;9];
-int root[N];
-int ux[50], uy[50];
-void build(int &amp;rt,int l,int r)
-{
-    rt = ++tot;
-    T[rt].cnt = 0;
-    T[rt].lc = T[rt].rc = 0;
-    if (l == r) return;
-    int mid = (l + r) &gt;&gt; 1;
-    build(T[rt].lc, l, mid);
-    build(T[rt].rc, mid + 1, r);
-}
-void update(int &amp;cur, int pre,int l, int r,int pos,int val)
-{
-    cur = ++tot;
-    T[cur] = T[pre];
-    T[cur].cnt += val;
-    int tmp = cur;
-    while (l &lt; r)
-    {
-        int mid = (l + r) &gt;&gt; 1;
-        if (pos &lt;= mid)
-        {
-            T[tmp].lc = ++tot;
-            T[tmp].rc = T[pre].rc;
-            pre = T[pre].lc;
-            tmp = T[tmp].lc;
-            r = mid;
-        }
-        else
-        {
-            T[tmp].rc = ++tot;
-            T[tmp].lc = T[pre].lc;
-            pre = T[pre].rc;
-            tmp = T[tmp].rc;
-            l = mid + 1;
-        }
-        T[tmp].cnt = T[pre].cnt + val;
-    }
-    return;
-}
-void add(int pos, int val)
-{
-    int npos = lower_bound(b + 1, b + m + 1, a[pos]) - b;
-    for (; pos &lt;= n; pos += lowbit(pos))
-        update(root[pos], root[pos], 1, m, npos, val);
-}
-int query(int l,int r,int k)
-{
-    while (l &lt; r)
-    {
-        int mid = (l + r) &gt;&gt; 1;
-        int sum = 0;
-        for (int j = 0; j &lt; numx; j++) sum -= T[T[ux[j]].lc].cnt;
-        for (int j = 0; j &lt; numy; j++) sum += T[T[uy[j]].lc].cnt;
-        if (k&gt;sum)
-        {
-            k -= sum;
-            for (int j = 0; j &lt; numx; j++)
-                ux[j] = T[ux[j]].rc;
-            for (int j = 0; j &lt; numy; j++)
-                uy[j] = T[uy[j]].rc;
-            l = mid + 1;
-        }
-        else
-        {
-            for (int j = 0; j &lt; numx; j++)
-                ux[j] = T[ux[j]].lc;
-            for (int j = 0; j &lt; numy; j++)
-                uy[j] = T[uy[j]].lc;
-            r = mid;
-        }
-    }
-
-    return l;
-}
-int main()
-{
-    tot = 0;
-    m = 0;
-    scanf(&quot;%d%d&quot;, &amp;n, &amp;q);
-    for (int i = 1; i &lt;= n; i++)
-    {
-        scanf(&quot;%d&quot;, &amp;a[i]);
-        b[++m] = a[i];
-    }
-    for (int i = 1; i &lt;= q; i++)
-    {
-        char op[5];
-        scanf(&quot;%s&quot;, op);
-        if (op[0] == 'Q')
-        {
-            scanf(&quot;%d%d%d&quot;, &amp;p[i].l, &amp;p[i].r, &amp;p[i].v);
-            p[i].op = 1;
-        }
-        else
-        {
-            scanf(&quot;%d%d&quot;, &amp;p[i].l, &amp;p[i].r);
-            b[++m] = p[i].r;
-            p[i].op = 2;
-        }
-    }
-    sort(b + 1, b + m + 1);
-    m = unique(b + 1, b + m + 1) - b - 1;
-    for (int i = 1; i &lt;= n; i++)
-        add(i, 1);
-    for (int i = 1; i &lt;= q; i++)
-    {
-        if (p[i].op == 1)
-        {
-            numx = 0, numy = 0;
-            for (int j = p[i].l-1; j &gt; 0; j -= lowbit(j)) ux[numx++] = root[j];
-            for (int j = p[i].r; j &gt; 0; j -= lowbit(j)) uy[numy++] = root[j];
-            int ans = query(1, m, p[i].v);
-            printf(&quot;%d\n&quot;, b[ans]);
-        }
-        else
-        {
-            add(p[i].l, -1);
-            a[p[i].l] = p[i].r;
-            add(p[i].l, 1);
-        }
-    }
-
-    return 0;
-}
-
-			
 </code></pre>
 ]]></content>
     </entry>
