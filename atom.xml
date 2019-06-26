@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-26T07:20:49.786Z</updated>
+    <updated>2019-06-26T10:08:52.715Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -25,6 +25,60 @@
 <p>洛谷P3674 <a href="https://www.luogu.org/problemnew/show/P3674">P3674 小清新人渣的本愿</a>
 1操作化简以后bitset统计答案左移x可以看成当前数+x , 2操作注意要另加一个bitset，这是因为可能有负数存不了，3操作直接枚举因子。</p>
 </blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[线段树区间修改优先级]]></title>
+        <id>https://www.akwing.cn/post/xian-duan-shu-qu-jian-xiu-gai-you-xian-ji</id>
+        <link href="https://www.akwing.cn/post/xian-duan-shu-qu-jian-xiu-gai-you-xian-ji">
+        </link>
+        <updated>2019-06-26T09:43:10.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="线段树一个区间进行多个操作时处理的优先级">线段树一个区间进行多个操作时处理的优先级</h2>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="线段树一个区间进行多个操作时处理的优先级">线段树一个区间进行多个操作时处理的优先级</h2>
+<!-- more -->
+<blockquote>
+<p>** 懒惰标记：当前区间已经修改，但儿子节点区间未修改，不能误认为当前区间也未修改。**</p>
+</blockquote>
+<h3 id="一-区间赋值和区间加值">一 、 区间<strong>赋值</strong>和区间<strong>加</strong>值</h3>
+<p>这个很明显就是赋值的优先级高，下放懒惰标记时，我们做出如下讨论。</p>
+<ul>
+<li>当前区间有赋值标记时，对儿子区间进行赋值，同时标记传给儿子，把当前区间以及儿子区间的加标记清除</li>
+<li>当前区间无懒惰标记，但有加标记，对儿子区间进行修改，同时标记下传, 下传时注意。若儿子区间有赋值标记，此时需要将儿子区间的赋值标记加上当前的加标记的值，同时将可儿子区间加标记清除。若儿子区间无赋值标记，直接将加标记下传即可。</li>
+</ul>
+<p>修改也有如下讨论</p>
+<ul>
+<li>执行赋值修改时，区间打上赋值标记时，将加标记清除</li>
+<li>执行加值修改时，如当前区间有赋值标记，则在赋值标记上加上当前的加值，若无赋值标记，区间<strong>加</strong>上加值标记即可。</li>
+</ul>
+<pre><code>void PushDown(int rt){
+    if (changetag[rt] != -1){
+        Max[rt&lt;&lt;1] = changetag[rt]; Max[rt&lt;&lt;1|1] = changetag[rt];
+        changetag[rt &lt;&lt; 1] = changetag[rt]; addtag[rt &lt;&lt; 1] = 0;
+        changetag[rt &lt;&lt; 1 | 1] = changetag[rt]; addtag[rt &lt;&lt; 1 | 1] = 0;
+        changetag[rt] = -1;
+    }else if (addtag[rt]){
+        Max[rt&lt;&lt;1] += addtag[rt]; Max[rt&lt;&lt;1|1] += addtag[rt];
+        if (changetag[rt&lt;&lt;1] != -1) changetag[rt&lt;&lt;1] += addtag[rt];
+        else addtag[rt&lt;&lt;1] += addtag[rt];
+        if (changetag[rt&lt;&lt;1|1] != -1) changetag[rt&lt;&lt;1|1] += addtag[rt];
+        else addtag[rt&lt;&lt;1|1] += addtag[rt];
+        addtag[rt] = 0;        
+    }
+}
+void add(int rt, int l, int r, int L, int R, int C)
+{
+    if (L &lt;= l &amp;&amp; r &lt;= R){
+        Max[rt] = Max[rt] + C;
+        if (changetag[rt] == -1) addtag[rt] += C;
+        else changetag[rt] += C;
+        return;
+    }
+}
+void change()
+{
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -1513,73 +1567,6 @@ int main(){
 		else
 			printf(&quot;%d\n&quot;, res + 1);
 	}
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[HDU 5710 Digit-Sum]]></title>
-        <id>https://www.akwing.cn/post/hdu-5710-digit-sum</id>
-        <link href="https://www.akwing.cn/post/hdu-5710-digit-sum">
-        </link>
-        <updated>2019-06-11T05:37:36.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="构造">构造</h1>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="构造">构造</h1>
-<!-- more -->
-<p><img src="https://www.akwing.cn/post-images/1560233194009.png" alt=""></p>
-<p>很容易发现，当 2 * n 每进1位的时候，与 2 * S(n)的差就会少去9，这也可以推出来，因为满10进1，每进1位就会少10，得到1，所以每进1位就会少9.所以当n的数位上出现[5-9]时，乘于2就会少9，假设n的所有位上一共有L个[5-9]的数
-我们可以得到 <code>S(2n)=2*S(n)-L*9</code>  再由 <code>a×S(n)=b×S(2n)</code> ,所以 <code>L/S(n)=(2*b-a)/(9*b)</code> 。(注意要上下同除gcd)
-所以我们可以让 <code>L=2*b-a,S(n)=9*b</code> ,那如何贪心构造出最小的n呢？
-我们先让n中的L位数全为5，即  xxx555(L个5)，S(n)-5 * L,然后剩下的S(n)再从末尾不断的加上去。
-当<code>L&lt;0||5 * L&gt;S(n)</code> 的时候就是无解。</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N = 2e5 + 10;
-int a, b;
-int gcd(int a, int b)
-{
-    if (b == 0) return a;
-    return gcd(b, a%b);
-}
-int ans[N];
-int main()
-{
-    int t;
-    scanf(&quot;%d&quot;, &amp;t);
-    while (t--)
-    {
-        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
-        int d = gcd(a, b);
-        a /= d, b /= d;
-        int l = 2 * b - a, sn = 9 * b;
-        if (l&lt;0 || l * 5&gt;sn){
-            puts(&quot;0&quot;);
-            continue;
-        }
-        d = gcd(l, sn);
-        l /= d, sn /= d;
-        int tot = 0;
-        sn -= 5 * l;
-        for (int i = 0; i &lt; l; i++)
-        {
-            int tmp = min(4, sn);
-            ans[tot++] = 5 + tmp;
-            sn -= tmp;
-        }
-        while (sn)
-        {
-            int tmp = min(4, sn);
-            ans[tot++] = tmp;
-            sn -= tmp;
-        }
-        for (int i = tot - 1; i &gt;= 0; i--)
-            cout &lt;&lt; ans[i];
-        puts(&quot;&quot;);
-    }
-    return 0;
 }
 </code></pre>
 ]]></content>
