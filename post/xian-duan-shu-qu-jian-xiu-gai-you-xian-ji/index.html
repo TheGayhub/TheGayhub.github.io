@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>线段树区间修改优先级 | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561621548078">
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561622934200">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561621548078" alt="">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561622934200" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -107,7 +107,8 @@
 <li>执行赋值修改时，区间打上赋值标记时，将加标记清除</li>
 <li>执行加值修改时，如当前区间有赋值标记，则在赋值标记上加上当前的加值，若无赋值标记，区间<strong>加</strong>上加值标记即可。</li>
 </ul>
-<pre><code>void PushDown(int rt){
+<pre><code>
+void PushDown(int rt){
     if (changetag[rt] != -1){
         Max[rt&lt;&lt;1] = changetag[rt]; Max[rt&lt;&lt;1|1] = changetag[rt];
         changetag[rt &lt;&lt; 1] = changetag[rt]; addtag[rt &lt;&lt; 1] = 0;
@@ -134,6 +135,7 @@ void add(int rt, int l, int r, int L, int R, int C)
 void change()
 {
 }
+
 </code></pre>
 
             </div>
