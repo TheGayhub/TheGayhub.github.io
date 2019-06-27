@@ -1,362 +1,221 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+  <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>数据结构—树状数组 | Guapi</title>
-<meta name="description" content="惟世之繁华如故,斟酌岁月如初">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561621311662">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561621125129">
-<!--字体-->
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Libre+Barcode+39" rel="stylesheet">
-<!--主要CSS-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
-<style type="text/css">
-      .tilt{
-        margin: 0;
-        overflow: hidden;
-        width: 100vw;
-        height: 100vh;
-        background: #49beb7;
-        background: linear-gradient(to top left, #4CB8C4 -40%, #2196F3);
-        position:fixed;
-        top:0;
-        left:0;
-        z-index: 999 !important;
-      }
-      .container {
-        position: absolute;
-        top:0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 250px;
-        height: 250px;
-        margin: auto;
-      }
 
-      .part {
-        width: 250px;
-        position: absolute;
-      }
-
-      .svgpath {
-        fill: rgba(145,220,90,0);
-        stroke: aqua;
-        stroke-width: 1.5px;
-        stroke-dasharray: 1000;
-        stroke-linecap: round;
-        z-index: 2;
-      }
-
-      .svgbg {
-        fill: rgba(255,255,255,0.2);
-        z-index: 1;
-       }
-
-      #playload {
-        animation: dash 2.5s reverse ease-in-out infinite;
-      }
-
-      @keyframes dash {
-        to {
-          stroke-dashoffset: 2000;
-        }
-      }</style>
-
-
-
-
-<script src="https://www.akwing.cn/media/dict/js/Vue.js"></script>
-<script src="https://www.akwing.cn/media/dict/js/JQuery.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://www.akwing.cn/media/dict/css/aos.css" />
-
-
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
 
 
 
   </head>
   <body>
-    <div class="tilt">
-      <div class='container'>
-        <svg class='part' x="0px" y="0px" viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve">
-          <path class="svgpath" id="playload" d="M189.5,140.5c-6.6,29.1-32.6,50.9-63.7,50.9c-36.1,0-65.3-29.3-65.3-65.3
-        c0,0,17,0,23.5,0c10.4,0,6.6-45.9,11-46c5.2-0.1,3.6,94.8,7.4,94.8c4.1,0,4.1-92.9,8.2-92.9c4.1,0,4.1,83,8.1,83
-        c4.1,0,4.1-73.6,8.1-73.6c4.1,0,4.1,63.9,8.1,63.9c4.1,0,4.1-53.9,8.1-53.9c4.1,0,4.1,44.1,8.2,44.1c4.1,0,3.1-34.5,7.2-34.5
-        c4.1,0,3.1,24.6,7.2,24.6c4.1,0,2.5-14.5,5.2-14.5c2.2,0,0.8,5.1,4.2,4.9c0.4,0,13.1,0,13.1,0c0-34.4-27.9-62.3-62.3-62.3
-        c-27.4,0-50.7,17.7-59,42.3" />
-
-          <path class="svgbg" d="M61,126c0,0,16.4,0,23,0c10.4,0,6.6-45.9,11-46c5.2-0.1,3.6,94.8,7.4,94.8c4.1,0,4.1-92.9,8.2-92.9
-        c4.1,0,4.1,83,8.1,83c4.1,0,4.1-73.6,8.1-73.6c4.1,0,4.1,63.9,8.1,63.9c4.1,0,4.1-53.9,8.1-53.9c4.1,0,4.1,44.1,8.2,44.1
-        c4.1,0,3.1-34.5,7.2-34.5c4.1,0,3.1,24.6,7.2,24.6c4.1,0,2.5-14.5,5.2-14.5c2.2,0,0.8,5.1,4.2,4.9c0.4,0,22.5,0,23,0" />
-        </svg></div> 
-    </div>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-
-  <div class="overlay"></div>
-  <div class="top-container" data-aos="fade-right">
-    <!--头像-->
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://www.akwing.cn">
-        <img src="https://www.akwing.cn/images/avatar.png?v=1561621125129" class="site-logo">
-      </a>
-      <h1 class="site-title">
-            Guapi
-            <p>惟世之繁华如故,斟酌岁月如初</p>
-        </h1>
-    </div>
-    <!--导航-->
-    <div class="top-header-nav">
-
-
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.akwing.cn">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561621311662" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
+    
       
-    </div>
-    <div class="icons">
-        <ul>
-          <li v-for="(le,index) in alin.like">
-            <a :href="le.aim" :alt="le.alt">
-              <img :src="le.src" />
-            </a>
-          </li>
-        </ul>
-    </div> 
-
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-
-
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-      <div class="site-footer">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
-<script>
-      </div>
-      <div class="site-description">
-          <p><a href="#">惟世之繁华如故,斟酌岁月如初</a></p>
-          <p>
-            
-            <span>&nbsp;</span>
-            Powered by <a href="https://gridea.dev">Gridea</a>
-            <span>•</span>Theme <a href="http://www.itaolaity.com/">Alin</a>
-          </p>
-      </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
 </div>
 
-
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <h2 class="current-tag">标签: 数据结构—树状数组</h2>
-          
-            <!-- Note -->
-            <article class="post-item">
-              <!-- 是否包含图片 -->
-              
-                <div class="art-bg">
-                  <div class="feature-container" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?night')"></div>
-                </div>
-              
-
-              <div class="post-con">
-                <!-- 标题 -->
-                <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2">
-                  <h2 class="post-title">暑假集训——周赛2</h2>
-                </a>
-                <!-- 时间与标注 -->
-                <div class="post-info">
-                  2019-06-27
-                  <span>•</span>
-                  数据结构—树状数组
-                </div>
-              </div>
-              
-
-            </article>
-          
-            <!-- Note -->
-            <article class="post-item">
-              <!-- 是否包含图片 -->
-              
-                <div class="art-bg">
-                  <div class="feature-container" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?random')"></div>
-                </div>
-              
-
-              <div class="post-con">
-                <!-- 标题 -->
-                <a href="https://www.akwing.cn/post/hdu-6278-just-h-index">
-                  <h2 class="post-title">HDU 6278 Just h-index</h2>
-                </a>
-                <!-- 时间与标注 -->
-                <div class="post-info">
-                  2019-06-24
-                  <span>•</span>
-                  数据结构—树状数组
-                </div>
-              </div>
-              
-
-            </article>
-          
-            <!-- Note -->
-            <article class="post-item">
-              <!-- 是否包含图片 -->
-              
-                <div class="art-bg">
-                  <div class="feature-container" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?scene')"></div>
-                </div>
-              
-
-              <div class="post-con">
-                <!-- 标题 -->
-                <a href="https://www.akwing.cn/post/hdu-6534-chika-and-friendly-pairs">
-                  <h2 class="post-title">HDU 6534 Chika and Friendly Pairs</h2>
-                </a>
-                <!-- 时间与标注 -->
-                <div class="post-info">
-                  2019-06-24
-                  <span>•</span>
-                  数据结构—树状数组
-                </div>
-              </div>
-              
-
-            </article>
-          
-            <!-- Note -->
-            <article class="post-item">
-              <!-- 是否包含图片 -->
-              
-                <div class="art-bg">
-                  <div class="feature-container" style="background-image: url('https://ncdn.camarts.cn/19c85394.jpg')"></div>
-                </div>
-              
-
-              <div class="post-con">
-                <!-- 标题 -->
-                <a href="https://www.akwing.cn/post/zoj-2112-dynamic-rankings">
-                  <h2 class="post-title">ZOJ 2112 Dynamic Rankings </h2>
-                </a>
-                <!-- 时间与标注 -->
-                <div class="post-info">
-                  2019-06-10
-                  <span>•</span>
-                  数据结构—树状数组
-                </div>
-              </div>
-              
-
-            </article>
-          
-
-          <div class="pagination-container">
-  
-  
-</div>
-
+        <div class="current-tag-container">
+            <h2 class="title">
+                标签：#数据结构—树状数组
+            </h2> 
         </div>
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2">
+        <h2 class="post-title">暑假集训——周赛2</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2019-06-27 ·
+        </time>
+        
+          <a href="https://www.akwing.cn/tag/FfsnjHhYC" class="post-tag">
+            # 数据结构—树状数组
+          </a>
+        
+          <a href="https://www.akwing.cn/tag/SzMzaPGNc" class="post-tag">
+            # 基本数据结构—单调栈
+          </a>
+        
+      </div>
+      
+        <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2" class="post-feature-image" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?night')">
+        </a>
+      
+      <div class="post-abstract">
+        <h1 id="线段树树状数组"><s>线段树</s>/树状数组</h1>
+
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://www.akwing.cn/post/hdu-6278-just-h-index">
+        <h2 class="post-title">HDU 6278 Just h-index</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2019-06-24 ·
+        </time>
+        
+          <a href="https://www.akwing.cn/tag/SBNKxTaFY" class="post-tag">
+            # 二分
+          </a>
+        
+          <a href="https://www.akwing.cn/tag/-Wb21-7YF" class="post-tag">
+            # 莫队
+          </a>
+        
+          <a href="https://www.akwing.cn/tag/Us343v9Eg" class="post-tag">
+            # 数据结构—主席树
+          </a>
+        
+          <a href="https://www.akwing.cn/tag/FfsnjHhYC" class="post-tag">
+            # 数据结构—树状数组
+          </a>
+        
+      </div>
+      
+        <a href="https://www.akwing.cn/post/hdu-6278-just-h-index" class="post-feature-image" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?random')">
+        </a>
+      
+      <div class="post-abstract">
+        <h1 id="莫队树状数组主席树">莫队+树状数组/主席树</h1>
+
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://www.akwing.cn/post/hdu-6534-chika-and-friendly-pairs">
+        <h2 class="post-title">HDU 6534 Chika and Friendly Pairs</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2019-06-24 ·
+        </time>
+        
+          <a href="https://www.akwing.cn/tag/-Wb21-7YF" class="post-tag">
+            # 莫队
+          </a>
+        
+          <a href="https://www.akwing.cn/tag/FfsnjHhYC" class="post-tag">
+            # 数据结构—树状数组
+          </a>
+        
+      </div>
+      
+        <a href="https://www.akwing.cn/post/hdu-6534-chika-and-friendly-pairs" class="post-feature-image" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?scene')">
+        </a>
+      
+      <div class="post-abstract">
+        <h1 id="莫队树状数组离散化">莫队+树状数组+离散化</h1>
+<h2 id="2019ccpc湖南全国邀请赛广东省赛-江苏省赛c题">2019CCPC湖南全国邀请赛（广东省赛、江苏省赛）C题</h2>
+
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://www.akwing.cn/post/zoj-2112-dynamic-rankings">
+        <h2 class="post-title">ZOJ 2112 Dynamic Rankings </h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2019-06-10 ·
+        </time>
+        
+          <a href="https://www.akwing.cn/tag/Us343v9Eg" class="post-tag">
+            # 数据结构—主席树
+          </a>
+        
+          <a href="https://www.akwing.cn/tag/FfsnjHhYC" class="post-tag">
+            # 数据结构—树状数组
+          </a>
+        
+      </div>
+      
+        <a href="https://www.akwing.cn/post/zoj-2112-dynamic-rankings" class="post-feature-image" style="background-image: url('https://ncdn.camarts.cn/19c85394.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        <h1 id="树状数组套主席树">树状数组套主席树</h1>
+
+      </di>
+    </article>
+  
+</div>
+
+        <div class="pagination-container">
+  
+  
+</div>
+
+        <div class="site-footer">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+<script> | 
+  <a class="rss" href="https://www.akwing.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
       </div>
     </div>
-
-    <footer>
-	<div class="foo-con">
-    	<p><a href="#">惟世之繁华如故,斟酌岁月如初</a></p>
-      	<p>
-	        
-	        <span>&nbsp;</span>
-	        Powered by <a href="https://gridea.dev">Gridea</a>
-	        <span>•</span>Theme <a href="http://www.itaolaity.com/">Alin</a>
-     	</p>
-    </div>
-</footer>
-
-
-
-<script src="https://www.akwing.cn/media/dict/js/aos.js"></script>
-
-<!--Self-->
-<script>
-    $(window).on('load',function(){ 
-  　　$('.tilt').fadeOut(1000);
-　　}); 
-</script>
-
-
-<script type="application/javascript">
-
-/*动画初始化*/
-AOS.init(
-  {
-  offset: 200,
-  duration: 600,
-  easing: 'ease-in-sine',
-  delay: 100,
-  }
-);
-
-/*代码高亮*/
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible:false,
-    alin:{
-      like:[
-          {
-            "alt":"我的博客",
-            "aim":"http://www.itaolaity.com/index.php",
-            "src":"http://itaolaity.com/20190429220545.png"
-          },
-          {
-            "alt":"GitHub",
-            "aim":"https://github.com/taoya7",
-            "src":"http://itaolaity.com/20190429220612.png"
-          },
-          {
-            "alt":"Email",
-            "aim":"mailto:569781231@qq.com",
-            "src":"http://itaolaity.com/20190429220636.png"
-          }
-      ]
-    }
-  }
-});
-
-</script>
-
-
-
-
-
-
   </body>
 </html>
