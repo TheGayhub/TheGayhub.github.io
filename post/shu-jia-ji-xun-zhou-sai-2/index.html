@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>暑假集训——周赛2 | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561616294793">
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561618792203">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561616294793" alt="">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561618792203" alt="">
   </a>
   <h1 class="site-title">
     Guapi
@@ -85,7 +85,18 @@
                 · 2019-06-27 ·
               </time>
               
+                <a href="https://www.akwing.cn/tag/FfsnjHhYC" class="post-tags">
+                  # 数据结构—树状数组
+                </a>
+              
+                <a href="https://www.akwing.cn/tag/SzMzaPGNc" class="post-tags">
+                  # 基本数据结构—单调栈
+                </a>
+              
             </div>
+            
+              <div class="post-feature-image" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?night')">
+              </div>
             
             <div class="post-content">
               <h1 id="线段树树状数组"><s>线段树</s>/树状数组</h1>
@@ -128,6 +139,182 @@ for (int i = 1; i &lt;= k; i++)
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.6000100000000002em;vertical-align:-0.55001em;"></span><span class="mop op-symbol large-op" style="position:relative;top:-0.000004999999999977245em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
 <p>求和的过程可以用树状数组来求解。由于如果从前往后遍历，我们需要求解的是满足比当前a_i大的，我们个将数组反转过来，这样我们就可以变成求解比 a_i 小的了。其实树状数组也能求解大于某一个数的个数，将树状数组更新和查询的过程中x变化反过来即可，也就是认为数组的最远的一端是起点。
 我们遍历到a_i时，将<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>−</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i][j-1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>从a_i这个位置插入树状数组中，这样在后面求和的时候，比a_i大的数就可以利用这个数，比a_i小的数不会用到。时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>×</mo><mi>k</mi><mo>×</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n \times k \times log_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N = 2e4 + 10;
+const int mod = 1e9;
+typedef  long long ll;
+#define lowbit(x) (x&amp;(-x))
+int c[N][12],n,k,a[N];
+int dp[N][12];
+void add(int x, int y, int val)
+{
+	while (x &lt;= n)
+	{
+		c[x][y] = (c[x][y] + val) % mod;
+		x += lowbit(x);
+	}
+}
+int ask(int x, int y)
+{
+	int res = 0;
+	while (x)
+	{
+		res = (res + c[x][y]) % mod;
+		x -= lowbit(x);
+	}
+	return res;
+}
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;k);
+	for (int i = 1; i &lt;= n; i++)
+		scanf(&quot;%d&quot;, &amp;a[i]);
+	for (int i = 1; i &lt;= n; i++){
+		dp[i][1] = 1;
+	}
+	for (int i = 1; i &lt;= n / 2; i++)
+		swap(a[i], a[n - i+1]);
+	for (int j = 2; j &lt;= k; j++)
+	{
+		for (int i = j-1; i &lt;= n; i++)//i从1开始也行，i&lt;j-1的部分dp[i][j]都是0，对答案无影响
+		{
+			dp[i][j] = ask(a[i] - 1,j);//这里也可以只用一个1维树状数组循环利用
+			add(a[i], j, dp[i][j - 1]);
+		}
+	}
+	int ans = 0;
+	for (int i = 1; i &lt;= n; i++)
+		ans = (ans + dp[i][k]) % mod;
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+<h3 id="d题贪心">D题(贪心)</h3>
+<h3 id="d-make-palindrome">&gt;  <strong><a href="http://acm.timus.ru/problem.aspx?space=1&amp;num=1523">D - Make Palindrome </a></strong></h3>
+<h4 id="题意求最小的次数将字符串变为回文串在一次操作中你可以变换任意一个字符-你可以随意移动字符串的位置不增加次数">题意：求最小的次数将字符串变为回文串，在一次操作中，你可以变换任意一个字符。你可以随意移动字符串的位置，不增加次数</h4>
+<p>回文串的特点是最多有1个字符的出现次数为奇数，其他为均为偶数。
+我们可以记录每个字符出现的次数，然后从小到大遍历字符，若当前字符个数为奇数，哪么我们可以再寻找<strong>一个</strong>个数也为奇数的字符，将其替换为我们这个字典序较小子符，这样我们花费一次就可以消去两个奇数字符。如果找不到，说明他就是中间字符。最后我们按照字典序从小到大输出字符即可。</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N = 2e5 + 10;
+const int mod = 1e9;
+typedef  long long ll;
+#define lowbit(x) (x&amp;(-x))
+int num[30];
+int len, tot;
+char s[N];
+int main()
+{
+	scanf(&quot;%s&quot;, s);
+	len = strlen(s);
+	for (int i = 0; i &lt; len; i++)
+		num[s[i] - 'a']++;
+	int pos = -1, f = 0;
+	for (int i = 0; i &lt; 26; i++)
+	{
+		if (num[i] &amp; 1)
+		{
+			f = 1;
+			for (int j = 25; j&gt;i; j--)
+			{
+				if (num[j] &amp; 1){
+					num[i]++;
+					num[j]--;
+					f = 0;
+					break;
+				}
+			}
+			if (f) pos = i;
+		}
+	}
+	for (int i = 0; i &lt; 26; i++)
+	{
+		if (!num[i]) continue;
+		int t = num[i] / 2;
+		while (t--)
+			s[tot++] = i + 'a';
+	}
+	if (pos != -1) s[tot++] = pos + 'a';
+	for (int i = 25; i &gt;= 0; i--)
+	{
+		if (!num[i]) continue;
+		int t = num[i] / 2;
+		while (t--)
+			s[tot++] = i + 'a';
+	}
+	printf(&quot;%s\n&quot;, s);
+	return 0;
+}
+</code></pre>
+<h3 id="f题单调栈st表">F题(单调栈/ST表)</h3>
+<h3 id="f-a-magic-lamp-hdu-3183">&gt;  <strong><a href="http://acm.timus.ru/problem.aspx?space=1&amp;num=1523">F - A Magic Lamp HDU - 3183</a></strong></h3>
+<h3 id="题意从字符串中删除m个字符使得字典序最小不改变字符的相对位置">题意：从字符串中删除m个字符，使得字典序最小，不改变字符的相对位置。</h3>
+<h4 id="单调栈">单调栈：</h4>
+<p>维护一个从栈顶到栈底递减的字符串，当前字符比栈顶大或相等，直接插入，否则弹出，直到大于栈顶或栈空。删除的个数达到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>就要及时停止，最后输出栈中前<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n-m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>个字符即可。字符相等为什么直接插入？ 因为这个字符保留在栈中是最优的。如果后面有比它小的字符，那这个就可能被删除，如果没有，那就是后面字符比它大，都不会影响答案。</p>
+<h4 id="st表">ST表：</h4>
+<p>不断的从区间中寻找最小的字符，然后暴力查找下标，再更新区间。第一次查找的区间为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,m+1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>,这个区间的选取，每次都要保证最终留有足够的字符来使得我们的最终字符个数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n-m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>。假设当前查找第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个字符，上次查找的位置下标为idx,那么这次查找的区间就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>i</mi><mi>d</mi><mi>x</mi><mo>+</mo><mn>1</mn><mo separator="true">,</mo><mi>m</mi><mo>+</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[idx+1,m+i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> .ST表求解即可</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N = 2e5 + 10;
+const int mod = 1e9;
+typedef  long long ll;
+#define lowbit(x) (x&amp;(-x))
+int num[30];
+int len, tot;
+char s[N];
+int main()
+{
+	scanf(&quot;%s&quot;, s);
+	len = strlen(s);
+	for (int i = 0; i &lt; len; i++)
+		num[s[i] - 'a']++;
+	int pos = -1, f = 0;
+	for (int i = 0; i &lt; 26; i++)
+	{
+		if (num[i] &amp; 1)
+		{
+			f = 1;
+			for (int j = 25; j&gt;i; j--)
+			{
+				if (num[j] &amp; 1){
+					num[i]++;
+					num[j]--;
+					f = 0;
+					break;
+				}
+			}
+			if (f) pos = i;
+		}
+	}
+	for (int i = 0; i &lt; 26; i++)
+	{
+		if (!num[i]) continue;
+		int t = num[i] / 2;
+		while (t--)
+			s[tot++] = i + 'a';
+	}
+	if (pos != -1) s[tot++] = pos + 'a';
+	for (int i = 25; i &gt;= 0; i--)
+	{
+		if (!num[i]) continue;
+		int t = num[i] / 2;
+		while (t--)
+			s[tot++] = i + 'a';
+	}
+	printf(&quot;%s\n&quot;, s);
+	return 0;
+}
+</code></pre>
 
             </div>
           </article>
