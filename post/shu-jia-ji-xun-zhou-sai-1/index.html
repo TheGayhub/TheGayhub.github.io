@@ -1,114 +1,540 @@
-<html>
-  <head>
-    <meta charset="utf-8" />
-<meta name="description" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!DOCTYPE HTML>
+<html class="no-js" >
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+<meta http-equiv="x-dns-prefetch-control" content="on">
 <title>暑假集训——周赛1 | Guapi</title>
-<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561685491099">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+<!-- APlayer Start -->
+<link rel="stylesheet" type="text/css" href="https://www.akwing.cn/styles/main.css" />
+<script>var APlayers = [];var APlayerOptions = [];</script>
+<!-- APlayer End -->
+	<script type="text/javascript">
+    window['LocalConst'] = {
+        THEME_VERSION: "1.7.10.DEV4(190612A)",
+        BASE_SCRIPT_URL: "https://cdn.fyun.org/usr/themes/Mirages/",
+        DEV_MODE: false,
+        IS_MOBILE: false,
+        IS_PHONE: false,
+        IS_TABLET: false,
+        HAS_LOGIN: false,
+        IS_HTTPS: true,
+        ENABLE_PJAX: false,
+        ENABLE_WEBP: true,
+        SHOW_TOC: false,
+        ENABLE_IMAGE_SIZE_OPTIMIZE: true,
+        THEME_COLOR: '#1abc9c',
+        DISQUS_SHORT_NAME: '',
+        COMMENT_SYSTEM: 0,
+        OWO_API: 'https://cdn.fyun.org/usr/themes/Mirages/js/1.7.10dev4/OwO.json',
+        COMMENT_SYSTEM_DISQUS: 1,
+        COMMENT_SYSTEM_DUOSHUO: 2,
+        COMMENT_SYSTEM_EMBED: 0,
+        PJAX_LOAD_STYLE: 0,
+        PJAX_LOAD_STYLE_SIMPLE: 0,
+        PJAX_LOAD_STYLE_CIRCLE: 1,
+        AUTO_NIGHT_SHIFT: true,
+        USE_MIRAGES_DARK: false,
+        PREFERS_DARK_MODE: false,
+        LIGHT_THEME_CLASS: "theme-white",
+        TOC_AT_LEFT: false,
+        SERIF_LOAD_NOTICE: '加载 Serif 字体可能需要 10 秒钟左右，请耐心等待',
+        ROOT_FONT_SIZE: '100',
+        BIAOQING_PAOPAO_PATH: '',
+        BIAOQING_ARU_PATH: '',
+        CDN_TYPE_OTHERS: -1,
+        CDN_TYPE_QINIU: 1,
+        CDN_TYPE_UPYUN: 2,
+        CDN_TYPE_LOCAL: 3,
+        CDN_TYPE_ALIYUN_OSS: 4,
+        CDN_TYPE_QCLOUD_CI: 5,
+        KEY_CDN_TYPE: '',
+        UPYUN_SPLIT_TAG: '!',
+        COMMENTS_ORDER: 'ASC',
+        ENABLE_FLOW_CHART: false,
+        ENABLE_MERMAID: false,
+        HIDE_CODE_LINE_NUMBER: false,
+        TRIM_LAST_LINE_BREAK_IN_CODE_BLOCK: true    };
+    var Mlog = function (message) {
+        if (LocalConst.DEV_MODE) {
+            console.log(message);
+        }
+    };
+                    LocalConst.BIAOQING_PAOPAO_PATH = 'https://cdn.fyun.org/usr/plugins/Mirages/biaoqing/paopao/';
+        LocalConst.BIAOQING_ARU_PATH = 'https://cdn.fyun.org/usr/plugins/Mirages/biaoqing/aru/';
+        var BIAOQING_PAOPAO_PATH = LocalConst.BIAOQING_PAOPAO_PATH;
+        var BIAOQING_ARU_PATH = LocalConst.BIAOQING_ARU_PATH;
+                LocalConst.KEY_CDN_TYPE = 'mirages-cdn-type';
+        LocalConst.UPYUN_SPLIT_TAG = '!';
+    </script>
+<style type="text/css">
+        /* Lora */
+    @font-face {
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 400;
+        font-display: fallback;
+        src:
+                local('Lora Regular'),
+                local('Lora-Regular'),
+                url(https://cdn.fyun.org/usr/themes/Mirages/fonts/Lora/400.woff2) format('woff2'),
+                url(https://cdn.fyun.org/usr/themes/Mirages/fonts/Lora/400.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 700;
+        font-display: fallback;
+        src:
+                local('Lora Bold'),
+                local('Lora-Bold'),
+                url(https://cdn.fyun.org/usr/themes/Mirages/fonts/Lora/700.woff2) format('woff2'),
+                url(https://cdn.fyun.org/usr/themes/Mirages/fonts/Lora/700.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
 <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+    <script>
+        var hour = new Date().getHours();
+        if (hour <= 5 || hour >= 22) {
+            LocalConst.USE_MIRAGES_DARK = true;
+        }
+    </script>
+
+    
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142872373-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-142872373-1');
+<script type="text/javascript">
+    var autoHideElements = {};
+    var CSS = function (css) {
+        var link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.href = css;
+        document.head.appendChild(link);
+    };
+    var STYLE = function (style, type) {
+        type = type || 'text/css';
+        var s = document.createElement('style');
+        s.type = type;
+        s.textContent = style;
+        document.head.appendChild(s);
+    };
+    var JS = function (js, async) {
+        async = async || false;
+        var sc = document.createElement('script'), s = document.scripts[0];
+        sc.src = js; sc.async = async;
+        s.parentNode.insertBefore(sc, s);
+    };
+    var registAutoHideElement = function (selector) {
+        var tmp = autoHideElements[selector];
+        if (typeof(tmp) !== 'undefined') {
+            return;
+        }
+        var element = document.querySelector(selector);
+        if (element && typeof(Headroom) !== "undefined") {
+            var headroom = new Headroom(element, {
+                tolerance: 5,
+                offset : 5,
+                classes: {
+                    initial: "show",
+                    pinned: "show",
+                    unpinned: "hide"
+                }
+            });
+            headroom.init();
+            autoHideElements[selector] = headroom;
+        }
+    };
+    var getImageAddon = function (cdnType, width, height) {
+        if (!LocalConst.ENABLE_IMAGE_SIZE_OPTIMIZE) {
+            return "";
+        }
+        if (cdnType == LocalConst.CDN_TYPE_LOCAL || cdnType == LocalConst.CDN_TYPE_OTHERS) {
+            return "";
+        }
+        var addon = "?";
+        if (cdnType == LocalConst.CDN_TYPE_UPYUN) {
+            addon = LocalConst.UPYUN_SPLIT_TAG;
+        }
+        var ratio = window.devicePixelRatio || 1;
+        width = width || window.innerWidth;
+        height = height || window.innerHeight;
+        width = width || 0;
+        height = height || 0;
+        if (width == 0 && height == 0) {
+            return "";
+        }
+        var format = "";
+        if (LocalConst.ENABLE_WEBP) {
+            if (cdnType == LocalConst.CDN_TYPE_ALIYUN_OSS) {
+                format = "/format,webp"
+            } else {
+                format = "/format/webp";
+            }
+        }
+        if (width >= height) {
+            if (cdnType == LocalConst.CDN_TYPE_UPYUN) {
+                addon += "/fw/" + parseInt(width * ratio) + "/quality/75" + format;
+            } else if(cdnType == LocalConst.CDN_TYPE_ALIYUN_OSS) {
+                addon += "x-oss-process=image/resize,w_" + parseInt(width * ratio) + "/quality,Q_75" + format;
+            } else {
+                addon += "imageView2/2/w/" + parseInt(width * ratio) + "/q/75" + format;
+            }
+        } else {
+            if (cdnType == LocalConst.CDN_TYPE_UPYUN) {
+                addon += "/fh/" + parseInt(width * ratio) + "/quality/75" + format;
+            } else if(cdnType == LocalConst.CDN_TYPE_ALIYUN_OSS) {
+                addon += "x-oss-process=image/resize,h_" + parseInt(width * ratio) + "/quality,Q_75" + format;
+            } else {
+                addon += "imageView2/2/h/" + parseInt(height * ratio) + "/q/75" + format;
+            }
+        }
+        return addon;
+    };
+    var getBgHeight = function(windowHeight, bannerHeight, mobileBannerHeight){
+        windowHeight = windowHeight || 560;
+        if (windowHeight > window.screen.availHeight) {
+            windowHeight = window.screen.availHeight;
+        }
+        bannerHeight = bannerHeight.trim();
+        mobileBannerHeight = mobileBannerHeight.trim();
+        if (window.innerHeight > window.innerWidth) {
+            bannerHeight = parseFloat(mobileBannerHeight);
+        } else {
+            bannerHeight = parseFloat(bannerHeight);
+        }
+        bannerHeight = Math.round(windowHeight * bannerHeight / 100);
+        return bannerHeight;
+    };
+    var registLoadBanner = function () {
+        if (window.asyncBannerLoadNum >= 0) {
+            window.asyncBannerLoadNum ++;
+            Mlog("Loading Banner..." + window.asyncBannerLoadNum);
+        }
+    };
+    var remove = function (element) {
+        if (element) {
+            if (typeof element['remove'] === 'function') {
+                element.remove();
+            } else if (element.parentNode) {
+                element.parentNode.removeChild(element);
+            }
+        }
+    };
+    var loadBanner = function (img, backgroundImage, backgroundPosition, wrap, cdnType, width, height, blured) {
+        var background = wrap.querySelector('.blog-background');
+        var container = wrap.querySelector('.lazyload-container');
+
+        if (!background) {
+            console.warn("background is null", background);
+            return;
+        }
+        if (!container) {
+            console.warn("container is null", container);
+            return;
+        }
+
+        var imageSrc = backgroundImage + getImageAddon(cdnType, width, height);
+
+        background.classList.add("loading");
+
+        remove(img);
+        if (typeof(backgroundPosition) === 'string' && backgroundPosition.length > 0) {
+            container.style.backgroundPosition = backgroundPosition;
+            background.style.backgroundPosition = backgroundPosition;
+        }
+        container.style.backgroundImage = 'url(' + img.src + ')';
+        container.classList.add('loaded');
+
+        blured = blured || false;
+        if (blured) {
+            return;
+        }
+
+        // load Src background image
+        var largeImage = new Image();
+        largeImage.src = imageSrc;
+        largeImage.onload = function() {
+            remove(this);
+            background.style.backgroundImage = 'url(' + imageSrc + ')';
+            background.classList.remove('loading');
+            container.classList.remove('loaded');
+            setTimeout(function () {
+                remove(container);
+                if (window.asyncBannerLoadCompleteNum >= 0) {
+                    window.asyncBannerLoadCompleteNum ++;
+                    Mlog("Loaded Banner: " + window.asyncBannerLoadCompleteNum);
+                    if (window.asyncBannerLoadCompleteNum === window.asyncBannerLoadNum) {
+                        window.asyncBannerLoadNum = -1170;
+                        window.asyncBannerLoadCompleteNum = -1170;
+                        $('body').trigger("ajax-banner:done");
+                    }
+                }
+            }, 1001);
+        };
+    };
+    var loadPrefersDarkModeState = function () {
+        var indicator = document.createElement('div');
+        indicator.className = 'dark-mode-state-indicator';
+        document.body.appendChild(indicator);
+        if (parseInt(mGetComputedStyle(indicator, 'z-index'), 10) === 11) {
+            LocalConst.PREFERS_DARK_MODE = true;
+        }
+        remove(indicator);
+    };
+    var mGetComputedStyle = function (element, style) {
+        var value;
+        if (window.getComputedStyle) {
+            // modern browsers
+            value = window.getComputedStyle(element).getPropertyValue(style);
+        } else if (element.currentStyle) {
+            // ie8-
+            value = element.currentStyle[style];
+        }
+        return value;
+    };
 </script>
+<style type="text/css">
+    body, button, input, optgroup, select, textarea {
+        font-family: 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif;
+    }
+    .github-box, .github-box .github-box-title h3 {
+        font-family: 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif !important;
+    }
+    .aplayer {
+        font-family: 'Mirages Custom', 'Myriad Pro', 'Myriad Set Pro', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  Helvetica, arial, sans-serif !important;
+    }
+    /* Serif */
+    body.content-lang-en.content-serif .post-content {
+        font-family: 'Lora', 'PT Serif', 'Source Serif Pro', Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  serif;
+    }
+    body.content-lang-en.content-serif.serif-fonts .post-content {
+        font-family: 'Lora', 'PT Serif', 'Source Serif Pro', 'Noto Serif CJK SC', 'Noto Serif CJK', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei',  serif;
+    }
+    body.serif-fonts .post-content, body.serif-fonts .blog-title {
+        font-family: 'Noto Serif CJK SC', 'Noto Serif CJK', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei',  Georgia, serif;
+    }
+    .dark-mode-state-indicator {
+        position: absolute;
+        top: -999em;
+        left: -999em;
 
+        z-index: 1;
+    }
 
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://www.akwing.cn">
-  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561685491099" alt="">
-  </a>
-  <h1 class="site-title">
-    Guapi
-  </h1>
-  <p class="site-description">
-    惟世之繁华如故,斟酌岁月如初
-  </p>
-  <div class="menu-container">
+    @media (prefers-color-scheme: dark) {
+        .dark-mode-state-indicator {
+            z-index: 11;
+        }
+    }
+</style>
+<style type="text/css">
+    /** 页面样式调整 */
     
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
+    </style>
 
-
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              暑假集训——周赛1
-            </h2>
-            <div class="post-info">
-              <time class="post-time">
-                · 2019-06-21 ·
-              </time>
-              
-                <a href="https://www.akwing.cn/tag/LsciNYV-v" class="post-tag">
-                  # 图论—最短路
-                </a>
-              
-                <a href="https://www.akwing.cn/tag/BwZk5Zyfl" class="post-tag">
-                  # 图论—最小生成树
-                </a>
-              
-                <a href="https://www.akwing.cn/tag/w2Kxoedb6" class="post-tag">
-                  # 暑假集训
-                </a>
-              
+<script>
+    var _czc = _czc || [];
+    var _hmt = _hmt || [];
+</script>
+		
+</head>
+<body class="theme-white color-default card  desktop windows chrome not-safari use-sidebar">
+    <script>
+        loadPrefersDarkModeState();
+        if (LocalConst.USE_MIRAGES_DARK || (LocalConst.AUTO_NIGHT_SHIFT && LocalConst.PREFERS_DARK_MODE)) {
+            var body = document.querySelector("body");
+            body.classList.remove('theme-white');
+            body.classList.add('theme-dark');
+        }
+    </script>
+<!--[if lt IE 9]>
+<div class="browse-happy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
+<![endif]-->
+<div class="sp-progress"></div>
+<div id="wrap">
+    <span id="backtop" class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
+      <header>
+    <a id="toggle-nav" class="btn btn-primary" href="javascript:void(0);"><span>MENU</span></a>
+<nav id="site-navigation" class="sidebar no-user-select" role="navigation">
+    <div id="nav">
+        <div class="author navbar-header">
+            <a href="https://www.akwing.cn">
+                <img src="https://www.akwing.cn/images/avatar.png?v=1561692378714" alt="Avatar" width="100" height="100"/>
+            </a>
+        </div>
+       
+		
+		
+        <ul id="menu-menu-1" class="menu navbar-nav">
+			
+			
+			
+			
+                        <li class="menu-item"><a href="/">首页</a></li>
+            
+			
+                        <li class="menu-item"><a href="/archives">归档</a></li>
+            
+			
+                        <li class="menu-item"><a href="/tags">标签</a></li>
+            
+			
+                        <li class="menu-item"><a href="/post/about">关于</a></li>
+            
+                                  
+                    </ul>
+		
+		
+		
+		
+		
+		
+    </div>
+                <div id="nav-toolbar">
+            <div class="side-toolbar">
+                <ul class="side-toolbar-list">
+                                            <li><a id="side-toolbar-rss" href="https://blog.fyun.org/feed" title="RSS"><i class="fa fa-feed"></i></a></li>
+											
+                                             
+                                                  
+                                             
+                                                  
+                                             
+                                                  
+                                             
+                                                  
+                                             
+                                                  
+											
+											<li><a id="side-toolbar-read-settings" href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a></li>
+                                    </ul>
+                <div class="read-settings-container animated">
+                    <div class="read-settings animated">
+                        <div class="font-size-controls animated">
+                            <button type="button" class="font-size-control control-btn-smaller waves-effect waves-button" data-mode="smaller">A</button>
+                            <button type="button" class="font-size-display" disabled>100%</button>
+                            <button type="button" class="font-size-control control-btn-larger waves-effect waves-button" data-mode="larger">A</button>
+                        </div>
+                        <div class="background-color-controls animated">
+                            <ul>
+                                <li><a href="javascript:void(0)" title="自动模式" class="background-color-control auto selected" data-mode="auto"><i class="fa fa-adjust"></i></a></li>
+                                <li><a href="javascript:void(0)" title="日间模式" class="background-color-control white " data-mode="white"><i class="fa fa-check-circle"></i></a></li>
+                                <li><a href="javascript:void(0)" title="日落模式" class="background-color-control sunset " data-mode="sunset"><i class="fa fa-check-circle"></i></a></li>
+                                <li><a href="javascript:void(0)" title="夜间模式" class="background-color-control dark " data-mode="dark"><i class="fa fa-check-circle"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="font-family-controls">
+                            <button type="button" class="font-family-control  control-btn-serif" data-mode="serif">Serif</button>
+                            <button type="button" class="font-family-control selected control-btn-sans-serif" data-mode="sans-serif">Sans Serif</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </nav>    </header>
+    
+    <div id="body">
+        <style type="text/css">
+    /** 页面样式调整 */
+                div#comments{
+        margin-top: 0;
+    }
+                        #footer{
+        padding: 1.25rem 0;
+    }
+        
+                .inner {
+        background-color: rgba(0,0,0,0.25);
+    }
+        #masthead {
+        min-height: 12.5rem;
+    }
+                </style>
+<style type="text/css">
+    </style>        <script type="text/javascript">
+            var wrap = document.querySelector('#wrap');
+            wrap.classList.remove('display-menu-tree');
+            var body = document.querySelector('body');
+            body.classList.remove('display-menu-tree');
+            LocalConst.TOC_AT_LEFT = false;
             
-              <div class="post-feature-image" style="background-image: url('https://ncdn.camarts.cn/01483d17.jpg')">
-              </div>
+                        if (body.classList.contains('no-banner')) {
+                body.classList.remove('no-banner');
+            }                        if (body.classList.contains('content-lang-en')) {
+                body.classList.remove('content-lang-en');
+            }                        if (body.classList.contains('content-serif')) {
+                body.classList.remove('content-serif');
+            }            LocalConst.SHOW_TOC = false;
+                    </script>
+                                <header id="masthead" class="align-center align-middle " style="
+            height:
+        65;">
+            <div class="blog-background"></div>
+                        <div class="lazyload-container"></div>
+            <script type="text/javascript">
+            var blurBanner = false;                if (!blurBanner) registLoadBanner();
+            </script>
+									
+            <img id="lazyload-img" alt="page banner image" src="https://ncdn.camarts.cn/01483d17.jpg?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://ncdn.camarts.cn/01483d17.jpg', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
+									
+                        <script type="text/javascript">
+                var head = document.querySelector("#masthead");
+                var bgHeight = getBgHeight(window.innerHeight, '65', '40');
+                head.style.height = bgHeight + "px";
+                            </script>
+									
+									
+									
+									
+									
+                        <div class="inner">
+                <div class="container">
+                    <h1 class="blog-title" style="">
+                        暑假集训——周赛1                    </h1>
+                    <h2 class="blog-description font-mono" style="">
+						
+                        2019-06-21 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
+							
+							<a href="https://www.akwing.cn/tag/LsciNYV-v">图论—最短路</a>
+								 
+							<a href="https://www.akwing.cn/tag/BwZk5Zyfl">图论—最小生成树</a>
+								 
+							<a href="https://www.akwing.cn/tag/w2Kxoedb6">暑假集训</a>
+								 									  
+																	  
+																	  • <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
+                </div>
+
+            </div>
+                    </header>
+                    <div class="container">
+            <div class="row">
+
+
+
+<div id="post" role="main">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
             
-            <div class="post-content">
-              <h2 id="最短路最小生成树">最短路/最小生成树</h2>
+        </div>
+        <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+            
+            
+                <meta itemprop="url" content="https://secure.gravatar.com/avatar/e9ebe6ce987b5a6eded073a87771a1bb?s=50&amp;r=PG&amp;d=">
+            </div>
+        </div>
+        
+                <div class="post-content" itemprop="articleBody">
+                        <p><h2 id="最短路最小生成树">最短路/最小生成树</h2>
 <!-- more -->
 <blockquote>
 <p><strong>C - Borg Maze <a href="http://poj.org/problem?id=3026">POJ - 3026</a></strong></p>
@@ -555,23 +981,49 @@ int main()
 <blockquote>
 <p>总结:比赛的时候一定要细心，有思路的时候要尝试去实现它！！！多刷题。</p>
 </blockquote>
-
-            </div>
-          </article>
+  </p>                    </div>
+        <div class="tags">
+			<div itemprop="keywords" class="keywords atudds">
+				
+				<a href="https://www.akwing.cn/tag/LsciNYV-v">图论—最短路</a> 
+				 
+				<a href="https://www.akwing.cn/tag/BwZk5Zyfl">图论—最小生成树</a> 
+				 
+				<a href="https://www.akwing.cn/tag/w2Kxoedb6">暑假集训</a> 
+				 												
+																
+																</div>
+                    </div>
+                <div class="post-buttons">
+            <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>
+                       <a id="toggle-post-qr-code" class="btn btn-grey">文章二维码</a>
+                                    <a id="toggle-reward-qr-code" class="btn btn-grey">打赏</a>
+                    </div>
+            </article>
+</div>
+</div>
+</div>
+<div id="qr-box">
+    <div class="post-qr-code-box">
+        <img src="https://api.wuzuhua.cn/qc/?text=https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1" width="250" height="250" alt="本页链接的二维码"/>
+    </div>
+    <div class="reward-qr-code-box">
+			
+    </div>
+</div>
+<div id="body-bottom">
+<div class="container">
+            <div class="post-near">
+            <nav>
+				 
+                <span class="prev"><a href="https://www.akwing.cn/post/poj-3662-telephone-lines" title=" POJ 3662 Telephone Lines"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+															POJ 3662 Telephone Lines</span></span></a></span>
+                
+            </nav>
         </div>
-
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://www.akwing.cn/post/poj-3662-telephone-lines">
-              <h3 class="post-title">
-                POJ 3662 Telephone Lines
-              </h3>
-            </a>
-          </div>
-        
-
-        
+            
+    <div id="comments">
+                      
           
             <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
@@ -595,20 +1047,68 @@ int main()
 </script>
 
           
-
           
         
+                    </div>
 
-        <div class="site-footer">
-   | 
-  <a class="rss" href="https://www.akwing.cn/atom.xml" target="_blank">RSS</a>
-</div>
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
 
-      </div>
     </div>
-  </body>
+</div>
+</div><!-- end #body -->
+</div><!-- end #wrap -->
+<footer id="footer" role="contentinfo">
+    <div class="container">
+        <p></p>    </div>
+</footer>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <script src="https://www.akwing.cn/media/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="https://www.akwing.cn/media/scripts/mirages.main.min.js" type="text/javascript"></script>
+
+<!-- APlayer Start -->
+<script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
+<script>
+var len = APlayerOptions.length;
+for(var i=0;i<len;i++){
+    APlayers[i] = new APlayer({
+        element: document.getElementById('player' + APlayerOptions[i]['id']),
+        narrow: false,
+        preload: APlayerOptions[i]['preload'],
+        mutex: APlayerOptions[i]['mutex'],
+        autoplay: APlayerOptions[i]['autoplay'],
+        showlrc: APlayerOptions[i]['showlrc'],
+        music: APlayerOptions[i]['music'],
+        theme: APlayerOptions[i]['theme']
+        });
+    APlayers[i].init();
+}
+</script>
+<!-- APlayer End -->
+
+<script type="text/javascript">Page.highlightCodeBlock();</script>
+
+
+<script type="text/javascript">pangu.spacingElementByClassName('container');</script>
+<script type="text/javascript">Waves.init();</script>
+
+<script type="text/javascript">
+    (function ($) {
+                if (typeof registCommentEvent === 'function') {
+            registCommentEvent();
+        }
+                        Page.setupLazyLoadImage();
+                        Page.setupCDNImageOptimize();
+                Page.loadDisqus();
+        Page.setupContents();
+        Page.bindQRCodeBlockEvents();
+            })(jQuery);
+    </script>
+<!--textClick Begin-->
+
+<!--textClick END-->
+
+
+</body>
 </html>
