@@ -1,188 +1,110 @@
-
 <html>
-  <head lang="zh">
-        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
-        <meta content="yes" name="apple-mobile-web-app-capable"/>
-        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-        <meta content="telephone=no" name="format-detection"/>
-        <meta name="renderer" content="webkit">
-    <title>Codeforce 1181 D - Irrigation | Guapi</title>
-<link href="https://www.akwing.cn/styles/main.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="https://www.akwing.cn/media/scripts/jquery.js"></script>
-<script type="text/javascript" src="https://www.akwing.cn/media/scripts/basic.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Codeforce 1181 D - Irrigation | Guapi</title>
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1561685491099">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142872373-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142872373-1');
 </script>
 
+
   </head>
-
   <body>
-     <div class="header">
-      <div class="logo_title">
-		  
-        <div class="title animated fadeInDown"><img src="https://www.akwing.cn/images/avatar.png?v=1561685274855"/>
-
-          <h1 title="Guapi" class="weaklink"><a href="/">Guapi</a>
-
-          </h1>
-
-          <div class="navbar weaklink">
-            <div class="normal_nav">
-
-<div class="bitcron_nav_container">
-
-
-  <div class="bitcron_nav">
-    <div class="mixed_site_nav_wrap site_nav_wrap">
-		
-      <ul class="mixed_site_nav site_nav sm sm-base">
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a>
-
-  </li>
- 
-
-      </ul>
-
-      <div class="clear clear_nav_inline_end"></div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="clear clear_nav_end"></div>
-
-</div>
-
-            </div>
-
-            <div class="hamberger"><i class="fa fa-bars"></i>
-<i class="fa fa-times"></i>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="hidden_nav animated fadeInDown">
-
-<div class="bitcron_nav_container">
-
-
-  <div class="bitcron_nav">
-    <div class="mixed_site_nav_wrap site_nav_wrap">
-      <ul class="mixed_site_nav site_nav sm sm-base">
-		  
-	
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a>
-
-  </li>
-
-
-
-
-
-      </ul>
-
-      <div class="clear clear_nav_inline_end"></div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="clear clear_nav_end"></div>
-
-</div>
-
-      </div>
-
-    </div>
-
-
     <div class="main">
-      <div class="main-inner">
-
-
-<div class="content">
-
-
-
-
-
-
-  <div class="post_page" >
-
-<div class="post">
-  <div class="post_title sm_margin">
-    <h2><a>Codeforce 1181 D - Irrigation</a>
-
-
-
-    </h2>
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.akwing.cn">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1561685491099" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-
-  <div class="post_details">
-    <div class="info"><i class="fa fa-clock-o"></i>
-<span class="date_info">2019-06-21</span>
-<i class="fa fa-eye"></i>
-
-<span class="date_info"><span id="busuanzi_value_page_pv"></span> Views</span>
-
-
-<i class="fa fa-bookmark-o"></i>
-<span class="tags_info weaklink">
-	
-	<a href="https://www.akwing.cn/tag/Us343v9Eg" class="tag">数据结构—主席树</a>
-
-	<a href="https://www.akwing.cn/tag/Codeforce" class="tag">Codeforce</a>
-
-
-</span>
-
-
-    </div>
-
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
+</div>
 
 
-
-
-
-  <div class="post_content markdown"><p class="md_block">
-    <span class="md_line md_line_start md_line_end"><h2 id="区间第k大">区间第K大</h2>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Codeforce 1181 D - Irrigation
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-06-21 ·
+              </time>
+              
+                <a href="https://www.akwing.cn/tag/Us343v9Eg" class="post-tag">
+                  # 数据结构—主席树
+                </a>
+              
+                <a href="https://www.akwing.cn/tag/Codeforce" class="post-tag">
+                  # Codeforce
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('https://source.unsplash.com/1600x900/weekly/?scenery')">
+              </div>
+            
+            <div class="post-content">
+              <h2 id="区间第k大">区间第K大</h2>
 <!-- more -->
 <blockquote>
 <p><a href="https://codeforces.com/contest/1181/problem/D">D - Irrigation</a></p>
@@ -276,21 +198,23 @@ int main()
 }
 
 </code></pre>
-</p>
 
-     <p class="md_block">
-    <div class="reward"><div class="reward-button">赏 <span class="reward-code"> <span class="alipay-code"> <img class="alipay-img" src="https://www.akwing.cn/media/images/alipay.png"><b>支付宝扫码打赏</b> </span> <span class="wechat-code"> <img class="wechat-img" src="https://www.akwing.cn/media/images/wechat.png"><b>微信打赏</b> </span> </span></div></div>
-</p> 
-</div>
+            </div>
+          </article>
+        </div>
 
-</div>
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1">
+              <h3 class="post-title">
+                暑假集训——周赛1
+              </h3>
+            </a>
+          </div>
+        
 
-
-
-<link href="https://www.akwing.cn/styles/main.css" type="text/css" rel="stylesheet"/>
-
-<div class="doc_comments">
-
+        
           
             <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
@@ -314,117 +238,20 @@ int main()
 </script>
 
           
-			  
+
           
         
+
+        <div class="site-footer">
+   | 
+  <a class="rss" href="https://www.akwing.cn/atom.xml" target="_blank">RSS</a>
 </div>
 
-
-
-  </div>
-</div>
-
-
-
-      </div>
-
-
-
-
-    </div>
-
-   <div class="footer">
-<link href="https://www.akwing.cn/styles/main.css" type="text/css" rel="stylesheet"/><div class="site_footer_wrap"><div class="site_footer">
-
-      <div class="mysocials"><div class="my_socials">
-		   
-			   
-    
-			   
-    
-			   
-    
-			   
-    
-</div><link href="https://www.akwing.cn/styles/main.css" type="text/css" rel="stylesheet"/>
-
-      </div>
-
-      <div class="copyright">
-      </div>
-
-</div></div>
-
-    </div>
-
-
-<style type="text/css">a.back_to_top {
-    text-decoration: none;
-    position: fixed;
-    bottom: 40px;
-    right: 30px;
-    background: #f0f0f0;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    line-height: 36px;
-    font-size: 18px;
-    text-align: center;
-    transition-duration: .5s;
-    transition-propety: background-color;
-    display: none;
-}
-
-a.back_to_top span {
-    color: #888;
-}
-
-a.back_to_top:hover {
-    cursor: pointer;
-    background: #dfdfdf;
-}
-
-a.back_to_top:hover span {
-    color: #555;
-}
-
-@media print, screen and (max-width: 580px) {
-    .back_to_top {
-        display: none !important;
-    }
-}
-
-
-
-</style><a id="back_to_top" href="#" class="back_to_top"><span>△</span>
-</a>
-<script type="text/javascript" src="https://www.akwing.cn/media/scripts/jquery.js"></script>
-
-<script>$(document).ready((function(_this) {
-  return function() {
-    var bt;
-    bt = $('#back_to_top');
-    if ($(document).width() > 480) {
-      $(window).scroll(function() {
-        var st;
-        st = $(window).scrollTop();
-        if (st > 30) {
-          return bt.css('display', 'block');
-        } else {
-          return bt.css('display', 'none');
-        }
-      });
-      return bt.click(function() {
-        $('body,html').animate({
-          scrollTop: 0
-        }, 800);
-        return false;
-      });
-    }
-  };
-})(this));
+<script>
+  hljs.initHighlightingOnLoad()
 </script>
 
-</body>
-
+      </div>
+    </div>
+  </body>
 </html>
