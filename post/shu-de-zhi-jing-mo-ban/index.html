@@ -8,7 +8,7 @@
 <meta name="HandheldFriendly" content="true">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
 <meta http-equiv="x-dns-prefetch-control" content="on">
-<title>Codeforce 1181 D - Irrigation | Guapi</title>
+<title>树的直径模板 | Guapi</title>
 
 <!-- APlayer Start -->
 <link rel="stylesheet" type="text/css" href="https://www.akwing.cn/styles/main.css" />
@@ -493,7 +493,7 @@
             var blurBanner = false;                if (!blurBanner) registLoadBanner();
             </script>
 									
-            <img id="lazyload-img" alt="page banner image" src="https://images.unsplash.com/photo-1549918231-84e61d32fbde?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=900?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://images.unsplash.com/photo-1549918231-84e61d32fbde?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=900', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
+            <img id="lazyload-img" alt="page banner image" src="https://images.unsplash.com/photo-1561642196-7cd984e2ee14?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://images.unsplash.com/photo-1561642196-7cd984e2ee14?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
 									
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
@@ -508,14 +508,14 @@
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
-                        Codeforce 1181 D - Irrigation                    </h1>
+                        树的直径模板                    </h1>
                     <h2 class="blog-description font-mono" style="">
 						
-                        2019-06-21 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
+                        2019-06-29 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
 							
-							<a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a>
+							<a href="https://www.akwing.cn/tag/bGX4TmKWf">图论—树的直径</a>
 								 
-							<a href="https://www.akwing.cn/tag/Codeforce">Codeforce</a>
+							<a href="https://www.akwing.cn/tag/8AwwtVN5L">常用模板</a>
 								 									  
 																	  
 																	  • <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
@@ -541,107 +541,79 @@
         </div>
         
                 <div class="post-content" itemprop="articleBody">
-                        <p><h2 id="区间第k大">区间第K大</h2>
-<!-- more -->
-<blockquote>
-<p><a href="https://codeforces.com/contest/1181/problem/D">D - Irrigation</a></p>
-</blockquote>
-<p>题目大致意思是Q个询问，每次询问一个K，输出表示第K年应该由那个城市举办奥运会。
-举办奥运会的次序是由举办次数决定的，举办次数少的优先举办，同等次数编号小的优先。并且前N年的举办情况已经知道。
-<img src="https://www.akwing.cn/post-images/1561104168882.png" alt=""></p>
-<blockquote>
-<p>我们可以先对前n年的城市举办的次数从小到大排序。其实我们可以发现举办的过程就是不断的去填平每一行，使得它们的差距不断减小。
-<code>S[n]</code> 数组，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示 i 前面每一列与第i列持平(填数是一行一行填的，目的是得到每一列相持平)，所需要的年数。可以发现k在某一区间内都是填固定的区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,i-1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>.   填至与第i列高度持平.然后转向区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>  继续这样填。
-有了S数组我们可以二分找到它正在填的区间，比如二分找到了位置pos,即它当前正在填区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mtext> </mtext><mi>p</mi><mi>o</mi><mi>s</mi><mo>−</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1~pos-1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mspace nobreak"> </span><span class="mord mathdefault">p</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>,我从2开始计算S数组，所以区间右端点为 <strong>pos-1</strong> (注意我所说的区间是指按照前N年出现次数排序后的区间)。找到了所填区间，我们就可以对区间长度 <strong>pos-1</strong>  取模，取模的得到的数X，正是它在填这个区间内的第X大数。然后转化为主席树求解(平衡时也可以，不过暂时不会)。</p>
-</blockquote>
-<pre><code>
-#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-#include&lt;queue&gt;
-#include&lt;algorithm&gt;
-#include&lt;iostream&gt;
-using namespace std;
-const int N = 5e5 + 10;
-typedef long long ll;
-int n, m, q;
-struct node{
-	int val, pos;
-	bool operator&lt;(const node &amp;o)const{
-		return val &lt; o.val;
-	}
-}a[N];
-struct Tree{
-	int lc, rc, cnt;
-}T[N&lt;&lt;5];
-ll s[N];
-int ct[N];
-int tot,up;
-int root[N];
-void update(int &amp;cur, int pre, int l, int r, int pos)
+                        <p><h3 id="方法一树形dp">方法一：树形DP</h3>
+<pre><code>void dp(int u,int pre)
 {
-	cur = ++tot;
-	T[cur] = T[pre];
-	T[cur].cnt++;
-	if (l == r) return;
-	int mid = (l + r) &gt;&gt; 1;
-	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos);
-	else update(T[cur].rc, T[pre].rc, mid + 1, r,pos);
+	for (int i = head[u]; i != -1; i = edge[i].next)
+	{
+		int v = edge[i].to, w = edge[i].w;
+		if (v == pre) continue;
+		dp(v, u);
+		ans = max(ans, dis[u] + dis[v] + w);//之前的最大值dis[u],当前的dis[v]+w
+		dis[u] = max(dis[u], dis[v] + w);//更新最大距离
+	}
 }
-int query(int x, int y, int l, int r, int k)
+</code></pre>
+<h3 id="方法二两次dfs">方法二：两次DFS</h3>
+<p>第一次BFS找到直径的一端，第二次从直径的一端找到直径的另一端，最终ans即为答案</p>
+<pre><code>void dfs(int u, int pre)
 {
-	if (l == r) return l;
-	int s = T[T[y].lc].cnt - T[T[x].lc].cnt;
-	int mid = (l + r) &gt;&gt; 1;
-	if (k &lt;= s)
-		return query(T[x].lc, T[y].lc, l, mid, k);
-	else 
-		return query(T[x].rc, T[y].rc, mid + 1, r, k-s);
+	if (ans &lt; dis[u]){
+		ans = dis[u];
+		pos = u;
+	}
+	for (int i = head[u]; i != -1; i = edge[i].next)
+	{
+		int v = edge[i].to, w = edge[i].w;
+		if (v == pre) continue;
+		dis[v] = dis[u] + w;
+		dfs(v, u);
+	}
 }
-int main()
+	dfs(1, -1);
+	dis[pos] = 0;
+	dfs(pos, -1);
+</code></pre>
+<h3 id="方法三两次bfs">方法三：两次BFS</h3>
+<pre><code>void bfs(int st)
 {
-	up = 5e5 + 5;
-	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;q);
-	for (int i = 1; i &lt;= n; i++)
+	memset(vis, false, sizeof(vis));
+	vis[st] = true;
+	queue&lt;int&gt; q;
+	dis[st] = 0;
+	q.push(st);
+	int pre = -1;
+	while (!q.empty())
 	{
-		int x;
-		scanf(&quot;%d&quot;, &amp;x);
-		ct[x]++;
+		int u = q.front();
+		q.pop();
+		for (int i = head[u]; i != -1; i = edge[i].next)
+		{
+			int v = edge[i].to, w = edge[i].w;
+			if (!vis[v])
+			{
+				vis[v] = true;
+				dis[v] = dis[u] + w;
+				if (ans &lt; dis[v]){
+					ans = dis[v];
+					pos = v;
+				}
+				q.push(v);
+			}
+		}
 	}
-	for (int i = 1; i &lt;= m; i++)
-	{
-		a[i].val = ct[i];
-		a[i].pos = i;
-	}
-	sort(a + 1, a + m + 1);
-	for (int i = 2; i &lt;= m; i++)
-	{
-		s[i] = s[i - 1] + (i - 1LL)*(a[i].val - a[i - 1].val); //一定要转化为LL，不然爆int
-	}
-	for (int i = 1; i &lt;= m; i++)
-	{
-		update(root[i], root[i - 1], 1, up, a[i].pos);
-	}
-	while (q--)
-	{
-		ll k;
-		scanf(&quot;%lld&quot;, &amp;k);
-		k -= n;
-		int pos = lower_bound(s + 1, s + m + 1, k) - s;//先找到区间
-		k = (k - s[pos - 1] - 1) % (pos - 1) + 1; //先减去前pos-1个区间所需的年数，然后再取模得到区间第K大
-		int ans = query(root[0], root[pos - 1], 1, up, k);//
-		printf(&quot;%d\n&quot;, ans);
-	}
-	return 0;
 }
 
+	dis[pos] = 0;
+	bfs(pos);
 </code></pre>
   </p>                    </div>
         <div class="tags">
 			<div itemprop="keywords" class="keywords atudds">
 				
-				<a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a> 
+				<a href="https://www.akwing.cn/tag/bGX4TmKWf">图论—树的直径</a> 
 				 
-				<a href="https://www.akwing.cn/tag/Codeforce">Codeforce</a> 
+				<a href="https://www.akwing.cn/tag/8AwwtVN5L">常用模板</a> 
 				 												
 																
 																</div>
@@ -657,7 +629,7 @@ int main()
 </div>
 <div id="qr-box">
     <div class="post-qr-code-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/codeforce-1181-d-irrigation" width="250" height="250" alt="本页链接的二维码"/>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban" width="250" height="250" alt="本页链接的二维码"/>
     </div>
     <div class="reward-qr-code-box">
 		
@@ -670,8 +642,8 @@ int main()
             <div class="post-near">
             <nav>
 				 
-                <span class="prev"><a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1" title=" 暑假集训——周赛1"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
-															暑假集训——周赛1</span></span></a></span>
+                <span class="prev"><a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2" title=" 暑假集训——周赛2"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+															暑假集训——周赛2</span></span></a></span>
                 
             </nav>
         </div>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-28T11:32:18.926Z</updated>
+    <updated>2019-06-29T05:58:33.248Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -28,6 +28,159 @@
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[LCA模板]]></title>
+        <id>https://www.akwing.cn/post/lca-mo-ban</id>
+        <link href="https://www.akwing.cn/post/lca-mo-ban">
+        </link>
+        <updated>2019-06-29T05:51:04.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="tarjan">Tarjan ：</h3>
+<p>只能离线处理，时间复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span></p>
+<pre><code>int get(int x)
+{
+	if (fa[x] == x) return x;
+	return fa[x] = get(fa[x]);
+}
+void tarjan(int u)
+{
+	vis[u] = true;
+	for (int i = head[u]; i != -1; i = edge[i].next)
+	{
+		int v = edge[i].to,w=edge[i].w;
+		if (vis[v]) continue;
+		dis[v] = dis[u] + w;
+		tarjan(v);
+		fa[v] = u;
+	}
+	for (int i = head1[u]; i != -1; i = query[i].next)
+	{
+		int v = query[i].v;
+		if (!vis[v]) continue;
+		int lca = get(v);//这个即是u和v的LCA
+		ans[query[i].id] = dis[v] + dis[u] - 2*dis[lca];//这是两点间的最短距离
+	}
+}
+</code></pre>
+<h3 id="树上倍增">树上倍增</h3>
+<p>可以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nlog_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 预处理，然后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(log_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 查询</p>
+<pre><code>void bfs()//预处理，也可以dfs
+{
+	//fat[1][0] = 1;
+	queue&lt;int&gt; q;
+	q.push(1);
+	dep[1] = 1;
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		for (int i = head[u]; i != -1; i = edge[i].next)
+		{
+			int v = edge[i].to;
+			if (dep[v]) continue;
+			dep[v] = dep[u] + 1;
+			fat[v][0] = u;
+			for (int j = 1; j &lt;= up; j++)
+			{
+				fat[v][j] = fat[fat[v][j - 1]][j - 1];
+			}
+			q.push(v);
+		}
+	}
+}
+int lca(int u, int v)
+{
+	if (dep[u] &gt; dep[v]) swap(u, v);
+	for (int j = up; j &gt;= 0; j--)
+	{
+		if (dep[fat[v][j]] &gt;= dep[u]) v = fat[v][j];
+	}
+	if (u == v) return u;
+	for (int j = up; j &gt;= 0; j--)
+	{
+		if (fat[v][j] !=fat[u][j]){
+			v = fat[v][j];
+			u = fat[u][j];
+		}
+	}
+	return fat[v][0];
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[树的直径模板]]></title>
+        <id>https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban</id>
+        <link href="https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban">
+        </link>
+        <updated>2019-06-29T05:35:48.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="方法一树形dp">方法一：树形DP</h3>
+<pre><code>void dp(int u,int pre)
+{
+	for (int i = head[u]; i != -1; i = edge[i].next)
+	{
+		int v = edge[i].to, w = edge[i].w;
+		if (v == pre) continue;
+		dp(v, u);
+		ans = max(ans, dis[u] + dis[v] + w);//之前的最大值dis[u],当前的dis[v]+w
+		dis[u] = max(dis[u], dis[v] + w);//更新最大距离
+	}
+}
+</code></pre>
+<h3 id="方法二两次dfs">方法二：两次DFS</h3>
+<p>第一次BFS找到直径的一端，第二次从直径的一端找到直径的另一端，最终ans即为答案</p>
+<pre><code>void dfs(int u, int pre)
+{
+	if (ans &lt; dis[u]){
+		ans = dis[u];
+		pos = u;
+	}
+	for (int i = head[u]; i != -1; i = edge[i].next)
+	{
+		int v = edge[i].to, w = edge[i].w;
+		if (v == pre) continue;
+		dis[v] = dis[u] + w;
+		dfs(v, u);
+	}
+}
+	dfs(1, -1);
+	dis[pos] = 0;
+	dfs(pos, -1);
+</code></pre>
+<h3 id="方法三两次bfs">方法三：两次BFS</h3>
+<pre><code>void bfs(int st)
+{
+	memset(vis, false, sizeof(vis));
+	vis[st] = true;
+	queue&lt;int&gt; q;
+	dis[st] = 0;
+	q.push(st);
+	int pre = -1;
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		for (int i = head[u]; i != -1; i = edge[i].next)
+		{
+			int v = edge[i].to, w = edge[i].w;
+			if (!vis[v])
+			{
+				vis[v] = true;
+				dis[v] = dis[u] + w;
+				if (ans &lt; dis[v]){
+					ans = dis[v];
+					pos = v;
+				}
+				q.push(v);
+			}
+		}
+	}
+}
+
+	dis[pos] = 0;
+	bfs(pos);
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[暑假集训——周赛2]]></title>
         <id>https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2</id>
         <link href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2">
@@ -43,7 +196,7 @@
 <p><strong><a href="http://poj.org/problem?id=3067">A - Japan POJ - 3067 </a></strong></p>
 </blockquote>
 <h4 id="题意给出一些线段寻找交点的个数">题意：给出一些线段，寻找交点的个数。</h4>
-<p>刚开始看到数据只有1000，想暴力找交点，线段<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(x,y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>,两条线段有交点就是<span class='katex-error' title='ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;&amp;&#039; at position 12: (x_1 &gt; x_2 &amp;̲&amp; y_1 &lt;y_2 ||x_…'>(x_1 &gt; x_2 &amp;&amp; y_1 &lt;y_2 ||x_2&gt;x_1 &amp;&amp; y_2&lt;y_1)</span> ,暴力寻找然后超时了。由于是交点只与点的关系所决定，我们不妨按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>从大到小开始遍历，我们可以发现，比如说遍历到了当前的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>,这个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>对答案的贡献是多少呢？ 显然就是前面的已经遍历过的那些线段中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>坐标比当前<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>坐标小的线段的数量，这就可以树状数组来求个数。按照遍历的顺序，依次把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>插入树状数组中，然后对于当前遍历的累加贡献即可。注意：<strong>要用 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>n</mi><mi>g</mi><mi>l</mi><mi>o</mi><mi>n</mi><mi>g</mi></mrow><annotation encoding="application/x-tex">long long</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span></strong></p>
+<p>刚开始看到数据只有1000，想暴力找交点，线段<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(x,y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>,两条线段有交点就是 <span class='katex-error' title='ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;&amp;&#039; at position 12: (x_1 &gt; x_2 &amp;̲&amp; y_1 &lt;y_2 )'>(x_1 &gt; x_2 &amp;&amp; y_1 &lt;y_2 )</span> 或者 <span class='katex-error' title='ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;&amp;&#039; at position 10: (x_2&gt;x_1 &amp;̲&amp; y_2&lt;y_1)'>(x_2&gt;x_1 &amp;&amp; y_2&lt;y_1)</span> ,暴力寻找然后超时了。由于是交点只与点的关系所决定，我们不妨按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>从大到小开始遍历，我们可以发现，比如说遍历到了当前的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>,这个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>对答案的贡献是多少呢？ 显然就是前面的已经遍历过的那些线段中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>坐标比当前<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>坐标小的线段的数量，这就可以树状数组来求个数。按照遍历的顺序，依次把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>插入树状数组中，然后对于当前遍历的累加贡献即可。注意：<strong>要用 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>n</mi><mi>g</mi><mi>l</mi><mi>o</mi><mi>n</mi><mi>g</mi></mrow><annotation encoding="application/x-tex">long long</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span></strong></p>
 <p>主要代码👇</p>
 <pre><code>
 bool operator&lt;(const P &amp;o)const
@@ -1085,655 +1238,6 @@ int main()
 	return 0;
 }
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[暑假集训——周赛1]]></title>
-        <id>https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1</id>
-        <link href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1">
-        </link>
-        <updated>2019-06-21T03:22:30.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="最短路最小生成树">最短路/最小生成树</h2>
-]]></summary>
-        <content type="html"><![CDATA[<h2 id="最短路最小生成树">最短路/最小生成树</h2>
-<!-- more -->
-<blockquote>
-<p><strong>C - Borg Maze <a href="http://poj.org/problem?id=3026">POJ - 3026</a></strong></p>
-</blockquote>
-<p>BFS+最小生成树</p>
-<p>比赛的时候想到了用 bfs求出每个点之间的最短距离，然后跑一遍MST。</p>
-<p>可是想想复杂度高达 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><msup><mi>m</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2m^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> ,然后放弃了。赛后看题解，确实是这种做法，比赛的时候还是要大胆一些</p>
-<pre><code>    #include&lt;iostream&gt;
-    #include&lt;cstdio&gt;
-    #include&lt;algorithm&gt;
-    #include&lt;string&gt;
-    #include&lt;cstring&gt;
-    #include&lt;cmath&gt;
-    #include&lt;queue&gt;
-    #include&lt;map&gt;
-    using namespace std;
-    const int N = 50 + 10;
-    const int inf = 0x3f3f3f3f;
-    int n, m;
-    int fa[N*N];
-    int a[N][N];
-    int get(int x)
-    {
-    	if (x == fa[x])  return x;
-    	return fa[x] = get(fa[x]);
-    }
-    struct E
-    {
-    	int u, v, w;
-    	bool operator&lt;(const E &amp;other){
-    		return w &lt; other.w;
-    	}
-    }edge[N*N*N*N];
-    int tot,cas;
-    int d[N][N];
-    const int dx[4] = { 0, 0, -1, 1 }, dy[4] = { 1, -1, 0, 0 };
-    typedef pair&lt;int, int &gt; P;
-    void bfs(int x,int y)
-    {
-    	memset(d, -1, sizeof(d));
-    	d[x][y] =0;
-    	queue&lt;P&gt; q;
-    	q.push(P(x, y));
-    	int cnt = 1;
-    	while (!q.empty())
-    	{
-    		P cur = q.front();
-    		q.pop();
-    		for (int i = 0; i &lt; 4; i++)
-    		{
-    			int nx = cur.first+ dx[i], ny = cur.second + dy[i];
-    			if (nx &gt;= 1 &amp;&amp; nx &lt;= n&amp;&amp;ny &gt;= 1 &amp;&amp; ny &lt;= m&amp;&amp;d[nx][ny] == -1&amp;&amp;a[nx][ny]&gt;=0)
-    			{
-    				d[nx][ny] = d[cur.first][cur.second] + 1;
-    				q.push(P(nx, ny));
-    				if (a[nx][ny]&gt;0)
-    				{
-    					edge[tot].u = a[x][y];
-    					edge[tot].v = a[nx][ny];
-    					edge[tot].w = d[nx][ny];
-    					tot++;
-    					cnt++;
-    					if (cnt &gt;= cas) return;
-    				}
-    			}
-    		}
-    	}
-    }
-    void kru()
-    {
-    	sort(edge, edge + tot);
-    	for (int i = 1; i &lt;= cas; i++)
-    		fa[i] = i;
-    	int ans = 0;
-    	int k = 0;
-    	for (int i = 0; i &lt; tot; i++)
-    	{
-    		int u = edge[i].u, v = edge[i].v;
-    		if (get(u) != get(v))
-    		{
-    			fa[get(u)] = get(v);
-    			ans += edge[i].w;
-    		}
-    	}
-    	cout &lt;&lt; ans &lt;&lt; endl;
-    
-    }
-    int main()
-    {
-    	int t;
-    	cin &gt;&gt; t;
-    	while (t--)
-    	{
-    		tot = 0;
-    		cas = 0;
-    		cin &gt;&gt; m &gt;&gt; n;
-    		char s[N];
-    		gets(s);
-    		for (int i = 1; i &lt;= n; i++)
-    		{
-    			for (int j = 1; j&lt;= m; j++)
-    			{
-    				char c = getchar();
-    				if (c == ' ') a[i][j] = 0;
-    				else if (c == '#') a[i][j] = -1;
-    				else a[i][j] = ++cas;
-    			}
-    			getchar();
-    		}
-    		for (int i = 1; i &lt;= n; i++)
-    		{
-    			for (int j = 1; j &lt;= m; j++)
-    			{
-    				if (a[i][j] &gt; 0)
-    					bfs(i, j);
-    			}
-    		}
-    		kru();
-    	}
-    	return 0;
-    }
-</code></pre>
-<p>[========]</p>
-<blockquote>
-<p><strong>D - 0 or 1   <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4370">HDU - 4370</a></strong></p>
-</blockquote>
-<p>比赛的时候不会，赛后看题解也是挺懵的。
-这题把C矩阵看成邻接表，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>  表示 i到j之间的距离，把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 看成 i到j之间的关系，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 为1则表示i和j之间有一条路，并且权值为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>
-这样我们求从1到n的最短路就可以得到  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow><mo>∗</mo><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></mrow><annotation encoding="application/x-tex">\sum C{ij} * X{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord"><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord"><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span></span> ， 为什么这样是正确的呢？
-我们把每行每列(邻接表) 看成是图的一个顶点，我们可以观察到第一行的出度就是1，最后一列的入度是1，其他点的出度和入度均为1</p>
-<ul>
-<li>表示点 1 的出度为 1</li>
-<li>表示点 n 的入度为 1</li>
-<li>除了点 1 和点 n 外的其他点出入度相等</li>
-</ul>
-<p>可以画一下，发现从一个点u到另一个点v就是邻接表 <code>C[u][v]</code> ,这样会使第V列多一个1，然后我们下次再从第V行出发在找下一个点，这样第V行也就多一个1，这样就满足了题目要求的关系。
-然后还有一种情况，那就是可以从点 1 出发到达其他点然后又回到点 1 形成一个环，同样也可以从点 n 出发回到点 n。这样也是符合条件的，答案为从 1 出发的最小权值环和从 n 出发的最小权值环之和。
-最后比较两种情况的最小值
-求环，注意最开始不是将起点 s 入队，而是把与起点相连的点加入队列，将 <code>dis[s]</code> 设为 <code>inf</code> 这样可以求得从 s 出发回到 s 的最小环，具体参考代码。</p>
-<pre><code>#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-#include&lt;queue&gt;
-#include&lt;algorithm&gt;
-#include&lt;iostream&gt;
-using namespace std;
-const int N = 310;
-const int inf = 0x3f3f3f3f;
-int dis[N];
-bool vis[N];
-int a[N][N],n;
-void spfa(int st)
-{
-	queue&lt;int&gt; q;
-	memset(vis, false, sizeof(vis));
-	memset(dis, inf, sizeof(dis));
-	for (int i = 1; i &lt;= n; i++)
-	{
-		if (i == st)
-		{
-			dis[i] = inf;
-		}
-		else
-		{
-			q.push(i);
-			vis[1] = true;
-			dis[i] = c[st][i];
-		}
-	}
-	while (!q.empty())
-	{
-		int u = q.front();
-		q.pop();
-		vis[u] = false;
-		for (int v = 1; v &lt;= n; v++)
-		{
-			if (dis[v] &gt; dis[u] + c[u][v])
-			{
-				dis[v] = dis[u] +c[u][v];
-				if (!vis[v])
-				{
-					vis[v] = true;
-					q.push(v);
-				}
-			}
-
-		}
-
-
-	}
-}
-int main()
-{
-	while (scanf(&quot;%d&quot;, &amp;n)!=EOF)
-	{
-		
-		for (int i = 1; i &lt;= n; i++)
-		{
-			for (int j = 1; j &lt;= n; j++)
-				scanf(&quot;%d&quot;, &amp;c[i][j]);
-		}
-		spfa(1);
-		int c1 = dis[1], ans = dis[n];
-		spfa(n);
-		int c2 = dis[n];
-		ans = min(ans, c1 + c2);
-		cout &lt;&lt; ans &lt;&lt; endl;
-
-	}
-	return 0;
-}
-</code></pre>
-<hr>
-<blockquote>
-<p><strong>E - Extended Traffic <a href="https://vjudge.net/problem/LightOJ-1074">LightOJ - 1074</a></strong></p>
-</blockquote>
-<p>spfa判负环，把负环上的点标记一下，不要想当然的认为有负环所有点都要被标记，负环只是所有点形成的图的一部分，还有就是不要忘了in[v]++,赛场上这个地方没写超时了，也没来得及发现</p>
-<pre><code>#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;ctime&gt;
-#include &lt;cmath&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;sstream&gt;
-#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-const int M = 2e5 + 10;
-const int N = 2e2 + 10;
-const int inf = 0x3f3f3f3f;
-struct E{
-	int to, next, w;
-}edge[M];
-int head1[N], tot;
-int dis1[N], in[N];
-bool vis[N], vis1[N];
-int n, m, cas;
-int a[N];
-void addedge(int from, int to, int w)
-{
-	edge[++tot].to = to;
-	edge[tot].w = w;
-	edge[tot].next = head1[from];
-	head1[from] = tot;
-}
-void dfs(int u)
-{
-	vis1[u] = true;
-	for (int i = head1[u]; i != -1; i = edge[i].next)
-	{
-		if (!vis1[edge[i].to])
-			dfs(edge[i].to);
-	}
-}
-bool spfa1()
-{
-	int h = 0, t = 0;
-	queue&lt;int&gt; q;
-	memset(dis1, inf, sizeof(dis1));
-	memset(vis, false, sizeof(vis));
-	memset(vis1, false, sizeof(vis1));
-	memset(in, 0, sizeof(in));
-	dis1[1] = 0;
-	q.push(1);
-	in[1]++;
-	vis[1] = true;
-	while (!q.empty())
-	{
-		int u = q.front();
-		q.pop();
-		vis[u] = false;
-		if (vis1[u]) continue;
-		for (int i = head1[u]; i != -1; i = edge[i].next)
-		{
-			int v = edge[i].to;
-			
-			int w = edge[i].w;
-			if (dis1[v]&gt; dis1[u] + w)
-			{
-				dis1[v] = dis1[u] + w;
-				if (!vis[v])
-				{
-					vis[v] = true;
-					q.push(v);
-					in[v]++;
-					if (in[v] &gt; n) vis1[v]=true;
-				}
-			}
-		}
-	}
-	return true;
-}
-
-int main()
-{
-	int t;
-	cin &gt;&gt; t;
-	while (t--)
-	{
-		tot = 0;
-		scanf(&quot;%d&quot;, &amp;n);
-		for (int i = 1; i &lt;= n; i++)
-		{
-			scanf(&quot;%d&quot;, &amp;a[i]);
-			head1[i] = -1;
-		}
-		cin &gt;&gt; m;
-		while (m--)
-		{
-			int u, v;
-			scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
-			int w = (a[v] - a[u])*(a[v] - a[u])*(a[v] - a[u]);
-			addedge(u, v, w);
-		}
-		bool f=spfa1();
-		printf(&quot;Case %d:\n&quot;, ++cas);
-		int q;
-		scanf(&quot;%d&quot;, &amp;q);
-		while (q--)
-		{
-			int vv;
-			scanf(&quot;%d&quot;, &amp;vv);
-			if (vis1[vv] || dis1[vv] == inf || dis1[vv] &lt; 3)
-			{
-				puts(&quot;?&quot;);
-			}
-			else
-			{
-				printf(&quot;%d\n&quot;, dis1[vv]);
-			}
-
-
-		}
-	}
-
-
-	return 0;
-}
-</code></pre>
-<hr>
-<blockquote>
-<p><strong>F - The Unique MST <a href="http://poj.org/problem?id=1679">POJ - 1679</a></strong></p>
-</blockquote>
-<p>这题判断最小生成树是否唯一，用kruskal 加边的时候如果两个顶点在一个集合中了，判断已加入的顶点集合中是否存在和当前边权值相同的边，有就是不唯一。可以把加入集合中的点建一颗树，然后搜索进行判断。</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;string&gt;
-#include&lt;cstring&gt;
-#include&lt;cmath&gt;
-#include&lt;queue&gt;
-#include&lt;map&gt;
-using namespace std;
-const int N = 1e3 + 10;
-const int inf = 0x3f3f3f3f;
-int n, m;
-int fa[N];
-int get(int x)
-{
-	if (x == fa[x])  return x;
-	return fa[x] = get(fa[x]);
-}
-struct E
-{
-	int u, v, w;
-	bool operator&lt;(const E &amp;other){
-		return w &lt; other.w;
-	}
-}edge[N*N];
-int tot;
-int a[N];
-typedef pair&lt;int, int&gt; P;
-vector&lt;P&gt; g[N];
-bool dfs(int v, int u,int pre, int c,bool f)
-{
-	for (int i = 0; i &lt; g[v].size(); i++)
-	{
-		if (g[v][i].first == pre) continue;
-		if (g[v][i].second == c)  f = true;
-		if (f&amp;&amp;g[v][i].first == u) return true;
-		if	(dfs(g[v][i].first, u, v, c, f)) return true;
-	}
-	return false;
-}
-int main()
-{
-	int t;
-	cin &gt;&gt; t;
-	while (t--)
-	{
-		cin &gt;&gt; n;
-		for (int i = 1; i &lt;= n; i++)
-			g[i].clear();
-		cin &gt;&gt; m;
-		tot = 0;
-		bool f = true;
-		while (m--)
-		{
-			int i, j, w;
-			cin &gt;&gt; i &gt;&gt; j &gt;&gt; w;
-			edge[tot].w = w;
-			edge[tot].u = i;
-			edge[tot].v = j;
-			tot++;
-		}
-		sort(edge, edge + tot);
-		for (int i = 1; i &lt;= n; i++)
-			fa[i] = i;
-		int ans = 0;
-		int k = 0;
-		for (int i = 0; i &lt; tot; i++)
-		{
-			if (k &gt;= n - 1) break;
-			int u = edge[i].u, v = edge[i].v;
-			if (get(u) != get(v))
-			{
-				g[u].push_back(P(v, edge[i].w));
-				g[v].push_back(P(u, edge[i].w));
-				fa[get(u)] = get(v);
-				ans += edge[i].w;
-			}
-			else
-			{
-				
-				if (dfs(u, v, -1, edge[i].w, false)) {
-					f = false;
-					break;
-				}
-				
-			}
-		}
-		if (f)
-			printf(&quot;%d\n&quot;, ans);
-		else
-			printf(&quot;Not Unique!\n&quot;);
-	}
-	return 0;
-}
-</code></pre>
-<blockquote>
-<p>总结:比赛的时候一定要细心，有思路的时候要尝试去实现它！！！多刷题。</p>
-</blockquote>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[POJ 3662 Telephone Lines]]></title>
-        <id>https://www.akwing.cn/post/poj-3662-telephone-lines</id>
-        <link href="https://www.akwing.cn/post/poj-3662-telephone-lines">
-        </link>
-        <updated>2019-06-19T12:35:40.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="dp二分-最短路">DP/二分 + 最短路</h2>
-]]></summary>
-        <content type="html"><![CDATA[<h2 id="dp二分-最短路">DP/二分 + 最短路</h2>
-<!-- more -->
-<blockquote>
-<p>方法1 DP</p>
-</blockquote>
-<p><strong><code>用d[x][y]表示从1号节点到达x号节点,途中经过了y条免费电缆时,经过的路上最贵的电缆花费最小是多少.</code></strong>
-假设有一条边从 <code>x</code> 到 <code>v</code> ，权值为 <code>w</code> ，则我们可以：</p>
-<ul>
-<li>用 <code>max(dp[x][y],w)</code> 更新 <code>dp[v][y]</code> ,这个表示不在电缆 <code>x-v</code> 使用免费服务。</li>
-<li>用 <code>dp[x][y]</code> 更新 <code>dp[v][p+1]</code> ,表示在电缆 <code>x-v</code> 上使用免费服务</li>
-</ul>
-<p>由于这个dp有后效性，不能用dij，采用spfa不断迭代更新。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;//缩短代码用了万能头，poj不允许这样
-using namespace std;
-const int N = 1e3 + 10;
-const int inf = 0x3f3f3f3f;
-int n, pp, k;
-struct E{
-	int to, next, w;
-}edge[20 * N];
-int tot;
-int head[N];
-bool vis[N][N];
-int dp[N][N];
-void addedge(int from, int to, int w)
-{
-	edge[++tot].to = to;
-	edge[tot].w = w;
-	edge[tot].next = head[from];
-	head[from] = tot;
-}
-typedef pair&lt;int, int&gt; P;
-queue&lt;P&gt; q;
-void spfa()
-{
-	memset(dp, inf, sizeof(dp));
-	dp[1][0] = 0;
-	vis[1][0] = true;
-	q.push(P(1, 0));
-	while (!q.empty())
-	{
-		P u = q.front();
-		q.pop();
-		int x = u.first, p = u.second;
-		vis[x][p] = false;
-		for (int i = head[x]; i != -1; i = edge[i].next)
-		{
-			int v = edge[i].to, w = edge[i].w;
-			if (dp[v][p]&gt;max(dp[x][p], w))
-			{
-				dp[v][p] = max(dp[x][p], w);
-				if (!vis[v][p])
-				{
-					vis[v][p] = true;
-					q.push(P(v, p));
-				}
-			}
-			if (p&lt;k&amp;&amp;dp[v][p + 1]&gt;dp[x][p])
-			{
-				dp[v][p + 1] = dp[x][p];
-				if (!vis[v][p + 1])
-				{
-					vis[v][p + 1] = true;
-					q.push(P(v, p + 1));
-				}
-			}
-		}
-	}
-
-}
-int main()
-{
-	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;pp, &amp;k);
-	memset(head, -1, sizeof(head));
-	while (pp--)
-	{
-		int u, v, w;
-		scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);
-		addedge(u, v, w);
-		addedge(v, u, w);
-	}
-	spfa();
-	int ans = inf;
-	for (int i = 0; i &lt;= k; i++)
-	{
-		ans = min(ans, dp[n][i]);
-	}
-	printf(&quot;%d\n&quot;, ans == inf ? -1 : ans);
-	return 0;
-}
-</code></pre>
-<blockquote>
-<p>方法2 二分</p>
-</blockquote>
-<p>显然答案具有单调性。二分答案，假设答案为mid，我们将边权大于等于mid的边的边权设为1，表示免费服务的边，即可以理解为使用了一次免费服务。小于mid的边权设为0，表示不免费，没有使用免费服务。然后我们跑一便最短路，看最短路径是否小于等于K，小于等于则mid是满足的，我们可以缩小mid,继续二分答案。</p>
-<pre><code>#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;ctime&gt;
-#include &lt;cmath&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;sstream&gt;
-#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-const int N = 1e3 + 10;
-const int inf = 0x3f3f3f3f;
-int n, pp, k;
-struct E{
-	int to, next, w;
-}edge[20 * N];
-int tot;
-int head[N];
-bool vis[N];
-int dis[N];
-void addedge(int from, int to, int w)
-{
-	edge[++tot].to = to;
-	edge[tot].w = w;
-	edge[tot].next = head[from];
-	head[from] = tot;
-}
-typedef pair&lt;int, int&gt; P;
-queue&lt;int&gt; q;
-int spfa(int mid)
-{
-	while (!q.empty()) q.pop();
-	memset(vis, false, sizeof(vis));
-	memset(dis, inf, sizeof(dis));
-	dis[1] = 0;
-	vis[1] = true;
-	q.push(1);
-	while (!q.empty())
-	{
-		int u = q.front();
-		q.pop();
-		vis[u] = false;
-		for (int i = head[u]; i != -1; i = edge[i].next)
-		{
-			int v = edge[i].to;
-			int w = (edge[i].w &gt;= mid);
-			if (dis[v] &gt; dis[u]+ w)
-			{
-				dis[v] = dis[u] + w;
-				if (!vis[v])
-				{
-					vis[v]= true;
-					q.push(v);
-				}
-			}
-		}
-	}
-	return dis[n] &lt;= k;
-}
-int main()
-{
-	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;pp, &amp;k);
-	memset(head, -1, sizeof(head));
-	int l = 0;
-	while (pp--)
-	{
-		int u, v, w;
-		scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);
-		addedge(u, v, w);
-		addedge(v, u, w);
-	}
-	int r = 1e7;
-	while (l &lt; r)
-	{
-		int mid = (l+r+1) &gt;&gt; 1;
-		if (!spfa(mid)) l = mid;
-		else r = mid - 1;
-	}
-	printf(&quot;%d\n&quot;, l &gt;=1e7 ? -1 : l);
-	return 0;
-}
 </code></pre>
 ]]></content>
     </entry>
