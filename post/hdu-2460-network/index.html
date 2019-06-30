@@ -377,7 +377,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1561802970758" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1561875805661" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
        
@@ -541,7 +541,16 @@
 <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2460">HDU 2460 Network</a></p>
 </blockquote>
 <h4 id="题意-给定一个无向图然后给出q个加边操作询问每次加边后图中桥边的个数">题意: 给定一个无向图，然后给出q个加边操作，询问每次加边后图中桥边的个数。</h4>
-<p>这题根本不会欸，去网上搜题解，用到的算法也是一大堆，好多都是没学过的。然后就去看蓝书，用Tarjan算法求桥边。下面是判定桥边</p>
+<p>这题根本不会欸，去网上搜题解，用到的算法也是一大堆，好多都是没学过的。然后就去看蓝书，用Tarjan算法求桥边。下面是求解桥边的算法</p>
+<ul>
+<li>时间戳: 图的深度优先遍历，每个节点第一次被访问的时间顺序，用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dfn[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>表示</li>
+<li>搜索树: 图的深度优先搜索构成了一棵搜索树(不连通的图构成搜索森林)</li>
+<li>追溯值: Tarjan算法引入一个追溯值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>x</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">low[x]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span></span></span></span>，设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>t</mi><mi>r</mi><mi>e</mi><mi>e</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">subtree(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">b</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>表示搜索树中以x为根的子树. <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>x</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">low[x]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span></span></span></span>定义如下
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>t</mi><mi>r</mi><mi>e</mi><mi>e</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">subtree(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">b</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>  ==中的节点==</li>
+</ul>
+</li>
+</ul>
   </p>                    </div>
         <div class="tags">
 			<div itemprop="keywords" class="keywords atudds">
