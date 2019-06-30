@@ -8,7 +8,7 @@
 <meta name="HandheldFriendly" content="true">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
 <meta http-equiv="x-dns-prefetch-control" content="on">
-<title>ZOJ 2112 Dynamic Rankings  | Guapi</title>
+<title>HDU 3830 Checkers | Guapi</title>
 
 <!-- APlayer Start -->
 <link rel="stylesheet" type="text/css" href="https://www.akwing.cn/styles/main.css" />
@@ -493,7 +493,7 @@
             var blurBanner = false;                if (!blurBanner) registLoadBanner();
             </script>
 									
-            <img id="lazyload-img" alt="page banner image" src="https://ncdn.camarts.cn/19c85394.jpg?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://ncdn.camarts.cn/19c85394.jpg', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
+            <img id="lazyload-img" alt="page banner image" src="https://images.pexels.com/photos/2226511/pexels-photo-2226511.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://images.pexels.com/photos/2226511/pexels-photo-2226511.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
 									
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
@@ -508,14 +508,14 @@
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
-                        ZOJ 2112 Dynamic Rankings                     </h1>
+                        HDU 3830 Checkers                    </h1>
                     <h2 class="blog-description font-mono" style="">
 						
-                        2019-06-10 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
+                        2019-06-30 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
 							
-							<a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a>
+							<a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a>
 								 
-							<a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a>
+							<a href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a>
 								 									  
 																	  
 																	  • <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
@@ -541,332 +541,133 @@
         </div>
         
                 <div class="post-content" itemprop="articleBody">
-                        <p><h1 id="树状数组套主席树">树状数组套主席树</h1>
+                        <p><h2 id="lca二分">LCA+二分</h2>
 <!-- more -->
-<p>之前学了主席树，解决了静态区间第k大，想着顺便学习一下如何求解动态区间第k大，奈何太菜，看了一晚上未能很好的理解，主要就是询问的时候卡住了我。第二天终于理解了。
-这里给出两种方法</p>
-<ul>
-<li>方法1</li>
-</ul>
-<p>前缀和建树(和静态主席树一样)，树状数组更新，<strong>树状数组只保存更新带来的影响</strong>，每次查询左孩子区间sum的时候需要同时查询 <strong>(原来的值+树状数组的影响)</strong></p>
-<ul>
-<li>方法2</li>
-</ul>
-<p>类似树状数组的方式建树，<code>T[i]</code> 只保存区间<code>[i-lowbit(i)+1,i]</code>内的个数， 更新和查询都类似树状数组,这里树状数组直接保存了更新后的结果，<strong>因此询问时只需查询树状数组</strong>。</p>
-<p>方法1的代码在洛谷和ZOJ都能过，方法2就只能过洛谷，ZOJ一直SF。</p>
-<blockquote>
-<p>方法1</p>
-</blockquote>
-<pre><code>#include&lt;iostream&gt;
+<h3 id="题意给定3个点abc每次操作可以跳到相邻点的对称位置-询问最终能否跳到xyz不考虑顺序-如果能输出最小步数">题意：给定3个点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>,每次操作可以跳到相邻点的对称位置。询问最终能否跳到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>(不考虑顺序)  如果能，输出最小步数.</h3>
+<p>我们不妨设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo>&lt;</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a&lt;b&lt;c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span> , <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>可以跳到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>a</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">2a-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>c</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">2c-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>,也即是往两边跳。
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span>可以往中间跳，我们可以发现如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>−</mo><mi>a</mi><mo>=</mo><mo>=</mo><mi>c</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">b-a==c-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>的时候我们就不能往中间跳了。
+我们可以这样想，把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>这三个的位置当成一个状态，而这个状态是二叉树中的一个节点，a和c往里跳相当于往父节点走，当<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>−</mo><mi>a</mi><mo>=</mo><mo>=</mo><mi>c</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">b-a==c-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>时说明走到了根节点。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>往外跳相当去往子节点走，并且无穷无尽。
+我们开始让<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span>不断往里走，即不断往上寻找父节点，直至找到根节点。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>具有相同根节点时，答案有解，此时答案树上两点的最短距离。也即是可以转化寻找LCA。往上走的时候不能一步一步走，比如三个数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>101</mn></mrow><annotation encoding="application/x-tex">1,2,101</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span></span></span></span>，我们不能一步步翻<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>101</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(2,3,101)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>101</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(3,4,101)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，这样太慢了，能不能直接翻到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>99</mn><mo separator="true">,</mo><mn>100</mn><mo separator="true">,</mo><mn>101</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(99,100,101)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">9</span><span class="mord">9</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。
+首先要找到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>走到根节点所需步数，也即是深度，然后将其中深度大的减小至共同深度。设深度差<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">dis</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span></span></span></span>.二分答案，假设二分值为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>,如果它们俩往上走<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>步就能处于共同坐标，那么可以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo>=</mo><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">r=mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>,缩小答案，继续二分。二分结束的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 即是它们俩其中一个走向LCA所需步数。最终 <strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>l</mi><mo>+</mo><mi>d</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">2 * l+dis</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span></span></span></span></strong> 即为答案。
+另外题目说多组输入，也没看到题目有说。</p>
+<pre><code>#include &lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
-#include&lt;string&gt;
-#include&lt;cmath&gt;
-#include&lt;string&gt;
-#include&lt;string.h&gt;
-#include&lt;vector&gt;
-#include&lt;map&gt;
+#include&lt;cstring&gt;
 #include&lt;queue&gt;
-#include&lt;cstdlib&gt;
+#include&lt;string&gt;
+#include&lt;bitset&gt;
+#include&lt;cmath&gt;
 using namespace std;
-#define lowbit(x) (x&amp;(-x))
+const int N = 1e6 + 100;
 typedef long long ll;
-const int N = 6e4 + 10;
-const int M = 2500000;
-int a[N], b[N * 2], tot, n, m, q, numx, numy;
-struct query{
-	int op, l, r, v;
-}p[10005];
-struct tree{
-	int lc, rc, cnt;
-}T[N * 32];
-int root[N];
-int ux[50], uy[50];
-int S[N];
-void build(int &amp;rt, int l, int r)
+struct state{
+    ll a, b, c, cnt;//cnt表示当前状态走到根节点需要的步数
+    bool operator == (const state &amp;o)const{
+        return a == o.a&amp;&amp;b == o.b&amp;&amp;c == o.c;
+    }
+};
+state st, ed;
+void Sort(state &amp;cur)
 {
-	rt = ++tot;
-	T[rt].cnt = 0;
-	T[rt].lc = T[rt].rc = 0;
-	if (l == r) return;
-	int mid = (l + r) &gt;&gt; 1;
-	build(T[rt].lc, l, mid);
-	build(T[rt].rc, mid + 1, r);
+    if (cur.a &gt; cur.b)swap(cur.a, cur.b);
+    if (cur.a &gt; cur.c) swap(cur.a, cur.c);
+    if (cur.b &gt; cur.c) swap(cur.b, cur.c);
 }
-void update(int &amp;cur, int pre, int l, int r, int pos, int val)
+state getRoot(state cur)
 {
-	cur = ++tot;
-	T[cur] = T[pre];
-	T[cur].cnt += val;
-	if (l == r) return;
-	int mid = (l + r) &gt;&gt; 1;
-	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos, val);
-	else update(T[cur].rc, T[pre].rc, mid + 1, r, pos, val);
+    cur.cnt = 0;
+    ll d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    while (d1 != d2)
+    {
+        ll t = 0;
+        if (d1 &gt; d2)
+        {
+            t = (d1 - 1) / d2;
+            cur.b -= t*d2;
+            cur.c -= t*d2;
+        }
+        else
+        {
+            t = (d2 - 1) / d1;
+            cur.b += t*d1;
+            cur.a += t*d1;
+        }
+        cur.cnt += t;
+        Sort(cur);
+        d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    }
+    return cur;
 }
-void add(int pos, int val)
+state solve(state cur, ll dis)
 {
-	int npos = lower_bound(b + 1, b + m + 1, a[pos]) - b;
-	for (; pos &lt;= n; pos += lowbit(pos))
-		update(S[pos], S[pos], 1, m, npos, val);
-}
-int query(int l, int r, int x, int y, int k)
-{
-	if (l == r) return l;
-	int mid = (l + r) &gt;&gt; 1;
-	int sum = 0;
-	for (int j = 0; j &lt; numx; j++) sum -= T[T[ux[j]].lc].cnt;
-	for (int j = 0; j &lt; numy; j++) sum += T[T[uy[j]].lc].cnt;
-	sum += T[T[y].lc].cnt - T[T[x].lc].cnt;
-	if (k&gt;sum)
-	{
-		for (int j = 0; j &lt; numx; j++)
-			ux[j] = T[ux[j]].rc;
-		for (int j = 0; j &lt; numy; j++)
-			uy[j] = T[uy[j]].rc;
-		return query(mid + 1, r, T[x].rc, T[y].rc, k - sum);
-	}
-	else
-	{
-		for (int j = 0; j &lt; numx; j++)
-			ux[j] = T[ux[j]].lc;
-		for (int j = 0; j &lt; numy; j++)
-			uy[j] = T[uy[j]].lc;
-		return query(l, mid, T[x].lc, T[y].lc, k );
-	}
-	
-	
+    ll d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    while (dis&amp;&amp;d1!=d2)
+    {
+        ll t = 0;
+        if (d1 &gt; d2)
+        {
+            t = min((d1 - 1) / d2, dis);
+            cur.b -= t*d2;
+            cur.c -= t*d2;
+        }
+        else
+        {
+            t = min((d2 - 1) / d1, dis);
+            cur.b += t*d1;
+            cur.a += t*d1;
+        }
+        dis -= t;
+        Sort(cur);
+        d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    }
+    return cur;
 }
 int main()
 {
-	int t;
-	scanf(&quot;%d&quot;, &amp;t);
-	while (t--)
-	{
-		tot = 0;
-		m = 0;
-		scanf(&quot;%d%d&quot;, &amp;n, &amp;q);
-		for (int i = 1; i &lt;= n; i++)
-		{
-			scanf(&quot;%d&quot;, &amp;a[i]);
-			b[++m] = a[i];
-		}
-		for (int i = 1; i &lt;= q; i++)
-		{
-			char op[5];
-			scanf(&quot;%s&quot;, op);
-			if (op[0] == 'Q')
-			{
-				scanf(&quot;%d%d%d&quot;, &amp;p[i].l, &amp;p[i].r, &amp;p[i].v);
-				p[i].op = 1;
-			}
-			else
-			{
-				scanf(&quot;%d%d&quot;, &amp;p[i].l, &amp;p[i].r);
-				b[++m] = p[i].r;
-				p[i].op = 2;
-			}
-		}
-		sort(b + 1, b + m + 1);
-		m = unique(b + 1, b + m + 1) - b - 1;
-		build(root[0], 1, m);
-		for (int i = 1; i &lt;= n; i++)
-		{
-			int pos = lower_bound(b + 1, b + m + 1, a[i]) - b;
-			update(root[i], root[i - 1], 1, m, pos, 1);
-		}
-		for (int i = 0; i &lt;= n; i++)
-			S[i] = root[0];
-		for (int i = 1; i &lt;= q; i++)
-		{
-			if (p[i].op == 1)
-			{
-				numx = 0, numy = 0;
-				for (int j = p[i].l - 1; j &gt; 0; j -= lowbit(j)) ux[numx++] = S[j];
-				for (int j = p[i].r; j &gt; 0; j -= lowbit(j)) uy[numy++] = S[j];
-				int ans = query(1, m, root[p[i].l - 1], root[p[i].r], p[i].v);
-				printf(&quot;%d\n&quot;, b[ans]);
-			}
-			else
-			{
-				add(p[i].l, -1);
-				a[p[i].l] = p[i].r;
-				add(p[i].l, 1);
-			}
-		}
-
-	}
-
-	return 0;
-}
-
-</code></pre>
-<blockquote>
-<p>方法2(顺便来个非递归查询和更新)</p>
-</blockquote>
-<pre><code>// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-// luogu-judger-enable-o2
-#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;string&gt;
-#include&lt;cmath&gt;
-#include&lt;string&gt;
-#include&lt;string.h&gt;
-#include&lt;vector&gt;
-#include&lt;map&gt;
-#include&lt;queue&gt;
-#include&lt;cstdlib&gt;
-using namespace std;
-#define lowbit(x) (x&amp;(-x))
-typedef long long ll;
-const int N = 1e5+ 10;
-const int M = 2500000;
-int a[N], b[N*2], tot, n, m, q,numx,numy;
-struct query{
-    int op, l, r, v;
-}p[100005];
-struct tree{
-    int lc, rc, cnt;
-}T[N&lt;&lt;9];
-int root[N];
-int ux[50], uy[50];
-void build(int &amp;rt,int l,int r)
-{
-    rt = ++tot;
-    T[rt].cnt = 0;
-    T[rt].lc = T[rt].rc = 0;
-    if (l == r) return;
-    int mid = (l + r) &gt;&gt; 1;
-    build(T[rt].lc, l, mid);
-    build(T[rt].rc, mid + 1, r);
-}
-void update(int &amp;cur, int pre,int l, int r,int pos,int val)
-{
-    cur = ++tot;
-    T[cur] = T[pre];
-    T[cur].cnt += val;
-    int tmp = cur;
-    while (l &lt; r)
+    while (scanf(&quot;%lld%lld%lld&quot;, &amp;st.a, &amp;st.b, &amp;st.c) != EOF)
     {
-        int mid = (l + r) &gt;&gt; 1;
-        if (pos &lt;= mid)
-        {
-            T[tmp].lc = ++tot;
-            T[tmp].rc = T[pre].rc;
-            pre = T[pre].lc;
-            tmp = T[tmp].lc;
-            r = mid;
+        scanf(&quot;%lld%lld%lld&quot;, &amp;ed.a, &amp;ed.b, &amp;ed.c);
+        st.cnt = 0, ed.cnt = 0;
+        Sort(st);
+        Sort(ed);
+        state st1 = getRoot(st), ed1 = getRoot(ed);//首先找到根节点
+        st.cnt = st1.cnt, ed.cnt = ed1.cnt;//所需步数
+        if (st1 == ed1){
+            puts(&quot;YES&quot;);
+            ll dis = abs(st.cnt - ed.cnt);
+            if (st.cnt &gt; ed.cnt){//提至同一深度
+                st = solve(st, dis);
+            }
+            else{
+                ed = solve(ed, dis);
+            }
+            ll l = 0, r = min(st.cnt, ed.cnt);
+            while (l &lt; r)
+            {
+                ll mid = (l + r) &gt;&gt; (1LL);
+                state ss = solve(st, mid);
+                state ee = solve(ed, mid);
+                if (ss == ee) r = mid;
+                else l = mid + 1;
+            }
+            printf(&quot;%lld\n&quot;, 2 * l + dis);
         }
-        else
-        {
-            T[tmp].rc = ++tot;
-            T[tmp].lc = T[pre].lc;
-            pre = T[pre].rc;
-            tmp = T[tmp].rc;
-            l = mid + 1;
-        }
-        T[tmp].cnt = T[pre].cnt + val;
-    }
-    return;
-}
-void add(int pos, int val)
-{
-    int npos = lower_bound(b + 1, b + m + 1, a[pos]) - b;
-    for (; pos &lt;= n; pos += lowbit(pos))
-        update(root[pos], root[pos], 1, m, npos, val);
-}
-int query(int l,int r,int k)
-{
-    while (l &lt; r)
-    {
-        int mid = (l + r) &gt;&gt; 1;
-        int sum = 0;
-        for (int j = 0; j &lt; numx; j++) sum -= T[T[ux[j]].lc].cnt;
-        for (int j = 0; j &lt; numy; j++) sum += T[T[uy[j]].lc].cnt;
-        if (k&gt;sum)
-        {
-            k -= sum;
-            for (int j = 0; j &lt; numx; j++)
-                ux[j] = T[ux[j]].rc;
-            for (int j = 0; j &lt; numy; j++)
-                uy[j] = T[uy[j]].rc;
-            l = mid + 1;
-        }
-        else
-        {
-            for (int j = 0; j &lt; numx; j++)
-                ux[j] = T[ux[j]].lc;
-            for (int j = 0; j &lt; numy; j++)
-                uy[j] = T[uy[j]].lc;
-            r = mid;
-        }
-    }
-
-    return l;
-}
-int main()
-{
-    tot = 0;
-    m = 0;
-    scanf(&quot;%d%d&quot;, &amp;n, &amp;q);
-    for (int i = 1; i &lt;= n; i++)
-    {
-        scanf(&quot;%d&quot;, &amp;a[i]);
-        b[++m] = a[i];
-    }
-    for (int i = 1; i &lt;= q; i++)
-    {
-        char op[5];
-        scanf(&quot;%s&quot;, op);
-        if (op[0] == 'Q')
-        {
-            scanf(&quot;%d%d%d&quot;, &amp;p[i].l, &amp;p[i].r, &amp;p[i].v);
-            p[i].op = 1;
-        }
-        else
-        {
-            scanf(&quot;%d%d&quot;, &amp;p[i].l, &amp;p[i].r);
-            b[++m] = p[i].r;
-            p[i].op = 2;
-        }
-    }
-    sort(b + 1, b + m + 1);
-    m = unique(b + 1, b + m + 1) - b - 1;
-    for (int i = 1; i &lt;= n; i++)
-        add(i, 1);
-    for (int i = 1; i &lt;= q; i++)
-    {
-        if (p[i].op == 1)
-        {
-            numx = 0, numy = 0;
-            for (int j = p[i].l-1; j &gt; 0; j -= lowbit(j)) ux[numx++] = root[j];
-            for (int j = p[i].r; j &gt; 0; j -= lowbit(j)) uy[numy++] = root[j];
-            int ans = query(1, m, p[i].v);
-            printf(&quot;%d\n&quot;, b[ans]);
-        }
-        else
-        {
-            add(p[i].l, -1);
-            a[p[i].l] = p[i].r;
-            add(p[i].l, 1);
+        else{
+            puts(&quot;NO&quot;);
         }
     }
 
     return 0;
 }
-
-			
 </code></pre>
   </p>                    </div>
         <div class="tags">
 			<div itemprop="keywords" class="keywords atudds">
 				
-				<a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a> 
+				<a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a> 
 				 
-				<a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> 
+				<a href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a> 
 				 												
 																
 																</div>
@@ -882,7 +683,7 @@ int main()
 </div>
 <div id="qr-box">
     <div class="post-qr-code-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/zoj-2112-dynamic-rankings" width="250" height="250" alt="本页链接的二维码"/>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/hdu-3830-checkers" width="250" height="250" alt="本页链接的二维码"/>
     </div>
     <div class="reward-qr-code-box">
 		
@@ -895,8 +696,8 @@ int main()
             <div class="post-near">
             <nav>
 				 
-                <span class="prev"><a href="https://www.akwing.cn/post/chi-qu-fa-xiao-he-ji" title=" 尺取法小合集"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
-															尺取法小合集</span></span></a></span>
+                <span class="prev"><a href="https://www.akwing.cn/post/hdu-2460-network" title=" HDU 2460 Network"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+															HDU 2460 Network</span></span></a></span>
                 
             </nav>
         </div>

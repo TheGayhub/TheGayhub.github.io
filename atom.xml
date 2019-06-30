@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-06-30T06:23:28.289Z</updated>
+    <updated>2019-06-30T10:28:34.598Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -25,6 +25,136 @@
 <p>洛谷P3674 <a href="https://www.luogu.org/problemnew/show/P3674">P3674 小清新人渣的本愿</a>
 1操作化简以后bitset统计答案左移x可以看成当前数+x , 2操作注意要另加一个bitset，这是因为可能有负数存不了，3操作直接枚举因子。</p>
 </blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HDU 3830 Checkers]]></title>
+        <id>https://www.akwing.cn/post/hdu-3830-checkers</id>
+        <link href="https://www.akwing.cn/post/hdu-3830-checkers">
+        </link>
+        <updated>2019-06-30T09:32:06.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="lca二分">LCA+二分</h2>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="lca二分">LCA+二分</h2>
+<!-- more -->
+<h3 id="题意给定3个点abc每次操作可以跳到相邻点的对称位置-询问最终能否跳到xyz不考虑顺序-如果能输出最小步数">题意：给定3个点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>,每次操作可以跳到相邻点的对称位置。询问最终能否跳到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>(不考虑顺序)  如果能，输出最小步数.</h3>
+<p>我们不妨设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo>&lt;</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a&lt;b&lt;c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span> , <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>可以跳到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>a</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">2a-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>c</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">2c-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>,也即是往两边跳。
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span>可以往中间跳，我们可以发现如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>−</mo><mi>a</mi><mo>=</mo><mo>=</mo><mi>c</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">b-a==c-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>的时候我们就不能往中间跳了。
+我们可以这样想，把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>这三个的位置当成一个状态，而这个状态是二叉树中的一个节点，a和c往里跳相当于往父节点走，当<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>−</mo><mi>a</mi><mo>=</mo><mo>=</mo><mi>c</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">b-a==c-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>时说明走到了根节点。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>往外跳相当去往子节点走，并且无穷无尽。
+我们开始让<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span>不断往里走，即不断往上寻找父节点，直至找到根节点。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>具有相同根节点时，答案有解，此时答案树上两点的最短距离。也即是可以转化寻找LCA。往上走的时候不能一步一步走，比如三个数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>101</mn></mrow><annotation encoding="application/x-tex">1,2,101</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span></span></span></span>，我们不能一步步翻<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>101</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(2,3,101)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>101</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(3,4,101)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，这样太慢了，能不能直接翻到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>99</mn><mo separator="true">,</mo><mn>100</mn><mo separator="true">,</mo><mn>101</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(99,100,101)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">9</span><span class="mord">9</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。
+首先要找到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>走到根节点所需步数，也即是深度，然后将其中深度大的减小至共同深度。设深度差<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">dis</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span></span></span></span>.二分答案，假设二分值为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>,如果它们俩往上走<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>步就能处于共同坐标，那么可以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo>=</mo><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">r=mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>,缩小答案，继续二分。二分结束的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 即是它们俩其中一个走向LCA所需步数。最终 <strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>l</mi><mo>+</mo><mi>d</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">2 * l+dis</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span></span></span></span></strong> 即为答案。
+另外题目说多组输入，也没看到题目有说。</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#include&lt;string&gt;
+#include&lt;bitset&gt;
+#include&lt;cmath&gt;
+using namespace std;
+const int N = 1e6 + 100;
+typedef long long ll;
+struct state{
+    ll a, b, c, cnt;//cnt表示当前状态走到根节点需要的步数
+    bool operator == (const state &amp;o)const{
+        return a == o.a&amp;&amp;b == o.b&amp;&amp;c == o.c;
+    }
+};
+state st, ed;
+void Sort(state &amp;cur)
+{
+    if (cur.a &gt; cur.b)swap(cur.a, cur.b);
+    if (cur.a &gt; cur.c) swap(cur.a, cur.c);
+    if (cur.b &gt; cur.c) swap(cur.b, cur.c);
+}
+state getRoot(state cur)
+{
+    cur.cnt = 0;
+    ll d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    while (d1 != d2)
+    {
+        ll t = 0;
+        if (d1 &gt; d2)
+        {
+            t = (d1 - 1) / d2;
+            cur.b -= t*d2;
+            cur.c -= t*d2;
+        }
+        else
+        {
+            t = (d2 - 1) / d1;
+            cur.b += t*d1;
+            cur.a += t*d1;
+        }
+        cur.cnt += t;
+        Sort(cur);
+        d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    }
+    return cur;
+}
+state solve(state cur, ll dis)
+{
+    ll d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    while (dis&amp;&amp;d1!=d2)
+    {
+        ll t = 0;
+        if (d1 &gt; d2)
+        {
+            t = min((d1 - 1) / d2, dis);
+            cur.b -= t*d2;
+            cur.c -= t*d2;
+        }
+        else
+        {
+            t = min((d2 - 1) / d1, dis);
+            cur.b += t*d1;
+            cur.a += t*d1;
+        }
+        dis -= t;
+        Sort(cur);
+        d1 = cur.b - cur.a, d2 = cur.c - cur.b;
+    }
+    return cur;
+}
+int main()
+{
+    while (scanf(&quot;%lld%lld%lld&quot;, &amp;st.a, &amp;st.b, &amp;st.c) != EOF)
+    {
+        scanf(&quot;%lld%lld%lld&quot;, &amp;ed.a, &amp;ed.b, &amp;ed.c);
+        st.cnt = 0, ed.cnt = 0;
+        Sort(st);
+        Sort(ed);
+        state st1 = getRoot(st), ed1 = getRoot(ed);//首先找到根节点
+        st.cnt = st1.cnt, ed.cnt = ed1.cnt;//所需步数
+        if (st1 == ed1){
+            puts(&quot;YES&quot;);
+            ll dis = abs(st.cnt - ed.cnt);
+            if (st.cnt &gt; ed.cnt){//提至同一深度
+                st = solve(st, dis);
+            }
+            else{
+                ed = solve(ed, dis);
+            }
+            ll l = 0, r = min(st.cnt, ed.cnt);
+            while (l &lt; r)
+            {
+                ll mid = (l + r) &gt;&gt; (1LL);
+                state ss = solve(st, mid);
+                state ee = solve(ed, mid);
+                if (ss == ee) r = mid;
+                else l = mid + 1;
+            }
+            printf(&quot;%lld\n&quot;, 2 * l + dis);
+        }
+        else{
+            puts(&quot;NO&quot;);
+        }
+    }
+
+    return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -971,193 +1101,6 @@ int main()
 	}
 	sort(q + 1, q + m + 1, cmp1);
 	Mo();
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[BZOJ 2038 小Z的袜子 ]]></title>
-        <id>https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi</id>
-        <link href="https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi">
-        </link>
-        <updated>2019-06-23T14:51:29.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="莫队">莫队</h2>
-]]></summary>
-        <content type="html"><![CDATA[<h2 id="莫队">莫队</h2>
-<!-- more -->
-<p>这题是个莫队模板题，今天学习了一下莫队，莫队用到了分块。莫队的巧妙之处就在于它的排序+转移。
-这题是个不带修莫队，先按照询问的左端点排序，左端点在同一区间再按照右端点排序，通常 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 转移对答案带来的影响可以预先推出来，然后实现了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>转移 ，比如这题的答案就是</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mo>(</mo><mo>∑</mo><mtext> </mtext><msubsup><mi>C</mi><mrow><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo></mrow><mn>2</mn></msubsup><mo>)</mo></mrow><mrow><mi>C</mi><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mn>2</mn><mrow><mi>r</mi><mo>−</mo><mi>l</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo fence="true">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\dfrac{(\sum\ C_{cnt[x]}^2)}{ C{2 \choose r-l+1}} 
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.8895469999999994em;vertical-align:-1.188439em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7011079999999996em;"><span style="top:-2.214892em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord"><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.895108em;"><span style="top:-2.355em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.887em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace"> </span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999998em;"><span style="top:-2.378em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">t</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">]</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.49699999999999994em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.188439em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>化简一下就是</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mo>(</mo><mo>∑</mo><mtext> </mtext><mo>(</mo><mrow><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo></mrow><msup><mo>)</mo><mn>2</mn></msup><mo>)</mo><mo>−</mo><mo>(</mo><mi>r</mi><mo>−</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mrow><mo>(</mo><mi>r</mi><mo>−</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>r</mi><mo>−</mo><mi>l</mi><mo>)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \dfrac{ (\sum\ ({cnt[x]})^2 ) -(r-l+1) }{ (r-l+1)(r-l) } 
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.427108em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911079999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace"> </span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>如果增加数，转移的时候就是增加了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mn>1</mn><msup><mo>)</mo><mn>2</mn></msup><mo>−</mo><mo>(</mo><mi>c</mi><mi>n</mi><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo><msup><mo>)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(cnt[x]+1)^2 - (cnt[x])^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
-<pre><code>#include&lt;stdio.h&gt;
-#include&lt;algorithm&gt;
-#include&lt;iostream&gt;
-#include&lt;math.h&gt;
-#include&lt;cstring&gt;
-#define mem(a,b) memset(a,b,sizeof(a))
-#define ll long long 
-using namespace std; 
-const int N = 5e4+10;
-int a[N], cnt[N],b[N];
-int n, m,block;
-ll ans;
-ll gcd(ll a, ll b)
-{
-	if (!b) return a;
-	return gcd(b, a%b);
-}
-struct query{
-	int id, l, r;
-	int aa, bb;
-}q[N];
-bool cmp1(query o1, query o2)
-{
-	if (b[o1.l] != b[o2.l]) return o1.l &lt; o2.l;
-	return o1.r &lt; o2.r;
-}
-bool cmp2(query o1, query o2)
-{
-	return o1.id &lt; o2.id;
-}
-void update(int pos,int val)
-{
-	ans -= (cnt[a[pos]] * cnt[a[pos]]);
-	cnt[a[pos]] += val;
-	ans += (cnt[a[pos]] * cnt[a[pos]]);
-	
-}
-int main()
-{
-	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	block = sqrt(n);
-	for (int i = 1; i &lt;= n; i++)
-	{
-		scanf(&quot;%d&quot;, &amp;a[i]);
-		b[i] = (i - 1) / block + 1;
-	}
-	for (int i = 1; i &lt;= m; i++)
-	{
-		scanf(&quot;%d%d&quot;, &amp;q[i].l, &amp;q[i].r);
-		q[i].id = i;
-	}
-	sort(q + 1, q + m + 1,cmp1);
-	int l = 1, r = 0;
-	for (int i = 1; i &lt;= m; i++)
-	{
-		while (l &lt; q[i].l) update(l++, -1);
-		while (l&gt;q[i].l) update(--l, 1);
-		while (r &lt; q[i].r) update(++r, 1);
-		while (r&gt;q[i].r) update(r--, -1);
-		if (q[i].l == q[i].r){
-			q[i].aa = 0;
-			q[i].bb = 1;
-			continue;
-		}
-		ll aa = ans - (q[i].r - q[i].l + 1);
-		ll bb = (q[i].r - q[i].l + 1LL)*(q[i].r - q[i].l);
-		ll d = gcd(aa, bb);
-		q[i].aa = aa / d, q[i].bb = bb / d;
-	}
-	sort(q + 1, q + m + 1, cmp2);
-	for (int i = 1; i &lt;= m; i++)
-	{
-		printf(&quot;%d/%d\n&quot;, q[i].aa, q[i].bb);
-	}
-	return 0;
-}
-</code></pre>
-<p>带修改的怎么处理呢？
-可以再增加一个时间记录最近更改的时间，这个时侯为减小复杂度，排序的时候就要变一下，分块的大小也要变。（块的大小很影响时间复杂度），这样我们每次转移的时候<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo separator="true">,</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">l,r,t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span></span></span></span> 一起转移。具体可以看代码。</p>
-<pre><code>#include&lt;stdio.h&gt;
-#include&lt;algorithm&gt;
-#include&lt;iostream&gt;
-#include&lt;math.h&gt;
-#include&lt;cstring&gt;
-#define mem(a,b) memset(a,b,sizeof(a))
-#define ll long long 
-using namespace std; 
-const int N = 5e4+10;
-const int M = 1e6 + 10;
-int a[N], cnt[M],b[N],Ans[N];
-int n, m,block,T,tot, ans;
-int l, r;
-struct query{
-	int id, l, r,t;
-}q[N];
-struct change{
-	int pos, val, pre;
-}R[N];
-bool cmp1(query o1, query o2)
-{
-	if (b[o1.l] == b[o2.l]) { 
-		if (b[o1.r] == b[o2.r]) 
-			return o1.t &lt; o2.t;
-		return o1.r &lt; o2.r; 
-	}
-	return o1.l &lt; o2.l;
-}
-void add(int pos)
-{
-	if (cnt[a[pos]]++ == 0) ans++;
-}
-void del(int pos)
-{
-	if (--cnt[a[pos]]==0) ans--;
-}
-void update(int t)
-{
-	if (R[t].pos &lt;= r&amp;&amp;R[t].pos &gt;= l){
-		if (cnt[R[t].val]++ == 0)ans++;
-		if (--cnt[a[R[t].pos]] == 0) ans--;
-	}
-	swap(a[R[t].pos], R[t].val);
-}
-int main()
-{
-	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	block = pow(n,2.0/3.0);
-	for (int i = 1; i &lt;= n; i++)
-	{
-		scanf(&quot;%d&quot;, &amp;a[i]);
-		b[i] = (i - 1) / block + 1;
-	}
-	for (int i = 1; i &lt;= m; i++)
-	{
-		char op[3];
-		scanf(&quot;%s&quot;, op);
-		if (op[0] == 'Q')
-		{
-			++tot;
-			scanf(&quot;%d%d&quot;, &amp;q[tot].l, &amp;q[tot].r);
-			q[tot].t = T;
-			q[tot].id = tot;
-		}
-		else if (op[0] == 'R')
-		{
-			++T;
-			scanf(&quot;%d%d&quot;, &amp;R[T].pos, &amp;R[T].val);
-		}
-	}
-	sort(q + 1, q + tot + 1,cmp1);
-	l = 1, r = 0;
-	int t = 0;
-	for (int i = 1; i &lt;= tot; i++)
-	{
-		while (t &lt; q[i].t) update(++t);
-		while (t&gt;q[i].t) update(t--);
-		while (l &lt; q[i].l) del(l++);
-		while (l&gt;q[i].l) add(--l);
-		while (r &lt; q[i].r) add(++r);
-		while (r&gt;q[i].r) del(r--);
-		Ans[q[i].id] = ans;
-	}
-	for (int i = 1; i &lt;= tot; i++)
-		printf(&quot;%d\n&quot;, Ans[i]);
 	return 0;
 }
 </code></pre>
