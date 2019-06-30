@@ -8,7 +8,7 @@
 <meta name="HandheldFriendly" content="true">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
 <meta http-equiv="x-dns-prefetch-control" content="on">
-<title>LCA模板 | Guapi</title>
+<title>POJ 3728 The merchant | Guapi</title>
 
 <!-- APlayer Start -->
 <link rel="stylesheet" type="text/css" href="https://www.akwing.cn/styles/main.css" />
@@ -493,8 +493,6 @@
             var blurBanner = false;                if (!blurBanner) registLoadBanner();
             </script>
 									
-            <img id="lazyload-img" alt="page banner image" src="https://images.unsplash.com/photo-1561697300-a44b204ae2ec?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://images.unsplash.com/photo-1561697300-a44b204ae2ec?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
-									
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
                 var bgHeight = getBgHeight(window.innerHeight, '65', '40');
@@ -508,15 +506,11 @@
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
-                        LCA模板                    </h1>
+                        POJ 3728 The merchant                    </h1>
                     <h2 class="blog-description font-mono" style="">
 						
-                        2019-06-29 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
-							
-							<a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a>
-								 
-							<a href="https://www.akwing.cn/tag/8AwwtVN5L">常用模板</a>
-								 									  
+                        2019-06-30 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
+																  
 																	  
 																	  • <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
                 </div>
@@ -541,85 +535,13 @@
         </div>
         
                 <div class="post-content" itemprop="articleBody">
-                        <p><h3 id="tarjan">Tarjan ：</h3>
-<p>只能离线处理，时间复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span></p>
-<pre><code>int get(int x)
-{
-	if (fa[x] == x) return x;
-	return fa[x] = get(fa[x]);
-}
-void tarjan(int u)
-{
-	vis[u] = true;
-	for (int i = head[u]; i != -1; i = edge[i].next)
-	{
-		int v = edge[i].to,w=edge[i].w;
-		if (vis[v]) continue;
-		dis[v] = dis[u] + w;
-		tarjan(v);
-		fa[v] = u;
-	}
-	for (int i = head1[u]; i != -1; i = query[i].next)
-	{
-		int v = query[i].v;
-		if (!vis[v]) continue;
-		int lca = get(v);//这个即是u和v的LCA
-		ans[query[i].id] = dis[v] + dis[u] - 2*dis[lca];//这是两点间的最短距离
-	}
-}
-</code></pre>
-<h3 id="树上倍增">树上倍增</h3>
-<p>可以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nlog_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 预处理，然后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(log_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 查询</p>
-<pre><code>void bfs()//预处理，也可以dfs
-{
-	//fat[1][0] = 1;
-	queue&lt;int&gt; q;
-	q.push(1);
-	dep[1] = 1;
-	while (!q.empty())
-	{
-		int u = q.front();
-		q.pop();
-		for (int i = head[u]; i != -1; i = edge[i].next)
-		{
-			int v = edge[i].to;
-			if (dep[v]) continue;
-			dep[v] = dep[u] + 1;
-			fat[v][0] = u;
-			for (int j = 1; j &lt;= up; j++)
-			{
-				fat[v][j] = fat[fat[v][j - 1]][j - 1];
-			}
-			q.push(v);
-		}
-	}
-}
-int lca(int u, int v)
-{
-	if (dep[u] &gt; dep[v]) swap(u, v);
-	for (int j = up; j &gt;= 0; j--)
-	{
-		if (dep[fat[v][j]] &gt;= dep[u]) v = fat[v][j];
-	}
-	if (u == v) return u;
-	for (int j = up; j &gt;= 0; j--)
-	{
-		if (fat[v][j] !=fat[u][j]){
-			v = fat[v][j];
-			u = fat[u][j];
-		}
-	}
-	return fat[v][0];
-}
-</code></pre>
+                        <p><h2 id="lca倍增dp">LCA+倍增+DP</h2>
+<!-- more -->
+<p>题目意思很明确，从u-&gt;v</p>
   </p>                    </div>
         <div class="tags">
 			<div itemprop="keywords" class="keywords atudds">
-				
-				<a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a> 
-				 
-				<a href="https://www.akwing.cn/tag/8AwwtVN5L">常用模板</a> 
-				 												
+																
 																
 																</div>
                     </div>
@@ -634,7 +556,7 @@ int lca(int u, int v)
 </div>
 <div id="qr-box">
     <div class="post-qr-code-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/lca-mo-ban" width="250" height="250" alt="本页链接的二维码"/>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/poj-3728-the-merchant" width="250" height="250" alt="本页链接的二维码"/>
     </div>
     <div class="reward-qr-code-box">
 		
@@ -647,8 +569,8 @@ int lca(int u, int v)
             <div class="post-near">
             <nav>
 				 
-                <span class="prev"><a href="https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban" title=" 树的直径模板"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
-															树的直径模板</span></span></a></span>
+                <span class="prev"><a href="https://www.akwing.cn/post/hdu-3830-checkers" title=" HDU 3830 Checkers"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+															HDU 3830 Checkers</span></span></a></span>
                 
             </nav>
         </div>
