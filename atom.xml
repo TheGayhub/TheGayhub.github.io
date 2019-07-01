@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-07-01T09:24:21.246Z</updated>
+    <updated>2019-07-01T09:30:51.824Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -537,59 +537,49 @@ int main()
 <p>维护一个从栈顶到栈底递减的字符串，当前字符比栈顶大或相等，直接插入，否则弹出，直到大于栈顶或栈空。删除的个数达到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>就要及时停止，最后输出栈中前<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n-m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>个字符即可。字符相等为什么直接插入？ 因为这个字符保留在栈中是最优的。如果后面有比它小的字符，那这个就可能被删除，如果没有，那就是后面字符比它大，都不会影响答案。</p>
 <h4 id="st表">ST表：</h4>
 <p>不断的从区间中寻找最小的字符，然后暴力查找下标，再更新区间。第一次查找的区间为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,m+1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>,这个区间的选取，每次都要保证最终留有足够的字符来使得我们的最终字符个数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n-m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>。假设当前查找第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个字符，上次查找的位置下标为idx,那么这次查找的区间就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>i</mi><mi>d</mi><mi>x</mi><mo>+</mo><mn>1</mn><mo separator="true">,</mo><mi>m</mi><mo>+</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[idx+1,m+i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> .ST表求解即可</p>
-<pre><code>
-#include &lt;iostream&gt;
+<pre><code>#include &lt;iostream&gt;
 #include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 #include&lt;cstring&gt;
 using namespace std;
-const int N = 2e5 + 10;
-const int mod = 1e9;
-typedef  long long ll;
+const int N = 1e3 + 10;
+typedef long long ll;
 #define lowbit(x) (x&amp;(-x))
-int num[30];
-int len, tot;
+int n,m,k;
 char s[N];
+char a[N];
+int tot;
 int main()
 {
-	scanf(&quot;%s&quot;, s);
-	len = strlen(s);
-	for (int i = 0; i &lt; len; i++)
-		num[s[i] - 'a']++;
-	int pos = -1, f = 0;
-	for (int i = 0; i &lt; 26; i++)
+	while (scanf(&quot;%s%d&quot;, s, &amp;m) != EOF)
 	{
-		if (num[i] &amp; 1)
+		tot = 0;
+		int lose = 0;
+		n = strlen(s);
+		for (int i = 0; i &lt; n; i++)
 		{
-			f = 1;
-			for (int j = 25; j&gt;i; j--)
+			if (lose &gt;= m) { a[++tot] = s[i]; continue; }
+			while (tot&amp;&amp;s[i] &lt; a[tot])
 			{
-				if (num[j] &amp; 1){
-					num[i]++;
-					num[j]--;
-					f = 0;
-					break;
-				}
+				tot--;
+				lose++;
+				if (lose &gt;= m) break;
 			}
-			if (f) pos = i;
+			a[++tot] = s[i];
 		}
+		int up = n - m;
+		int i = 1;
+		while (a[i] == '0'&amp;&amp;i &lt;= up) i++;
+		if (i &gt; up){
+			puts(&quot;0&quot;);
+			continue;
+		}
+		for (; i &lt;= up; i++)
+		{
+			putchar(a[i]);
+		}
+		puts(&quot;&quot;);
 	}
-	for (int i = 0; i &lt; 26; i++)
-	{
-		if (!num[i]) continue;
-		int t = num[i] / 2;
-		while (t--)
-			s[tot++] = i + 'a';
-	}
-	if (pos != -1) s[tot++] = pos + 'a';
-	for (int i = 25; i &gt;= 0; i--)
-	{
-		if (!num[i]) continue;
-		int t = num[i] / 2;
-		while (t--)
-			s[tot++] = i + 'a';
-	}
-	printf(&quot;%s\n&quot;, s);
 	return 0;
 }
 
