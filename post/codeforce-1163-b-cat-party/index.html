@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html class="no-js" >
 <head>
-
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
@@ -15,8 +15,6 @@
     
     <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
     <script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
-    
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script>var dPlayers = [];var dPlayerOptions = [];</script><style type="text/css">
             /* Lora */
@@ -510,8 +508,7 @@
         		
     
 </head>
-<body class="theme-white color-default card  desktop windows chrome not-safari use-sidebar">
-
+<body class="theme-white color-default code-dark card  desktop windows chrome not-safari wrap-code use-sidebar">
     <script>
         loadPrefersDarkModeState();
         if (LocalConst.USE_MIRAGES_DARK || (LocalConst.AUTO_NIGHT_SHIFT && LocalConst.PREFERS_DARK_MODE)) {
@@ -524,50 +521,40 @@
 <div class="browse-happy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
 <![endif]-->
 <div class="sp-progress"></div>
+
 <div id="wrap">
     <span id="backtop" class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
-      <header>
- 
+       <header>
     <a id="toggle-nav" class="btn btn-primary" href="javascript:void(0);"><span>MENU</span></a>
 <nav id="site-navigation" class="sidebar no-user-select" role="navigation">
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1561913470820" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1561973052608" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
-       
-		
-		
+        
         <ul id="menu-menu-1" class="menu navbar-nav">
-			
-			
-			
-			
+                        
                         <li class="menu-item"><a href="/">首页</a></li>
-            
-			
+           
                         <li class="menu-item"><a href="/archives">归档</a></li>
-            
-			
+           
                         <li class="menu-item"><a href="/tags">标签</a></li>
-            
-			
+           
                         <li class="menu-item"><a href="/post/about">关于</a></li>
-            
-                                  
+           
+                                    
                     </ul>
-		
-		
-		
-		
-		
-		
     </div>
                 <div id="nav-toolbar">
             <div class="side-toolbar">
                 <ul class="side-toolbar-list">
-                                            <li><a id="side-toolbar-rss" href="https://blog.fyun.org/feed" title="RSS"><i class="fa fa-feed"></i></a></li>
+                                            
+                                            
+                                            <li><a id="side-toolbar-rss" href="https://www.akwing.cn/atom.xml" title=""><i class="fa fa-feed"></i></a></li>
+                                       
+                                       
 											
                                              
                                                   
@@ -575,12 +562,9 @@
                                                   
                                              
                                                   
-                                             
-                                                  
-                                             
-                                                  
-											
-											<li><a id="side-toolbar-read-settings" href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a></li>
+                                                                                
+                                                                                
+                                                                                 <li><a id="side-toolbar-read-settings" href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a></li>
                                     </ul>
                 <div class="read-settings-container animated">
                     <div class="read-settings animated">
@@ -610,7 +594,61 @@
     <div id="body">
         <style type="text/css">
     /** 页面样式调整 */
-                div#comments{
+            #masthead::after {
+        content: '';
+        width: 150%;
+        height: 4.375rem;
+        background: #fff;
+        left: -25%;
+        bottom: -1.875rem;
+        border-radius: 100%;
+        position: absolute;
+        z-index: -1;
+    }
+    .inner::after {
+        content: '';
+        width: 150%;
+        height: 4.375rem;
+        background-color: #fff;
+        left: -25%;
+        bottom: -1.875rem;
+        border-radius: 100%;
+        position: absolute;
+    }
+    @media screen and (max-width: 25rem){
+        #masthead::after, .inner::after {
+            width: 250%;
+            left: -75%;
+            bottom: -3.875rem;
+        }
+    }
+    @media screen and (min-width: 25.0625rem) and (max-width: 37.4375rem){
+        #masthead::after, .inner::after {
+            width: 200%;
+            left: -50%;
+            bottom: -2.875rem;
+        }
+    }
+    body.theme-dark #masthead {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    body.theme-dark #masthead::after {
+        background-color: #2c2a2a;
+    }
+    body.theme-dark .inner::after {
+        background-color: #2c2a2a;
+    }
+    body.theme-sunset .inner::after, body.theme-sunset #masthead::after{
+        background-color: #F8F1E4;
+    }
+    #post article {
+        margin-top: -0.625rem;
+    }
+    #index {
+        padding-top: 0.375rem;
+    }
+            div#comments{
         margin-top: 0;
     }
                         #footer{
@@ -640,39 +678,175 @@
                 body.classList.remove('content-serif');
             }            LocalConst.SHOW_TOC = false;
                     </script>
-                                <header id="masthead" class="align-center align-middle " style="
+        <script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-204'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-204'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+var registCommentEvent = function() {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        focus: 'focus',
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        focus: 'onfocus',
+        load: 'onload'
+    };
+    var r = document.getElementById('respond-post-204');
+        
+    if (null != r) {
+        var forms = r.getElementsByTagName('form');
+        if (forms.length > 0) {
+            var f = forms[0], textarea = f.getElementsByTagName('textarea')[0], added = false;
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea[event.add](event.focus, function () {
+                    if (!added) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        
+                        input.name = '_';
+                            input.value = (function () {
+    var _5MEzOLL = //'o'
+'8d'+//'ULe'
+'8a3'+//'gOR'
+'03d'+'6e'//'KM3'
++//'QL'
+'QL'+'0Mc'//'0Mc'
++//'fIe'
+'8f3'+'4f'//'3'
++'ac'//'UQx'
++'27'//'y7'
++//'Rf'
+'Rf'+'7c'//'Nd'
++//'Z'
+'38'+'e34'//'T1'
++'8'//'pj'
++'d9'//'zbQ'
++'l'//'l'
++'d0'//'Vx3'
++/* '3'//'3' */''+''///*'1T'*/'1T'
++//'G'
+'f', _bvJXTD = [[10,12],[10,13],[19,21],[29,30]];
+    
+    for (var i = 0; i < _bvJXTD.length; i ++) {
+        _5MEzOLL = _5MEzOLL.substring(0, _bvJXTD[i][0]) + _5MEzOLL.substring(_bvJXTD[i][1]);
+    }
+
+    return _5MEzOLL;
+})();
+                        //console.log('https://7yue.in/204.py');
+                        //console.log('https://7yue.in/204.py');
+                        f.appendChild(input);
+                        
+                        input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'checkReferer';
+                        input.value = 'false';
+                        
+                        f.appendChild(input);
+                        
+
+                        added = true;
+                    }
+                });
+            }
+        }
+    }
+};
+</script>                        <header id="masthead" class="align-center align-middle " style="
             height:
-        65;">
+        60;">
             <div class="blog-background"></div>
-                        <div class="lazyload-container"></div>
-            <script type="text/javascript">
-            var blurBanner = false;                if (!blurBanner) registLoadBanner();
-            </script>
-									
-            <img id="lazyload-img" alt="page banner image" src="https://ncdn.camarts.cn/a5a26ab6.jpg?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://ncdn.camarts.cn/a5a26ab6.jpg', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
-									
+            
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
-                var bgHeight = getBgHeight(window.innerHeight, '65', '40');
+                var bgHeight = getBgHeight(window.innerHeight, '60', '40');
                 head.style.height = bgHeight + "px";
+
+                                var banner = 'https://ncdn.camarts.cn/a5a26ab6.jpg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
+                head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
                             </script>
-									
-									
-									
-									
-									
+                            
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
                         Codeforce 1163 B Cat Party                    </h1>
                     <h2 class="blog-description font-mono" style="">
-						
-                        2019-05-10 • 阅读: <span id="busuanzi_value_page_pv"></span> • 
-							
-							<a href="https://www.akwing.cn/tag/Codeforce">Codeforce</a>
-								 									  
-																	  
-																	  • <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
+                        2019-05-10 • 阅读: 21 • 
+                        
+                        <a href="https://www.akwing.cn/tag/Codeforce">Codeforce</a> • 
+                        
+                        <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
                 </div>
 
             </div>
@@ -685,12 +859,13 @@
 <div id="post" role="main">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
-            
+            <meta itemprop="name" content=""/>
+            <meta itemprop="url" content="https://www.akwing.cn"/>
         </div>
         <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
-            
-            
-                <meta itemprop="url" content="https://secure.gravatar.com/avatar/e9ebe6ce987b5a6eded073a87771a1bb?s=50&amp;r=PG&amp;d=">
+            <meta itemprop="name" content=""/>
+            <div itemscope itemprop="logo" itemtype="">
+                <meta itemprop="url" content="">
             </div>
         </div>
         
@@ -749,20 +924,17 @@ int main()
 	return 0;
 }
 </code></pre>
-  </p>                    </div>
+</p>                    </div>
         <div class="tags">
-			<div itemprop="keywords" class="keywords atudds">
-				
+			
 				<a href="https://www.akwing.cn/tag/Codeforce">Codeforce</a> 
-				 												
-																
-																</div>
+				 			
                     </div>
-                <div class="post-buttons">
-            <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>
-                       <a id="toggle-post-qr-code" class="btn btn-grey">文章二维码</a>
-                                    <a id="toggle-reward-qr-code" class="btn btn-grey">打赏</a>
-                    </div>
+                    <div class="post-buttons">
+                        <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>
+                                   <a id="toggle-post-qr-code" class="btn btn-grey">文章二维码</a>
+                                                <a id="toggle-reward-qr-code" class="btn btn-grey">打赏</a>
+                                </div>
             </article>
 </div>
 </div>
@@ -776,22 +948,24 @@ int main()
         <img src="https://www.z4a.net/images/2019/06/29/QQ20190628125623_666.jpg" height="250" alt="打赏二维码"/>
 			
     </div>
+    
 </div>
 <div id="body-bottom">
 <div class="container">
             <div class="post-near">
-            <nav>
-				 
-                <span class="prev"><a href="https://www.akwing.cn/post/codeforces-gym-101147-j-whistles-new-car" title=" Codeforces Gym 101147 J-Whistle&#39;s New Car"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
-															Codeforces Gym 101147 J-Whistle&#39;s New Car</span></span></a></span>
-                
-            </nav>
+                <nav>
+                    
+                   <span class="prev"><a href="https://www.akwing.cn/post/codeforces-gym-101147-j-whistles-new-car" title=" Codeforces Gym 101147 J-Whistle&#39;s New Car"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+                                                               Codeforces Gym 101147 J-Whistle&#39;s New Car</span></span></a></span>
+                   
+               </nav>
         </div>
             
     <div id="comments">
-                      
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                        <div id="respond-post-204" class="respond">
+                            
+                                
+                                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
@@ -812,9 +986,10 @@ int main()
 
 </script>
 
-          
-          
-        
+                                
+                                
+                              
+        </div>
                     </div>
 
 
@@ -823,37 +998,21 @@ int main()
 </div>
 </div><!-- end #body -->
 </div><!-- end #wrap -->
+
 <footer id="footer" role="contentinfo">
     <div class="container">
         <p></p>    </div>
 </footer>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+
     <script src="https://www.akwing.cn/media/scripts/jquery.min.js" type="text/javascript"></script>
 <script src="https://www.akwing.cn/media/scripts/mirages.main.min.js" type="text/javascript"></script>
-
-<!-- APlayer Start -->
-<script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
-<script>
-var len = APlayerOptions.length;
-for(var i=0;i<len;i++){
-    APlayers[i] = new APlayer({
-        element: document.getElementById('player' + APlayerOptions[i]['id']),
-        narrow: false,
-        preload: APlayerOptions[i]['preload'],
-        mutex: APlayerOptions[i]['mutex'],
-        autoplay: APlayerOptions[i]['autoplay'],
-        showlrc: APlayerOptions[i]['showlrc'],
-        music: APlayerOptions[i]['music'],
-        theme: APlayerOptions[i]['theme']
-        });
-    APlayers[i].init();
-}
+<script type="text/javascript">
+    (function ($) {
+                Page.prepareCodeBlock();
+        hljs.initHighlightingOnLoad();
+    })(jQuery);
 </script>
-<!-- APlayer End -->
-
-<script type="text/javascript">Page.highlightCodeBlock();</script>
 
 
 <script type="text/javascript">pangu.spacingElementByClassName('container');</script>
@@ -864,17 +1023,39 @@ for(var i=0;i<len;i++){
                 if (typeof registCommentEvent === 'function') {
             registCommentEvent();
         }
-                        Page.setupLazyLoadImage();
-                        Page.setupCDNImageOptimize();
-                Page.loadDisqus();
+                                Page.loadDisqus();
         Page.setupContents();
         Page.bindQRCodeBlockEvents();
+                $('body').pjax('a[href^="https://www.akwing.cn"]:not(a[target="_blank"], a[no-pjax])', {
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            }
+        ).on('pjax:click', function() {
+            Page.doPJAXClickAction();
+                    }).on('pjax:send', function() {
+            Page.doPJAXSendAction();
+                    }).on('pjax:complete', function() {
+                        if (typeof registCommentEvent === 'function') {
+                registCommentEvent();
+            }
+                        Page.doPJAXCompleteAction();
+                    });
             })(jQuery);
+        function ExSearchCall(item){
+        if (item && item.length) {
+            // 关闭搜索框
+            $('.ins-close').click();
+            $.pjax({
+                url: item.attr('data-url'),
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            });
+        }
+    }
     </script>
-<!--textClick Begin-->
-
-<!--textClick END-->
-<script type="text/javascript"> 
+    <script type="text/javascript"> 
 /* 鼠标特效 */
 var a_idx = 0; 
 jQuery(document).ready(function($) { 
@@ -903,6 +1084,23 @@ jQuery(document).ready(function($) {
         }); 
     }); 
 }); 
+</script>
+
+<script>
+    var OriginTitile = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '(つェ⊂)你又抛弃人家啦~ ' + OriginTitile;
+            clearTimeout(titleTime);
+        }
+        else {
+            document.title = '(*´∇｀*) 你来啦~ ' + OriginTitile;
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            }, 2000);
+        }
+    });
 </script>
 
 </body>

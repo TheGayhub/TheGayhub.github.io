@@ -1,7 +1,8 @@
+
 <!DOCTYPE HTML>
 <html class="no-js" >
 <head>
- 
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
@@ -14,8 +15,6 @@
     
     <link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
     <script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
-    
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script>var dPlayers = [];var dPlayerOptions = [];</script><style type="text/css">
             /* Lora */
@@ -509,8 +508,7 @@
         		
     
 </head>
-<body class="theme-white color-default card  desktop windows chrome not-safari use-sidebar">
-
+<body class="theme-white color-default code-dark card  desktop windows chrome not-safari wrap-code use-sidebar">
     <script>
         loadPrefersDarkModeState();
         if (LocalConst.USE_MIRAGES_DARK || (LocalConst.AUTO_NIGHT_SHIFT && LocalConst.PREFERS_DARK_MODE)) {
@@ -523,50 +521,40 @@
 <div class="browse-happy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
 <![endif]-->
 <div class="sp-progress"></div>
+
 <div id="wrap">
     <span id="backtop" class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
-      <header>
- 
+       <header>
     <a id="toggle-nav" class="btn btn-primary" href="javascript:void(0);"><span>MENU</span></a>
 <nav id="site-navigation" class="sidebar no-user-select" role="navigation">
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1561913470820" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1561973052608" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
-       
-		
-		
+        
         <ul id="menu-menu-1" class="menu navbar-nav">
-			
-			
-			
-			
+                        
                         <li class="menu-item"><a href="/">首页</a></li>
-            
-			
+           
                         <li class="menu-item"><a href="/archives">归档</a></li>
-            
-			
+           
                         <li class="menu-item"><a href="/tags">标签</a></li>
-            
-			
+           
                         <li class="menu-item"><a href="/post/about">关于</a></li>
-            
-                                  
+           
+                                    
                     </ul>
-		
-		
-		
-		
-		
-		
     </div>
                 <div id="nav-toolbar">
             <div class="side-toolbar">
                 <ul class="side-toolbar-list">
-                                            <li><a id="side-toolbar-rss" href="https://blog.fyun.org/feed" title="RSS"><i class="fa fa-feed"></i></a></li>
+                                            
+                                            
+                                            <li><a id="side-toolbar-rss" href="https://www.akwing.cn/atom.xml" title=""><i class="fa fa-feed"></i></a></li>
+                                       
+                                       
 											
                                              
                                                   
@@ -574,12 +562,9 @@
                                                   
                                              
                                                   
-                                             
-                                                  
-                                             
-                                                  
-											
-											<li><a id="side-toolbar-read-settings" href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a></li>
+                                                                                
+                                                                                
+                                                                                 <li><a id="side-toolbar-read-settings" href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a></li>
                                     </ul>
                 <div class="read-settings-container animated">
                     <div class="read-settings animated">
@@ -670,7 +655,61 @@
             max-width: 1024px;
         }
     }
-                    #qr-box {
+            #masthead::after {
+        content: '';
+        width: 150%;
+        height: 4.375rem;
+        background: #fff;
+        left: -25%;
+        bottom: -1.875rem;
+        border-radius: 100%;
+        position: absolute;
+        z-index: -1;
+    }
+    .inner::after {
+        content: '';
+        width: 150%;
+        height: 4.375rem;
+        background-color: #fff;
+        left: -25%;
+        bottom: -1.875rem;
+        border-radius: 100%;
+        position: absolute;
+    }
+    @media screen and (max-width: 25rem){
+        #masthead::after, .inner::after {
+            width: 250%;
+            left: -75%;
+            bottom: -3.875rem;
+        }
+    }
+    @media screen and (min-width: 25.0625rem) and (max-width: 37.4375rem){
+        #masthead::after, .inner::after {
+            width: 200%;
+            left: -50%;
+            bottom: -2.875rem;
+        }
+    }
+    body.theme-dark #masthead {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    body.theme-dark #masthead::after {
+        background-color: #2c2a2a;
+    }
+    body.theme-dark .inner::after {
+        background-color: #2c2a2a;
+    }
+    body.theme-sunset .inner::after, body.theme-sunset #masthead::after{
+        background-color: #F8F1E4;
+    }
+    #post article {
+        margin-top: -0.625rem;
+    }
+    #index {
+        padding-top: 0.375rem;
+    }
+                #qr-box {
         background-color: transparent;
     }
             .post-buttons, #qr-box {
@@ -705,23 +744,24 @@
                     </script>
                                 <header id="masthead" class="align-center align-middle " style="
             height:
-        65;">
+        60;">
+
             <div class="blog-background"></div>
-                        <div class="lazyload-container"></div>
-            <script type="text/javascript">
-            var blurBanner = false;                if (!blurBanner) registLoadBanner();
-            </script>
-				
-									
-            <img id="lazyload-img" alt="page banner image" src="https://images.unsplash.com/photo-1415509038608-afca35072cff?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1270&amp;q=80?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://images.unsplash.com/photo-1415509038608-afca35072cff?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1270&amp;q=80', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
-				
-				
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
-                var bgHeight = getBgHeight(window.innerHeight, '65', '40');
+                var bgHeight = getBgHeight(window.innerHeight, '60', '40');
                 head.style.height = bgHeight + "px";
+	
+                                var banner = 'https://images.unsplash.com/photo-1415509038608-afca35072cff?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1270&amp;q=80'
+                           	     
+                                
+                                 + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
+                head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
                             </script>
+
+
                         <div class="inner">
+
                 <div class="container">
                     <h1 class="blog-title" style="">Guapi</h1>
                     <h2 class="blog-description" style="">惟世之繁华如故,斟酌岁月如初</h2>
@@ -734,8 +774,8 @@
 
 
 <div id="index" role="main">
-    	                                
-	
+                                       
+   
 	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
                     <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
                         <meta itemprop="name" content="Hran">
@@ -744,7 +784,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/shu-jia-shua-ti-ji-lu">
@@ -782,7 +822,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/poj-3728-the-merchant">
@@ -814,7 +854,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-3830-checkers">
@@ -856,7 +896,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-2460-network">
@@ -888,7 +928,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/lca-mo-ban">
@@ -930,7 +970,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban">
@@ -972,7 +1012,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2">
@@ -1014,7 +1054,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/xian-duan-shu-qu-jian-xiu-gai-you-xian-ji">
@@ -1054,7 +1094,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-5306-gorgeous-sequence">
@@ -1094,7 +1134,7 @@
                     <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="Hran">
                         <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561913470820">
+                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1561973052608">
                         </div>
                     </div>
                     <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-6278-just-h-index">
@@ -1132,46 +1172,77 @@
                     </a>
                 </article>
                                    
-                                            
+                                             
                             <ol class="page-navigator">
-								
-								
-								
-								<li class="btn btn-primary next"><a href="https://www.akwing.cn/page/2/">下一页</a></li></ol></div> 
-									 
+                                    
+                                
+                                <li class="btn btn-primary next"><a href="https://www.akwing.cn/page/2/">下一页</a></li>
+                                
+                            </ol></div>
 </div>
 </div>
 <div id="body-bottom">
 </div>
     </div><!-- end #body -->
 </div><!-- end #wrap -->
+
 <footer id="footer" role="contentinfo">
     <div class="container">
         <p></p>    </div>
 </footer>
 
+
     <script src="https://www.akwing.cn/media/scripts/jquery.min.js" type="text/javascript"></script>
 <script src="https://www.akwing.cn/media/scripts/mirages.main.min.js" type="text/javascript"></script>
-<script>
-var len = APlayerOptions.length;
-for(var i=0;i<len;i++){
-    APlayers[i] = new APlayer({
-        element: document.getElementById('player' + APlayerOptions[i]['id']),
-        narrow: false,
-        preload: APlayerOptions[i]['preload'],
-        mutex: APlayerOptions[i]['mutex'],
-        autoplay: APlayerOptions[i]['autoplay'],
-        showlrc: APlayerOptions[i]['showlrc'],
-        music: APlayerOptions[i]['music'],
-        theme: APlayerOptions[i]['theme']
-        });
-    APlayers[i].init();
-}
+<script type="text/javascript">
+    (function ($) {
+                Page.prepareCodeBlock();
+        hljs.initHighlightingOnLoad();
+    })(jQuery);
 </script>
 
-<script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
 
-<script type="text/javascript"> 
+<script type="text/javascript">pangu.spacingElementByClassName('container');</script>
+<script type="text/javascript">Waves.init();</script>
+
+<script type="text/javascript">
+    (function ($) {
+                if (typeof registCommentEvent === 'function') {
+            registCommentEvent();
+        }
+                                Page.loadDisqus();
+        Page.setupContents();
+        Page.bindQRCodeBlockEvents();
+                $('body').pjax('a[href^="https://www.akwing.cn"]:not(a[target="_blank"], a[no-pjax])', {
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            }
+        ).on('pjax:click', function() {
+            Page.doPJAXClickAction();
+                    }).on('pjax:send', function() {
+            Page.doPJAXSendAction();
+                    }).on('pjax:complete', function() {
+                        if (typeof registCommentEvent === 'function') {
+                registCommentEvent();
+            }
+                        Page.doPJAXCompleteAction();
+                    });
+            })(jQuery);
+        function ExSearchCall(item){
+        if (item && item.length) {
+            // 关闭搜索框
+            $('.ins-close').click();
+            $.pjax({
+                url: item.attr('data-url'),
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            });
+        }
+    }
+    </script>
+    <script type="text/javascript"> 
 /* 鼠标特效 */
 var a_idx = 0; 
 jQuery(document).ready(function($) { 
@@ -1202,8 +1273,22 @@ jQuery(document).ready(function($) {
 }); 
 </script>
 
-
-
+<script>
+    var OriginTitile = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '(つェ⊂)你又抛弃人家啦~ ' + OriginTitile;
+            clearTimeout(titleTime);
+        }
+        else {
+            document.title = '(*´∇｀*) 你来啦~ ' + OriginTitile;
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            }, 2000);
+        }
+    });
+    </script>
 </body>
 </html>
 
