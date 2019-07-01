@@ -833,22 +833,18 @@ var registCommentEvent = function() {
                 var bgHeight = getBgHeight(window.innerHeight, '60', '40');
                 head.style.height = bgHeight + "px";
 
-                                var banner = 'https://i.loli.net/2019/07/01/5d19ea97722d119066.jpg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
+                                var banner = 'https://i.loli.net/2019/07/01/5d1a11dbbfb3590044.jpeg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
                 head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
                             </script>
                             
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
-                        HDU 6278 Just h-index                    </h1>
+                        POJ 2763 Housewife Wind                    </h1>
                     <h2 class="blog-description font-mono" style="">
-                        2019-06-24 • 阅读: 21 • 
+                        2019-07-01 • 阅读: 21 • 
                         
-                        <a href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a> • 
-                        
-                        <a href="https://www.akwing.cn/tag/-Wb21-7YF">莫队</a> • 
-                        
-                        <a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a> • 
+                        <a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a> • 
                         
                         <a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> • 
                         
@@ -876,202 +872,160 @@ var registCommentEvent = function() {
         </div>
         
                 <div class="post-content" itemprop="articleBody">
-                        <p><h1 id="莫队树状数组主席树">莫队+树状数组/主席树</h1>
+                        <p><h1 id="lca树状数组">LCA+树状数组</h1>
 <!-- more -->
-<blockquote>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6278">Just h-index</a></p>
-</blockquote>
-<p>本题可以二分答案，假设二分的答案为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>,区间长度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">len</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span></span></span></span>。</p>
-<ul>
-<li>如果区间大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>的数个数大于等于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>个，那么这个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>就是满足的。</li>
-<li>也可以这样理解：如果该区间第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>n</mi><mo>−</mo><mi>m</mi><mi>i</mi><mi>d</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">len-mid+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>大的数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&gt;</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">&gt;=mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>，那么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>也是满足的。</li>
-</ul>
-<p>对于第一个我们可以用莫队+树状数组解决。第二个就是求解区间第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span>大的模板了，利用主席树。
-主席树比莫队快了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1000</mn><mo>+</mo><mi>m</mi><mi>s</mi><mo>!</mo></mrow><annotation encoding="application/x-tex">1000+ms!</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">s</span><span class="mclose">!</span></span></span></span></p>
-<p><a href="https://www.akwing.cn/post-images/1561361398782.png"></a></p>
-<blockquote>
-<p>主席树</p>
-</blockquote>
-<pre><code>#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;string&gt;
-#include&lt;cmath&gt;
-#include&lt;functional&gt;
-using namespace std;
-const int N = 1e5+10;
-typedef long long ll;
-struct tree{
-	int lc, rc, cnt;
-}T[N&lt;&lt;5];
-int n, m,tot,rm;
-int a[N],root[N];
-void build(int &amp;rt,int l, int r)
-{
-	rt = ++tot;
-	if (l &lt; r)
-	{
-		int mid = (l + r) &gt;&gt; 1;
-		build(T[rt].lc, l, mid);
-		build(T[rt].rc, mid + 1, r);
-	}
-}
-void update(int &amp;cur, int pre, int l, int r, int pos)
-{
-	cur = ++tot;
-	T[cur] = T[pre];
-	T[cur].cnt++;
-	if (l == r) return;
-	int mid = (l + r) &gt;&gt; 1;
-	if (pos &lt;= mid) update(T[cur].lc, T[pre].lc, l, mid, pos);
-	else update(T[cur].rc, T[pre].rc, mid + 1, r, pos);
-}
-int query(int x, int y, int l, int r, int k)
-{
-	if (l == r) return l;
-	int s = T[T[y].lc].cnt - T[T[x].lc].cnt;
-	int mid = (l + r) &gt;&gt; 1;
-	if (k &lt;= s)
-		return query(T[x].lc, T[y].lc, l, mid, k);
-	else
-		return query(T[x].rc, T[y].rc, mid + 1, r, k - s);
-}
-int solve(int l, int r)
-{
-	int s = r - l + 1;
-	int L = 1, R = s;
-	while (L &lt; R)
-	{
-		int mid = (L + R+1) &gt;&gt; 1;
-		int k = query(root[l - 1], root[r], 1, rm, s - mid + 1);
-		if (k &gt;= mid) L = mid;
-		else R = mid - 1;
-	}
-	return L;
-}
-int main()
-{
-	while (scanf(&quot;%d%d&quot;, &amp;n, &amp;m) != EOF)
-	{
-		tot = 0;
-		rm = -1;
-		for (int i = 1; i &lt;= n; i++)
-		{
-			scanf(&quot;%d&quot;, &amp;a[i]);
-			rm = max(rm, a[i]);
-		}
-		//build(root[0], 1, rm);
-		for (int i = 1; i &lt;= n; i++)
-			update(root[i], root[i - 1], 1, rm, a[i]);
-		for (int i = 1; i &lt;= m; i++)
-		{
-			int l, r;
-			scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
-			printf(&quot;%d\n&quot;,solve(l, r));
-		}
-	}
-	return 0;
-}
-</code></pre>
-<blockquote>
-<p>莫队+树状数组</p>
-</blockquote>
-<pre><code>#include&lt;stdio.h&gt;
+<h3 id="一个lca板子有个地方打错了然后wa了一天检查代码就是没去仔细检查板子">一个LCA板子有个地方打错了，然后WA了一天😭😭😭，检查代码就是没去仔细检查板子。</h3>
+<h3 id="题目链接-poj-2763-housewife-wind">&gt;  题目链接 ：<a href="http://poj.org/problem?id=2763">POJ 2763 Housewife Wind</a></h3>
+<h3 id="题意给一棵树-询问操作当前节点s走到节点u所需最短距离-修改操作改变输入的第i条边的权值">题意：给一棵树。询问操作：当前节点s走到节点u所需最短距离。修改操作：改变输入的第i条边的权值</h3>
+<p>如果不加修改，拿这就是一个裸LCA的题，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dis[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>表示根节点到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>节点的距离，询问<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span> 的距离就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>a</mi><mo>]</mo><mo>+</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>b</mi><mo>]</mo><mo>−</mo><mn>2</mn><mo>∗</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>l</mi><mi>c</mi><mi>a</mi><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo>)</mo><mo>]</mo></mrow><annotation encoding="application/x-tex">dis[a]+dis[b]-2 * dis[lca(a,b)]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">a</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span> ,增加修改怎么考虑呢？</p>
+<p>可以发现改变<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>−</mo><mo>&gt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a-&gt;b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord">−</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> (假设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>的深度大于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>)的权值会影响根节点到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>以及<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>的整个子树的距离，即改变<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>b</mi><mo>]</mo><mi mathvariant="normal">和</mi><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>b</mi><mtext>的子树中的节点</mtext><mo>]</mo></mrow><annotation encoding="application/x-tex">dis[b]和dis[b{\text{的子树中的节点}} ]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mclose">]</span><span class="mord cjk_fallback">和</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">的子树中的节点</span></span></span><span class="mclose">]</span></span></span></span> ,改变子树可以转化为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序上的区间修改。我们不可能暴力的对区间经行修改。我们可以用树状数组完成区间修改，树状数组维护一个差分数组表示<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">dis</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span></span></span></span>数组的变化，这个差分数组前 <strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span></strong> 项求和代表历史上的修改对第 <strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span></strong> 个位置带来的影响(即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">dis</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span></span></span></span>数组的变化)。</p>
+<p>最后答案就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>+</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>u</mi><mo>)</mo><mo>+</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>s</mi><mo>]</mo><mo>+</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>s</mi><mo>)</mo><mo>−</mo><mn>2</mn><mo>∗</mo><mo>(</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>l</mi><mi>c</mi><mi>a</mi><mo>(</mo><mi>u</mi><mo separator="true">,</mo><mi>s</mi><mo>)</mo><mo>]</mo><mo>+</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>(</mo><mi>l</mi><mi>c</mi><mi>a</mi><mo>(</mo><mi>u</mi><mo separator="true">,</mo><mi>s</mi><mo>)</mo><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">dis[u]+sum(u)+dis[s]+sum(s)-2 * (dis[lca(u,s)]+sum(lca(u,s)))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">s</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
-#include&lt;iostream&gt;
-#include&lt;math.h&gt;
 #include&lt;cstring&gt;
-#define mem(a,b) memset(a,b,sizeof(a))
-#define ll long long 
-using namespace std; 
+#include&lt;queue&gt;
+#include&lt;string&gt;
+#include&lt;bitset&gt;
+#include&lt;cmath&gt;
+using namespace std;
+const int N = 1e6 + 100;
+const int up = 20;
 #define lowbit(x) (x&amp;(-x))
-const int N = 1e5+10;
-int b[N],Ans[N];
-int c[N], a[N];
-int g[N];
-int n, m,block,tot, ans;
-int  k;
-int l, r;
-struct query{
-	int id, l, r;
-}q[N];
-bool cmp1(query o1, query o2)
+typedef long long ll;
+struct Edge{
+	int to, w, next;
+}edge[N];
+int head[N], tot,in[N],out[N],fat[N][22],dep[N],dis[N],top;
+int n, q, s,c[N],we[N];
+void addedge(int from, int to, int w)
 {
-	if (b[o1.l] == b[o2.l]) 
-		return o1.r &lt; o2.r; 
-	return o1.l &lt; o2.l;
+	edge[++tot].to = to;
+	edge[tot].w = w;
+	edge[tot].next = head[from];
+	head[from] = tot;
 }
-void update(int pos,int val)
+void dfs(int u)
 {
-	for (; pos &lt;= n; pos += lowbit(pos))
-		c[pos] += val;
+	in[u] = ++top;
+	for (int i = head[u]; i != -1; i = edge[i].next)
+	{
+		int v = edge[i].to, w = edge[i].w;
+		if (dep[v]) continue;
+		dep[v] = dep[u] + 1;
+		dis[v] = dis[u] + w;
+		fat[v][0] = u;
+		dfs(v);
+	}
+	out[u] = ++top;
 }
-int ask(int pos)
+void dp()
 {
-	int res=0;
-	for (; pos; pos -= lowbit(pos))
-		res += c[pos];
+	for (int j = 1; j &lt;= up; j++)
+	{
+		for (int i = 1; i &lt;= n; i++)
+		{
+			fat[i][j] = fat[fat[i][j - 1]][j - 1];
+		}
+	}
+}
+int lca(int u, int v)
+{
+	if (dep[u] &lt; dep[v]) swap(u, v);
+	for (int j = up; j &gt;= 0; j--)
+	{
+		if ((dep[u] - dep[v]) &gt;&gt; j &amp; 1) u = fat[u][j];
+	}
+	if (u == v) return v;
+	for (int j = up; j &gt;= 0; j--)
+	{
+		if (fat[u][j] != fat[v][j]){
+			u = fat[u][j];
+			v = fat[v][j];
+		}
+	}
+	return fat[u][0];
+}
+void add(int x,int val)
+{
+	while (x &lt;= top)
+	{
+		c[x] += val;
+		x += lowbit(x);
+	}
+}
+int ask(int x)
+{
+	int res = 0;
+	while (x)
+	{
+		res += c[x];
+		x -= lowbit(x);
+	}
 	return res;
 }
-int solve()
-{
-	int cnt = r - l + 1;
-	int L = 1, R = cnt;
-	while (L &lt; R)
-	{
-		int mid = (L + R+1) &gt;&gt; 1;
-		if (cnt - ask(mid - 1) &gt;= mid) L = mid;
-		else R = mid - 1;
-	}
-	 return L;
-}
-void Mo()
-{
-	l = 1, r = 0;
-	for (int i = 1; i &lt;= m; i++)
-	{
-		while (r &lt; q[i].r) update(a[++r],1);
-		while (r&gt; q[i].r)  update(a[r--], -1);
-		while (l &lt; q[i].l) update(a[l++], -1);
-		while (l&gt;q[i].l) update(a[--l], 1);
-		Ans[q[i].id] = solve();
-	}
-	for (int i = 1; i &lt;= m; i++)
-		printf(&quot;%d\n&quot;, Ans[i]);
-}
 int main()
 {
-	while (scanf(&quot;%d%d&quot;, &amp;n, &amp;m) != EOF)
+	memset(head, -1, sizeof(head));
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;q, &amp;s);
+	for (int i = 1; i &lt; n ; i++)
 	{
-		block = sqrt(n);
-		for (int i = 1; i &lt;= n; i++)
-		{
-			scanf(&quot;%d&quot;, &amp;a[i]);
-			b[i] = (i - 1) / block + 1;
-			c[i] = 0;
-		}
-		for (int i = 1; i &lt;= m; i++)
-		{
-			scanf(&quot;%d%d&quot;, &amp;q[i].l, &amp;q[i].r);
-			q[i].id = i;
-		}
-		sort(q + 1, q + m + 1, cmp1);
-		Mo();
+		int u, v;
+		scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;we[i]);
+		addedge(u, v, we[i]);
+		addedge(v, u, we[i]);
 	}
-	return 0;
+	dep[1] = 1;
+	fat[1][0] = 1;
+	dfs(1);
+	dp();
+	for (int i = 0; i &lt; q; i++)
+	{
+		int op, x, y;
+		scanf(&quot;%d&quot;, &amp;op);
+		if (op == 0){
+			scanf(&quot;%d&quot;, &amp;x);
+			int Lca = lca(x, s);
+			printf(&quot;%d\n&quot;, dis[s] + dis[x] + ask(in[x]) + ask(in[s]) - 2 * (dis[Lca] + ask(in[Lca])));
+			s = x;
+		} 
+		else
+		{
+			scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+			int u = edge[2*(x-1)+1].to, v = edge[x &lt;&lt; 1].to;
+			if (dep[u] &lt; dep[v]) swap(u, v);
+			add(in[u], y - we[x]);
+			add(out[u] + 1, we[x] - y);
+			we[x] = y;
+		}
+	}
+    return 0;
 }
+
+
+
+</code></pre>
+<p>我们也可以不适用dis数组。</p>
+<pre><code>for (int i = 1; i &lt; n; i++)
+{
+    scanf(&quot;%d%d%d&quot;, &amp;a[i], &amp;b[i], &amp;we[i]);
+    addedge(a[i], b[i], we[i]);
+    addedge(b[i], a[i], we[i]);
+}
+for (int i = 1; i &lt; n; i++)
+{
+    if (dep[a[i]] &lt; dep[b[i]]) swap(a[i], b[i]);
+    add(in[a[i]], we[i]);//直接插入,这也可以理解为和修改操作一样，不断修改边权的过程。
+    add(out[a[i]] + 1, -we[i]);
+}
+
+printf(&quot;%d\n&quot;, ask(in[x]) + ask(in[s]) - 2 * (ask(in[Lca])));
+
 </code></pre>
 </p>                    </div>
         <div class="tags">
 			
-				<a href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a> 
-				 
-				<a href="https://www.akwing.cn/tag/-Wb21-7YF">莫队</a> 
-				 
-				<a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a> 
+				<a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a> 
 				 
 				<a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> 
 				 			
@@ -1087,7 +1041,7 @@ int main()
 </div>
 <div id="qr-box">
     <div class="post-qr-code-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/hdu-6278-just-h-index" width="250" height="250" alt="本页链接的二维码"/>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/poj-2763-housewife-wind" width="250" height="250" alt="本页链接的二维码"/>
     </div>
     <div class="reward-qr-code-box">
 		
@@ -1101,8 +1055,8 @@ int main()
             <div class="post-near">
                 <nav>
                     
-                   <span class="prev"><a href="https://www.akwing.cn/post/hdu-6534-chika-and-friendly-pairs" title=" HDU 6534 Chika and Friendly Pairs"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
-                                                               HDU 6534 Chika and Friendly Pairs</span></span></a></span>
+                   <span class="prev"><a href="https://www.akwing.cn/post/poj-3728-the-merchant" title=" POJ 3728 The merchant"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+                                                               POJ 3728 The merchant</span></span></a></span>
                    
                </nav>
         </div>
