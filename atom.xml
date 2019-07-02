@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-07-02T03:23:09.096Z</updated>
+    <updated>2019-07-02T05:06:54.901Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2019, Guapi</rights>
     <entry>
         <title type="html"><![CDATA[暑假刷题记录]]></title>
-        <id>https://www.akwing.cn/post/shu-jia-shua-ti-ji-lu</id>
-        <link href="https://www.akwing.cn/post/shu-jia-shua-ti-ji-lu">
+        <id>https://www.akwing.cn/post/shu-jia-shua-ti</id>
+        <link href="https://www.akwing.cn/post/shu-jia-shua-ti">
         </link>
         <updated>2019-09-01T11:36:23.000Z</updated>
         <summary type="html"><![CDATA[<h1 id="主要记录一下每天刷的题目">主要记录一下每天刷的题目</h1>
