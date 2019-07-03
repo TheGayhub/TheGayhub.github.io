@@ -594,67 +594,6 @@
     <div id="body">
         <style type="text/css">
     /** 页面样式调整 */
-        @media(max-width: 767px) {
-        body.card #index, body.card #archive {
-            padding: 4rem 3rem 3.5rem;
-        }
-        body.card .container {
-            max-width: 710px;
-        }
-        body.card #index article, body.card #archive article {
-            padding: .9375rem 0 1.25rem;
-        }
-        body.card #index article .post-card-mask, body.card #archive article .post-card-mask {
-            height: 12.5rem;
-        }
-        body.card #index article .post-card-container, body.card #archive article .post-card-container {
-            padding: 1rem 1rem;
-        }
-        .page-navigator {
-            margin-top: 2rem;
-        }
-    }
-    @media(max-width: 336px) {
-        body.card #index article .post-card-mask, body.card #archive article .post-card-mask {
-            height: 10.5rem;
-        }
-        a.btn, .btn>a {
-            padding: .4375rem 2.25rem;
-        }
-        .page-navigator {
-            margin-top: 1.5rem;
-        }
-    }
-    @media screen and (min-width: 768px) and (max-width: 1301px) {
-        body.card .container {
-            max-width: 720px;
-        }
-    }
-    @media screen and (min-width: 1302px) and (max-width: 1599px) {
-        body.card .container {
-            max-width: 864px;
-        }
-    }
-    @media screen and (min-width: 1600px) and (max-width: 1799px){
-        body.card .container {
-            max-width: 896px;
-        }
-    }
-    @media screen and (min-width: 1800px) and (max-width: 1999px){
-        body.card .container {
-            max-width: 960px;
-        }
-    }
-    @media screen and (min-width: 2000px) and (max-width: 2399px) {
-        body.card .container {
-            max-width: 992px;
-        }
-    }
-    @media screen and (min-width: 2400px) {
-        body.card .container {
-            max-width: 1024px;
-        }
-    }
             #masthead::after {
         content: '';
         width: 150%;
@@ -709,16 +648,13 @@
     #index {
         padding-top: 0.375rem;
     }
-                #qr-box {
-        background-color: transparent;
-    }
-            .post-buttons, #qr-box {
-        display: none;
-    }
-    #body-bottom {
+            div#comments{
         margin-top: 0;
     }
-            
+                        #footer{
+        padding: 1.25rem 0;
+    }
+        
                 .inner {
         background-color: rgba(0,0,0,0.25);
     }
@@ -742,30 +678,168 @@
                 body.classList.remove('content-serif');
             }            LocalConst.SHOW_TOC = false;
                     </script>
-                                <header id="masthead" class="align-center align-middle " style="
+        <script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-204'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-204'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+var registCommentEvent = function() {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        focus: 'focus',
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        focus: 'onfocus',
+        load: 'onload'
+    };
+    var r = document.getElementById('respond-post-204');
+        
+    if (null != r) {
+        var forms = r.getElementsByTagName('form');
+        if (forms.length > 0) {
+            var f = forms[0], textarea = f.getElementsByTagName('textarea')[0], added = false;
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea[event.add](event.focus, function () {
+                    if (!added) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        
+                        input.name = '_';
+                            input.value = (function () {
+    var _5MEzOLL = //'o'
+'8d'+//'ULe'
+'8a3'+//'gOR'
+'03d'+'6e'//'KM3'
++//'QL'
+'QL'+'0Mc'//'0Mc'
++//'fIe'
+'8f3'+'4f'//'3'
++'ac'//'UQx'
++'27'//'y7'
++//'Rf'
+'Rf'+'7c'//'Nd'
++//'Z'
+'38'+'e34'//'T1'
++'8'//'pj'
++'d9'//'zbQ'
++'l'//'l'
++'d0'//'Vx3'
++/* '3'//'3' */''+''///*'1T'*/'1T'
++//'G'
+'f', _bvJXTD = [[10,12],[10,13],[19,21],[29,30]];
+    
+    for (var i = 0; i < _bvJXTD.length; i ++) {
+        _5MEzOLL = _5MEzOLL.substring(0, _bvJXTD[i][0]) + _5MEzOLL.substring(_bvJXTD[i][1]);
+    }
+
+    return _5MEzOLL;
+})();
+                        //console.log('https://7yue.in/204.py');
+                        //console.log('https://7yue.in/204.py');
+                        f.appendChild(input);
+                        
+                        input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'checkReferer';
+                        input.value = 'false';
+                        
+                        f.appendChild(input);
+                        
+
+                        added = true;
+                    }
+                });
+            }
+        }
+    }
+};
+</script>                        <header id="masthead" class="align-center align-middle " style="
             height:
         60;">
-
             <div class="blog-background"></div>
-                        <script type="text/javascript">
-                var head = document.querySelector("#masthead");
-                var bgHeight = getBgHeight(window.innerHeight, '60', '40');
-                head.style.height = bgHeight + "px";
-	
-                                var banner = 'https://i.loli.net/2019/07/01/5d19e382b61dd38591.jpg'
-                           	     
-                                
-                                 + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
-                head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
-                            </script>
-
-
+            
                         <div class="inner">
-
                 <div class="container">
-                    <h1 class="blog-title" style="">Guapi</h1>
-                    <h2 class="blog-description" style="">惟世之繁华如故,斟酌岁月如初</h2>
+                    <h1 class="blog-title" style="">
+                        CH#56C 异象石                    </h1>
+                    <h2 class="blog-description font-mono" style="">
+                        2019-07-03 • 阅读: 21 • 
+                        
+                        <a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a> • 
+                        
+                        <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
                 </div>
+
             </div>
                     </header>
                     <div class="container">
@@ -773,441 +847,253 @@
 
 
 
-<div id="index" role="main">
-                                       
-   
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
+<div id="post" role="main">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+            <meta itemprop="name" content=""/>
+            <meta itemprop="url" content="https://www.akwing.cn"/>
+        </div>
+        <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content=""/>
+            <div itemscope itemprop="logo" itemtype="">
+                <meta itemprop="url" content="">
+            </div>
+        </div>
+        
+                <div class="post-content" itemprop="articleBody">
+                        <p><h1 id="lcadfs序">LCA+DFS序</h1>
+<!-- more -->
+<blockquote>
+<p>题目链接：<a href="https://www.acwing.com/problem/content/description/357/">CH#56C 异象石</a></p>
+</blockquote>
+<p>题意：选择一条最短路将树上标记过的点连起来,并且点的个数是动态变化的。</p>
+<p>如果我们按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序将这些点排序，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序小的在前面，构成一个环。我们可以发现这个环中相邻两个点得距离之和就是答案的二倍。我是这样理解的，既然按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序将这些点排列起来(构成环)，按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序将这几个点走完得到的路程是答案的两倍。因为每两个点之间的边必然递归一次，然后回溯一次，即每个边经过两次。</p>
+<p>基于这样的思想，我们可以求解本题，但是如果暴力去做的话，单次操作的复杂度最高会变成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nlog_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> ,由于点是动态变化的，且每次只变一个点，我们可以用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">set</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span></span></span></span>来维护这些点，将它们的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序放入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">set</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span></span></span></span>中。设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">dist</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span></span></span></span>为两个点之间的距离(利用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>C</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">LCA</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span></span></span></span>很容易求得)，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>为答案的二倍，
+每次插入一个点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>时.找到这个点的前驱<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>r</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">pre</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span></span></span></span>和后继<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>a</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">last</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span></span></span></span>.(注意是环)</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi><mo>−</mo><mo>=</mo><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>p</mi><mi>r</mi><mi>e</mi><mo separator="true">,</mo><mi>l</mi><mi>a</mi><mi>s</mi><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">ans-=dist(pre,last)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord">−</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span>，即将原来的断开。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi><mo>+</mo><mo>=</mo><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>p</mi><mi>r</mi><mi>e</mi><mo separator="true">,</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>l</mi><mi>a</mi><mi>s</mi><mi>t</mi><mo separator="true">,</mo><mi>p</mi><mi>r</mi><mi>e</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">ans+=dist(pre,x)+dist(last,pre)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord">+</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mclose">)</span></span></span></span>,即加入新边。</li>
+<li>将x节点的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>序插入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">set</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span></span></span></span></li>
+</ul>
+<p>这样单词操作为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>n</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(log_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，删除也是同理</p>
+<pre><code>    
+
+#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#include&lt;string&gt;
+#include&lt;set&gt;
+#include&lt;cmath&gt;
+using namespace std;
+const int N = 8e5 + 10;
+const int up = 20;
+#define lowbit(x) (x&amp;(-x))
+typedef long long ll;
+struct Edge{
+    int to, w, next;
+}edge[N];
+int head[N], tot, in[N], fat[N][22], dep[N],  top, vs[N];
+int n, m;
+set&lt;int&gt; s;
+ll dis[N];
+void addedge(int from, int to, int w)
+{
+    edge[++tot].to = to;
+    edge[tot].w = w;
+    edge[tot].next = head[from];
+    head[from] = tot;
+}
+void dfs(int u)
+{
+    in[u] = ++top;
+    vs[top] = u;
+    for (int i = head[u]; i != -1; i = edge[i].next)
+    {
+        int v = edge[i].to, w = edge[i].w;
+        if (dep[v]) continue;
+        dep[v] = dep[u] + 1;
+        dis[v] = dis[u] + w;
+        fat[v][0] = u;
+        dfs(v);
+    }
+}
+void dp()
+{
+    for (int j = 1; j &lt;= up; j++)
+    {
+        for (int i = 1; i &lt;= n; i++)
+        {
+            fat[i][j] = fat[fat[i][j - 1]][j - 1];
+        }
+    }
+}
+int lca(int u, int v)
+{
+    if (dep[u] &lt; dep[v]) swap(u, v);
+    for (int j = up; j &gt;= 0; j--)
+    {
+        if ((dep[u] - dep[v]) &gt;&gt; j &amp; 1) u = fat[u][j];
+    }
+    if (u == v) return v;
+    for (int j = up; j &gt;= 0; j--)
+    {
+        if (fat[u][j] != fat[v][j]){
+            u = fat[u][j];
+            v = fat[v][j];
+        }
+    }
+    return fat[u][0];
+}
+
+void init()
+{
+    top = tot = 0;
+    for (int i = 0; i &lt;= n; i++)
+    {
+        head[i] = -1;
+        fat[i][0] = i;
+        dep[i] = 0;
+        dis[i] = 0;
+    }
+}
+ll dist(int u, int v)
+{
+    return dis[u] + dis[v] - 2 * dis[lca(u, v)];
+}
+int main()
+{
+    scanf(&quot;%d&quot;, &amp;n);
+    memset(head, -1, sizeof(head));
+    //init();
+    for (int i = 1; i &lt; n; i++)
+    {
+        int u, v, w;
+        scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);
+        addedge(u, v, w);
+        addedge(v, u, w);
+    }
+    dep[1] = 1;
+    dfs(1);
+    dp();
+    scanf(&quot;%d&quot;, &amp;m);
+    ll ans = 0;
+    while (m--)
+    {
+        char op[5];
+        int x;
+        scanf(&quot;%s&quot;, op);
+        if (op[0] == '?')
+        {
+            printf(&quot;%lld\n&quot;, ans / 2);
+        }
+        else if (op[0] == '+')
+        {
+            scanf(&quot;%d&quot;, &amp;x);
+            if (s.empty())
+            {
+                s.insert(in[x]);
+                continue;
+            }
+            else
+            {
+                auto it = s.lower_bound(in[x]);
+                if (it == s.end()) it = s.begin();
+                auto itt = it == s.begin() ? prev(s.end()) : prev(it);
+                ans += dist(vs[*itt], x) + dist(x, vs[*it]) - dist(vs[*itt], vs[*it]);
+                s.insert(in[x]);
+            }
+        }
+        else
+        {
+            scanf(&quot;%d&quot;, &amp;x);
+            if (!s.count(in[x])) continue;
+            auto it = s.lower_bound(in[x]);
+            auto pre = it == s.begin() ? prev(s.end()) : prev(it);
+            auto lst = next(it) == s.end() ? s.begin() : next(it);
+            ans = ans - dist(vs[*pre], x) - dist(vs[*lst], x) + dist(vs[*pre], vs[*lst]);
+            s.erase(it);
+        }
+    }
+    return 0;
+}
+
+
+</code></pre>
+</p>                    </div>
+        <div class="tags">
+			
+				<a href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a> 
+				 			
                     </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2">
-                    <meta itemprop="dateModified" content="2019-06-27">
-
-                    <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-2">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://i.loli.net/2019/07/01/5d19e9fe38eab54971.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://i.loli.net/2019/07/01/5d19e9fe38eab54971.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://i.loli.net/2019/07/01/5d19e9fe38eab54971.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>暑假集训——周赛2</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-27">2019-06-27・</span>
-
-                                        <span>数据结构—树状数组</span>
- 
-                                        <span>基本数据结构—单调栈</span>
- 
-                                    </div>
+                    <div class="post-buttons">
+                        <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>
+                                   <a id="toggle-post-qr-code" class="btn btn-grey">文章二维码</a>
+                                                <a id="toggle-reward-qr-code" class="btn btn-grey">打赏</a>
                                 </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/xian-duan-shu-qu-jian-xiu-gai-you-xian-ji">
-                    <meta itemprop="dateModified" content="2019-06-26">
-
-                    <a href="https://www.akwing.cn/post/xian-duan-shu-qu-jian-xiu-gai-you-xian-ji">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://i.loli.net/2019/07/01/5d19ea2de162164132.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://i.loli.net/2019/07/01/5d19ea2de162164132.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://i.loli.net/2019/07/01/5d19ea2de162164132.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>线段树区间修改优先级</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-26">2019-06-26・</span>
-
-                                        <span>数据结构—线段树</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-5306-gorgeous-sequence">
-                    <meta itemprop="dateModified" content="2019-06-25">
-
-                    <a href="https://www.akwing.cn/post/hdu-5306-gorgeous-sequence">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://i.loli.net/2019/07/01/5d19ea636256689174.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://i.loli.net/2019/07/01/5d19ea636256689174.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://i.loli.net/2019/07/01/5d19ea636256689174.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>HDU 5306 Gorgeous Sequence</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-25">2019-06-25・</span>
-
-                                        <span>数据结构—线段树</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-6278-just-h-index">
-                    <meta itemprop="dateModified" content="2019-06-24">
-
-                    <a href="https://www.akwing.cn/post/hdu-6278-just-h-index">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://i.loli.net/2019/07/01/5d19ea97722d119066.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://i.loli.net/2019/07/01/5d19ea97722d119066.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://i.loli.net/2019/07/01/5d19ea97722d119066.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>HDU 6278 Just h-index</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-24">2019-06-24・</span>
-
-                                        <span>二分</span>
- 
-                                        <span>莫队</span>
- 
-                                        <span>数据结构—主席树</span>
- 
-                                        <span>数据结构—树状数组</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/hdu-6534-chika-and-friendly-pairs">
-                    <meta itemprop="dateModified" content="2019-06-24">
-
-                    <a href="https://www.akwing.cn/post/hdu-6534-chika-and-friendly-pairs">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://i.loli.net/2019/07/01/5d19eabc99bb675255.jpghttps://i.loli.net/2019/07/01/5d19eabc99bb675255.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://i.loli.net/2019/07/01/5d19eabc99bb675255.jpghttps://i.loli.net/2019/07/01/5d19eabc99bb675255.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://i.loli.net/2019/07/01/5d19eabc99bb675255.jpghttps://i.loli.net/2019/07/01/5d19eabc99bb675255.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>HDU 6534 Chika and Friendly Pairs</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-24">2019-06-24・</span>
-
-                                        <span>莫队</span>
- 
-                                        <span>数据结构—树状数组</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi">
-                    <meta itemprop="dateModified" content="2019-06-23">
-
-                    <a href="https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://source.unsplash.com/1600x900/weekly/?like?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://source.unsplash.com/1600x900/weekly/?like">
-                            <meta itemprop="thumbnailUrl" content="https://source.unsplash.com/1600x900/weekly/?like?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>BZOJ 2038 小Z的袜子 </h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-23">2019-06-23・</span>
-
-                                        <span>莫队</span>
- 
-                                        <span>数据结构—分块</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/codeforce-1181-d-irrigation">
-                    <meta itemprop="dateModified" content="2019-06-21">
-
-                    <a href="https://www.akwing.cn/post/codeforce-1181-d-irrigation">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://images.unsplash.com/photo-1549918231-84e61d32fbde?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=900?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://images.unsplash.com/photo-1549918231-84e61d32fbde?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=900">
-                            <meta itemprop="thumbnailUrl" content="https://images.unsplash.com/photo-1549918231-84e61d32fbde?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=900?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>Codeforce 1181 D - Irrigation</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-21">2019-06-21・</span>
-
-                                        <span>数据结构—主席树</span>
- 
-                                        <span>Codeforce</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1">
-                    <meta itemprop="dateModified" content="2019-06-21">
-
-                    <a href="https://www.akwing.cn/post/shu-jia-ji-xun-zhou-sai-1">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://ncdn.camarts.cn/01483d17.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://ncdn.camarts.cn/01483d17.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://ncdn.camarts.cn/01483d17.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>暑假集训——周赛1</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-21">2019-06-21・</span>
-
-                                        <span>图论—最短路</span>
- 
-                                        <span>图论—最小生成树</span>
- 
-                                        <span>暑假集训</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/poj-3662-telephone-lines">
-                    <meta itemprop="dateModified" content="2019-06-19">
-
-                    <a href="https://www.akwing.cn/post/poj-3662-telephone-lines">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://ncdn.camarts.cn/de388581.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://ncdn.camarts.cn/de388581.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://ncdn.camarts.cn/de388581.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>POJ 3662 Telephone Lines</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-19">2019-06-19・</span>
-
-                                        <span>图论—最短路</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                  
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
-                    </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/e-minimal-segment-cover">
-                    <meta itemprop="dateModified" content="2019-06-15">
-
-                    <a href="https://www.akwing.cn/post/e-minimal-segment-cover">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://ncdn.camarts.cn/55fb6e45.jpg?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://ncdn.camarts.cn/55fb6e45.jpg">
-                            <meta itemprop="thumbnailUrl" content="https://ncdn.camarts.cn/55fb6e45.jpg?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>E. Minimal Segment Cover</h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-15">2019-06-15・</span>
-
-                                        <span>倍增</span>
- 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                                   
-                                             
-                            <ol class="page-navigator">
-                                    
-                                <li class="btn btn-primary prev"><a href="https://www.akwing.cn/">上一页</a></li>
-                                
-                                
-                                <li class="btn btn-primary next"><a href="https://www.akwing.cn/page/3/">下一页</a></li>
-                                
-                            </ol></div>
+            </article>
 </div>
+</div>
+</div>
+<div id="qr-box">
+    <div class="post-qr-code-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/ch56c-yi-xiang-shi" width="250" height="250" alt="本页链接的二维码"/>
+    </div>
+    <div class="reward-qr-code-box">
+		
+        <img src="https://www.z4a.net/images/2019/06/29/QQ20190628125623_666.jpg" height="250" alt="打赏二维码"/>
+			
+    </div>
+    
 </div>
 <div id="body-bottom">
+<div class="container">
+            <div class="post-near">
+                <nav>
+                    
+                   <span class="prev"><a href="https://www.akwing.cn/post/hdu-5274-dylans-loves-tree" title=" HDU 5274 Dylans loves tree"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+                                                               HDU 5274 Dylans loves tree</span></span></a></span>
+                   
+               </nav>
+        </div>
+            
+    <div id="comments">
+                        <div id="respond-post-204" class="respond">
+                            
+                                
+                                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '5ce5a551fd840268c860',
+    clientSecret: '5ead9040f7cc55641e21476762d5830732b68688',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                                
+                                
+                              
+        </div>
+                    </div>
+
+
+
+    </div>
 </div>
-    </div><!-- end #body -->
+</div><!-- end #body -->
 </div><!-- end #wrap -->
 
 <footer id="footer" role="contentinfo">
@@ -1312,7 +1198,7 @@ jQuery(document).ready(function($) {
             }, 2000);
         }
     });
-    </script>
+</script>
+
 </body>
 </html>
-

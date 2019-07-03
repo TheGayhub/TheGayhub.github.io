@@ -1,7 +1,8 @@
+
 <!DOCTYPE HTML>
 <html class="no-js" >
 <head>
- 
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
@@ -507,7 +508,7 @@
         		
     
 </head>
-<body class="theme-white color-default card  desktop windows chrome not-safari use-sidebar">
+<body class="theme-white color-default code-dark card  desktop windows chrome not-safari wrap-code use-sidebar">
     <script>
         loadPrefersDarkModeState();
         if (LocalConst.USE_MIRAGES_DARK || (LocalConst.AUTO_NIGHT_SHIFT && LocalConst.PREFERS_DARK_MODE)) {
@@ -520,9 +521,10 @@
 <div class="browse-happy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
 <![endif]-->
 <div class="sp-progress"></div>
+
 <div id="wrap">
     <span id="backtop" class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
-     <header>
+       <header>
     <a id="toggle-nav" class="btn btn-primary" href="javascript:void(0);"><span>MENU</span></a>
 <nav id="site-navigation" class="sidebar no-user-select" role="navigation">
     <div id="nav">
@@ -592,77 +594,67 @@
     <div id="body">
         <style type="text/css">
     /** 页面样式调整 */
-        @media(max-width: 767px) {
-        body.card #index, body.card #archive {
-            padding: 4rem 3rem 3.5rem;
-        }
-        body.card .container {
-            max-width: 710px;
-        }
-        body.card #index article, body.card #archive article {
-            padding: .9375rem 0 1.25rem;
-        }
-        body.card #index article .post-card-mask, body.card #archive article .post-card-mask {
-            height: 12.5rem;
-        }
-        body.card #index article .post-card-container, body.card #archive article .post-card-container {
-            padding: 1rem 1rem;
-        }
-        .page-navigator {
-            margin-top: 2rem;
+            #masthead::after {
+        content: '';
+        width: 150%;
+        height: 4.375rem;
+        background: #fff;
+        left: -25%;
+        bottom: -1.875rem;
+        border-radius: 100%;
+        position: absolute;
+        z-index: -1;
+    }
+    .inner::after {
+        content: '';
+        width: 150%;
+        height: 4.375rem;
+        background-color: #fff;
+        left: -25%;
+        bottom: -1.875rem;
+        border-radius: 100%;
+        position: absolute;
+    }
+    @media screen and (max-width: 25rem){
+        #masthead::after, .inner::after {
+            width: 250%;
+            left: -75%;
+            bottom: -3.875rem;
         }
     }
-    @media(max-width: 336px) {
-        body.card #index article .post-card-mask, body.card #archive article .post-card-mask {
-            height: 10.5rem;
-        }
-        a.btn, .btn>a {
-            padding: .4375rem 2.25rem;
-        }
-        .page-navigator {
-            margin-top: 1.5rem;
+    @media screen and (min-width: 25.0625rem) and (max-width: 37.4375rem){
+        #masthead::after, .inner::after {
+            width: 200%;
+            left: -50%;
+            bottom: -2.875rem;
         }
     }
-    @media screen and (min-width: 768px) and (max-width: 1301px) {
-        body.card .container {
-            max-width: 720px;
-        }
+    body.theme-dark #masthead {
+        box-shadow: none;
+        -webkit-box-shadow: none;
     }
-    @media screen and (min-width: 1302px) and (max-width: 1599px) {
-        body.card .container {
-            max-width: 864px;
-        }
+    body.theme-dark #masthead::after {
+        background-color: #2c2a2a;
     }
-    @media screen and (min-width: 1600px) and (max-width: 1799px){
-        body.card .container {
-            max-width: 896px;
-        }
+    body.theme-dark .inner::after {
+        background-color: #2c2a2a;
     }
-    @media screen and (min-width: 1800px) and (max-width: 1999px){
-        body.card .container {
-            max-width: 960px;
-        }
+    body.theme-sunset .inner::after, body.theme-sunset #masthead::after{
+        background-color: #F8F1E4;
     }
-    @media screen and (min-width: 2000px) and (max-width: 2399px) {
-        body.card .container {
-            max-width: 992px;
-        }
+    #post article {
+        margin-top: -0.625rem;
     }
-    @media screen and (min-width: 2400px) {
-        body.card .container {
-            max-width: 1024px;
-        }
+    #index {
+        padding-top: 0.375rem;
     }
-                    #qr-box {
-        background-color: transparent;
-    }
-            .post-buttons, #qr-box {
-        display: none;
-    }
-    #body-bottom {
+            div#comments{
         margin-top: 0;
     }
-            
+                        #footer{
+        padding: 1.25rem 0;
+    }
+        
                 .inner {
         background-color: rgba(0,0,0,0.25);
     }
@@ -686,28 +678,175 @@
                 body.classList.remove('content-serif');
             }            LocalConst.SHOW_TOC = false;
                     </script>
-                                <header id="masthead" class="align-center align-middle " style="
+        <script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-204'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-204'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+var registCommentEvent = function() {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        focus: 'focus',
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        focus: 'onfocus',
+        load: 'onload'
+    };
+    var r = document.getElementById('respond-post-204');
+        
+    if (null != r) {
+        var forms = r.getElementsByTagName('form');
+        if (forms.length > 0) {
+            var f = forms[0], textarea = f.getElementsByTagName('textarea')[0], added = false;
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea[event.add](event.focus, function () {
+                    if (!added) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        
+                        input.name = '_';
+                            input.value = (function () {
+    var _5MEzOLL = //'o'
+'8d'+//'ULe'
+'8a3'+//'gOR'
+'03d'+'6e'//'KM3'
++//'QL'
+'QL'+'0Mc'//'0Mc'
++//'fIe'
+'8f3'+'4f'//'3'
++'ac'//'UQx'
++'27'//'y7'
++//'Rf'
+'Rf'+'7c'//'Nd'
++//'Z'
+'38'+'e34'//'T1'
++'8'//'pj'
++'d9'//'zbQ'
++'l'//'l'
++'d0'//'Vx3'
++/* '3'//'3' */''+''///*'1T'*/'1T'
++//'G'
+'f', _bvJXTD = [[10,12],[10,13],[19,21],[29,30]];
+    
+    for (var i = 0; i < _bvJXTD.length; i ++) {
+        _5MEzOLL = _5MEzOLL.substring(0, _bvJXTD[i][0]) + _5MEzOLL.substring(_bvJXTD[i][1]);
+    }
+
+    return _5MEzOLL;
+})();
+                        //console.log('https://7yue.in/204.py');
+                        //console.log('https://7yue.in/204.py');
+                        f.appendChild(input);
+                        
+                        input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'checkReferer';
+                        input.value = 'false';
+                        
+                        f.appendChild(input);
+                        
+
+                        added = true;
+                    }
+                });
+            }
+        }
+    }
+};
+</script>                        <header id="masthead" class="align-center align-middle " style="
             height:
-        65;">
+        60;">
             <div class="blog-background"></div>
-                        <div class="lazyload-container"></div>
-            <script type="text/javascript">
-            var blurBanner = false;                if (!blurBanner) registLoadBanner();
-            </script>
-				
-									
-            <img id="lazyload-img" alt="page banner image" src="https://i.loli.net/2019/07/01/5d19e382b61dd38591.jpg?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://i.loli.net/2019/07/01/5d19e382b61dd38591.jpg', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
-				
+            
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
-                var bgHeight = getBgHeight(window.innerHeight, '65', '40');
+                var bgHeight = getBgHeight(window.innerHeight, '60', '40');
                 head.style.height = bgHeight + "px";
+
+                                var banner = 'https://i.loli.net/2019/07/03/5d1cd0e54020b25848.jpg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
+                head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
                             </script>
+                            
                         <div class="inner">
                 <div class="container">
-                    <h1 class="blog-title" style="">数据结构—分块</h1>
-                    
+                    <h1 class="blog-title" style="">
+                        倍增初探                    </h1>
+                    <h2 class="blog-description font-mono" style="">
+                        2019-07-03 • 阅读: 21 • 
+                        
+                        <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
                 </div>
+
             </div>
                     </header>
                     <div class="container">
@@ -715,62 +854,196 @@
 
 
 
-<div id="index" role="main">
-    	                                
-	
-	                   
-	         <article itemscope="" itemtype="http://schema.org/BlogPosting" class="">
-                    <div class="display-none" itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="Hran">
-                        <meta itemprop="url" content="https://www.akwing.cn">
+<div id="post" role="main">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+            <meta itemprop="name" content=""/>
+            <meta itemprop="url" content="https://www.akwing.cn"/>
+        </div>
+        <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content=""/>
+            <div itemscope itemprop="logo" itemtype="">
+                <meta itemprop="url" content="">
+            </div>
+        </div>
+        
+                <div class="post-content" itemprop="articleBody">
+                        <p><p>倍增+DP</p>
+<!-- more -->
+<p>最近做的3题倍增+dp题，大致思想都是预处理出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>,即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>位置跳<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>j</mi></msup></mrow><annotation encoding="application/x-tex">2^j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span></span></span></span></span></span></span>步能到达的最远距离，和求<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>C</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">LCA</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span></span></span></span>差不多。</p>
+<blockquote>
+<p>Codeforce 1175 E<a href="https://codeforces.com/contest/1175/problem/E">Minimal Segment Cover</a></p>
+</blockquote>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>表示<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>位置往右选择<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>j</mi></msup></mrow><annotation encoding="application/x-tex">2^j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span></span></span></span></span></span></span>个区间能到达的最远位置，根据输入处理出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mn>0</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i][0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mn>0</mn><mo>]</mo><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo>(</mo><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mn>0</mn><mo>]</mo><mo separator="true">,</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo>(</mo><mi>i</mi><mo separator="true">,</mo><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo>]</mo><mo>[</mo><mn>0</mn><mo>]</mo><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">dp[i][0] = max(dp[i][0], max(i,dp[i - 1][0]))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>,然后预处理出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">dp</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span></span></span></span>数组。询问的时候贪心即可。</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int mx = 20;
+const int N = 5e5 + 10;
+int dp[N][mx];
+int n, m,mxdis;
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	for (int i = 0; i &lt; n; i++)
+	{
+		int l, r;
+		scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+		dp[l][0] = max(dp[l][0], r);
+		mxdis = max(mxdis, r);
+	}
+	for (int i = 1; i &lt;= mxdis; i++)
+	{
+		dp[i][0] = max(dp[i][0], max(i,dp[i - 1][0]));
+	}
+	for (int j = 1; j &lt; mx; j++)
+	{
+		for (int i = 0; i &lt;= mxdis; i++)
+		{
+			dp[i][j] = dp[dp[i][j - 1]][j - 1];
+		}
+	}
+	while (m--)
+	{
+		int l, r;
+		scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+		int ans = 0;
+		for (int j = mx - 1; j &gt;= 0; j--)
+		{
+			if (dp[l][j] &lt; r){
+				ans += (1 &lt;&lt; j);
+				l = dp[l][j];
+			}
+		}
+		l = dp[l][0];
+		if (dp[l][0] &lt; r){
+			puts(&quot;-1&quot;);
+			continue;
+		}
+		printf(&quot;%d\n&quot;, ans + 1);
+	}
+	return 0;
+}
+</code></pre>
+<blockquote>
+<p>题目链接： <a href="https://ac.nowcoder.com/acm/problem/15429">牛客 区间的连续段</a></p>
+</blockquote>
+<p>现利用前缀和二分得到dp[i][0]，即i往右跳一步能到达的最远的位置r，我们使用upper_bound,注意这个位置r是不包含在我们一步所能到达的区间内的，即我们一步只能得到区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">[</mo><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mn>0</mn><mo>]</mo><mo separator="true">,</mo><mi>r</mi><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left [ dp[i][0],r \right )</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span> . 这个r代表下一步的起点，仔细想想很巧妙。</p>
+<p>注意<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>]</mo><mo>[</mo><mi>i</mi><mo>]</mo><mo>(</mo><mi>i</mi><mo>∈</mo><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>n</mi><mo>]</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">dp[n+1][i](i \in [1  ,n])</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">]</span><span class="mclose">)</span></span></span></span>要设为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>.因为处理<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mn>0</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i][0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span>的时候可能返回<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N = 1e6 + 10;
+int n, m, k;
+ll a[N];
+int dp[N][25];
+int main()
+{
+    scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;k);
+    for (int i = 1; i &lt;= n; i++)
+    {
+        cin &gt;&gt; a[i];
+    }
+    for (int i = 1; i &lt;= n; i++)
+        a[i] += a[i - 1];
+    for (int i = 0; i &lt;= 20; i++)
+        dp[n+1][i] = n + 1;
+    for (int i = 1; i &lt;= n; i++)
+    {
+        dp[i][0] = upper_bound(a + 1, a + n + 1, a[i - 1] + k) - a;
+        //cout &lt;&lt; dp[i][0] &lt;&lt; endl;
+    }
+    for (int j = 1; j &lt;= 20; j++)
+        for (int i = 1; i &lt;= n; i++)
+            dp[i][j] = dp[dp[i][j - 1]][j - 1];
+    while (m--)
+    {
+        int l, r;
+        scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+        int res = 0;
+        for (int j = 20; j &gt;= 0; j--)
+            if (dp[l][j] &lt;= r) res += (1 &lt;&lt; j), l = dp[l][j];
+        if (dp[l][0] &lt;= r) puts(&quot;Chtholly&quot;);
+        else printf(&quot;%d\n&quot;, res + 1);
+    }
+    return 0;
+}
+</code></pre>
+<blockquote>
+<p>题目链接： <a href="https://codeforces.com/contest/932/problem/D">Codeforce 932 D</a></p>
+</blockquote>
+<p>树上倍增</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mi>a</mi><mi>t</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">fat[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>表示i节点的第2^j个父亲，sum[i][j]表示往上走</p>
+</p>                    </div>
+        <div class="tags">
+						
                     </div>
-                    <div class="display-none" itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="Hran">
-                        <div itemscope="" itemprop="logo" itemtype="http://schema.org/ImageObject">
-                            <meta itemprop="url" content="https://www.akwing.cn/images/avatar.png?v=1562170983037">
-                        </div>
-                    </div>
-                    <meta itemprop="url mainEntityOfPage" content="https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi">
-                    <meta itemprop="dateModified" content="2019-06-23">
-
-                    <a href="https://www.akwing.cn/post/bzoj-2038-xiao-z-de-wa-zi">
-                                                <div class="post-card" id="post-card-681">
-
-                                                        <div class="blog-background" style="background-image: url(&quot;https://source.unsplash.com/1600x900/weekly/?like?imageView2/2/w/928/q/75/format/webp&quot;);"></div>
-                            
-                            <script type="text/javascript">registLoadBanner();</script>
-                            <meta itemprop="image" content="https://source.unsplash.com/1600x900/weekly/?like">
-                            <meta itemprop="thumbnailUrl" content="https://source.unsplash.com/1600x900/weekly/?like?imageView2/2/w/320/q/75">
-                            
-
-                                                        <div class="post-card-mask">
-
-                                <div class="post-card-container">
-                                    <h2 class="post-card-title" itemprop="headline"><span></span>BZOJ 2038 小Z的袜子 </h2>
-                                    <div class="post-card-info">
-                                        <span itemprop="datePublished" content="2019-06-23">2019-06-23・</span>
-
-                                        <span>莫队</span>
- 
-                                        <span>数据结构—分块</span>
- 
-                                    </div>
+                    <div class="post-buttons">
+                        <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>
+                                   <a id="toggle-post-qr-code" class="btn btn-grey">文章二维码</a>
+                                                <a id="toggle-reward-qr-code" class="btn btn-grey">打赏</a>
                                 </div>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                                   
-                                            
-                            <ol class="page-navigator">
-								
-								
-								
+            </article>
 </div>
+</div>
+</div>
+<div id="qr-box">
+    <div class="post-qr-code-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/bei-zeng-chu-tan" width="250" height="250" alt="本页链接的二维码"/>
+    </div>
+    <div class="reward-qr-code-box">
+		
+        <img src="https://www.z4a.net/images/2019/06/29/QQ20190628125623_666.jpg" height="250" alt="打赏二维码"/>
+			
+    </div>
+    
 </div>
 <div id="body-bottom">
+<div class="container">
+            <div class="post-near">
+                <nav>
+                    
+                   <span class="prev"><a href="https://www.akwing.cn/post/ch56c-yi-xiang-shi" title=" CH#56C 异象石"><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
+                                                               CH#56C 异象石</span></span></a></span>
+                   
+               </nav>
+        </div>
+            
+    <div id="comments">
+                        <div id="respond-post-204" class="respond">
+                            
+                                
+                                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '5ce5a551fd840268c860',
+    clientSecret: '5ead9040f7cc55641e21476762d5830732b68688',
+    repo: 'TheGayhub.github.io',
+    owner: 'TheGayhub',
+    admin: ['TheGayhub'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                                
+                                
+                              
+        </div>
+                    </div>
+
+
+
+    </div>
 </div>
-    </div><!-- end #body -->
+</div><!-- end #body -->
 </div><!-- end #wrap -->
 
 <footer id="footer" role="contentinfo">
@@ -778,29 +1051,58 @@
         <p></p>    </div>
 </footer>
 
+
     <script src="https://www.akwing.cn/media/scripts/jquery.min.js" type="text/javascript"></script>
 <script src="https://www.akwing.cn/media/scripts/mirages.main.min.js" type="text/javascript"></script>
-
-
-<script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
-<script>
-var len = APlayerOptions.length;
-for(var i=0;i<len;i++){
-    APlayers[i] = new APlayer({
-        element: document.getElementById('player' + APlayerOptions[i]['id']),
-        narrow: false,
-        preload: APlayerOptions[i]['preload'],
-        mutex: APlayerOptions[i]['mutex'],
-        autoplay: APlayerOptions[i]['autoplay'],
-        showlrc: APlayerOptions[i]['showlrc'],
-        music: APlayerOptions[i]['music'],
-        theme: APlayerOptions[i]['theme']
-        });
-    APlayers[i].init();
-}
+<script type="text/javascript">
+    (function ($) {
+                Page.prepareCodeBlock();
+        hljs.initHighlightingOnLoad();
+    })(jQuery);
 </script>
 
-<script type="text/javascript"> 
+
+<script type="text/javascript">pangu.spacingElementByClassName('container');</script>
+<script type="text/javascript">Waves.init();</script>
+
+<script type="text/javascript">
+    (function ($) {
+                if (typeof registCommentEvent === 'function') {
+            registCommentEvent();
+        }
+                                Page.loadDisqus();
+        Page.setupContents();
+        Page.bindQRCodeBlockEvents();
+                $('body').pjax('a[href^="https://www.akwing.cn"]:not(a[target="_blank"], a[no-pjax])', {
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            }
+        ).on('pjax:click', function() {
+            Page.doPJAXClickAction();
+                    }).on('pjax:send', function() {
+            Page.doPJAXSendAction();
+                    }).on('pjax:complete', function() {
+                        if (typeof registCommentEvent === 'function') {
+                registCommentEvent();
+            }
+                        Page.doPJAXCompleteAction();
+                    });
+            })(jQuery);
+        function ExSearchCall(item){
+        if (item && item.length) {
+            // 关闭搜索框
+            $('.ins-close').click();
+            $.pjax({
+                url: item.attr('data-url'),
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            });
+        }
+    }
+    </script>
+    <script type="text/javascript"> 
 /* 鼠标特效 */
 var a_idx = 0; 
 jQuery(document).ready(function($) { 
@@ -831,7 +1133,22 @@ jQuery(document).ready(function($) {
 }); 
 </script>
 
+<script>
+    var OriginTitile = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '(つェ⊂)你又抛弃人家啦~ ' + OriginTitile;
+            clearTimeout(titleTime);
+        }
+        else {
+            document.title = '(*´∇｀*) 你来啦~ ' + OriginTitile;
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            }, 2000);
+        }
+    });
+</script>
 
 </body>
 </html>
-
