@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1562170983037" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1562240616813" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -543,6 +543,8 @@
                         <li class="menu-item"><a href="/tags">标签</a></li>
            
                         <li class="menu-item"><a href="/post/about">关于</a></li>
+           
+                        <li class="menu-item"><a href="/think">心得</a></li>
            
                                     
                     </ul>
@@ -875,7 +877,7 @@ var registCommentEvent = function() {
 <blockquote>
 <p>题目链接<a href="https://codeforces.com/gym/101147/problem/J"> Whistle's New Car</a></p>
 </blockquote>
-<p>题目的意思是给定 <code>n</code> 个城市编号 <code>1-n</code> ,每个城市都有一个权值    <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
+<p>题目的意思是给定 <code>n</code> 个城市编号 <code>1-n</code> ,每个城市都有一个权值    <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
 ,两个城市间的距离  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_ {ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 这些城市的结构是一颗以 <code>1</code> 为根节点的树，输出每个城市<code>i</code>的<code>attractiveness</code>   ，每个节点 <code>attractiveness</code> 是满足以下条件的城市的个数</p>
 <ol>
 <li><code>j</code> 是 <code>i</code> 的子树。</li>

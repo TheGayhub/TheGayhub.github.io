@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1562170983037" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1562240616813" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -543,6 +543,8 @@
                         <li class="menu-item"><a href="/tags">标签</a></li>
            
                         <li class="menu-item"><a href="/post/about">关于</a></li>
+           
+                        <li class="menu-item"><a href="/think">心得</a></li>
            
                                     
                     </ul>
@@ -844,6 +846,8 @@ var registCommentEvent = function() {
                     <h2 class="blog-description font-mono" style="">
                         2019-07-03 • 阅读: 21 • 
                         
+                        <a href="https://www.akwing.cn/tag/3qstMVy1y">倍增</a> • 
+                        
                         <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
                 </div>
 
@@ -868,7 +872,7 @@ var registCommentEvent = function() {
         </div>
         
                 <div class="post-content" itemprop="articleBody">
-                        <p><p>倍增+DP</p>
+                        <p><h1 id="倍增dp">倍增+DP</h1>
 <!-- more -->
 <p>最近做的3题倍增+dp题，大致思想都是预处理出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>,即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>位置跳<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>j</mi></msup></mrow><annotation encoding="application/x-tex">2^j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span></span></span></span></span></span></span>步能到达的最远距离，和求<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>C</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">LCA</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span></span></span></span>差不多。</p>
 <blockquote>
@@ -972,10 +976,13 @@ int main()
 <p>题目链接： <a href="https://codeforces.com/contest/932/problem/D">Codeforce 932 D</a></p>
 </blockquote>
 <p>树上倍增</p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mi>a</mi><mi>t</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">fat[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>表示i节点的第2^j个父亲，sum[i][j]表示往上走</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mi>a</mi><mi>t</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">fat[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>表示i节点往上走的第2<sup>j个父亲，注意这里的父节点不是普通的父节点，而是满足条件的父节，即父节点的权值比子节点大。sum[i][j]表示i往上走2</sup>j个节点得到的权值和，sum[1][i](i \in [1  ,n]) 要设为inf，因为1节点就不能往上走了，设为0的话1节点可以继续往上走，使得答案增加。</p>
+<p>没加一个点处理一次，询问的直接sum[u][j]是否&lt;X,满足的话</p>
 </p>                    </div>
         <div class="tags">
-						
+			
+				<a href="https://www.akwing.cn/tag/3qstMVy1y">倍增</a> 
+				 			
                     </div>
                     <div class="post-buttons">
                         <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>

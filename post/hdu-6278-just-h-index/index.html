@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1562170983037" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1562240616813" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -543,6 +543,8 @@
                         <li class="menu-item"><a href="/tags">标签</a></li>
            
                         <li class="menu-item"><a href="/post/about">关于</a></li>
+           
+                        <li class="menu-item"><a href="/think">心得</a></li>
            
                                     
                     </ul>
@@ -844,13 +846,13 @@ var registCommentEvent = function() {
                     <h2 class="blog-description font-mono" style="">
                         2019-06-24 • 阅读: 21 • 
                         
+                        <a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> • 
+                        
                         <a href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a> • 
                         
                         <a href="https://www.akwing.cn/tag/-Wb21-7YF">莫队</a> • 
                         
                         <a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a> • 
-                        
-                        <a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> • 
                         
                         <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
                 </div>
@@ -886,7 +888,7 @@ var registCommentEvent = function() {
 <li>如果区间大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>的数个数大于等于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>个，那么这个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>就是满足的。</li>
 <li>也可以这样理解：如果该区间第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>n</mi><mo>−</mo><mi>m</mi><mi>i</mi><mi>d</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">len-mid+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>大的数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&gt;</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">&gt;=mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>，那么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span>也是满足的。</li>
 </ul>
-<p>对于第一个我们可以用莫队+树状数组解决。第二个就是求解区间第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span>大的模板了，利用主席树。
+<p>对于第一个我们可以用莫队+树状数组解决。第二个就是求解区间第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span>大的模板了，利用主席树。<br>
 主席树比莫队快了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1000</mn><mo>+</mo><mi>m</mi><mi>s</mi><mo>!</mo></mrow><annotation encoding="application/x-tex">1000+ms!</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">s</span><span class="mclose">!</span></span></span></span></p>
 <p><a href="https://www.akwing.cn/post-images/1561361398782.png"></a></p>
 <blockquote>
@@ -1067,13 +1069,13 @@ int main()
 </p>                    </div>
         <div class="tags">
 			
+				<a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> 
+				 
 				<a href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a> 
 				 
 				<a href="https://www.akwing.cn/tag/-Wb21-7YF">莫队</a> 
 				 
 				<a href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a> 
-				 
-				<a href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a> 
 				 			
                     </div>
                     <div class="post-buttons">

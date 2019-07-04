@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1562170983037" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1562240616813" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -543,6 +543,8 @@
                         <li class="menu-item"><a href="/tags">标签</a></li>
            
                         <li class="menu-item"><a href="/post/about">关于</a></li>
+           
+                        <li class="menu-item"><a href="/think">心得</a></li>
            
                                     
                     </ul>
@@ -875,7 +877,7 @@ var registCommentEvent = function() {
 <blockquote>
 <p>方法1 DP</p>
 </blockquote>
-<p><strong><code>用d[x][y]表示从1号节点到达x号节点,途中经过了y条免费电缆时,经过的路上最贵的电缆花费最小是多少.</code></strong>
+<p><strong><code>用d[x][y]表示从1号节点到达x号节点,途中经过了y条免费电缆时,经过的路上最贵的电缆花费最小是多少.</code></strong><br>
 假设有一条边从 <code>x</code> 到 <code>v</code> ，权值为 <code>w</code> ，则我们可以：</p>
 <ul>
 <li>用 <code>max(dp[x][y],w)</code> 更新 <code>dp[v][y]</code> ,这个表示不在电缆 <code>x-v</code> 使用免费服务。</li>

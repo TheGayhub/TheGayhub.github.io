@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1562170983037" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1562240616813" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -543,6 +543,8 @@
                         <li class="menu-item"><a href="/tags">标签</a></li>
            
                         <li class="menu-item"><a href="/post/about">关于</a></li>
+           
+                        <li class="menu-item"><a href="/think">心得</a></li>
            
                                     
                     </ul>
@@ -885,7 +887,7 @@ var registCommentEvent = function() {
 <li>前<code>x</code>天内只有一种颜色出现过一次，既个数为1，其他若干种颜色的个数相同。</li>
 <li>前<code>x</code>天内出现个数最多的颜色只有一种，其他种类的颜色个数相同，且这个最多个数的颜色比这些颜色个数多1</li>
 </ul>
-<p>可以发现，我们每次判断<code>x</code>是否合法几乎只与颜色个数为1的和颜色个数最多的那些颜色有关。所以我们就可用数组来保存这些颜色的信息，然后<code>O(1)</code>判断，总复杂度为<code>O(n)</code>.
+<p>可以发现，我们每次判断<code>x</code>是否合法几乎只与颜色个数为1的和颜色个数最多的那些颜色有关。所以我们就可用数组来保存这些颜色的信息，然后<code>O(1)</code>判断，总复杂度为<code>O(n)</code>.<br>
 具体看代码实现.</p>
 <pre><code class="language-c++">#include&lt;iostream&gt;
 #include&lt;algorithm&gt;

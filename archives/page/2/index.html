@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html class="no-js" >
 <head>
-    
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
@@ -508,7 +508,7 @@
         		
     
 </head>
-<body class="theme-white color-default code-dark card  desktop windows chrome not-safari wrap-code use-sidebar">
+<body class="theme-white color-default card  desktop windows chrome not-safari use-sidebar">
     <script>
         loadPrefersDarkModeState();
         if (LocalConst.USE_MIRAGES_DARK || (LocalConst.AUTO_NIGHT_SHIFT && LocalConst.PREFERS_DARK_MODE)) {
@@ -521,10 +521,9 @@
 <div class="browse-happy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
 <![endif]-->
 <div class="sp-progress"></div>
-
 <div id="wrap">
     <span id="backtop" class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
-       <header>
+     <header>
     <a id="toggle-nav" class="btn btn-primary" href="javascript:void(0);"><span>MENU</span></a>
 <nav id="site-navigation" class="sidebar no-user-select" role="navigation">
     <div id="nav">
@@ -596,64 +595,16 @@
     <div id="body">
         <style type="text/css">
     /** 页面样式调整 */
-            #masthead::after {
-        content: '';
-        width: 150%;
-        height: 4.375rem;
-        background: #fff;
-        left: -25%;
-        bottom: -1.875rem;
-        border-radius: 100%;
-        position: absolute;
-        z-index: -1;
+                    #qr-box {
+        background-color: transparent;
     }
-    .inner::after {
-        content: '';
-        width: 150%;
-        height: 4.375rem;
-        background-color: #fff;
-        left: -25%;
-        bottom: -1.875rem;
-        border-radius: 100%;
-        position: absolute;
+            .post-buttons, #qr-box {
+        display: none;
     }
-    @media screen and (max-width: 25rem){
-        #masthead::after, .inner::after {
-            width: 250%;
-            left: -75%;
-            bottom: -3.875rem;
-        }
-    }
-    @media screen and (min-width: 25.0625rem) and (max-width: 37.4375rem){
-        #masthead::after, .inner::after {
-            width: 200%;
-            left: -50%;
-            bottom: -2.875rem;
-        }
-    }
-    body.theme-dark #masthead {
-        box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-    body.theme-dark #masthead::after {
-        background-color: #2c2a2a;
-    }
-    body.theme-dark .inner::after {
-        background-color: #2c2a2a;
-    }
-    body.theme-sunset .inner::after, body.theme-sunset #masthead::after{
-        background-color: #F8F1E4;
-    }
-    #post article {
-        margin-top: -0.625rem;
-    }
-    #index {
-        padding-top: 0.375rem;
-    }
-            div#comments{
+    #body-bottom {
         margin-top: 0;
     }
-                        #footer{
+                #footer{
         padding: 1.25rem 0;
     }
         
@@ -680,175 +631,27 @@
                 body.classList.remove('content-serif');
             }            LocalConst.SHOW_TOC = false;
                     </script>
-        <script type="text/javascript">
-(function () {
-    window.TypechoComment = {
-        dom : function (id) {
-            return document.getElementById(id);
-        },
-    
-        create : function (tag, attr) {
-            var el = document.createElement(tag);
-        
-            for (var key in attr) {
-                el.setAttribute(key, attr[key]);
-            }
-        
-            return el;
-        },
-
-        reply : function (cid, coid) {
-            var comment = this.dom(cid), parent = comment.parentNode,
-                response = this.dom('respond-post-204'), input = this.dom('comment-parent'),
-                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
-                textarea = response.getElementsByTagName('textarea')[0];
-
-            if (null == input) {
-                input = this.create('input', {
-                    'type' : 'hidden',
-                    'name' : 'parent',
-                    'id'   : 'comment-parent'
-                });
-
-                form.appendChild(input);
-            }
-
-            input.setAttribute('value', coid);
-
-            if (null == this.dom('comment-form-place-holder')) {
-                var holder = this.create('div', {
-                    'id' : 'comment-form-place-holder'
-                });
-
-                response.parentNode.insertBefore(holder, response);
-            }
-
-            comment.appendChild(response);
-            this.dom('cancel-comment-reply-link').style.display = '';
-
-            if (null != textarea && 'text' == textarea.name) {
-                textarea.focus();
-            }
-
-            return false;
-        },
-
-        cancelReply : function () {
-            var response = this.dom('respond-post-204'),
-            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
-
-            if (null != input) {
-                input.parentNode.removeChild(input);
-            }
-
-            if (null == holder) {
-                return true;
-            }
-
-            this.dom('cancel-comment-reply-link').style.display = 'none';
-            holder.parentNode.insertBefore(response, holder);
-            return false;
-        }
-    };
-})();
-</script>
-<script type="text/javascript">
-var registCommentEvent = function() {
-    var event = document.addEventListener ? {
-        add: 'addEventListener',
-        focus: 'focus',
-        load: 'DOMContentLoaded'
-    } : {
-        add: 'attachEvent',
-        focus: 'onfocus',
-        load: 'onload'
-    };
-    var r = document.getElementById('respond-post-204');
-        
-    if (null != r) {
-        var forms = r.getElementsByTagName('form');
-        if (forms.length > 0) {
-            var f = forms[0], textarea = f.getElementsByTagName('textarea')[0], added = false;
-
-            if (null != textarea && 'text' == textarea.name) {
-                textarea[event.add](event.focus, function () {
-                    if (!added) {
-                        var input = document.createElement('input');
-                        input.type = 'hidden';
-                        
-                        input.name = '_';
-                            input.value = (function () {
-    var _5MEzOLL = //'o'
-'8d'+//'ULe'
-'8a3'+//'gOR'
-'03d'+'6e'//'KM3'
-+//'QL'
-'QL'+'0Mc'//'0Mc'
-+//'fIe'
-'8f3'+'4f'//'3'
-+'ac'//'UQx'
-+'27'//'y7'
-+//'Rf'
-'Rf'+'7c'//'Nd'
-+//'Z'
-'38'+'e34'//'T1'
-+'8'//'pj'
-+'d9'//'zbQ'
-+'l'//'l'
-+'d0'//'Vx3'
-+/* '3'//'3' */''+''///*'1T'*/'1T'
-+//'G'
-'f', _bvJXTD = [[10,12],[10,13],[19,21],[29,30]];
-    
-    for (var i = 0; i < _bvJXTD.length; i ++) {
-        _5MEzOLL = _5MEzOLL.substring(0, _bvJXTD[i][0]) + _5MEzOLL.substring(_bvJXTD[i][1]);
-    }
-
-    return _5MEzOLL;
-})();
-                        //console.log('https://7yue.in/204.py');
-                        //console.log('https://7yue.in/204.py');
-                        f.appendChild(input);
-                        
-                        input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = 'checkReferer';
-                        input.value = 'false';
-                        
-                        f.appendChild(input);
-                        
-
-                        added = true;
-                    }
-                });
-            }
-        }
-    }
-};
-</script>                        <header id="masthead" class="align-center align-middle " style="
+                                <header id="masthead" class="align-center align-middle " style="
             height:
-        60;">
+        65;">
             <div class="blog-background"></div>
-            
+                        <div class="lazyload-container"></div>
+            <script type="text/javascript">
+            var blurBanner = false;                if (!blurBanner) registLoadBanner();
+            </script>
+              
+            <img id="lazyload-img" alt="page banner image" src="https://i.loli.net/2019/07/01/5d19e51c9f2f031818.jpg?imageView2/2/w/64/q/75" style="display: none" onload="javascript:loadBanner(this, 'https://i.loli.net/2019/07/01/5d19e51c9f2f031818.jpg', '', document.querySelector('#masthead'), '1', window.screen.availWidth, window.screen.availHeight, blurBanner)">
+				
                         <script type="text/javascript">
                 var head = document.querySelector("#masthead");
-                var bgHeight = getBgHeight(window.innerHeight, '60', '40');
+                var bgHeight = getBgHeight(window.innerHeight, '65', '40');
                 head.style.height = bgHeight + "px";
-
-                                var banner = 'https://ncdn.camarts.cn/7e69cc86.jpg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
-                head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
                             </script>
-                            
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
-                        HDU 5710 Digit-Sum                    </h1>
-                    <h2 class="blog-description font-mono" style="">
-                        2019-06-11 • 阅读: 21 • 
-                        
-                        <a href="https://www.akwing.cn/tag/xp0ZrIWH8">思维</a> • 
-                        
-                        <a href="javascript:void(0)" id="page-read-setting-toggle">阅读设置</a>                    </h2>
+                        归档                    </h1>
+                    
                 </div>
 
             </div>
@@ -858,143 +661,171 @@ var registCommentEvent = function() {
 
 
 
-<div id="post" role="main">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
-            <meta itemprop="name" content=""/>
-            <meta itemprop="url" content="https://www.akwing.cn"/>
-        </div>
-        <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
-            <meta itemprop="name" content=""/>
-            <div itemscope itemprop="logo" itemtype="">
-                <meta itemprop="url" content="">
-            </div>
-        </div>
-        
-                <div class="post-content" itemprop="articleBody">
-                        <p><h1 id="构造">构造</h1>
-<!-- more -->
-<p><img src="https://www.akwing.cn/post-images/1560233194009.png" alt=""></p>
-<p>很容易发现，当 2 * n 每进1位的时候，与 2 * S(n)的差就会少去9，这也可以推出来，因为满10进1，每进1位就会少10，得到1，所以每进1位就会少9.所以当n的数位上出现[5-9]时，乘于2就会少9，假设n的所有位上一共有L个[5-9]的数<br>
-我们可以得到 <code>S(2n)=2*S(n)-L*9</code>  再由 <code>a×S(n)=b×S(2n)</code> ,所以 <code>L/S(n)=(2*b-a)/(9*b)</code> 。(注意要上下同除gcd)<br>
-所以我们可以让 <code>L=2*b-a,S(n)=9*b</code> ,那如何贪心构造出最小的n呢？<br>
-我们先让n中的L位数全为5，即  xxx555(L个5)，S(n)-5 * L,然后剩下的S(n)再从末尾不断的加上去。<br>
-当<code>L&lt;0||5 * L&gt;S(n)</code> 的时候就是无解。</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-const int N = 2e5 + 10;
-int a, b;
-int gcd(int a, int b)
-{
-    if (b == 0) return a;
-    return gcd(b, a%b);
-}
-int ans[N];
-int main()
-{
-    int t;
-    scanf(&quot;%d&quot;, &amp;t);
-    while (t--)
-    {
-        scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
-        int d = gcd(a, b);
-        a /= d, b /= d;
-        int l = 2 * b - a, sn = 9 * b;
-        if (l&lt;0 || l * 5&gt;sn){
-            puts(&quot;0&quot;);
-            continue;
-        }
-        d = gcd(l, sn);
-        l /= d, sn /= d;
-        int tot = 0;
-        sn -= 5 * l;
-        for (int i = 0; i &lt; l; i++)
-        {
-            int tmp = min(4, sn);
-            ans[tot++] = 5 + tmp;
-            sn -= tmp;
-        }
-        while (sn)
-        {
-            int tmp = min(4, sn);
-            ans[tot++] = tmp;
-            sn -= tmp;
-        }
-        for (int i = tot - 1; i &gt;= 0; i--)
-            cout &lt;&lt; ans[i];
-        puts(&quot;&quot;);
-    }
-    return 0;
-}
-</code></pre>
-</p>                    </div>
-        <div class="tags">
-			
-				<a href="https://www.akwing.cn/tag/xp0ZrIWH8">思维</a> 
-				 			
-                    </div>
-                    <div class="post-buttons">
-                        <a id="toggle-archives" class="btn btn-grey" href="https://www.akwing.cn/archives/">返回文章列表</a>
-                                   <a id="toggle-post-qr-code" class="btn btn-grey">文章二维码</a>
-                                                <a id="toggle-reward-qr-code" class="btn btn-grey">打赏</a>
-                                </div>
-            </article>
-</div>
-</div>
-</div>
-<div id="qr-box">
-    <div class="post-qr-code-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.akwing.cn/post/hdu-5710-digit-sum" width="250" height="250" alt="本页链接的二维码"/>
-    </div>
-    <div class="reward-qr-code-box">
+<div id="archives">
+    <div id="archives-tags">
+        <h3>标签云</h3>
+                                            
 		
-        <img src="https://www.z4a.net/images/2019/06/29/QQ20190628125623_666.jpg" height="250" alt="打赏二维码"/>
-			
-    </div>
-    
+		
+		
+		<a class="itags" href="https://www.akwing.cn/tag/3qstMVy1y">倍增</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/8AwwtVN5L">常用模板</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/bGX4TmKWf">图论—树的直径</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/SzMzaPGNc">基本数据结构—单调栈</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/Segment-Tree">数据结构—线段树</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/-Wb21-7YF">莫队</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/KodHWhCLd">数据结构—分块</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/Codeforce">Codeforce</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/LsciNYV-v">图论—最短路</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/BwZk5Zyfl">图论—最小生成树</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/w2Kxoedb6">暑假集训</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/xp0ZrIWH8">思维</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/Ml1rPTXNB">尺取法</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/UHaY9iXO5">搜索—DFS</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/RoW-UQAZf">模拟</a>
+               
+		
+		<a class="itags" href="https://www.akwing.cn/tag/JNU">数据结构作业</a>
+                            
+                        </div>
+    <div id="archives-content">
+        <br>
+		
+
+                <div class="archive-title" id="archives-2019-06">
+					
+            <div class="archives" data-date="2019-06">
+				 
+                <h3>2019</h3>
+					
+					 
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/hdu-5710-digit-sum">
+                            <span class="time">2019-06-11</span> HDU 5710 Digit-Sum                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/zoj-2112-dynamic-rankings">
+                            <span class="time">2019-06-10</span> ZOJ 2112 Dynamic Rankings                         </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/chi-qu-fa-xiao-he-ji">
+                            <span class="time">2019-05-10</span> 尺取法小合集                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/codeforce-1163-b-cat-party">
+                            <span class="time">2019-05-10</span> Codeforce 1163 B Cat Party                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/codeforces-gym-101147-j-whistles-new-car">
+                            <span class="time">2019-05-06</span> Codeforces Gym 101147 J-Whistle&#39;s New Car                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/codeforce-gym-101086-d-secure-but-true">
+                            <span class="time">2019-05-05</span> Codeforce Gym 101086 D - Secure but True                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/poj-2796-feel-good">
+                            <span class="time">2019-05-04</span> POJ 2796 Feel Good                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/MinString">
+                            <span class="time">2019-05-02</span> 字符串最小表示法                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/fast_pow">
+                            <span class="time">2019-05-02</span> 快速幂模板                        </a>
+                    </div>
+                            
+                             
+      
+                                    <div class="brick">
+                        <a href="https://www.akwing.cn/post/JNU-LinkList">
+                            <span class="time">2019-05-01</span> 数据结构上机实验报告——链表                        </a>
+                    </div>
+                            
+                             
+								
+                            </div>
+																	   
+																   
+        </div>
+               
+        
+
+            </div>
+</div>
+</div>
 </div>
 <div id="body-bottom">
 <div class="container">
-            <div class="post-near">
-                <nav>
-                    
-                   <span class="prev"><a href="https://www.akwing.cn/post/zoj-2112-dynamic-rankings" title=" ZOJ 2112 Dynamic Rankings "><span class="post-near-span"><span class="prev-t no-user-select color-main">下一篇: </span><br><span>
-                                                               ZOJ 2112 Dynamic Rankings </span></span></a></span>
-                   
-               </nav>
-        </div>
             
     <div id="comments">
-                        <div id="respond-post-204" class="respond">
-                            
-                                
-                                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '5ce5a551fd840268c860',
-    clientSecret: '5ead9040f7cc55641e21476762d5830732b68688',
-    repo: 'TheGayhub.github.io',
-    owner: 'TheGayhub',
-    admin: ['TheGayhub'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-                                
-                                
-                              
-        </div>
+       
                     </div>
 
 
@@ -1009,15 +840,30 @@ int main()
         <p></p>    </div>
 </footer>
 
-
     <script src="https://www.akwing.cn/media/scripts/jquery.min.js" type="text/javascript"></script>
 <script src="https://www.akwing.cn/media/scripts/mirages.main.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    (function ($) {
-                Page.prepareCodeBlock();
-        hljs.initHighlightingOnLoad();
-    })(jQuery);
+
+<!-- APlayer Start -->
+<script type="text/javascript" src="https://www.akwing.cn/media/scripts/APlayer.min.js"></script>
+<script>
+var len = APlayerOptions.length;
+for(var i=0;i<len;i++){
+    APlayers[i] = new APlayer({
+        element: document.getElementById('player' + APlayerOptions[i]['id']),
+        narrow: false,
+        preload: APlayerOptions[i]['preload'],
+        mutex: APlayerOptions[i]['mutex'],
+        autoplay: APlayerOptions[i]['autoplay'],
+        showlrc: APlayerOptions[i]['showlrc'],
+        music: APlayerOptions[i]['music'],
+        theme: APlayerOptions[i]['theme']
+        });
+    APlayers[i].init();
+}
 </script>
+<!-- APlayer End -->
+
+<script type="text/javascript">Page.highlightCodeBlock();</script>
 
 
 <script type="text/javascript">pangu.spacingElementByClassName('container');</script>
@@ -1028,39 +874,15 @@ int main()
                 if (typeof registCommentEvent === 'function') {
             registCommentEvent();
         }
-                                Page.loadDisqus();
+                        Page.setupLazyLoadImage();
+                        Page.setupCDNImageOptimize();
+                Page.loadDisqus();
         Page.setupContents();
         Page.bindQRCodeBlockEvents();
-                $('body').pjax('a[href^="https://www.akwing.cn"]:not(a[target="_blank"], a[no-pjax])', {
-                container: '#body',
-                fragment: '#body',
-                timeout: 8000
-            }
-        ).on('pjax:click', function() {
-            Page.doPJAXClickAction();
-                    }).on('pjax:send', function() {
-            Page.doPJAXSendAction();
-                    }).on('pjax:complete', function() {
-                        if (typeof registCommentEvent === 'function') {
-                registCommentEvent();
-            }
-                        Page.doPJAXCompleteAction();
-                    });
             })(jQuery);
-        function ExSearchCall(item){
-        if (item && item.length) {
-            // 关闭搜索框
-            $('.ins-close').click();
-            $.pjax({
-                url: item.attr('data-url'),
-                container: '#body',
-                fragment: '#body',
-                timeout: 8000
-            });
-        }
-    }
     </script>
-    <script type="text/javascript"> 
+
+<script type="text/javascript"> 
 /* 鼠标特效 */
 var a_idx = 0; 
 jQuery(document).ready(function($) { 
@@ -1091,22 +913,6 @@ jQuery(document).ready(function($) {
 }); 
 </script>
 
-<script>
-    var OriginTitile = document.title;
-    var titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '(つェ⊂)你又抛弃人家啦~ ' + OriginTitile;
-            clearTimeout(titleTime);
-        }
-        else {
-            document.title = '(*´∇｀*) 你来啦~ ' + OriginTitile;
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            }, 2000);
-        }
-    });
-</script>
 
 </body>
 </html>
