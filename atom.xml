@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.akwing.cn</id>
     <title>Guapi</title>
-    <updated>2019-07-04T11:49:26.507Z</updated>
+    <updated>2019-07-05T06:11:22.589Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.akwing.cn"/>
     <link rel="self" href="https://www.akwing.cn/atom.xml"/>
@@ -25,6 +25,259 @@
 <p>洛谷P3674 <a href="https://www.luogu.org/problemnew/show/P3674">P3674 小清新人渣的本愿</a><br>
 1操作化简以后bitset统计答案左移x可以看成当前数+x , 2操作注意要另加一个bitset，这是因为可能有负数存不了，3操作直接枚举因子。</p>
 </blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Codeforce 刷题]]></title>
+        <id>https://www.akwing.cn/post/codeforce-shuti</id>
+        <link href="https://www.akwing.cn/post/codeforce-shuti">
+        </link>
+        <updated>2019-07-05T05:07:12.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="codeforce-1016c-vasya-and-the-mushrooms">Codeforce 1016C Vasya And The Mushrooms</h3>
+<p>题目链接 <a href="https://codeforces.com/problemset/problem/1016/C">Vasya And The Mushrooms</a></p>
+<h4 id="题意">题意：</h4>
+<p>每个格子都有蘑菇，且具有生长速度，没走一个格子就可以获得当前蘑菇的价值。把所有格子走一遍(每个格子只走一次)，求得到的最大值</p>
+<h4 id="思路">思路：</h4>
+<p>仔细发现，终点只有一下几种情况<br>
+<img src="https://i.loli.net/2019/07/05/5d1edc0e1210765760.png" alt="2018080814200474.png"></p>
+<p>对于终点在第一行，也就是偶数列，我们可以这样走</p>
+<p><img src="https://i.loli.net/2019/07/05/5d1edc0e11f1015072.png" alt="20180808142441382.png"></p>
+<p>对于终点在第二行，也就是奇数列，我们可以这样走</p>
+<p><img src="https://i.loli.net/2019/07/05/5d1edc0e11b1d24167.png" alt="20180808142257570.png"></p>
+<p>这是有规律的，所以对于一个终点来说，他能得到的最大值分别是左边得到的最大值加上右边的得到的最大值。左边的最大值不难求，我们只需使用前缀和就可以的到。右边的怎么求呢？ 不一样的时间经过的点不一样，也就是价值不一样。虽然说到达每个点的时间不一样，但是可以发现一但我们把当前的点当作终点时，每个点到达的时间的差是一样的，也就是偏移量一样，我们假设开始都是从最左边开始走，到达终点时的所获得价值为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>,我们再计算到达这个终点的当前时间，拿这个当前时间减去我们刚开始认为它到达终点的时间，这个就是时间偏移量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>，当前价值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>+</mo><mi>t</mi><mo>∗</mo><mo>(</mo><mtext>所经过的蘑菇生长的速度和</mtext><mo>)</mo></mrow><annotation encoding="application/x-tex">x+t*(\text{所经过的蘑菇生长的速度和})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">所经过的蘑菇生长的速度和</span></span><span class="mclose">)</span></span></span></span>既是这个终点右边所得到的值。<br>
+这个蘑菇生长的速度和可以用后缀和表示，因为右边是往右跑，因此是后缀和。</p>
+<p>注意：我们认为终点所在列的左边是左边得到的价值，这个终点所在列不包括在左边价值里，而是包括在右边价值里</p>
+<h4 id="代码">代码：</h4>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#define MAXN 300010
+using namespace std;
+
+typedef long long ll;
+
+int n;
+
+ll a[MAXN], b[MAXN];		// 原矩阵的两行
+ll sum[MAXN];			// sum[i] 存储了第i列到第n列所有a[i],b[i]的和,也即是所说的后缀和
+ll sum_s[2 * MAXN];			// 顺时针跑。sum_s[i] 当i在1~n的时候，存储的是a[1]~a[i]的和
+//			当i在n+1 ~ 2*n的时候，存储的是a[1]~a[n]的和再加上b[n]~b[2*n - i - 1]的和
+ll sum_n[2 * MAXN];			// 逆时针跑。sum_n[i] 当i在1~n的时候，存储的是b[1]~b[i]的和
+//			当i在n+1 ~ 2*n的时候，存储的是b[1]~b[n]的和再加上a[n]~a[2*n - i - 1]的和
+ll sumr[MAXN];				// 终点列右部最大值
+ll suml[MAXN];				// 终点列左部最大值
+
+void table() {
+	for (int i = n; i &gt;= 1; i--)
+		sum[i] = sum[i + 1] + a[i] + b[i];
+	for (int i = 1; i &lt;= n; i++)
+	{
+		sum_s[i] = sum_s[i - 1] + a[i] * (i - 1);
+		sum_n[i] = sum_n[i - 1] + b[i] * (i - 1);//初始假定都是从0时间开始走
+	}
+	/*
+	这里要说一下sum_n[1]，这里可以是0，可以是b[1]，如果设为b[1]，后面的时间偏移量就减一即可
+	*/
+	for (int i = n; i &gt;= 1; i--)
+	{
+		sum_s[2 * n - i + 1] = sum_s[2 * n - i] + b[i] * (2 * n - i);
+		sum_n[2 * n - i + 1] = sum_n[2 * n - i] + a[i] * (2 * n - i);
+	}
+	for (int i = 1; i &lt;= n; i++)
+	{
+		if (i &amp; 1)
+		{
+			sumr[i] = sum_s[2 * n - i + 1] - sum_s[i - 1] + sum[i] * (i-1);//这个(i-1)就是时间偏移量
+			suml[i] = suml[i - 1] + a[i-1] * (2 * i - 3) + b[i-1] * (2 * i - 4);//左边价值前缀和递推即可，注意经过每个点时间
+		}
+		else
+		{
+			sumr[i] = sum_n[2 * n - i + 1] - sum_n[i - 1] + sum[i] * (i - 1);
+			suml[i] = suml[i - 1] + a[i-1] * (2 * i - 4) + b[i-1] * (2 * i - 3);
+		}
+	}
+}
+
+int main()
+{
+	cin &gt;&gt; n;
+	for (int i = 1; i &lt;= n; i++) {
+		cin &gt;&gt; a[i];
+	}
+	for (int i = 1; i &lt;= n; i++) {
+		cin &gt;&gt; b[i];
+	}
+
+	table();
+	
+	ll ans = 0;
+	for (int i = 1; i &lt;= n; i++) {
+		ans = max(ans, sumr[i] + suml[i]);
+	}
+
+	cout &lt;&lt; ans &lt;&lt; endl;
+
+	return 0;
+}
+</code></pre>
+<h3 id="codeforce-932c-permutation-cycle">Codeforce 932C Permutation Cycle</h3>
+<p>题目链接 <a href="https://codeforces.com/problemset/problem/932/C"> Permutation Cycle</a></p>
+<h4 id="题意balabala">题意：balabala</h4>
+<h4 id="思路-2">思路：</h4>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">g[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>的值要么是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>，要么是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>。也就是至少一个数要转换<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>次或<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>次。如果有一个长度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>的环，环上一点从当前位置走<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>次，必定回到原位。这样想的话，这题答案就出来了。按照题意，并且这个位置的前一个位置的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span>值一定是自己。这样的话，我们构造出若干个长度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>的环和长度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>的环即可。开始要判断 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mi>y</mi><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">ax+by=n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 是否有整数解，这个直接枚举判断即可。</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+const int N = 2e5 + 10;
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int, int&gt; P;
+int n, a, b;
+int main()
+{
+	cin &gt;&gt; n &gt;&gt; a &gt;&gt; b;
+	int cnta = 0, cntb = 0;
+	for (int i = 0; i*a &lt;= n; i++)
+	{
+		int val = n - i*a;
+		if (val%b == 0){
+			cnta = i;
+			cntb = val / b;
+			break;
+		}
+	}
+	if (cnta*a + cntb*b != n) {
+		puts(&quot;-1&quot;);
+		return 0;
+	}
+	int lst = 1, cur = 1;
+	for (int i = 0; i &lt; cnta; i++)
+	{
+		for (int j = 1; j &lt; a; j++)
+		{
+			printf(&quot;%d &quot;, ++cur);
+		}
+		printf(&quot;%d &quot;, lst);
+		lst = ++cur;
+	}
+	for (int i = 0; i &lt; cntb; i++)
+	{
+		for (int j = 1; j &lt; b; j++)
+		{
+			printf(&quot;%d &quot;, ++cur);
+		}
+		printf(&quot;%d &quot;, lst);
+		lst = ++cur;
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="codeforce-1059c-sequence-transformation">Codeforce 1059C Sequence Transformation</h3>
+<p>题目链接 <a href="https://codeforces.com/problemset/problem/1059/C"> Sequence Transformation</a></p>
+<h4 id="题意-2">题意：</h4>
+<p>数组有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>个数，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>…</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1\dots n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span> 每次将数组中的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>c</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">gcd</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span></span></span></span>添加到序列末尾，然后从数组中任意删除一个数，最后使得得到的序列字典序最大</p>
+<h4 id="思路-3">思路：</h4>
+<p>由于相邻两项<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>c</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">gcd</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，所以就要去除相邻的数。因此最优的是开始先把所有奇数删去。删除所有的奇数以后剩下 ： 2 4 6 8 10 12 14 16.<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mi>C</mi><mi>D</mi><mo>(</mo><mn>2</mn><mi mathvariant="normal">，</mi><mn>4</mn><mi mathvariant="normal">，</mi><mn>6</mn><mi mathvariant="normal">，</mi><mn>8</mn><mi mathvariant="normal">，</mi><mn>10</mn><mi mathvariant="normal">，</mi><mn>12</mn><mi mathvariant="normal">，</mi><mn>14...</mn><mo>)</mo><mo>=</mo><mn>2</mn><mo>∗</mo><mi>G</mi><mi>C</mi><mi>D</mi><mo>(</mo><mn>1</mn><mi mathvariant="normal">，</mi><mn>2</mn><mi mathvariant="normal">，</mi><mn>3</mn><mi mathvariant="normal">，</mi><mn>4</mn><mi mathvariant="normal">，</mi><mn>5</mn><mi mathvariant="normal">，</mi><mn>6</mn><mi mathvariant="normal">，</mi><mn>7....</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">GCD(2，4，6，8，10，12，14...)=2* GCD(1，2，3，4，5，6，7....)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord">2</span><span class="mord cjk_fallback">，</span><span class="mord">4</span><span class="mord cjk_fallback">，</span><span class="mord">6</span><span class="mord cjk_fallback">，</span><span class="mord">8</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">0</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">2</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">4</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord">1</span><span class="mord cjk_fallback">，</span><span class="mord">2</span><span class="mord cjk_fallback">，</span><span class="mord">3</span><span class="mord cjk_fallback">，</span><span class="mord">4</span><span class="mord cjk_fallback">，</span><span class="mord">5</span><span class="mord cjk_fallback">，</span><span class="mord">6</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mclose">)</span></span></span></span>，这就和刚开始一样了，同时<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>c</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">gcd</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span></span></span></span>变为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>.</p>
+<p>于是每次把数组长度减半，然后删去奇数位上的值，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>c</mi><mi>d</mi><mo>=</mo><mi>g</mi><mi>c</mi><mi>d</mi><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">gcd=gcd \times 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>.</p>
+<h4 id="代码-2">代码</h4>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+const int maxn = 1e6 + 6;
+
+int n;
+
+int main(){
+	cin &gt;&gt; n;
+	int mul = 1;
+	while (n)
+	{
+		if (n == 1){
+			printf(&quot;%d\n&quot;, mul);
+			break;
+		}
+		else if (n == 2){
+			printf(&quot;%d %d\n&quot;, mul, mul * 2);
+			break;
+		}
+		else if (n == 3){
+			printf(&quot;%d %d %d\n&quot;, mul, mul, mul * 3);
+			break;
+		}
+		for (int i = 1; i &lt;= (n + 1) / 2; i++)
+		{
+			printf(&quot;%d &quot;, mul);
+		}
+		n /= 2;
+		mul *= 2;
+	}
+	return 0;
+}
+</code></pre>
+<h4 id="codeforce-1047c-enlarge-gcd">Codeforce 1047C Enlarge GCD</h4>
+<p>题目链接 <a href="https://codeforces.com/problemset/problem/1047/C"> Enlarge GCD </a></p>
+<h4 id="题意-3">题意：</h4>
+<p>删除尽量少的数使<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>c</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">gcd</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span></span></span></span>变大</p>
+<h4 id="思路-4">思路：</h4>
+<p>先把每个数除于它们的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>c</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">gcd</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">c</span><span class="mord mathdefault">d</span></span></span></span>,留下来的数的共同质因数一定是最多的，我们可以枚举每个数的质因数，然后取出现最多的那个质因数的个数,这个个数就代表留下来最多的个数，删除的数一定是不具有这个出现最多质因数的。</p>
+<h4 id="代码-3">代码：</h4>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+const int N = 15000000 +5;
+int prime[N], st[N], cnt,num[N];
+int n, a[N];
+int gcd(int a, int b) {
+	return b == 0 ? a : gcd(b, a%b);
+}
+void seive(int n)
+{
+	for (int i = 2; i &lt;= n; i++)
+	{
+		if (!prime[i])
+		{
+			prime[i] = i;
+			st[cnt++] = i;
+		}
+		for (int j = 0; j &lt; cnt&amp;&amp;i*st[j] &lt;= n; j++)
+		{
+			prime[i*st[j]] = st[j];
+			if (i%st[j] == 0) break;
+		}
+	}
+}
+int main()
+{
+	seive(15000000);
+	scanf(&quot;%d&quot;, &amp;n);
+	int g = 0;
+	for (int i = 1; i &lt;= n; i++)
+	{
+		scanf(&quot;%d&quot;, &amp;a[i]);
+		g = gcd(a[i], g);
+	}
+	int ans = 0;
+	for (int i = 1; i &lt;= n; i++)
+	{
+		a[i] /= g;
+		for (int j = a[i]; j &gt; 1;)
+		{
+			int t = prime[j];
+			num[t]++;
+			ans = max(ans, num[t]);
+			while (j &gt; 1 &amp;&amp; j%t == 0)
+			{
+				j /= t;
+			}
+		}
+	}
+	ans = ans ? n-ans : -1;
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+<p>做了cf的题，发现自己的思维还是很差，多刷题训练。</p>
 ]]></content>
     </entry>
     <entry>
@@ -783,80 +1036,6 @@ int lca(int l,int r)
 	if (dep[p1] &lt;= dep[p2]) return vs[p1];
 	else return vs[p2];
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[树的直径模板]]></title>
-        <id>https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban</id>
-        <link href="https://www.akwing.cn/post/shu-de-zhi-jing-mo-ban">
-        </link>
-        <updated>2019-06-29T05:35:48.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="方法一树形dp">方法一：树形DP</h3>
-<pre><code>void dp(int u,int pre)
-{
-	for (int i = head[u]; i != -1; i = edge[i].next)
-	{
-		int v = edge[i].to, w = edge[i].w;
-		if (v == pre) continue;
-		dp(v, u);
-		ans = max(ans, dis[u] + dis[v] + w);//之前的最大值dis[u],当前的dis[v]+w
-		dis[u] = max(dis[u], dis[v] + w);//更新最大距离
-	}
-}
-</code></pre>
-<h3 id="方法二两次dfs">方法二：两次DFS</h3>
-<p>第一次BFS找到直径的一端，第二次从直径的一端找到直径的另一端，最终ans即为答案</p>
-<pre><code>void dfs(int u, int pre)
-{
-	if (ans &lt; dis[u]){
-		ans = dis[u];
-		pos = u;
-	}
-	for (int i = head[u]; i != -1; i = edge[i].next)
-	{
-		int v = edge[i].to, w = edge[i].w;
-		if (v == pre) continue;
-		dis[v] = dis[u] + w;
-		dfs(v, u);
-	}
-}
-	dfs(1, -1);
-	dis[pos] = 0;
-	dfs(pos, -1);
-</code></pre>
-<h3 id="方法三两次bfs">方法三：两次BFS</h3>
-<pre><code>void bfs(int st)
-{
-	memset(vis, false, sizeof(vis));
-	vis[st] = true;
-	queue&lt;int&gt; q;
-	dis[st] = 0;
-	q.push(st);
-	int pre = -1;
-	while (!q.empty())
-	{
-		int u = q.front();
-		q.pop();
-		for (int i = head[u]; i != -1; i = edge[i].next)
-		{
-			int v = edge[i].to, w = edge[i].w;
-			if (!vis[v])
-			{
-				vis[v] = true;
-				dis[v] = dis[u] + w;
-				if (ans &lt; dis[v]){
-					ans = dis[v];
-					pos = v;
-				}
-				q.push(v);
-			}
-		}
-	}
-}
-
-	dis[pos] = 0;
-	bfs(pos);
 </code></pre>
 ]]></content>
     </entry>
