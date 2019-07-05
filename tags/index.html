@@ -1,0 +1,177 @@
+<html>
+  <head>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guapi</title>
+<meta name="description" content="惟世之繁华如故,斟酌岁月如初" />
+<link rel="shortcut icon" href="https://www.akwing.cn/favicon.ico?v=1562345500400">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.akwing.cn/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142872373-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142872373-1');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.akwing.cn">
+  <img class="avatar" src="https://www.akwing.cn/images/avatar.png?v=1562345500400" alt="">
+  </a>
+  <h1 class="site-title">
+    Guapi
+  </h1>
+  <p class="site-description">
+    惟世之繁华如故,斟酌岁月如初
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+        <div class="tags-container">
+          
+            <a class="tag" href="https://www.akwing.cn/tag/3qstMVy1y">倍增</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/4Bk6jBRY9">图论—LCA</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/FfsnjHhYC">数据结构—树状数组</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/SBNKxTaFY">二分</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/8AwwtVN5L">常用模板</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/bGX4TmKWf">图论—树的直径</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/SzMzaPGNc">基本数据结构—单调栈</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/Segment-Tree">数据结构—线段树</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/-Wb21-7YF">莫队</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/Us343v9Eg">数据结构—主席树</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/KodHWhCLd">数据结构—分块</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/Codeforce">Codeforce</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/LsciNYV-v">图论—最短路</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/BwZk5Zyfl">图论—最小生成树</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/w2Kxoedb6">暑假集训</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/xp0ZrIWH8">思维</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/Ml1rPTXNB">尺取法</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/UHaY9iXO5">搜索—DFS</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/RoW-UQAZf">模拟</a>
+          
+            <a class="tag" href="https://www.akwing.cn/tag/JNU">数据结构作业</a>
+          
+        </div>
+
+        <div class="site-footer">
+   | 
+  <a class="rss" href="https://www.akwing.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
