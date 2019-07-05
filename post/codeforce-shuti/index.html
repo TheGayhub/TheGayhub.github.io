@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://www.akwing.cn">
-                <img src="https://www.akwing.cn/images/avatar.png?v=1562307077934" alt="Avatar" width="100" height="100"/>
+                <img src="https://www.akwing.cn/images/avatar.png?v=1562308079555" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -828,6 +828,15 @@ var registCommentEvent = function() {
         60;">
             <div class="blog-background"></div>
             
+                        <script type="text/javascript">
+                var head = document.querySelector("#masthead");
+                var bgHeight = getBgHeight(window.innerHeight, '60', '40');
+                head.style.height = bgHeight + "px";
+
+                                var banner = 'https://i.loli.net/2019/07/05/5d1eeb224cb8c95563.jpg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
+                head.querySelector(".blog-background").style.backgroundImage = 'url(' + banner + ')';
+                            </script>
+                            
                         <div class="inner">
                 <div class="container">
                     <h1 class="blog-title" style="">
