@@ -530,7 +530,7 @@
     <div id="nav">
         <div class="author navbar-header">
             <a href="https://TheGayhub.github.io">
-                <img src="https://TheGayhub.github.io/images/avatar.png?v=1564023812386" alt="Avatar" width="100" height="100"/>
+                <img src="https://TheGayhub.github.io/images/avatar.png?v=1564024817227" alt="Avatar" width="100" height="100"/>
             </a>
         </div>
         
@@ -870,6 +870,165 @@ var registCommentEvent = function() {
                 <div class="post-content" itemprop="articleBody">
                         <p><h1 id="lca线段树">LCA+线段树</h1>
 <!-- more -->
+<p>由于至多只有1个出现奇数次的树，那我们可以用所有数的异或来的得到这个出现奇数次数，用线段树维护到根节点的异或和，询问的时候询问节点，LCA在这个过程中被异或了两次，再异或一下LCA消除影响，注意：询问的是单个节点，即线段树的叶子节点。</p>
+<p>还有就是原数字可能出现0，我们统一+1处理，询问的时候再减一，显然这样不影响答案。</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#include&lt;string&gt;
+#include&lt;bitset&gt;
+#include&lt;cmath&gt;
+#include&lt;map&gt;
+using namespace std;
+const int N = 1e5 + 10;
+const int up = 18;
+#define lowbit(x) (x&amp;(-x))
+typedef long long ll;
+struct Edge{
+    int to, next;
+}edge[N &lt;&lt; 1];
+int head[N], tot, dep[N],a[N],in[N],out[N],top;
+int fat[N][20];
+int c[N &lt;&lt; 2], add[N &lt;&lt; 2];
+int n, m;
+void addedge(int from, int to)
+{
+    edge[tot].to = to;
+    edge[tot].next = head[from];
+    head[from] = tot++;
+}
+void dfs(int u, int fa)
+{
+    in[u] = ++top;
+    for (int i = head[u]; i != -1; i = edge[i].next)
+    {
+        int v = edge[i].to;
+        if (v == fa) continue;
+        dep[v] = dep[u] + 1;
+        fat[v][0] = u;
+        dfs(v, u);
+    }
+    out[u] = top;
+}
+void pushdown(int rt)
+{
+    if (c[rt]){
+        c[rt &lt;&lt; 1] ^= c[rt];
+        c[rt &lt;&lt;1|1] ^= c[rt];
+        c[rt] = 0;
+    }
+}
+void change(int rt, int l, int r, int x, int y, int val)
+{
+    if (x &lt;= l&amp;&amp;r &lt;= y){
+        c[rt] ^= val;
+        return;
+    }
+    pushdown(rt);
+    int mid = (l + r) &gt;&gt; 1;
+    if (x &lt;= mid) change(rt &lt;&lt; 1, l, mid, x, y, val);
+    if (y &gt; mid) change(rt &lt;&lt; 1 | 1, mid + 1, r, x, y, val);
+}
+int query(int rt, int l, int r, int pos)
+{
+    if (l==r){
+        return c[rt];
+    }
+    pushdown(rt);
+    int mid = (l + r) &gt;&gt; 1;
+    int ans1 = 0,ans2=0;
+    if (pos&lt;= mid) return  query(rt &lt;&lt; 1, l, mid, pos);
+    else return query(rt &lt;&lt; 1 | 1, mid + 1, r,pos);
+    return ans1^ans2;
+}
+void dp()
+{
+    for (int j = 1; j &lt;= up; j++)
+    {
+        for (int i = 1; i &lt;= n; i++)
+        {
+            fat[i][j] = fat[fat[i][j - 1]][j - 1];
+        }
+    }
+}
+int lca(int u, int v)
+{
+    if (dep[u] &lt; dep[v]) swap(u, v);
+    for (int j = up; j &gt;= 0; j--)
+    {
+        if ((dep[u] - dep[v]) &gt;&gt; j &amp; 1){
+            u = fat[u][j];
+        }
+    }
+    if (u == v) return u;
+    for (int j = up; j &gt;= 0; j--)
+    {
+        if (fat[u][j] != fat[v][j]){
+            u = fat[u][j];
+            v = fat[v][j];
+        }
+    }
+    return fat[u][0];
+}
+void init()
+{
+    tot = 0;
+    top = 0;
+    memset(head, -1, sizeof(head));
+    memset(c, 0, sizeof(c));
+
+}
+void solve()
+{
+    dep[1] = 1;
+    dfs(1, -1);
+    dp();
+}
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;, &amp;t);
+    for (int j = 1; j &lt;= t; j++)
+    {
+        scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+        init();
+        for (int i = 1; i &lt; n; i++)
+        {
+            int u ,v ;
+            scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+            addedge(u, v);
+            addedge(v, u);
+        }
+        solve();
+        for (int i = 1; i &lt;= n; i++){
+            scanf(&quot;%d&quot;, &amp;a[i]);
+            a[i]++;
+            change(1, 1, n, in[i], out[i], a[i]);
+        }
+        while (m--)
+        {
+            int op, x, y;
+            scanf(&quot;%d%d%d&quot;, &amp;op, &amp;x, &amp;y);
+            if (op == 1){
+                int Lca = lca(x, y);
+                int ans = query(1, 1, n, in[x]);
+                ans ^= query(1, 1, n, in[y]);
+                ans ^= a[Lca];
+                printf(&quot;%d\n&quot;, ans - 1);
+            }
+            else{
+                y++;
+                change(1, 1, n, in[x], out[x], a[x] ^ y);
+                a[x] = y;
+            }
+        }
+        
+    }
+    return 0;
+}
+</code></pre>
 </p>                    </div>
         <div class="tags">
 						
