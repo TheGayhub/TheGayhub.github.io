@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://TheGayhub.github.io</id>
     <title>Guapi</title>
-    <updated>2019-07-25T03:20:22.542Z</updated>
+    <updated>2019-11-20T11:33:49.036Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://TheGayhub.github.io"/>
     <link rel="self" href="https://TheGayhub.github.io/atom.xml"/>
@@ -374,9 +374,9 @@ int main()
 <p>仔细发现，终点只有一下几种情况<br>
 <img src="https://i.loli.net/2019/07/05/5d1edc0e1210765760.png" alt="2018080814200474.png"></p>
 <p>对于终点在第一行，也就是偶数列，我们可以这样走</p>
-<p><img src="https://i.loli.net/2019/07/05/5d1edc0e11f1015072.png" alt="20180808142441382.png"></p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2019/07/05/5d1edc0e11f1015072.png" alt="20180808142441382.png"></figure>
 <p>对于终点在第二行，也就是奇数列，我们可以这样走</p>
-<p><img src="https://i.loli.net/2019/07/05/5d1edc0e11b1d24167.png" alt="20180808142257570.png"></p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2019/07/05/5d1edc0e11b1d24167.png" alt="20180808142257570.png"></figure>
 <p>这是有规律的，所以对于一个终点来说，他能得到的最大值分别是左边得到的最大值加上右边的得到的最大值。左边的最大值不难求，我们只需使用前缀和就可以的到。右边的怎么求呢？ 不一样的时间经过的点不一样，也就是价值不一样。虽然说到达每个点的时间不一样，但是可以发现一但我们把当前的点当作终点时，每个点到达的时间的差是一样的，也就是偏移量一样，我们假设开始都是从最左边开始走，到达终点时的所获得价值为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>,我们再计算到达这个终点的当前时间，拿这个当前时间减去我们刚开始认为它到达终点的时间，这个就是时间偏移量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>，当前价值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>+</mo><mi>t</mi><mo>∗</mo><mo>(</mo><mtext>所经过的蘑菇生长的速度和</mtext><mo>)</mo></mrow><annotation encoding="application/x-tex">x+t*(\text{所经过的蘑菇生长的速度和})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">所经过的蘑菇生长的速度和</span></span><span class="mclose">)</span></span></span></span>既是这个终点右边所得到的值。<br>
 这个蘑菇生长的速度和可以用后缀和表示，因为右边是往右跑，因此是后缀和。</p>
 <p>注意：我们认为终点所在列的左边是左边得到的价值，这个终点所在列不包括在左边价值里，而是包括在右边价值里</p>
